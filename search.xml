@@ -3,7 +3,7 @@
   <entry>
     <title>Dijkstra</title>
     <url>/2020/08/27/Dijkstra/</url>
-    <content><![CDATA[<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><h3 id="问题1：最短路径"><a href="#问题1：最短路径" class="headerlink" title="问题1：最短路径"></a>问题1：最短路径</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src= "/img/loading.gif" data-lazy-src="/2020/08/27/Dijkstra/Dijkstra-%E9%97%AE%E9%A2%981.png" alt="image-20200731221210621"></p>
+    <content><![CDATA[<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><h3 id="问题1：最短路径"><a href="#问题1：最短路径" class="headerlink" title="问题1：最短路径"></a>问题1：最短路径</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src="/2020/08/27/Dijkstra/Dijkstra-%E9%97%AE%E9%A2%981.png" alt="image-20200731221210621"></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 代码构造上图</span><br><span class="line"></span><br><span class="line">graph &#x3D; &#123;</span><br><span class="line">    &quot;A&quot;: &#123;&quot;B&quot;: 5, &quot;C&quot;: 1&#125;,</span><br><span class="line">    &quot;B&quot;: &#123;&quot;A&quot;: 5, &quot;C&quot;: 2, &quot;D&quot;: 1&#125;,</span><br><span class="line">    &quot;C&quot;: &#123;&quot;A&quot;: 1, &quot;B&quot;: 2, &quot;D&quot;: 4, &quot;E&quot;: 8&#125;,</span><br><span class="line">    &quot;D&quot;: &#123;&quot;B&quot;: 1, &quot;C&quot;: 4, &quot;E&quot;: 3, &quot;F&quot;: 6&#125;,</span><br><span class="line">    &quot;E&quot;: &#123;&quot;C&quot;: 8, &quot;D&quot;: 3&#125;,</span><br><span class="line">    &quot;F&quot;: &#123;&quot;D&quot;: 6&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <a id="more"></a>
@@ -55,6 +55,60 @@
       </tags>
   </entry>
   <entry>
+    <title>Mosquitto</title>
+    <url>/2020/08/31/Mosquitto/</url>
+    <content><![CDATA[<h2 id="Mosquitto"><a href="#Mosquitto" class="headerlink" title="Mosquitto"></a>Mosquitto</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型设备、移动应用等方面有较广泛的应用。</p>
+<p>MQTT是一个基于客户端-服务器的消息发布/订阅传输协议。MQTT协议是轻量、简单、开放和易于实现的，这些特点使它适用范围非常广泛。在很多情况下，包括受限的环境中，如：机器与机器（M2M）通信和物联网（IoT）。其在，通过卫星链路通信传感器、偶尔拨号的医疗设备、智能家居、及一些小型化设备中已广泛使用。</p>
+<a id="more"></a>
+
+<p><img src="/2020/08/31/Mosquitto/1573118328615.png" alt="1573118328615"></p>
+<h3 id="config-解析"><a href="#config-解析" class="headerlink" title="config 解析"></a>config 解析</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim mosquitto.conf</span><br><span class="line"></span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># General configuration</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 客户端心跳的间隔时间</span><br><span class="line">#retry_interval 20</span><br><span class="line"> </span><br><span class="line"># 系统状态的刷新时间</span><br><span class="line">#sys_interval 10</span><br><span class="line"> </span><br><span class="line"># 系统资源的回收时间，0表示尽快处理</span><br><span class="line">#store_clean_interval 10</span><br><span class="line"> </span><br><span class="line"># 服务进程的PID</span><br><span class="line">#pid_file &#x2F;var&#x2F;run&#x2F;mosquitto.pid</span><br><span class="line"> </span><br><span class="line"># 服务进程的系统用户</span><br><span class="line">#user mosquitto</span><br><span class="line"> </span><br><span class="line"># 客户端心跳消息的最大并发数</span><br><span class="line">#max_inflight_messages 10</span><br><span class="line"> </span><br><span class="line"># 客户端心跳消息缓存队列</span><br><span class="line">#max_queued_messages 100</span><br><span class="line"> </span><br><span class="line"># 用于设置客户端长连接的过期时间，默认永不过期</span><br><span class="line">#persistent_client_expiration</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Default listener</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 服务绑定的IP地址</span><br><span class="line">#bind_address</span><br><span class="line"> </span><br><span class="line"># 服务绑定的端口号</span><br><span class="line">#port 1883</span><br><span class="line"> </span><br><span class="line"># 允许的最大连接数，-1表示没有限制</span><br><span class="line">#max_connections -1</span><br><span class="line"> </span><br><span class="line"># cafile：CA证书文件</span><br><span class="line"># capath：CA证书目录</span><br><span class="line"># certfile：PEM证书文件</span><br><span class="line"># keyfile：PEM密钥文件</span><br><span class="line">#cafile</span><br><span class="line">#capath</span><br><span class="line">#certfile</span><br><span class="line">#keyfile</span><br><span class="line"> </span><br><span class="line"># 必须提供证书以保证数据安全性</span><br><span class="line">#require_certificate false</span><br><span class="line"> </span><br><span class="line"># 若require_certificate值为true，use_identity_as_username也必须为true</span><br><span class="line">#use_identity_as_username false</span><br><span class="line"> </span><br><span class="line"># 启用PSK（Pre-shared-key）支持</span><br><span class="line">#psk_hint</span><br><span class="line"> </span><br><span class="line"># SSL&#x2F;TSL加密算法，可以使用“openssl ciphers”命令获取</span><br><span class="line"># as the output of that command.</span><br><span class="line">#ciphers</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Persistence</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 消息自动保存的间隔时间</span><br><span class="line">#autosave_interval 1800</span><br><span class="line"> </span><br><span class="line"># 消息自动保存功能的开关</span><br><span class="line">#autosave_on_changes false</span><br><span class="line"> </span><br><span class="line"># 持久化功能的开关</span><br><span class="line">persistence true</span><br><span class="line"> </span><br><span class="line"># 持久化DB文件</span><br><span class="line">#persistence_file mosquitto.db</span><br><span class="line"> </span><br><span class="line"># 持久化DB文件目录</span><br><span class="line">#persistence_location &#x2F;var&#x2F;lib&#x2F;mosquitto&#x2F;</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Logging</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 4种日志模式：stdout、stderr、syslog、topic</span><br><span class="line"># none 则表示不记日志，此配置可以提升些许性能</span><br><span class="line">log_dest none</span><br><span class="line"> </span><br><span class="line"># 选择日志的级别（可设置多项）</span><br><span class="line">#log_type error</span><br><span class="line">#log_type warning</span><br><span class="line">#log_type notice</span><br><span class="line">#log_type information</span><br><span class="line"> </span><br><span class="line"># 是否记录客户端连接信息</span><br><span class="line">#connection_messages true</span><br><span class="line"> </span><br><span class="line"># 是否记录日志时间</span><br><span class="line">#log_timestamp true</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Security</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 客户端ID的前缀限制，可用于保证安全性</span><br><span class="line">#clientid_prefixes</span><br><span class="line"> </span><br><span class="line"># 允许匿名用户</span><br><span class="line">#allow_anonymous true</span><br><span class="line"> </span><br><span class="line"># 用户&#x2F;密码文件，默认格式：username:password</span><br><span class="line">#password_file</span><br><span class="line"> </span><br><span class="line"># PSK格式密码文件，默认格式：identity:key</span><br><span class="line">#psk_file</span><br><span class="line"> </span><br><span class="line"># pattern write sensor&#x2F;%u&#x2F;data</span><br><span class="line"># ACL权限配置，常用语法如下：</span><br><span class="line"># 用户限制：user &lt;username&gt;</span><br><span class="line"># 话题限制：topic [read|write] &lt;topic&gt;</span><br><span class="line"># 正则限制：pattern write sensor&#x2F;%u&#x2F;data</span><br><span class="line">#acl_file</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Bridges</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 允许服务之间使用“桥接”模式（可用于分布式部署）</span><br><span class="line">#connection &lt;name&gt;</span><br><span class="line">#address &lt;host&gt;[:&lt;port&gt;]</span><br><span class="line">#topic &lt;topic&gt; [[[out | in | both] qos-level] local-prefix remote-prefix]</span><br><span class="line"> </span><br><span class="line"># 设置桥接的客户端ID</span><br><span class="line">#clientid</span><br><span class="line"> </span><br><span class="line"># 桥接断开时，是否清除远程服务器中的消息</span><br><span class="line">#cleansession false</span><br><span class="line"> </span><br><span class="line"># 是否发布桥接的状态信息</span><br><span class="line">#notifications true</span><br><span class="line"> </span><br><span class="line"># 设置桥接模式下，消息将会发布到的话题地址</span><br><span class="line"># $SYS&#x2F;broker&#x2F;connection&#x2F;&lt;clientid&gt;&#x2F;state</span><br><span class="line">#notification_topic</span><br><span class="line"> </span><br><span class="line"># 设置桥接的keepalive数值</span><br><span class="line">#keepalive_interval 60</span><br><span class="line"> </span><br><span class="line"># 桥接模式，目前有三种：automatic、lazy、once</span><br><span class="line">#start_type automatic</span><br><span class="line"> </span><br><span class="line"># 桥接模式automatic的超时时间</span><br><span class="line">#restart_timeout 30</span><br><span class="line"> </span><br><span class="line"># 桥接模式lazy的超时时间</span><br><span class="line">#idle_timeout 60</span><br><span class="line"> </span><br><span class="line"># 桥接客户端的用户名</span><br><span class="line">#username</span><br><span class="line"> </span><br><span class="line"># 桥接客户端的密码</span><br><span class="line">#password</span><br><span class="line"> </span><br><span class="line"># bridge_cafile：桥接客户端的CA证书文件</span><br><span class="line"># bridge_capath：桥接客户端的CA证书目录</span><br><span class="line"># bridge_certfile：桥接客户端的PEM证书文件</span><br><span class="line"># bridge_keyfile：桥接客户端的PEM密钥文件</span><br><span class="line">#bridge_cafile</span><br><span class="line">#bridge_capath</span><br><span class="line">#bridge_certfile</span><br><span class="line">#bridge_keyfile</span><br><span class="line"> </span><br><span class="line"># 自己的配置可以放到以下目录中</span><br><span class="line">#include_dir &#x2F;mqtt&#x2F;config&#x2F;conf.d</span><br></pre></td></tr></table></figure>
+
+<h3 id="Qos-解析"><a href="#Qos-解析" class="headerlink" title="Qos 解析"></a>Qos 解析</h3><h4 id="Qos-0-–-gt-最多一次"><a href="#Qos-0-–-gt-最多一次" class="headerlink" title="Qos=0 –&gt; 最多一次"></a>Qos=0 –&gt; 最多一次</h4><blockquote>
+<p>sequenceDiagram</p>
+<p>ClientA-&gt;&gt;ServerBroker: 发送消息<br>ServerBroker-&gt;&gt;ClientB: 发送消息</p>
+</blockquote>
+<h4 id="Qos-1-–-gt-至少一次"><a href="#Qos-1-–-gt-至少一次" class="headerlink" title="Qos=1 –&gt; 至少一次"></a>Qos=1 –&gt; 至少一次</h4><blockquote>
+<p>sequenceDiagram</p>
+<p>ClientA-&gt;&gt;ServerBroker: 1.发送消息PUBLISH<br>ServerBroker-&gt;&gt;ServerBroker: 1.1存储消息<br>ServerBroker-&gt;&gt;ClientA: 1.2发送消息回应PUBACK<br>ServerBroker-&gt;&gt;ClientB: 2.发送消息<br>ClientB-&gt;&gt;ServerBroker: 2.1发送消息回应PUBACK<br>ServerBroker-&gt;&gt;ServerBroker: 2.2删除消息</p>
+</blockquote>
+<h4 id="Qos-2-–-gt-有且仅有一次"><a href="#Qos-2-–-gt-有且仅有一次" class="headerlink" title="Qos=2 –&gt; 有且仅有一次"></a>Qos=2 –&gt; 有且仅有一次</h4><blockquote>
+<p>sequenceDiagram</p>
+<p>ClientA-&gt;&gt;ServerBroker: 1.发送消息PUBLISH<br>ServerBroker-&gt;&gt;ServerBroker: 1.1存储消息<br>ServerBroker-&gt;&gt;ClientA: 1.2发送消息回应Rec<br>ClientA-&gt;&gt;ServerBroker: 2.发送消息Rel<br>ServerBroker-&gt;&gt;ServerBroker: 2.1删除消息<br>ServerBroker-&gt;&gt;ServerBroker: 2.2存储消息到发送列队<br>ServerBroker-&gt;&gt;ClientB: 2.3发送消息<br>ServerBroker-&gt;&gt;ClientA: 2.4发送消息回应Comp<br>ClientB-&gt;&gt;ServerBroker: 3.发送消息回应Rec<br>ServerBroker-&gt;&gt;ServerBroker: 3.1删除2.2中存储的消息（一次确认）<br>ServerBroker-&gt;&gt;ServerBroker: 3.2存储消息<br>ServerBroker-&gt;&gt;ClientB: 3.3发送消息Rel<br>ClientB-&gt;&gt;ServerBroker: 3.4发送消息回应Comp<br>ServerBroker-&gt;&gt;ServerBroker: 3.5删除消息(二次确认)</p>
+</blockquote>
+<p><img src="/2020/08/31/Mosquitto/1573118624880.png" alt="1573118624880"></p>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><h4 id="实验1：Mosquitto-内存数据落盘机制"><a href="#实验1：Mosquitto-内存数据落盘机制" class="headerlink" title="实验1：Mosquitto 内存数据落盘机制"></a>实验1：Mosquitto 内存数据落盘机制</h4><h5 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h5><p>​    Mosquitto 内存数据落盘持久化时，是否会产生重复数据</p>
+<h5 id="实验结论"><a href="#实验结论" class="headerlink" title="实验结论"></a>实验结论</h5><p>​    Mosquitto 不会重复持久化已经持久化过的数据</p>
+<h5 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h5><p>​    mosquitto version 1.4.15</p>
+<h5 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h5><ol>
+<li>发送者保持同样的发送速率，降低订阅者消费速度，触发mqtt的持久化机制</li>
+<li>更改mqtt持久化的间隔（3s 和 30s），观测持久化的数据大小是否不同</li>
+</ol>
+<h5 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h5><blockquote>
+<p>发送者：发送1w条消息，用时 31.16837883 s</p>
+<p>订阅者：每分钟消化1条，1min内堆积9999条消息</p>
+<p>Mosquitto：持久化间隔 3s，1min内涨幅 27842 Byte</p>
+</blockquote>
+<p><img src="/2020/08/31/Mosquitto/1573112430542.png" alt="1573112430542"></p>
+<blockquote>
+<p>发送者：发送1w条消息，</p>
+<p>订阅者：每分钟消化1条，1min内堆积9999条消息</p>
+<p>Mosquitto：持久化间隔 30s，1min内涨幅 27842 Byte</p>
+</blockquote>
+<p><img src="/2020/08/31/Mosquitto/1573113441213.png" alt="1573113441213"></p>
+<h5 id="实验脚本"><a href="#实验脚本" class="headerlink" title="实验脚本"></a>实验脚本</h5><h6 id="send-py"><a href="#send-py" class="headerlink" title="send.py"></a>send.py</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">Send msg to mqtt (linux, python2)</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">__author__ &#x3D; &#39;RYB&#39;</span><br><span class="line"></span><br><span class="line">import json</span><br><span class="line">import time</span><br><span class="line">import random</span><br><span class="line">import string</span><br><span class="line">import paho.mqtt.publish as publish</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def ranstr(num):</span><br><span class="line">    salt &#x3D; &#39;&#39;.join(random.sample(string.ascii_letters + string.digits, num))</span><br><span class="line">    return salt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def publish_msg(msg_num):</span><br><span class="line">    for i in range(msg_num):</span><br><span class="line">        msg &#x3D; &#123;</span><br><span class="line">            &quot;id&quot;: i,</span><br><span class="line">            &quot;Timestamp&quot;: int(time.time() * 1000),</span><br><span class="line">            &quot;str1&quot;: ranstr(50),</span><br><span class="line">            &quot;str2&quot;: ranstr(50)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        publish.single(&quot;test&quot;, payload&#x3D;json.dumps(msg), qos&#x3D;2, hostname&#x3D;&quot;10.244.0.164&quot;, port&#x3D;1883)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; Start &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)</span><br><span class="line">start &#x3D; time.time()</span><br><span class="line">print(&quot;Running...&quot;)</span><br><span class="line">publish_msg(10000)</span><br><span class="line">end &#x3D; time.time()</span><br><span class="line">print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; End &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)</span><br><span class="line">print(&quot;Run Time: %s s&quot; % str(end - start))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6 id="rec-py"><a href="#rec-py" class="headerlink" title="rec.py"></a>rec.py</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">Receive msg from mqtt (linux, python2)</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">__author__ &#x3D; &#39;RYB&#39;</span><br><span class="line"></span><br><span class="line">import time</span><br><span class="line">import paho.mqtt.subscribe as subscribe</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def on_message_sleep(client, userdata, msg):</span><br><span class="line">    print(msg.topic + &#39; --&gt; &#39; + msg.payload)</span><br><span class="line">    time.sleep(60)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subscribe.callback(on_message_sleep, &quot;test&quot;, qos&#x3D;2, hostname&#x3D;&quot;mosquitto&quot;, port&#x3D;1883)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3>]]></content>
+      <categories>
+        <category>中间件</category>
+      </categories>
+      <tags>
+        <tag>MQTT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Sort</title>
     <url>/2020/08/27/Sort/</url>
     <content><![CDATA[<h2 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h2><h3 id="算法1：冒泡排序"><a href="#算法1：冒泡排序" class="headerlink" title="算法1：冒泡排序"></a>算法1：冒泡排序</h3><h4 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h4><blockquote>
@@ -102,7 +156,7 @@
 
 <h3 id="算法4：快速排序"><a href="#算法4：快速排序" class="headerlink" title="算法4：快速排序"></a>算法4：快速排序</h3><h4 id="思想-3"><a href="#思想-3" class="headerlink" title="思想"></a>思想</h4><blockquote>
 <p>设要排序的数组是A[0]……A[N-1]，首先任意选取一个数据（通常选用数组的第一个数）作为关键数据，然后将所有比它小的数都放到它左边，所有比它大的数都放到它右边，这个过程称为一趟快速排序。值得注意的是，快速排序不是一种稳定的排序算法，也就是说，多个相同的值的相对位置也许会在算法结束时产生变动 [1]。</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2020/08/27/Sort/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.gif" alt="快速排序"></p>
+<p><img src="/2020/08/27/Sort/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.gif" alt="快速排序"></p>
 <p>一趟快速排序的算法是：</p>
 <p>1）设置两个变量i、j，排序开始的时候：i=0，j=N-1；</p>
 <p>2）以第一个数组元素作为关键数据，赋值给<strong>key</strong>，即<strong>key</strong>=A[0]；</p>
@@ -125,7 +179,7 @@
 <li>创建最大堆（Build Max Heap）：将堆中的所有数据重新排序</li>
 <li>堆排序（HeapSort）：移除位在第一个数据的根节点，并做最大堆调整的递归运算</li>
 </ul>
-<p><img src= "/img/loading.gif" data-lazy-src="/2020/08/27/Sort/%E5%A0%86%E6%8E%92%E5%BA%8F.gif" alt="堆排序"></p>
+<p><img src="/2020/08/27/Sort/%E5%A0%86%E6%8E%92%E5%BA%8F.gif" alt="堆排序"></p>
 <p>参考资料：</p>
 <ol>
 <li>Floyd, Robert W. (1964), “Algorithm 245 - Treesort 3”, Communications of the ACM, 7 (12): 701, doi:10.1145/355588.365103</li>
@@ -144,7 +198,7 @@
 <p>第三次归并后：{1,6,8,38,100,202,301},比较次数：4；</p>
 <p>总的比较次数为：3+4+4=11；</p>
 <p>逆序数为14；</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2020/08/27/Sort/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.gif" alt="归并排序"></p>
+<p><img src="/2020/08/27/Sort/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.gif" alt="归并排序"></p>
 <p>归并操作的工作原理如下：</p>
 <p>第一步：申请空间，使其大小为两个已经<a href="https://baike.baidu.com/item/%E6%8E%92%E5%BA%8F">排序</a>序列之和，该空间用来存放合并后的序列</p>
 <p>第二步：设定两个<a href="https://baike.baidu.com/item/%E6%8C%87%E9%92%88">指针</a>，最初位置分别为两个已经排序序列的起始位置</p>
@@ -159,6 +213,277 @@
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vim</title>
+    <url>/2020/08/31/Vim/</url>
+    <content><![CDATA[<h1 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>Vim是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。</p>
+<p>简单的来说， vi 是老式的字处理器，不过功能已经很齐全了，但是还是有可以进步的地方。 vim 则可以说是程序开发者的一项很好用的工具。</p>
+<p>连 vim 的官方网站 (<a href="http://www.vim.org/">http://www.vim.org</a>) 自己也说 vim 是一个程序开发工具而不是文字处理软件。</p>
+<p>参考文档：<a href="https://www.runoob.com/linux/linux-vim.html">https://www.runoob.com/linux/linux-vim.html</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="常用按键"><a href="#常用按键" class="headerlink" title="常用按键"></a>常用按键</h2><h3 id="第一部分：一般模式"><a href="#第一部分：一般模式" class="headerlink" title="第一部分：一般模式"></a>第一部分：一般模式</h3><h4 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>h, j, k, l</td>
+<td>光标向左，下，上，右移动</td>
+</tr>
+<tr>
+<td>Ctrl + f / b</td>
+<td>屏幕向下/上移动</td>
+</tr>
+<tr>
+<td>Ctrl + d / u</td>
+<td>屏幕向下/上移动半页</td>
+</tr>
+<tr>
+<td>0</td>
+<td>移动到一行的最前面</td>
+</tr>
+<tr>
+<td>$</td>
+<td>移动到一行的最后面字符</td>
+</tr>
+<tr>
+<td>H / M / L</td>
+<td>移动到屏幕最上方/中央/最下方那一行的第一个字符</td>
+</tr>
+<tr>
+<td>G</td>
+<td>移动到文件的最后一行</td>
+</tr>
+<tr>
+<td>nG / ngg</td>
+<td>移动到文件的第n行</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>移动到文件的第一行</td>
+</tr>
+<tr>
+<td>n[Enter]</td>
+<td>向下移动n行</td>
+</tr>
+</tbody></table>
+<h4 id="查找替换"><a href="#查找替换" class="headerlink" title="查找替换"></a>查找替换</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/ <word></word></td>
+<td>向下查找word字符串</td>
+</tr>
+<tr>
+<td>? <word></word></td>
+<td>向上查找word字符串</td>
+</tr>
+<tr>
+<td>n</td>
+<td>代表重复前一个查找动作</td>
+</tr>
+<tr>
+<td>N</td>
+<td>代表反向重复前一个查找动作</td>
+</tr>
+<tr>
+<td>: s/<old>/<new></new></old></td>
+<td>将第一个old替换为new</td>
+</tr>
+<tr>
+<td>: s/<old>/<new>/g</new></old></td>
+<td>将一行中所有的old替换为new</td>
+</tr>
+<tr>
+<td>:n1, n2s/<word1>/<word2>/g</word2></word1></td>
+<td>将行n1与n2之间的word1替换为word2</td>
+</tr>
+<tr>
+<td>:%s/<old>/<new>/g</new></old></td>
+<td>将文件所有的old替换为new</td>
+</tr>
+<tr>
+<td>:%s/<old>/<new>/gc</new></old></td>
+<td>替换前要求确认</td>
+</tr>
+</tbody></table>
+<h4 id="删除复制粘贴"><a href="#删除复制粘贴" class="headerlink" title="删除复制粘贴"></a>删除复制粘贴</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>x/X</td>
+<td>向后/前删除一个字符</td>
+</tr>
+<tr>
+<td>nx</td>
+<td>连续删除n个字符</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除整行</td>
+</tr>
+<tr>
+<td>ndd</td>
+<td>删除n行</td>
+</tr>
+<tr>
+<td>d1G</td>
+<td>删除光标所在到第一行数据</td>
+</tr>
+<tr>
+<td>dG</td>
+<td>删除光标所在到最后一行数据</td>
+</tr>
+<tr>
+<td>d$</td>
+<td>删除光标所在到该行最后一个字符</td>
+</tr>
+<tr>
+<td>d0</td>
+<td>删除光标所在到该行最前面一个字符</td>
+</tr>
+<tr>
+<td>yy</td>
+<td>复制光标所在的一行</td>
+</tr>
+<tr>
+<td>nyy</td>
+<td>向下复制n行</td>
+</tr>
+<tr>
+<td>y1G</td>
+<td>复制光标所在到第一行数据</td>
+</tr>
+<tr>
+<td>yG</td>
+<td>复制光标所在到最后一行数据</td>
+</tr>
+<tr>
+<td>y$</td>
+<td>复制光标所在到该行最后一个字符</td>
+</tr>
+<tr>
+<td>y0</td>
+<td>复制光标所在到该行最前面一个字符</td>
+</tr>
+<tr>
+<td>p/P</td>
+<td>粘贴数据在光标下/上一行</td>
+</tr>
+<tr>
+<td>J</td>
+<td>将光标所在行与下一行数据结合成同一行</td>
+</tr>
+<tr>
+<td>u</td>
+<td>回撤前一操作</td>
+</tr>
+<tr>
+<td>Ctrl + r</td>
+<td>重做前一操作</td>
+</tr>
+<tr>
+<td>.</td>
+<td>重复前一个操作</td>
+</tr>
+</tbody></table>
+<h3 id="第二部分：编辑模式"><a href="#第二部分：编辑模式" class="headerlink" title="第二部分：编辑模式"></a>第二部分：编辑模式</h3><h4 id="进入插入或替换的编辑模式"><a href="#进入插入或替换的编辑模式" class="headerlink" title="进入插入或替换的编辑模式"></a>进入插入或替换的编辑模式</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>i, I</td>
+<td>进入插入模式： i从当前光标所在处插入，I在目前所在行的第一个非空格符处插入</td>
+</tr>
+<tr>
+<td>a, A</td>
+<td>进入插入模式： a从当前光标所在的下一个字符插入，A从光标所在行的最后一个字符后插入</td>
+</tr>
+<tr>
+<td>o, O</td>
+<td>进入插入模式： o从当前光标所在行的下一行插入新的一行；O正好相反，从上一行插入新行</td>
+</tr>
+<tr>
+<td>r, R</td>
+<td>进入替换模式： r只会替换光标所在的那一个字符一次；R会一直替换光标所在文字，直到Esc</td>
+</tr>
+</tbody></table>
+<h4 id="块选择"><a href="#块选择" class="headerlink" title="块选择"></a>块选择</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>v</td>
+<td>字符选择，将光标经过的地方反白选择</td>
+</tr>
+<tr>
+<td>V</td>
+<td>行选择，将光标经过的行反白选择</td>
+</tr>
+<tr>
+<td>Ctrl + v</td>
+<td>块选择，可以用长方形选择数据</td>
+</tr>
+<tr>
+<td>y</td>
+<td>将反白的地方复制</td>
+</tr>
+<tr>
+<td>d</td>
+<td>删除反白的地方</td>
+</tr>
+</tbody></table>
+<h4 id="多窗口"><a href="#多窗口" class="headerlink" title="多窗口"></a>多窗口</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>：sp filename</td>
+<td>打开新窗口，如果有加filename,新窗口打开新文件，否则打开相同文件</td>
+</tr>
+<tr>
+<td>Ctrl + w + s/v</td>
+<td>水平/垂直分割打开新窗口</td>
+</tr>
+<tr>
+<td>Ctrl + w + h/j/k/l</td>
+<td>光标移动到左/下/上/右窗口</td>
+</tr>
+<tr>
+<td>Ctrl + w + q</td>
+<td>退出窗口</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Vim</tag>
       </tags>
   </entry>
   <entry>
