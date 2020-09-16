@@ -18,43 +18,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Dynamic Programming</title>
-    <url>/2020/08/27/Dynamic-Programming/</url>
-    <content><![CDATA[<h2 id="Dynamic-Programming（动态规划）"><a href="#Dynamic-Programming（动态规划）" class="headerlink" title="Dynamic Programming（动态规划）"></a>Dynamic Programming（动态规划）</h2><p>解决重复子问题</p>
-<h3 id="问题1：0-1背包问题"><a href="#问题1：0-1背包问题" class="headerlink" title="问题1：0/1背包问题"></a>问题1：0/1背包问题</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>有N件物品和一个容量为V的背包。第i件物品的重量是w[i]，价值是v[i]。求解将哪些物品装入背包可使这些物品的重量总和不超过背包容量，且价值总和最大</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">N &#x3D; 5</span><br><span class="line">V &#x3D; 10</span><br><span class="line">w &#x3D; [2, 2, 6, 5, 4]</span><br><span class="line">v &#x3D; [6, 3, 5, 4, 6]</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h3 id="问题2：斐波那契数列"><a href="#问题2：斐波那契数列" class="headerlink" title="问题2：斐波那契数列"></a>问题2：斐波那契数列</h3><h4 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h4><p>求第n个斐波那契数</p>
-<h4 id="python"><a href="#python" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_opt</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> <span class="keyword">if</span> n &lt;= <span class="number">2</span> <span class="keyword">else</span> rec_opt(n<span class="number">-1</span>) + rec_opt(n<span class="number">-2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 非递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_opt</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        opt = np.zeros(n, dtype=int)</span><br><span class="line">        opt[<span class="number">0</span>], opt[<span class="number">1</span>] = <span class="number">1</span>, <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, n):</span><br><span class="line">            opt[i] = opt[i<span class="number">-1</span>] + opt[i<span class="number">-2</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> opt[n<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">        print(<span class="string">&#x27;=====第%s个数=====&#x27;</span> % (i))</span><br><span class="line">        print(<span class="string">&#x27;递归结果： %s&#x27;</span> % (rec_opt(i)))</span><br><span class="line">        print(<span class="string">&#x27;非递归结果： %s&#x27;</span> % (dp_opt(i)))</span><br><span class="line">        print(<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="问题3：求最大和"><a href="#问题3：求最大和" class="headerlink" title="问题3：求最大和"></a>问题3：求最大和</h3><h4 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h4><p>Array内，隔一个选一个，求最大和</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">arr &#x3D; [1, 4, 6, 1, 9, 2, 2, 3]</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="python-1"><a href="#python-1" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_opt</span>(<span class="params">arr, i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> max(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">        A = rec_opt(arr, i<span class="number">-1</span>)</span><br><span class="line">        B = rec_opt(arr, i<span class="number">-2</span>) + arr[i]</span><br><span class="line">        <span class="keyword">return</span> max(A, B)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 非递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_opt</span>(<span class="params">arr, i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> max(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">        opt = np.zeros(i+<span class="number">1</span>, dtype=int)</span><br><span class="line">        opt[<span class="number">0</span>] = arr[<span class="number">0</span>]</span><br><span class="line">        opt[<span class="number">1</span>] = max(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">2</span>, i+<span class="number">1</span>):</span><br><span class="line">            A = opt[n<span class="number">-1</span>]</span><br><span class="line">            B = opt[n<span class="number">-2</span>] + arr[n]</span><br><span class="line">            opt[n] = max(A, B)</span><br><span class="line">        <span class="keyword">return</span> opt[i]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">    print(rec_opt(arr, <span class="number">7</span>))</span><br><span class="line">    print(dp_opt(arr, <span class="number">7</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="问题4：是否可组成指定和"><a href="#问题4：是否可组成指定和" class="headerlink" title="问题4：是否可组成指定和"></a>问题4：是否可组成指定和</h3><h4 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a>题目</h4><p>数组Array（全是正整数），是否可以组成指定和S</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">arr &#x3D; [3, 34, 4, 12, 5, 2]</span><br><span class="line">S &#x3D; 9</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="python-2"><a href="#python-2" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_subset</span>(<span class="params">arr, i, S</span>):</span></span><br><span class="line">    <span class="keyword">if</span> S == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>] == S</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 剪枝</span></span><br><span class="line">    <span class="keyword">elif</span> arr[i] &gt; S:</span><br><span class="line">        <span class="keyword">return</span> rec_subset(arr, i<span class="number">-1</span>, S)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        A = rec_subset(arr, i<span class="number">-1</span>, S-arr[i])</span><br><span class="line">        B = rec_subset(arr, i<span class="number">-1</span>, S)</span><br><span class="line">        <span class="keyword">return</span> A <span class="keyword">or</span> B</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 非递归</span></span><br><span class="line"><span class="comment">## 动态规划表：构造一个len(arr)行，S+1列的二维数组</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_subset</span>(<span class="params">arr, S</span>):</span></span><br><span class="line">    subset = np.zeros((len(arr), S + <span class="number">1</span>), dtype=bool)</span><br><span class="line">    subset[:, <span class="number">0</span>] = <span class="literal">True</span></span><br><span class="line">    subset[<span class="number">0</span>, :] = <span class="literal">False</span></span><br><span class="line">    subset[<span class="number">0</span>, arr[<span class="number">0</span>]] = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(arr)):</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> range(<span class="number">1</span>, S + <span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 剪枝</span></span><br><span class="line">            <span class="keyword">if</span> arr[i] &gt; s:</span><br><span class="line">                subset[i, s] = subset[i<span class="number">-1</span>, s]</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                A = subset[i<span class="number">-1</span>, s-arr[i]]</span><br><span class="line">                B = subset[i<span class="number">-1</span>, s]</span><br><span class="line">                subset[i, s] = A <span class="keyword">or</span> B</span><br><span class="line">    <span class="keyword">return</span> subset[<span class="number">-1</span>, <span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">3</span>, <span class="number">34</span>, <span class="number">4</span>, <span class="number">12</span>, <span class="number">5</span>, <span class="number">2</span>]</span><br><span class="line">    print(dp_subset(arr, <span class="number">9</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">10</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">11</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">12</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">13</span>))</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo</title>
     <url>/2020/09/10/Hexo/</url>
     <content><![CDATA[<h2 id="Hexo-简介"><a href="#Hexo-简介" class="headerlink" title="Hexo 简介"></a>Hexo 简介</h2><blockquote>
@@ -177,6 +140,43 @@
       </tags>
   </entry>
   <entry>
+    <title>Dynamic Programming</title>
+    <url>/2020/08/27/Dynamic-Programming/</url>
+    <content><![CDATA[<h2 id="Dynamic-Programming（动态规划）"><a href="#Dynamic-Programming（动态规划）" class="headerlink" title="Dynamic Programming（动态规划）"></a>Dynamic Programming（动态规划）</h2><p>解决重复子问题</p>
+<h3 id="问题1：0-1背包问题"><a href="#问题1：0-1背包问题" class="headerlink" title="问题1：0/1背包问题"></a>问题1：0/1背包问题</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>有N件物品和一个容量为V的背包。第i件物品的重量是w[i]，价值是v[i]。求解将哪些物品装入背包可使这些物品的重量总和不超过背包容量，且价值总和最大</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">N &#x3D; 5</span><br><span class="line">V &#x3D; 10</span><br><span class="line">w &#x3D; [2, 2, 6, 5, 4]</span><br><span class="line">v &#x3D; [6, 3, 5, 4, 6]</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="问题2：斐波那契数列"><a href="#问题2：斐波那契数列" class="headerlink" title="问题2：斐波那契数列"></a>问题2：斐波那契数列</h3><h4 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h4><p>求第n个斐波那契数</p>
+<h4 id="python"><a href="#python" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_opt</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> <span class="keyword">if</span> n &lt;= <span class="number">2</span> <span class="keyword">else</span> rec_opt(n<span class="number">-1</span>) + rec_opt(n<span class="number">-2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 非递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_opt</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        opt = np.zeros(n, dtype=int)</span><br><span class="line">        opt[<span class="number">0</span>], opt[<span class="number">1</span>] = <span class="number">1</span>, <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, n):</span><br><span class="line">            opt[i] = opt[i<span class="number">-1</span>] + opt[i<span class="number">-2</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> opt[n<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">        print(<span class="string">&#x27;=====第%s个数=====&#x27;</span> % (i))</span><br><span class="line">        print(<span class="string">&#x27;递归结果： %s&#x27;</span> % (rec_opt(i)))</span><br><span class="line">        print(<span class="string">&#x27;非递归结果： %s&#x27;</span> % (dp_opt(i)))</span><br><span class="line">        print(<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="问题3：求最大和"><a href="#问题3：求最大和" class="headerlink" title="问题3：求最大和"></a>问题3：求最大和</h3><h4 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h4><p>Array内，隔一个选一个，求最大和</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">arr &#x3D; [1, 4, 6, 1, 9, 2, 2, 3]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="python-1"><a href="#python-1" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_opt</span>(<span class="params">arr, i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> max(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">        A = rec_opt(arr, i<span class="number">-1</span>)</span><br><span class="line">        B = rec_opt(arr, i<span class="number">-2</span>) + arr[i]</span><br><span class="line">        <span class="keyword">return</span> max(A, B)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 非递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_opt</span>(<span class="params">arr, i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> max(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">        opt = np.zeros(i+<span class="number">1</span>, dtype=int)</span><br><span class="line">        opt[<span class="number">0</span>] = arr[<span class="number">0</span>]</span><br><span class="line">        opt[<span class="number">1</span>] = max(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">2</span>, i+<span class="number">1</span>):</span><br><span class="line">            A = opt[n<span class="number">-1</span>]</span><br><span class="line">            B = opt[n<span class="number">-2</span>] + arr[n]</span><br><span class="line">            opt[n] = max(A, B)</span><br><span class="line">        <span class="keyword">return</span> opt[i]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">    print(rec_opt(arr, <span class="number">7</span>))</span><br><span class="line">    print(dp_opt(arr, <span class="number">7</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="问题4：是否可组成指定和"><a href="#问题4：是否可组成指定和" class="headerlink" title="问题4：是否可组成指定和"></a>问题4：是否可组成指定和</h3><h4 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a>题目</h4><p>数组Array（全是正整数），是否可以组成指定和S</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">arr &#x3D; [3, 34, 4, 12, 5, 2]</span><br><span class="line">S &#x3D; 9</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="python-2"><a href="#python-2" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_subset</span>(<span class="params">arr, i, S</span>):</span></span><br><span class="line">    <span class="keyword">if</span> S == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>] == S</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 剪枝</span></span><br><span class="line">    <span class="keyword">elif</span> arr[i] &gt; S:</span><br><span class="line">        <span class="keyword">return</span> rec_subset(arr, i<span class="number">-1</span>, S)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        A = rec_subset(arr, i<span class="number">-1</span>, S-arr[i])</span><br><span class="line">        B = rec_subset(arr, i<span class="number">-1</span>, S)</span><br><span class="line">        <span class="keyword">return</span> A <span class="keyword">or</span> B</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 非递归</span></span><br><span class="line"><span class="comment">## 动态规划表：构造一个len(arr)行，S+1列的二维数组</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_subset</span>(<span class="params">arr, S</span>):</span></span><br><span class="line">    subset = np.zeros((len(arr), S + <span class="number">1</span>), dtype=bool)</span><br><span class="line">    subset[:, <span class="number">0</span>] = <span class="literal">True</span></span><br><span class="line">    subset[<span class="number">0</span>, :] = <span class="literal">False</span></span><br><span class="line">    subset[<span class="number">0</span>, arr[<span class="number">0</span>]] = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(arr)):</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> range(<span class="number">1</span>, S + <span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 剪枝</span></span><br><span class="line">            <span class="keyword">if</span> arr[i] &gt; s:</span><br><span class="line">                subset[i, s] = subset[i<span class="number">-1</span>, s]</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                A = subset[i<span class="number">-1</span>, s-arr[i]]</span><br><span class="line">                B = subset[i<span class="number">-1</span>, s]</span><br><span class="line">                subset[i, s] = A <span class="keyword">or</span> B</span><br><span class="line">    <span class="keyword">return</span> subset[<span class="number">-1</span>, <span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">3</span>, <span class="number">34</span>, <span class="number">4</span>, <span class="number">12</span>, <span class="number">5</span>, <span class="number">2</span>]</span><br><span class="line">    print(dp_subset(arr, <span class="number">9</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">10</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">11</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">12</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">13</span>))</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mosquitto</title>
     <url>/2020/08/31/Mosquitto/</url>
     <content><![CDATA[<h2 id="Mosquitto"><a href="#Mosquitto" class="headerlink" title="Mosquitto"></a>Mosquitto</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型设备、移动应用等方面有较广泛的应用。</p>
@@ -231,31 +231,79 @@
       </tags>
   </entry>
   <entry>
-    <title>Oracle 11G 安装</title>
-    <url>/2020/09/10/Oracle/</url>
-    <content><![CDATA[<h2 id="win10安装"><a href="#win10安装" class="headerlink" title="win10安装"></a>win10安装</h2><h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><p>链接：<a href="https://pan.baidu.com/s/12ctlN7GaU4JbIOuawpsiqA">https://pan.baidu.com/s/12ctlN7GaU4JbIOuawpsiqA</a><br>提取码：bah3</p>
+    <title>Oracle 11.2 安装文档</title>
+    <url>/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<h2 id="win10安装"><a href="#win10安装" class="headerlink" title="win10安装"></a>win10安装</h2><h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle 11.2.0.1.0</p>
+<p>链接：<a href="https://pan.baidu.com/s/12ctlN7GaU4JbIOuawpsiqA">https://pan.baidu.com/s/12ctlN7GaU4JbIOuawpsiqA</a> </p>
+<p>提取码：bah3</p>
 <h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><h4 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h4><p>解压后，双击setup.exe。目录建议全英文</p>
-<p><img src="/2020/09/10/Oracle/win10-1.png" alt="win10-1"></p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-1.png" alt="win10-1"></p>
 <h4 id="环境检测"><a href="#环境检测" class="headerlink" title="环境检测"></a>环境检测</h4><p>双击setup.exe后，自动启动安装程序，检测环境配置。</p>
 <p>我本次目的是测试安装流程，点击是继续安装即可。对安装无影响，对性能有影响。</p>
-<p><img src="/2020/09/10/Oracle/win10-2.png" alt="win10-2"></p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-2.png" alt="win10-2"></p>
 <h4 id="配置安全更新"><a href="#配置安全更新" class="headerlink" title="配置安全更新"></a>配置安全更新</h4><p>电子邮箱配置自己的即可，会接受安全问题通知，也可以不填</p>
-<p><img src="/2020/09/10/Oracle/win10-3.png" alt="win10-3"></p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-3.png" alt="win10-3"></p>
 <h4 id="安装选项"><a href="#安装选项" class="headerlink" title="安装选项"></a>安装选项</h4><p>选择创建和配置数据库，点击下一步</p>
-<p><img src="/2020/09/10/Oracle/win10-4.png" alt="win10-4"></p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-4.png" alt="win10-4"></p>
 <h4 id="系统类"><a href="#系统类" class="headerlink" title="系统类"></a>系统类</h4><p>这里在win10上实验，选择的桌面类</p>
-<p><img src="/2020/09/10/Oracle/win10-5.png" alt="win10-5"></p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-5.png" alt="win10-5"></p>
 <h4 id="典型安装"><a href="#典型安装" class="headerlink" title="典型安装"></a>典型安装</h4><p>设置数据库文件存储目录、数据库版本、字符集、数据库名及管理口令（用户名为<code>system</code>）</p>
-<p><img src="/2020/09/10/Oracle/win10-6.png" alt="win10-6"></p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-6.png" alt="win10-6"></p>
 <h4 id="后续步骤"><a href="#后续步骤" class="headerlink" title="后续步骤"></a>后续步骤</h4><p>典型安装完成后，按照流程下一步即可完成安装</p>
 <h4 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h4><p>安装完成后，登录<code>https://localhost:1158/em</code>即可查看，用户名<code>system</code>，口令为典型安装中配置的管理口令</p>
-<p><img src="/2020/09/10/Oracle/win10-7.png" alt="win10-7"></p>
-]]></content>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-7.png" alt="win10-7"></p>
+<h2 id="Ubuntu-18-Docker安装"><a href="#Ubuntu-18-Docker安装" class="headerlink" title="Ubuntu 18 Docker安装"></a>Ubuntu 18 Docker安装</h2><h3 id="安装包-1"><a href="#安装包-1" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle Express Edition 11g Release 2</p>
+<p>GitHub：<a href="https://github.com/wnameless/docker-oracle-xe-11g">https://github.com/wnameless/docker-oracle-xe-11g</a></p>
+<h3 id="安装步骤-1"><a href="#安装步骤-1" class="headerlink" title="安装步骤"></a>安装步骤</h3><h4 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h4><p>参考文档：<a href="https://www.runoob.com/docker/ubuntu-docker-install.html">https://www.runoob.com/docker/ubuntu-docker-install.html</a></p>
+<p>安装命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用国内 daocloud 一键安装命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -sSL https://get.daocloud.io/docker | sh</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装Oracle-11G"><a href="#安装Oracle-11G" class="headerlink" title="安装Oracle 11G"></a>安装Oracle 11G</h4><h5 id="Installation-Local"><a href="#Installation-Local" class="headerlink" title="Installation(Local)"></a>Installation(Local)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/wnameless/docker-oracle-xe-11g.git</span><br><span class="line">cd docker-oracle-xe-11g</span><br><span class="line">docker build -t wnameless/oracle-xe-11g .</span><br></pre></td></tr></table></figure>
+
+<h5 id="Installation-DockerHub"><a href="#Installation-DockerHub" class="headerlink" title="Installation(DockerHub)"></a>Installation(DockerHub)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
+
+<p>SSH server has been removed since 18.04, please use “docker exec”</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>Run with 1521 port opened:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 49161:1521 wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
+
+<p>Run this, if you want the database to be connected remotely:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 49161:1521 -e ORACLE_ALLOW_REMOTE=true wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
+
+<h4 id="默认信息"><a href="#默认信息" class="headerlink" title="默认信息"></a>默认信息</h4><p>By default, the password verification is disable(password never expired)<br>Connect database with following setting:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hostname: localhost</span><br><span class="line">port: 49161</span><br><span class="line">sid: xe</span><br><span class="line">username: system</span><br><span class="line">password: oracle</span><br></pre></td></tr></table></figure>
+
+<p>Password for SYS &amp; SYSTEM</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">oracle</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Oracle</category>
       </categories>
       <tags>
-        <tag>Oracle 11G</tag>
+        <tag>Oracle 11.2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle 11.2 快速上手</title>
+    <url>/2020/09/14/Oracle-11-2-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>Oracle 11.2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle 性能测试</title>
+    <url>/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h2 id="性能测试项"><a href="#性能测试项" class="headerlink" title="性能测试项"></a>性能测试项</h2><h3 id="批量插入数据"><a href="#批量插入数据" class="headerlink" title="批量插入数据"></a>批量插入数据</h3>]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>性能测试</tag>
       </tags>
   </entry>
   <entry>
@@ -363,6 +411,146 @@
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TiDB 安装文档</title>
+    <url>/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>官方文档：<a href="https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements">https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements</a></p>
+<h2 id="使用-TiUP-部署-TiDB-集群"><a href="#使用-TiUP-部署-TiDB-集群" class="headerlink" title="使用 TiUP 部署 TiDB 集群"></a>使用 TiUP 部署 TiDB 集群</h2><p><a href="https://github.com/pingcap/tiup">TiUP</a> 是 TiDB 4.0 版本引入的集群运维工具，<a href="https://github.com/pingcap/tiup/tree/master/components/cluster">TiUP cluster</a> 是 TiUP 提供的使用 Golang 编写的集群管理组件，通过 TiUP cluster 组件就可以进行日常的运维工作，包括部署、启动、关闭、销毁、弹性扩缩容、升级 TiDB 集群；管理 TiDB 集群参数。</p>
+<p>目前 TiUP 可以支持部署 TiDB、TiFlash、TiDB Binlog、TiCDC，以及监控系统。本文将介绍不同集群拓扑的具体部署步骤。</p>
+<h3 id="第-1-步：软硬件环境需求及前置检查"><a href="#第-1-步：软硬件环境需求及前置检查" class="headerlink" title="第 1 步：软硬件环境需求及前置检查"></a>第 1 步：软硬件环境需求及前置检查</h3><p><a href="https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements">软硬件环境需求</a></p>
+<p><a href="https://docs.pingcap.com/zh/tidb/stable/check-before-deployment">环境与系统配置检查</a></p>
+<h3 id="第-2-步：在中控机上安装-TiUP-组件"><a href="#第-2-步：在中控机上安装-TiUP-组件" class="headerlink" title="第 2 步：在中控机上安装 TiUP 组件"></a>第 2 步：在中控机上安装 TiUP 组件</h3><p>使用普通用户登录中控机，以 <code>tidb</code> 用户为例，后续安装 TiUP 及集群管理操作均通过该用户完成：</p>
+<ol>
+<li><p>执行如下命令安装 TiUP 工具：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按如下步骤设置 TiUP 环境变量：</p>
+<p>重新声明全局环境变量：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>确认 TiUP 工具是否安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">which tiup</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 TiUP cluster 组件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果已经安装，则更新 TiUP cluster 组件至最新版本：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup update --self &amp;&amp; tiup update cluster</span><br></pre></td></tr></table></figure>
+
+<p>预期输出 <code>“Update successfully!”</code> 字样。</p>
+</li>
+<li><p>验证当前 TiUP cluster 版本信息。执行如下命令查看 TiUP cluster 组件版本：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup --binary cluster</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h3 id="第-3-步：编辑初始化配置文件"><a href="#第-3-步：编辑初始化配置文件" class="headerlink" title="第 3 步：编辑初始化配置文件"></a>第 3 步：编辑初始化配置文件</h3><p>请根据不同的集群拓扑，编辑 TiUP 所需的集群初始化配置文件。</p>
+<p>这里举出常见的 6 种场景，请根据链接中的拓扑说明，以及给出的配置文件模板，新建一个配置文件 <code>topology.yaml</code>。如果有其他组合场景的需求，请根据多个模板自行调整。</p>
+<ul>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/minimal-deployment-topology">最小拓扑架构</a></p>
+<p>最基本的集群拓扑，包括 tidb-server、tikv-server、pd-server，适合 OLTP 业务。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-deployment-topology">增加 TiFlash 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiFlash。TiFlash 是列式的存储引擎，已经逐步成为集群拓扑的标配。适合 Real-Time HTAP 业务。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/ticdc-deployment-topology">增加 TiCDC 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiCDC。TiCDC 是 4.0 版本开始支持的 TiDB 增量数据同步工具，支持多种下游 (TiDB/MySQL/MQ)。相比于 TiDB Binlog，TiCDC 有延迟更低、天然高可用等优点。在部署完成后，需要启动 TiCDC，<a href="https://docs.pingcap.com/zh/tidb/stable/manage-ticdc">通过 <code>cdc cli</code> 创建同步任务</a>。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tidb-binlog-deployment-topology">增加 TiDB Binlog 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiDB Binlog。TiDB Binlog 是目前广泛使用的增量同步组件，可提供准实时备份和同步功能。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tispark-deployment-topology">增加 TiSpark 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiSpark 组件。TiSpark 是 PingCAP 为解决用户复杂 OLAP 需求而推出的产品。TiUP cluster 组件对 TiSpark 的支持目前为实验性特性。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/hybrid-deployment-topology">混合部署拓扑架构</a></p>
+<p>适用于单台机器，混合部署多个实例的情况，也包括单机多实例，需要额外增加目录、端口、资源配比、label 等配置。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/geo-distributed-deployment-topology">跨机房部署拓扑架构</a></p>
+<p>以典型的 <code>两地三中心</code> 架构为例，介绍跨机房部署架构，以及需要注意的关键设置。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>topology.yaml</code>配置文件内不能使用主机名，需要使用ip地址。使用主机名会在启动时出现报错。</li>
+<li>对于需要全局生效的参数，请在配置文件中 <code>server_configs</code> 的对应组件下配置。</li>
+<li>对于需要某个节点生效的参数，请在具体节点的 <code>config</code> 中配置。</li>
+<li>配置的层次结构使用 <code>.</code> 表示。如：<code>log.slow-threshold</code>。更多格式参考 <a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml">TiUP 配置参数模版</a>。</li>
+<li>更多参数说明，请参考 <a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example">TiDB <code>config.toml.example</code></a>、<a href="https://github.com/tikv/tikv/blob/master/etc/config-template.toml">TiKV <code>config.toml.example</code></a> 、 <a href="https://github.com/pingcap/pd/blob/master/conf/config.toml">PD <code>config.toml.example</code></a> 和 <a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-configuration">TiFlash 配置参数</a>。</li>
+</ul>
+</blockquote>
+<h3 id="第-4-步：执行部署命令"><a href="#第-4-步：执行部署命令" class="headerlink" title="第 4 步：执行部署命令"></a>第 4 步：执行部署命令</h3><blockquote>
+<p><strong>注意：</strong></p>
+<p>通过 TiUP 进行集群部署可以使用密钥或者交互密码方式来进行安全认证：</p>
+<ul>
+<li>如果是密钥方式，可以通过 <code>-i</code> 或者 <code>--identity_file</code> 来指定密钥的路径；</li>
+<li>如果是密码方式，可以通过 <code>-p</code> 进入密码交互窗口；</li>
+<li>如果已经配置免密登陆目标机，则不需填写认证。</li>
+</ul>
+<p>一般情况下 TiUP 会在目标机器上创建 <code>topology.yaml</code> 中约定的用户和组，以下情况例外：</p>
+<ul>
+<li><code>topology.yaml</code> 中设置的用户名在目标机器上已存在。</li>
+<li>在命令行上使用了参数 <code>--skip-create-user</code> 明确指定跳过创建用户的步骤。</li>
+</ul>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster deploy tidb-test v4.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]</span><br></pre></td></tr></table></figure>
+
+<p>以上部署命令中：</p>
+<ul>
+<li>通过 TiUP cluster 部署的集群名称为 <code>tidb-test</code></li>
+<li>部署版本为 <code>v4.0.0</code>，最新版本可以通过执行 <code>tiup list tidb</code> 来查看 TiUP 支持的版本</li>
+<li>初始化配置文件为 <code>topology.yaml</code></li>
+<li>–user root：通过 root 用户登录到目标主机完成集群部署，该用户需要有 ssh 到目标机器的权限，并且在目标机器有 sudo 权限。也可以用其他有 ssh 和 sudo 权限的用户完成部署。</li>
+<li>[-i] 及 [-p]：非必选项，如果已经配置免密登陆目标机，则不需填写。否则选择其一即可，[-i] 为可登录到目标机的 root 用户（或 –user 指定的其他用户）的私钥，也可使用 [-p] 交互式输入该用户的密码</li>
+<li>如果需要指定在目标机创建的用户组名，可以参考<a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml#L7">这个例子</a>。</li>
+</ul>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-1.png" alt="TiUP-1"></p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-2.png" alt="TiUP-2"></p>
+<p>预期日志结尾输出会有 <code>Deployed cluster </code>tidb-test<code> successfully</code> 关键词，表示部署成功。</p>
+<h3 id="第-5-步：查看-TiUP-管理的集群情况"><a href="#第-5-步：查看-TiUP-管理的集群情况" class="headerlink" title="第 5 步：查看 TiUP 管理的集群情况"></a>第 5 步：查看 TiUP 管理的集群情况</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster list</span><br></pre></td></tr></table></figure>
+
+<p>TiUP 支持管理多个 TiDB 集群，该命令会输出当前通过 TiUP cluster 管理的所有集群信息，包括集群名称、部署用户、版本、密钥信息等：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Starting &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;components&#x2F;cluster&#x2F;v1.0.0&#x2F;cluster list</span><br><span class="line">Name              User  Version        Path                                                        PrivateKey</span><br><span class="line">----              ----  -------        ----                                                        ----------</span><br><span class="line">tidb-test         tidb  v4.0.0      &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test         &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test&#x2F;ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-3.png" alt="TiUP-3"></p>
+<h3 id="第-6-步：检查部署的-TiDB-集群情况"><a href="#第-6-步：检查部署的-TiDB-集群情况" class="headerlink" title="第 6 步：检查部署的 TiDB 集群情况"></a>第 6 步：检查部署的 TiDB 集群情况</h3><p>例如，执行如下命令检查 <code>tidb-test</code> 集群情况：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期输出包括 <code>tidb-test</code> 集群中实例 ID、角色、主机、监听端口和状态（由于还未启动，所以状态为 Down/inactive）、目录信息。</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-4.png" alt="TiUP-4"></p>
+<h3 id="第-7-步：启动集群"><a href="#第-7-步：启动集群" class="headerlink" title="第 7 步：启动集群"></a>第 7 步：启动集群</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster start tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期结果输出 <code>Started cluster </code>tidb-test<code> successfully</code> 标志启动成功。</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-5.png" alt="TiUP-5"></p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-6.png" alt="TiUP-6"></p>
+<h3 id="第-8-步：验证集群运行状态"><a href="#第-8-步：验证集群运行状态" class="headerlink" title="第 8 步：验证集群运行状态"></a>第 8 步：验证集群运行状态</h3><ul>
+<li>通过 TiUP 检查集群状态</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期结果输出，注意 Status 状态信息为 <code>Up</code> 说明集群状态正常</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-7.png" alt="TiUP-7"></p>
+<ul>
+<li>执行如下命令登录数据库：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -h 10.0.1.4 -P 4000</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-8.png" alt="TiUP-8"></p>
+<p>此外，也需要验证监控系统、<a href="https://docs.pingcap.com/zh/tidb/stable/dashboard-intro">TiDB Dashboard</a> 的运行状态，以及简单命令的执行，验证方式可参考<a href="https://docs.pingcap.com/zh/tidb/stable/post-installation-check">验证集群运行状态</a>。</p>
+<h3 id="TiUP管理命令"><a href="#TiUP管理命令" class="headerlink" title="TiUP管理命令"></a>TiUP管理命令</h3><h4 id="集群管理"><a href="#集群管理" class="headerlink" title="集群管理"></a>集群管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看集群列表</span></span><br><span class="line">tiup cluster list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看集群状态</span></span><br><span class="line">tiup cluster display tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动集群</span></span><br><span class="line">tiup cluster start tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止集群</span></span><br><span class="line">tiup cluster stop tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改集群参数</span></span><br><span class="line">tiup cluster edit-config tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除集群</span></span><br><span class="line">tiup cluster destroy tidb-test</span><br></pre></td></tr></table></figure>
+
+<h4 id="集群组件管理"><a href="#集群组件管理" class="headerlink" title="集群组件管理"></a>集群组件管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动组件所有节点</span></span><br><span class="line">tiup cluster start tidb-test -R pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭组件所有节点</span></span><br><span class="line">tiup cluster stop tidb-test -R tidb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动某几个节点的组件</span></span><br><span class="line">tiup cluster start tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭某几个节点的组件</span></span><br><span class="line">tiup cluster stop tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>TiDB</category>
+      </categories>
+      <tags>
+        <tag>TiDB</tag>
       </tags>
   </entry>
   <entry>
