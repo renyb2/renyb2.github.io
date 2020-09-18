@@ -469,6 +469,125 @@
       </tags>
   </entry>
   <entry>
+    <title>Oracle Performance Test：SwingBench</title>
+    <url>/2020/09/18/SwingBench/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>SwingBench是Oracle UK的一个员工在一个被抛弃的项目的基础上开发的。目前稳定版本2.6，基于JDK。该工具是免费的，可以在作者的网站上自由下载，并且拥有详细的使用文档。Swingbench 可以执行4种不同的标准测试(benchmark)，拥有三种前端展示方式Swingbench/Charbench/Minibench，其中 Charbench是字符模式的，另外两种是GUI模式的。另外还可以通过ClusterOverview可以聚合显示所有的结果。Swingbench 的开发目的主要是用来展示RAC的负载和测试，但也可用于单实例环境。2.3版本开始支持TimesTen。</p>
+<blockquote>
+<p>SwingBench consists of a load generator, a coordinator and a cluster overview. The software enables a load to be generated and the transactions/response times to be charted.</p>
+<p>Swingbench can be used to demonstrate and test technologies such as Real Application Clusters, Online table rebuilds, Standby databases, Online backup and recovery etc.</p>
+<p>The code that ships with SwingBench includes 6 benchmarks, OrderEntry, SalesHistory, TPC-DS Like, JSON, CallingCircle and StressTest..</p>
+<ul>
+<li>OrderEntry is based on the “oe” schema that ships with Oracle 12c/Oracle 18c/Oracle 19c. It has been modified so that Spatial, Intermedia schema’s do not need to be installed. It can be run continuously (that is until you run out of space). It introduces heavy contention on a small number of tables and is designed to stress interconnects and memory. It is installed using the “oewizard” located in the bin directory. Both a pure jdbc and pl/sql (lower network overhead) variant exist of the benchmark.</li>
+<li>SalesHistory is based on the “sh” schema that ships with Oracle 12c/Oracle 18c/Oracle 19c and is designed to test the performance of complicated queries when run against large tables. It is read only and can be scaled over a number of default sizes from 1GB to 1TB. A custom mode also allows for the creation of smaller and larger schemas</li>
+<li>CallingCircle (deprecated) simulates the SQL that is generated for an online telco application. It requires data files to be generated and copied from the database server to the load generator before each run, it typically requires between 1 and 8 GB of disk space. Both benchmarks are heavily CPU intensive. Experience has shown that you require at least 1 processor of load generator to every 2 processors of database server. It is designed to stress the CPU and memory without the need for a powerful I/O subsystem. Its is installed using the “ccwizard” located in the bin directory</li>
+<li>StressTest simply fires random inserts,updates,selects and updates against a well know table.</li>
+<li>JSON Stresstest is based on simple JSON documents modelling people flying between airports. It follow a basic CRUD model</li>
+<li>TPC-DS Like Benchmark is a benchmark similar to TPC-DS. It features both a query and transaction workload in separate configuration files.</li>
+</ul>
+<p>The entire framework is developed in Java and as a result can be run on wide variety of platforms. It also provides a simple API to allow developers to build their own benchmarks.</p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><p>系统：win10虚机</p>
+<p>配置：4c8g，500G硬盘</p>
+<h3 id="安装包下载"><a href="#安装包下载" class="headerlink" title="安装包下载"></a>安装包下载</h3><p>官方下载地址：<a href="http://www.dominicgiles.com/downloads.html">http://www.dominicgiles.com/downloads.html</a></p>
+<h3 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h3><h4 id="安装JDK-1-8"><a href="#安装JDK-1-8" class="headerlink" title="安装JDK 1.8"></a>安装JDK 1.8</h4><p>版本：jdk-8u131-windows-i586（链接：<a href="https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg">https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg</a> 提取码：4ztk）</p>
+<p>系统环境变量：</p>
+<ul>
+<li>JAVA_HOME：C:\Program Files (x86)\Java\jdk1.8.0_131</li>
+<li>CLASSPATH：.;%JAVA_HOME%\bin;%JAVA_HOME%\lib\dt.jar%JAVA_HOME%\lib\tools.jar;</li>
+<li>PATH：新增两行，%JAVA_HOME%\bin，%JAVA_HOME%\jre\lib</li>
+</ul>
+<h4 id="安装SwingBench"><a href="#安装SwingBench" class="headerlink" title="安装SwingBench"></a>安装SwingBench</h4><p>Swingbench压缩包下载完，解压即可使用。</p>
+<h2 id="Oewizard加载数据"><a href="#Oewizard加载数据" class="headerlink" title="Oewizard加载数据"></a>Oewizard加载数据</h2><h3 id="运行Oewizard"><a href="#运行Oewizard" class="headerlink" title="运行Oewizard"></a>运行Oewizard</h3><p>进入<code>.\swingbench\winbin</code>目录下，双击运行<code>oewizard.bat</code>。</p>
+<blockquote>
+<p>实验时，出现双击后无响应的情况，在cmd中运行<code>oewizard.bat</code>文件，报错如下：<br>Error occurred during initialization of VM<br>Could not reserve enough space for 2097152KB object heap</p>
+<p>解决方式：系统环境变量中添加如下变量<br>变量名：<code>JAVA_TOOL_OPTIONS</code>    变量值：<code>-Xms1024m</code><br>变量名：<code>_JAVA_OPTIONS</code>    变量值：<code>-Xmx1024m</code></p>
+</blockquote>
+<p><img src="/2020/09/18/SwingBench/oewizard-1.png" alt="oewizard-1"></p>
+<h3 id="Benchmark-Version"><a href="#Benchmark-Version" class="headerlink" title="Benchmark Version"></a>Benchmark Version</h3><p>选择默认选项，version 2.0</p>
+<p><img src="/2020/09/18/SwingBench/oewizard-2.png" alt="oewizard-2"></p>
+<h3 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h3><p>选择默认选项，Create the Order Entry Schema (User, Table, indexes, Data etc)</p>
+<p><img src="/2020/09/18/SwingBench/oewizard-3.png" alt="oewizard-3"></p>
+<h3 id="Database-Details"><a href="#Database-Details" class="headerlink" title="Database Details"></a>Database Details</h3><p>填写Oracle数据库的连接信息</p>
+<ul>
+<li><p>Connect String：格式为<code>ip[：port][：service name]</code>，eg：<code>10.121.9.104:49161</code></p>
+</li>
+<li><p>Connection Type：使用默认选项，<code>Type IV jdbc driver (Thin)</code></p>
+</li>
+<li><p>Administrator Username：<code>sys as sysdba</code></p>
+</li>
+<li><p>Administrator Password：使用sys的密码，如果未设置，可在oracle中使用如下命令设置</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> <span class="keyword">sys</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">&quot;&lt;new password&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/18/SwingBench/oewizard-4.png" alt="oewizard-4"></p>
+<h3 id="Schema-Details"><a href="#Schema-Details" class="headerlink" title="Schema Details"></a>Schema Details</h3><ul>
+<li><p>Username：<code>sys as sysdba</code></p>
+</li>
+<li><p>Password：sys的密码</p>
+</li>
+<li><p>Schema’s Tablespace：使用的是SYSTEM</p>
+</li>
+<li><p>Tablespaces’s Datafile：自动生成</p>
+</li>
+</ul>
+<p><img src="/2020/09/18/SwingBench/oewizard-5.png" alt="oewizard-5"></p>
+<h3 id="Database-Options"><a href="#Database-Options" class="headerlink" title="Database Options"></a>Database Options</h3><p>全使用默认选项，直接下一步</p>
+<ul>
+<li><p>Partitioning Model：<code>No Partitioning</code></p>
+</li>
+<li><p>Compression Used：<code>No Compression</code></p>
+</li>
+<li><p>Tablespace Type：<code>Bigfile Tablespace</code></p>
+</li>
+<li><p>Indexing Used：<code>All Indexes</code></p>
+</li>
+</ul>
+<p><img src="/2020/09/18/SwingBench/oewizard-6.png" alt="oewizard-6"></p>
+<h3 id="Sizing-Details"><a href="#Sizing-Details" class="headerlink" title="Sizing Details"></a>Sizing Details</h3><p>加载的测试数据大小，根据需求选择。实验选择的最小数据量1GB，点击下一步</p>
+<p><img src="/2020/09/18/SwingBench/oewizard-7.png" alt="oewizard-7"></p>
+<h3 id="ALL-Details-Entered"><a href="#ALL-Details-Entered" class="headerlink" title="ALL Details Entered"></a>ALL Details Entered</h3><p>Level of Parallelism：设置导入时的并发，只影响数据导入速度，默认为4</p>
+<p><img src="/2020/09/18/SwingBench/oewizard-8.png" alt="oewizard-8"></p>
+<h3 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h3><p><img src="/2020/09/18/SwingBench/Swingbench%E5%8A%A0%E8%BD%BD%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE.png" alt="Swingbench加载测试数据"></p>
+<p><img src="/2020/09/18/SwingBench/Swingbench%E5%8A%A0%E8%BD%BD%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%EF%BC%88%E5%AE%8C%E6%88%90%EF%BC%89.png" alt="Swingbench加载测试数据（完成）"></p>
+<h2 id="SwingBench性能测试"><a href="#SwingBench性能测试" class="headerlink" title="SwingBench性能测试"></a>SwingBench性能测试</h2><h3 id="开启SwingBench"><a href="#开启SwingBench" class="headerlink" title="开启SwingBench"></a>开启SwingBench</h3><p>进入<code>.\swingbench\winbin</code>目录下，双击运行<code>swingbench.bat</code>。界面功能区分布如下：</p>
+<p><img src="/2020/09/18/SwingBench/swingbench-1.png" alt="swingbench-1"></p>
+<h3 id="User-Details"><a href="#User-Details" class="headerlink" title="User Details"></a>User Details</h3><p>设置Oracle数据库的连接信息。<code>注意：必须使用sysdba用户，普通用户获取不到数据库的性能数据</code></p>
+<ul>
+<li>Username：<code>sys as sysdba</code></li>
+<li>Password：sys的密码</li>
+<li>Connect String：格式为<code>ip[：port][：service name]</code>，eg：<code>10.121.9.104:49161</code></li>
+<li>Driver Type：使用默认选项，<code>Oracle jdbc Driver</code></li>
+</ul>
+<p>填写完成后，进行连接测试，提示如下则表明连接正常</p>
+<p><img src="/2020/09/18/SwingBench/swingbench-4.png" alt="swingbench-4"></p>
+<h3 id="Load"><a href="#Load" class="headerlink" title="Load"></a>Load</h3><p>设置压力参数</p>
+<ul>
+<li>Number of Users：并发数，默认为4</li>
+<li>Benchmark Run Time (hh:min)：运行时长</li>
+</ul>
+<h3 id="Server-Monitoring（ssh）"><a href="#Server-Monitoring（ssh）" class="headerlink" title="Server Monitoring（ssh）"></a>Server Monitoring（ssh）</h3><p>设置Oracle主机的ssh信息，SwingBench会ssh到主机，获取监控信息</p>
+<p><img src="/2020/09/18/SwingBench/swingbench-2.png" alt="swingbench-2"></p>
+<h3 id="Oracle-AWR静态分析"><a href="#Oracle-AWR静态分析" class="headerlink" title="Oracle AWR静态分析"></a>Oracle AWR静态分析</h3><ul>
+<li>勾选Connect database statistics</li>
+<li>勾选Take AWR Snapshots at Start and End</li>
+<li>Admin Username：<code>sys as sysdba</code></li>
+<li>Admin Password：sys的密码</li>
+</ul>
+<h3 id="性能图表"><a href="#性能图表" class="headerlink" title="性能图表"></a>性能图表</h3><p>支持的图表如下</p>
+<p><img src="/2020/09/18/SwingBench/swingbench-5.png" alt="swingbench-5"></p>
+<h3 id="运行SwingBench"><a href="#运行SwingBench" class="headerlink" title="运行SwingBench"></a>运行SwingBench</h3><p><img src="/2020/09/18/SwingBench/swingbench-3.png" alt="swingbench-3"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="http://www.dominicgiles.com/simplebenchmark.html">SwingBench官方文档</a></p>
+<p><a href="https://www.cnblogs.com/liangqihui/p/7193956.html">如何使用swingbench进行oracle数据库压力测试</a></p>
+]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>性能测试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>TiDB 安装文档</title>
     <url>/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<p>官方文档：<a href="https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup">https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup</a></p>
