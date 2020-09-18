@@ -250,7 +250,9 @@
 <h4 id="典型安装"><a href="#典型安装" class="headerlink" title="典型安装"></a>典型安装</h4><p>设置数据库文件存储目录、数据库版本、字符集、数据库名及管理口令（用户名为<code>system</code>）</p>
 <p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-6.png" alt="win10-6"></p>
 <h4 id="后续步骤"><a href="#后续步骤" class="headerlink" title="后续步骤"></a>后续步骤</h4><p>典型安装完成后，按照流程下一步即可完成安装</p>
-<h4 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h4><p>安装完成后，登录<code>https://localhost:1158/em</code>即可查看，用户名<code>system</code>，口令为典型安装中配置的管理口令</p>
+<h4 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h4><p>CMD：<code>sqlplus system/&lt;system password&gt;</code></p>
+<p>网页：<code>https://localhost:1158/em</code>，用户名<code>system</code>，口令为典型安装中配置的管理口令</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-8.png" alt="win10-8"></p>
 <p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-7.png" alt="win10-7"></p>
 <h2 id="Ubuntu-18-Docker安装"><a href="#Ubuntu-18-Docker安装" class="headerlink" title="Ubuntu 18 Docker安装"></a>Ubuntu 18 Docker安装</h2><h3 id="安装包-1"><a href="#安装包-1" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle Express Edition 11g Release 2</p>
 <p>GitHub：<a href="https://github.com/wnameless/docker-oracle-xe-11g">https://github.com/wnameless/docker-oracle-xe-11g</a></p>
