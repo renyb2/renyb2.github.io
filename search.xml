@@ -55,6 +55,77 @@
       </tags>
   </entry>
   <entry>
+    <title>Jmeter</title>
+    <url>/2020/09/23/Jmeter/</url>
+    <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址：<a href="http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip">http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip</a></p>
+<h3 id="Windows部署"><a href="#Windows部署" class="headerlink" title="Windows部署"></a>Windows部署</h3><h4 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h4><p>版本：jdk-8u131-windows-i586（链接：<a href="https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg">https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg</a> 提取码：4ztk）</p>
+<p>系统环境变量：</p>
+<ul>
+<li>JAVA_HOME：C:\Program Files (x86)\Java\jdk1.8.0_131</li>
+<li>CLASSPATH：.;%JAVA_HOME%\bin;%JAVA_HOME%\lib\dt.jar%JAVA_HOME%\lib\tools.jar;</li>
+<li>PATH：新增两行，%JAVA_HOME%\bin，%JAVA_HOME%\jre\lib</li>
+</ul>
+<h4 id="Jmeter"><a href="#Jmeter" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>开箱即用。可执行文件：<code>.\bin\jmeter.bat</code></p>
+<h3 id="Linux部署"><a href="#Linux部署" class="headerlink" title="Linux部署"></a>Linux部署</h3><h4 id="Java环境-1"><a href="#Java环境-1" class="headerlink" title="Java环境"></a>Java环境</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br></pre></td></tr></table></figure>
+
+<h4 id="Jmeter-1"><a href="#Jmeter-1" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>环境变量<code>/etc/profile</code>增加如下内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export JMETER_HOME=/root/jmeter</span><br><span class="line">export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH</span><br><span class="line">export PATH=$JMETER_HOME/bin:$PATH:$HOME/bin</span><br></pre></td></tr></table></figure>
+
+<p>环境变量配置生效：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>验证：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter --version</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>思路：</strong>通过Windows图形界面生成配置文件，上传至服务器进行压测</p>
+<h3 id="http-https-性能测试"><a href="#http-https-性能测试" class="headerlink" title="http/https 性能测试"></a>http/https 性能测试</h3><h4 id="1-添加线程组"><a href="#1-添加线程组" class="headerlink" title="1. 添加线程组"></a>1. 添加线程组</h4><p>Test Plan中添加<code>Thread Group</code></p>
+<p>总请求量 = 并发用户数 * 循环轮次</p>
+<ul>
+<li><p><code>Number of Threads (users)</code>：设置并发用户数</p>
+</li>
+<li><p><code>Loop Count</code>：设置循环轮次</p>
+</li>
+<li><p><code>Ramp-up period (seconds)</code>：设置压力启动时间（从开始到最大压力之间的时间）</p>
+</li>
+</ul>
+<p><img src="/2020/09/23/Jmeter/jmeter-1.png" alt="jmeter-1"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-2.png" alt="jmeter-2"></p>
+<h4 id="2-设置http-https请求"><a href="#2-设置http-https请求" class="headerlink" title="2. 设置http/https请求"></a>2. 设置http/https请求</h4><p>Thread Group中添加<code>HTTP Request</code>，填写http/https请求的配置</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-3.png" alt="jmeter-3"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-4.png" alt="jmeter-4"></p>
+<h4 id="3-添加统计分析功能"><a href="#3-添加统计分析功能" class="headerlink" title="3. 添加统计分析功能"></a>3. 添加统计分析功能</h4><p>通常，添加如下两个统计分析功能：</p>
+<ul>
+<li>Summary Report</li>
+<li>jp@gc - Transactions Per Second（需要单独安装，安装流程见插件 - QPS统计）</li>
+</ul>
+<p><img src="/2020/09/23/Jmeter/jmeter-5.png" alt="jmeter-5"></p>
+<h4 id="4-导出配置"><a href="#4-导出配置" class="headerlink" title="4. 导出配置"></a>4. 导出配置</h4><p>保存jmx文件，上传至压力服务器。</p>
+<h4 id="5-压力执行"><a href="#5-压力执行" class="headerlink" title="5. 压力执行"></a>5. 压力执行</h4><p>linux运行，生成结果文件至<code>test.jtl</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter -n -t vm.jmx -l test.jtl</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-查看性能测试结果"><a href="#6-查看性能测试结果" class="headerlink" title="6. 查看性能测试结果"></a>6. 查看性能测试结果</h4><p>下载<code>test.jtl</code>，在Windows Jmeter的统计分析功能中打开查看。</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-6.png" alt="jmeter-6"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-7.png" alt="jmeter-7"></p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p><strong>Jmeter插件官网：</strong><a href="https://jmeter-plugins.org/wiki/Start/">https://jmeter-plugins.org/wiki/Start/</a></p>
+<h3 id="QPS统计"><a href="#QPS统计" class="headerlink" title="QPS统计"></a>QPS统计</h3><p>下载地址：<a href="https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip">https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip</a></p>
+<p>解压后，移动压缩包内lib目录下的文件至Jmeter\lib目录下同位置即可，重启Jmeter。</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-8.png" alt="jmeter-8"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://jmeter.apache.org/">Jmeter官方网站</a></p>
+<p><a href="https://jmeter-plugins.org/wiki/Start/">Jmeter官方插件</a></p>
+]]></content>
+      <categories>
+        <category>性能测试工具</category>
+      </categories>
+      <tags>
+        <tag>Jmeter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo</title>
     <url>/2020/09/10/Hexo/</url>
     <content><![CDATA[<h2 id="Hexo-简介"><a href="#Hexo-简介" class="headerlink" title="Hexo 简介"></a>Hexo 简介</h2><blockquote>
