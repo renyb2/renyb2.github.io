@@ -803,13 +803,19 @@
   <entry>
     <title>Vim</title>
     <url>/2020/08/31/Vim/</url>
-    <content><![CDATA[<h1 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
 <p>Vim是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。</p>
 <p>简单的来说， vi 是老式的字处理器，不过功能已经很齐全了，但是还是有可以进步的地方。 vim 则可以说是程序开发者的一项很好用的工具。</p>
 <p>连 vim 的官方网站 (<a href="http://www.vim.org/">http://www.vim.org</a>) 自己也说 vim 是一个程序开发工具而不是文字处理软件。</p>
 <p>参考文档：<a href="https://www.runoob.com/linux/linux-vim.html">https://www.runoob.com/linux/linux-vim.html</a></p>
 </blockquote>
 <a id="more"></a>
+
+
+
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat &gt;&gt; ~/.vimrc &lt;&lt; EOF</span><br><span class="line">&quot;设置编码&quot;</span><br><span class="line">set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936</span><br><span class="line">set termencoding=utf-8</span><br><span class="line">set encoding=utf-8</span><br><span class="line"></span><br><span class="line">&quot;显示行号&quot;</span><br><span class="line">set nu</span><br><span class="line"></span><br><span class="line">&quot;显示括号匹配&quot;</span><br><span class="line">set showmatch</span><br><span class="line"></span><br><span class="line">&quot;设置Tab长度为4空格&quot;</span><br><span class="line">set tabstop=4</span><br><span class="line">&quot;空格替代制表符&quot;</span><br><span class="line">set expandtab</span><br><span class="line">&quot;设置自动缩进长度为4空格&quot;</span><br><span class="line">set shiftwidth=4</span><br><span class="line">&quot;继承前一行的缩进方式，适用于多行注释&quot;</span><br><span class="line">set autoindent</span><br><span class="line"></span><br><span class="line">&quot;括号自动补全&quot;</span><br><span class="line">inoremap &#x27; &#x27;&#x27;&lt;ESC&gt;i</span><br><span class="line">inoremap &quot; &quot;&quot;&lt;ESC&gt;i</span><br><span class="line">inoremap ( ()&lt;ESC&gt;i</span><br><span class="line">inoremap [ []&lt;ESC&gt;i</span><br><span class="line">inoremap &#123; &#123;&lt;CR&gt;&#125;&lt;ESC&gt;O</span><br><span class="line"></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+
 
 <h2 id="常用按键"><a href="#常用按键" class="headerlink" title="常用按键"></a>常用按键</h2><h3 id="第一部分：一般模式"><a href="#第一部分：一般模式" class="headerlink" title="第一部分：一般模式"></a>第一部分：一般模式</h3><h4 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h4><table>
 <thead>
