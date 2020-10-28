@@ -6,7 +6,7 @@
   <link href="https://renyb2.github.io/atom.xml" rel="self"/>
   
   <link href="https://renyb2.github.io/"/>
-  <updated>2020-09-24T07:58:29.865Z</updated>
+  <updated>2020-10-28T06:28:25.861Z</updated>
   <id>https://renyb2.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git</title>
+    <link href="https://renyb2.github.io/2020/10/28/Git/"/>
+    <id>https://renyb2.github.io/2020/10/28/Git/</id>
+    <published>2020-10-28T03:44:50.000Z</published>
+    <updated>2020-10-28T06:28:25.861Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Git基本操作"><a href="#Git基本操作" class="headerlink" title="Git基本操作"></a>Git基本操作</h2><p>Git 常用的是以下 6 个命令：<strong>git clone</strong>、<strong>git push</strong>、<strong>git add</strong> 、<strong>git commit</strong>、<strong>git checkout</strong>、<strong>git pull</strong></p><p><img src="/2020/10/28/Git/git-command.jpg" alt="Git"></p><p><strong>说明：</strong></p><ul><li>workspace：工作区</li><li>staging area：暂存区/缓存区</li><li>local repository：或本地仓库</li><li>remote repository：远程仓库</li></ul><h2 id="Git命令"><a href="#Git命令" class="headerlink" title="Git命令"></a>Git命令</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化仓库</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆仓库（下载项目）</span></span><br><span class="line">git <span class="built_in">clone</span> &lt;repo&gt;</span><br></pre></td></tr></table></figure><h3 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加文件到仓库</span></span><br><span class="line">git add &lt;file or dir&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看仓库当前的状态，显示有变更的文件</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区到本地仓库中</span></span><br><span class="line">git commit -m &lt;message&gt;</span><br></pre></td></tr></table></figure><h3 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从远程获取代码库</span></span><br><span class="line">git fetch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程代码并合并</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传远程代码并合并</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure><h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建分支</span></span><br><span class="line">git branch &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">git checkout &lt;branch name&gt;</span><br></pre></td></tr></table></figure><h3 id="提交日志"><a href="#提交日志" class="headerlink" title="提交日志"></a>提交日志</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看历史提交记录</span></span><br><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://git-scm.com/book/zh/v2">Git官方文档</a></p><p><a href="https://www.runoob.com/git/git-tutorial.html">Git 菜鸟教程</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Git基本操作&quot;&gt;&lt;a href=&quot;#Git基本操作&quot; class=&quot;headerlink&quot; title=&quot;Git基本操作&quot;&gt;&lt;/a&gt;Git基本操作&lt;/h2&gt;&lt;p&gt;Git 常用的是以下 6 个命令：&lt;strong&gt;git clone&lt;/strong&gt;、&lt;stron</summary>
+      
+    
+    
+    
+    <category term="Git" scheme="https://renyb2.github.io/categories/Git/"/>
+    
+    
+    <category term="Git" scheme="https://renyb2.github.io/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>Jmeter</title>

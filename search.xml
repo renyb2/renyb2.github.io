@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Dijkstra</title>
-    <url>/2020/08/27/Dijkstra/</url>
-    <content><![CDATA[<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><h3 id="问题1：最短路径"><a href="#问题1：最短路径" class="headerlink" title="问题1：最短路径"></a>问题1：最短路径</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src="/2020/08/27/Dijkstra/Dijkstra-%E9%97%AE%E9%A2%981.png" alt="image-20200731221210621"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 代码构造上图</span><br><span class="line"></span><br><span class="line">graph &#x3D; &#123;</span><br><span class="line">    &quot;A&quot;: &#123;&quot;B&quot;: 5, &quot;C&quot;: 1&#125;,</span><br><span class="line">    &quot;B&quot;: &#123;&quot;A&quot;: 5, &quot;C&quot;: 2, &quot;D&quot;: 1&#125;,</span><br><span class="line">    &quot;C&quot;: &#123;&quot;A&quot;: 1, &quot;B&quot;: 2, &quot;D&quot;: 4, &quot;E&quot;: 8&#125;,</span><br><span class="line">    &quot;D&quot;: &#123;&quot;B&quot;: 1, &quot;C&quot;: 4, &quot;E&quot;: 3, &quot;F&quot;: 6&#125;,</span><br><span class="line">    &quot;E&quot;: &#123;&quot;C&quot;: 8, &quot;D&quot;: 3&#125;,</span><br><span class="line">    &quot;F&quot;: &#123;&quot;D&quot;: 6&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/27</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dijkstra.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化各点距离值，起始点距离为0，其余点距离为正无穷大</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_distance</span>(<span class="params">graph, start</span>):</span></span><br><span class="line">    distance = &#123;start: <span class="number">0</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> vertex <span class="keyword">in</span> graph:</span><br><span class="line">        <span class="keyword">if</span> vertex != start:</span><br><span class="line">            distance[vertex] = math.inf</span><br><span class="line">    <span class="keyword">return</span> distance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 最短路径</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dijkstra</span>(<span class="params">graph, start, end</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 记录未走过的点，使用优先队列维护，权重为起始点至当前节点的最短距离</span></span><br><span class="line">    pqueue = []</span><br><span class="line">    heapq.heappush(pqueue, (<span class="number">0</span>, start))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录已经被走过的点，set()用于去重</span></span><br><span class="line">    seen = set()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录当前节点的父节点，即从哪来的</span></span><br><span class="line">    parent = &#123;start: <span class="literal">None</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录从起始点到各节点的最短距离</span></span><br><span class="line">    distance = init_distance(graph, start)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 寻找起始点至所有点的最短路径</span></span><br><span class="line">    <span class="keyword">while</span> pqueue:</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># 从起始点开始走。队列非空时，拿出队列中权重最小的点</span></span><br><span class="line">        pair = heapq.heappop(pqueue)</span><br><span class="line">        dist = pair[<span class="number">0</span>]</span><br><span class="line">        vertex = pair[<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从队列中拿出的点，即认为被看见</span></span><br><span class="line">        seen.add(vertex)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 从图中查看当前父节点的所有相邻子节点</span></span><br><span class="line">        nodes = graph[vertex].keys()</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> nodes:</span><br><span class="line">            <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">                <span class="comment"># 如果父节点到子节点的距离小于记录中的距离，则把子节点加入队列中，并更新子节点的距离值和子节点的父节点信息</span></span><br><span class="line">                <span class="keyword">if</span> dist + graph[vertex][node] &lt; distance[node]:</span><br><span class="line">                    heapq.heappush(pqueue, (dist + graph[vertex][node], node))</span><br><span class="line">                    distance[node] = dist + graph[vertex][node]</span><br><span class="line">                    parent[node] = vertex</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 回溯最短路径</span></span><br><span class="line">    path = [end]</span><br><span class="line">    <span class="keyword">while</span> parent[path[<span class="number">0</span>]]:</span><br><span class="line">        path.insert(<span class="number">0</span>, parent[path[<span class="number">0</span>]])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> path, distance[end]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line"></span><br><span class="line">    graph = &#123;</span><br><span class="line">	    <span class="string">&quot;A&quot;</span>: &#123;<span class="string">&quot;B&quot;</span>: <span class="number">5</span>, <span class="string">&quot;C&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;B&quot;</span>: &#123;<span class="string">&quot;A&quot;</span>: <span class="number">5</span>, <span class="string">&quot;C&quot;</span>: <span class="number">2</span>, <span class="string">&quot;D&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;C&quot;</span>: &#123;<span class="string">&quot;A&quot;</span>: <span class="number">1</span>, <span class="string">&quot;B&quot;</span>: <span class="number">2</span>, <span class="string">&quot;D&quot;</span>: <span class="number">4</span>, <span class="string">&quot;E&quot;</span>: <span class="number">8</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;D&quot;</span>: &#123;<span class="string">&quot;B&quot;</span>: <span class="number">1</span>, <span class="string">&quot;C&quot;</span>: <span class="number">4</span>, <span class="string">&quot;E&quot;</span>: <span class="number">3</span>, <span class="string">&quot;F&quot;</span>: <span class="number">6</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;E&quot;</span>: &#123;<span class="string">&quot;C&quot;</span>: <span class="number">8</span>, <span class="string">&quot;D&quot;</span>: <span class="number">3</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;F&quot;</span>: &#123;<span class="string">&quot;D&quot;</span>: <span class="number">6</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    path, distance = dijkstra(graph, <span class="string">&quot;A&quot;</span>, <span class="string">&quot;F&quot;</span>)</span><br><span class="line">    print(path)</span><br><span class="line">    print(distance)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Dynamic Programming</title>
     <url>/2020/08/27/Dynamic-Programming/</url>
     <content><![CDATA[<h2 id="Dynamic-Programming（动态规划）"><a href="#Dynamic-Programming（动态规划）" class="headerlink" title="Dynamic Programming（动态规划）"></a>Dynamic Programming（动态规划）</h2><p>解决重复子问题</p>
@@ -52,6 +35,119 @@
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git</title>
+    <url>/2020/10/28/Git/</url>
+    <content><![CDATA[<h2 id="Git基本操作"><a href="#Git基本操作" class="headerlink" title="Git基本操作"></a>Git基本操作</h2><p>Git 常用的是以下 6 个命令：<strong>git clone</strong>、<strong>git push</strong>、<strong>git add</strong> 、<strong>git commit</strong>、<strong>git checkout</strong>、<strong>git pull</strong></p>
+<p><img src="/2020/10/28/Git/git-command.jpg" alt="Git"></p>
+<p><strong>说明：</strong></p>
+<ul>
+<li>workspace：工作区</li>
+<li>staging area：暂存区/缓存区</li>
+<li>local repository：或本地仓库</li>
+<li>remote repository：远程仓库</li>
+</ul>
+<h2 id="Git命令"><a href="#Git命令" class="headerlink" title="Git命令"></a>Git命令</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 初始化仓库</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆仓库（下载项目）</span></span><br><span class="line">git <span class="built_in">clone</span> &lt;repo&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加文件到仓库</span></span><br><span class="line">git add &lt;file or dir&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看仓库当前的状态，显示有变更的文件</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区到本地仓库中</span></span><br><span class="line">git commit -m &lt;message&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从远程获取代码库</span></span><br><span class="line">git fetch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程代码并合并</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传远程代码并合并</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建分支</span></span><br><span class="line">git branch &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">git checkout &lt;branch name&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="提交日志"><a href="#提交日志" class="headerlink" title="提交日志"></a>提交日志</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看历史提交记录</span></span><br><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://git-scm.com/book/zh/v2">Git官方文档</a></p>
+<p><a href="https://www.runoob.com/git/git-tutorial.html">Git 菜鸟教程</a></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jmeter</title>
+    <url>/2020/09/23/Jmeter/</url>
+    <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址：<a href="http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip">http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip</a></p>
+<h3 id="Windows部署"><a href="#Windows部署" class="headerlink" title="Windows部署"></a>Windows部署</h3><h4 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h4><p>版本：jdk-8u131-windows-i586（链接：<a href="https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg">https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg</a> 提取码：4ztk）</p>
+<p>系统环境变量：</p>
+<ul>
+<li>JAVA_HOME：C:\Program Files (x86)\Java\jdk1.8.0_131</li>
+<li>CLASSPATH：.;%JAVA_HOME%\bin;%JAVA_HOME%\lib\dt.jar%JAVA_HOME%\lib\tools.jar;</li>
+<li>PATH：新增两行，%JAVA_HOME%\bin，%JAVA_HOME%\jre\lib</li>
+</ul>
+<h4 id="Jmeter"><a href="#Jmeter" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>开箱即用。可执行文件：<code>.\bin\jmeter.bat</code></p>
+<h3 id="Linux部署"><a href="#Linux部署" class="headerlink" title="Linux部署"></a>Linux部署</h3><h4 id="Java环境-1"><a href="#Java环境-1" class="headerlink" title="Java环境"></a>Java环境</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br></pre></td></tr></table></figure>
+
+<h4 id="Jmeter-1"><a href="#Jmeter-1" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>环境变量<code>/etc/profile</code>增加如下内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export JMETER_HOME=/root/jmeter</span><br><span class="line">export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH</span><br><span class="line">export PATH=$JMETER_HOME/bin:$PATH:$HOME/bin</span><br></pre></td></tr></table></figure>
+
+<p>环境变量配置生效：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>验证：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter --version</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>思路：</strong>通过Windows图形界面生成配置文件，上传至服务器进行压测</p>
+<h3 id="http-https-性能测试"><a href="#http-https-性能测试" class="headerlink" title="http/https 性能测试"></a>http/https 性能测试</h3><h4 id="1-添加线程组"><a href="#1-添加线程组" class="headerlink" title="1. 添加线程组"></a>1. 添加线程组</h4><p>Test Plan中添加<code>Thread Group</code></p>
+<p>总请求量 = 并发用户数 * 循环轮次</p>
+<ul>
+<li><p><code>Number of Threads (users)</code>：设置并发用户数</p>
+</li>
+<li><p><code>Loop Count</code>：设置循环轮次</p>
+</li>
+<li><p><code>Ramp-up period (seconds)</code>：设置压力启动时间（从开始到最大压力之间的时间）</p>
+</li>
+</ul>
+<p><img src="/2020/09/23/Jmeter/jmeter-1.png" alt="jmeter-1"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-2.png" alt="jmeter-2"></p>
+<h4 id="2-设置http-https请求"><a href="#2-设置http-https请求" class="headerlink" title="2. 设置http/https请求"></a>2. 设置http/https请求</h4><p>Thread Group中添加<code>HTTP Request</code>，填写http/https请求的配置</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-3.png" alt="jmeter-3"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-4.png" alt="jmeter-4"></p>
+<h4 id="3-添加统计分析功能"><a href="#3-添加统计分析功能" class="headerlink" title="3. 添加统计分析功能"></a>3. 添加统计分析功能</h4><p>通常，添加如下两个统计分析功能：</p>
+<ul>
+<li>Summary Report</li>
+<li>jp@gc - Transactions Per Second（需要单独安装，安装流程见插件 - QPS统计）</li>
+</ul>
+<p><img src="/2020/09/23/Jmeter/jmeter-5.png" alt="jmeter-5"></p>
+<h4 id="4-导出配置"><a href="#4-导出配置" class="headerlink" title="4. 导出配置"></a>4. 导出配置</h4><p>保存jmx文件，上传至压力服务器。</p>
+<h4 id="5-压力执行"><a href="#5-压力执行" class="headerlink" title="5. 压力执行"></a>5. 压力执行</h4><p>linux运行，生成结果文件至<code>test.jtl</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter -n -t vm.jmx -l test.jtl</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-查看性能测试结果"><a href="#6-查看性能测试结果" class="headerlink" title="6. 查看性能测试结果"></a>6. 查看性能测试结果</h4><p>下载<code>test.jtl</code>，在Windows Jmeter的统计分析功能中打开查看。</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-6.png" alt="jmeter-6"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-7.png" alt="jmeter-7"></p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p><strong>Jmeter插件官网：</strong><a href="https://jmeter-plugins.org/wiki/Start/">https://jmeter-plugins.org/wiki/Start/</a></p>
+<h3 id="QPS统计"><a href="#QPS统计" class="headerlink" title="QPS统计"></a>QPS统计</h3><p>下载地址：<a href="https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip">https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip</a></p>
+<p>解压后，移动压缩包内lib目录下的文件至Jmeter\lib目录下同位置即可，重启Jmeter。</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-8.png" alt="jmeter-8"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://jmeter.apache.org/">Jmeter官方网站</a></p>
+<p><a href="https://jmeter-plugins.org/wiki/Start/">Jmeter官方插件</a></p>
+]]></content>
+      <categories>
+        <category>性能测试工具</category>
+      </categories>
+      <tags>
+        <tag>Jmeter</tag>
       </tags>
   </entry>
   <entry>
@@ -174,77 +270,6 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jmeter</title>
-    <url>/2020/09/23/Jmeter/</url>
-    <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址：<a href="http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip">http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip</a></p>
-<h3 id="Windows部署"><a href="#Windows部署" class="headerlink" title="Windows部署"></a>Windows部署</h3><h4 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h4><p>版本：jdk-8u131-windows-i586（链接：<a href="https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg">https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg</a> 提取码：4ztk）</p>
-<p>系统环境变量：</p>
-<ul>
-<li>JAVA_HOME：C:\Program Files (x86)\Java\jdk1.8.0_131</li>
-<li>CLASSPATH：.;%JAVA_HOME%\bin;%JAVA_HOME%\lib\dt.jar%JAVA_HOME%\lib\tools.jar;</li>
-<li>PATH：新增两行，%JAVA_HOME%\bin，%JAVA_HOME%\jre\lib</li>
-</ul>
-<h4 id="Jmeter"><a href="#Jmeter" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>开箱即用。可执行文件：<code>.\bin\jmeter.bat</code></p>
-<h3 id="Linux部署"><a href="#Linux部署" class="headerlink" title="Linux部署"></a>Linux部署</h3><h4 id="Java环境-1"><a href="#Java环境-1" class="headerlink" title="Java环境"></a>Java环境</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br></pre></td></tr></table></figure>
-
-<h4 id="Jmeter-1"><a href="#Jmeter-1" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>环境变量<code>/etc/profile</code>增加如下内容：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export JMETER_HOME=/root/jmeter</span><br><span class="line">export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH</span><br><span class="line">export PATH=$JMETER_HOME/bin:$PATH:$HOME/bin</span><br></pre></td></tr></table></figure>
-
-<p>环境变量配置生效：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-
-<p>验证：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter --version</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>思路：</strong>通过Windows图形界面生成配置文件，上传至服务器进行压测</p>
-<h3 id="http-https-性能测试"><a href="#http-https-性能测试" class="headerlink" title="http/https 性能测试"></a>http/https 性能测试</h3><h4 id="1-添加线程组"><a href="#1-添加线程组" class="headerlink" title="1. 添加线程组"></a>1. 添加线程组</h4><p>Test Plan中添加<code>Thread Group</code></p>
-<p>总请求量 = 并发用户数 * 循环轮次</p>
-<ul>
-<li><p><code>Number of Threads (users)</code>：设置并发用户数</p>
-</li>
-<li><p><code>Loop Count</code>：设置循环轮次</p>
-</li>
-<li><p><code>Ramp-up period (seconds)</code>：设置压力启动时间（从开始到最大压力之间的时间）</p>
-</li>
-</ul>
-<p><img src="/2020/09/23/Jmeter/jmeter-1.png" alt="jmeter-1"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-2.png" alt="jmeter-2"></p>
-<h4 id="2-设置http-https请求"><a href="#2-设置http-https请求" class="headerlink" title="2. 设置http/https请求"></a>2. 设置http/https请求</h4><p>Thread Group中添加<code>HTTP Request</code>，填写http/https请求的配置</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-3.png" alt="jmeter-3"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-4.png" alt="jmeter-4"></p>
-<h4 id="3-添加统计分析功能"><a href="#3-添加统计分析功能" class="headerlink" title="3. 添加统计分析功能"></a>3. 添加统计分析功能</h4><p>通常，添加如下两个统计分析功能：</p>
-<ul>
-<li>Summary Report</li>
-<li>jp@gc - Transactions Per Second（需要单独安装，安装流程见插件 - QPS统计）</li>
-</ul>
-<p><img src="/2020/09/23/Jmeter/jmeter-5.png" alt="jmeter-5"></p>
-<h4 id="4-导出配置"><a href="#4-导出配置" class="headerlink" title="4. 导出配置"></a>4. 导出配置</h4><p>保存jmx文件，上传至压力服务器。</p>
-<h4 id="5-压力执行"><a href="#5-压力执行" class="headerlink" title="5. 压力执行"></a>5. 压力执行</h4><p>linux运行，生成结果文件至<code>test.jtl</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter -n -t vm.jmx -l test.jtl</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="6-查看性能测试结果"><a href="#6-查看性能测试结果" class="headerlink" title="6. 查看性能测试结果"></a>6. 查看性能测试结果</h4><p>下载<code>test.jtl</code>，在Windows Jmeter的统计分析功能中打开查看。</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-6.png" alt="jmeter-6"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-7.png" alt="jmeter-7"></p>
-<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p><strong>Jmeter插件官网：</strong><a href="https://jmeter-plugins.org/wiki/Start/">https://jmeter-plugins.org/wiki/Start/</a></p>
-<h3 id="QPS统计"><a href="#QPS统计" class="headerlink" title="QPS统计"></a>QPS统计</h3><p>下载地址：<a href="https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip">https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip</a></p>
-<p>解压后，移动压缩包内lib目录下的文件至Jmeter\lib目录下同位置即可，重启Jmeter。</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-8.png" alt="jmeter-8"></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://jmeter.apache.org/">Jmeter官方网站</a></p>
-<p><a href="https://jmeter-plugins.org/wiki/Start/">Jmeter官方插件</a></p>
-]]></content>
-      <categories>
-        <category>性能测试工具</category>
-      </categories>
-      <tags>
-        <tag>Jmeter</tag>
       </tags>
   </entry>
   <entry>
@@ -661,146 +686,6 @@
       </tags>
   </entry>
   <entry>
-    <title>TiDB 安装文档</title>
-    <url>/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<p>官方文档：<a href="https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup">https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup</a></p>
-<h2 id="使用-TiUP-部署-TiDB-集群"><a href="#使用-TiUP-部署-TiDB-集群" class="headerlink" title="使用 TiUP 部署 TiDB 集群"></a>使用 TiUP 部署 TiDB 集群</h2><p><a href="https://github.com/pingcap/tiup">TiUP</a> 是 TiDB 4.0 版本引入的集群运维工具，<a href="https://github.com/pingcap/tiup/tree/master/components/cluster">TiUP cluster</a> 是 TiUP 提供的使用 Golang 编写的集群管理组件，通过 TiUP cluster 组件就可以进行日常的运维工作，包括部署、启动、关闭、销毁、弹性扩缩容、升级 TiDB 集群；管理 TiDB 集群参数。</p>
-<p>目前 TiUP 可以支持部署 TiDB、TiFlash、TiDB Binlog、TiCDC，以及监控系统。本文将介绍不同集群拓扑的具体部署步骤。</p>
-<h3 id="第-1-步：软硬件环境需求及前置检查"><a href="#第-1-步：软硬件环境需求及前置检查" class="headerlink" title="第 1 步：软硬件环境需求及前置检查"></a>第 1 步：软硬件环境需求及前置检查</h3><p><a href="https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements">软硬件环境需求</a></p>
-<p><a href="https://docs.pingcap.com/zh/tidb/stable/check-before-deployment">环境与系统配置检查</a></p>
-<h3 id="第-2-步：在中控机上安装-TiUP-组件"><a href="#第-2-步：在中控机上安装-TiUP-组件" class="headerlink" title="第 2 步：在中控机上安装 TiUP 组件"></a>第 2 步：在中控机上安装 TiUP 组件</h3><p>使用普通用户登录中控机，以 <code>tidb</code> 用户为例，后续安装 TiUP 及集群管理操作均通过该用户完成：</p>
-<ol>
-<li><p>执行如下命令安装 TiUP 工具：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>按如下步骤设置 TiUP 环境变量：</p>
-<p>重新声明全局环境变量：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
-
-<p>确认 TiUP 工具是否安装：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">which tiup</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装 TiUP cluster 组件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果已经安装，则更新 TiUP cluster 组件至最新版本：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup update --self &amp;&amp; tiup update cluster</span><br></pre></td></tr></table></figure>
-
-<p>预期输出 <code>“Update successfully!”</code> 字样。</p>
-</li>
-<li><p>验证当前 TiUP cluster 版本信息。执行如下命令查看 TiUP cluster 组件版本：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup --binary cluster</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<h3 id="第-3-步：编辑初始化配置文件"><a href="#第-3-步：编辑初始化配置文件" class="headerlink" title="第 3 步：编辑初始化配置文件"></a>第 3 步：编辑初始化配置文件</h3><p>请根据不同的集群拓扑，编辑 TiUP 所需的集群初始化配置文件。</p>
-<p>这里举出常见的 6 种场景，请根据链接中的拓扑说明，以及给出的配置文件模板，新建一个配置文件 <code>topology.yaml</code>。如果有其他组合场景的需求，请根据多个模板自行调整。</p>
-<ul>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/minimal-deployment-topology">最小拓扑架构</a></p>
-<p>最基本的集群拓扑，包括 tidb-server、tikv-server、pd-server，适合 OLTP 业务。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-deployment-topology">增加 TiFlash 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiFlash。TiFlash 是列式的存储引擎，已经逐步成为集群拓扑的标配。适合 Real-Time HTAP 业务。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/ticdc-deployment-topology">增加 TiCDC 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiCDC。TiCDC 是 4.0 版本开始支持的 TiDB 增量数据同步工具，支持多种下游 (TiDB/MySQL/MQ)。相比于 TiDB Binlog，TiCDC 有延迟更低、天然高可用等优点。在部署完成后，需要启动 TiCDC，<a href="https://docs.pingcap.com/zh/tidb/stable/manage-ticdc">通过 <code>cdc cli</code> 创建同步任务</a>。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tidb-binlog-deployment-topology">增加 TiDB Binlog 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiDB Binlog。TiDB Binlog 是目前广泛使用的增量同步组件，可提供准实时备份和同步功能。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tispark-deployment-topology">增加 TiSpark 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiSpark 组件。TiSpark 是 PingCAP 为解决用户复杂 OLAP 需求而推出的产品。TiUP cluster 组件对 TiSpark 的支持目前为实验性特性。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/hybrid-deployment-topology">混合部署拓扑架构</a></p>
-<p>适用于单台机器，混合部署多个实例的情况，也包括单机多实例，需要额外增加目录、端口、资源配比、label 等配置。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/geo-distributed-deployment-topology">跨机房部署拓扑架构</a></p>
-<p>以典型的 <code>两地三中心</code> 架构为例，介绍跨机房部署架构，以及需要注意的关键设置。</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>注意：</strong></p>
-<ul>
-<li><code>topology.yaml</code>配置文件内不能使用主机名，需要使用ip地址。使用主机名会在启动时出现报错。</li>
-<li>对于需要全局生效的参数，请在配置文件中 <code>server_configs</code> 的对应组件下配置。</li>
-<li>对于需要某个节点生效的参数，请在具体节点的 <code>config</code> 中配置。</li>
-<li>配置的层次结构使用 <code>.</code> 表示。如：<code>log.slow-threshold</code>。更多格式参考 <a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml">TiUP 配置参数模版</a>。</li>
-<li>更多参数说明，请参考 <a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example">TiDB <code>config.toml.example</code></a>、<a href="https://github.com/tikv/tikv/blob/master/etc/config-template.toml">TiKV <code>config.toml.example</code></a> 、 <a href="https://github.com/pingcap/pd/blob/master/conf/config.toml">PD <code>config.toml.example</code></a> 和 <a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-configuration">TiFlash 配置参数</a>。</li>
-</ul>
-</blockquote>
-<h3 id="第-4-步：执行部署命令"><a href="#第-4-步：执行部署命令" class="headerlink" title="第 4 步：执行部署命令"></a>第 4 步：执行部署命令</h3><blockquote>
-<p><strong>注意：</strong></p>
-<p>通过 TiUP 进行集群部署可以使用密钥或者交互密码方式来进行安全认证：</p>
-<ul>
-<li>如果是密钥方式，可以通过 <code>-i</code> 或者 <code>--identity_file</code> 来指定密钥的路径；</li>
-<li>如果是密码方式，可以通过 <code>-p</code> 进入密码交互窗口；</li>
-<li>如果已经配置免密登陆目标机，则不需填写认证。</li>
-</ul>
-<p>一般情况下 TiUP 会在目标机器上创建 <code>topology.yaml</code> 中约定的用户和组，以下情况例外：</p>
-<ul>
-<li><code>topology.yaml</code> 中设置的用户名在目标机器上已存在。</li>
-<li>在命令行上使用了参数 <code>--skip-create-user</code> 明确指定跳过创建用户的步骤。</li>
-</ul>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster deploy tidb-test v4.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]</span><br></pre></td></tr></table></figure>
-
-<p>以上部署命令中：</p>
-<ul>
-<li>通过 TiUP cluster 部署的集群名称为 <code>tidb-test</code></li>
-<li>部署版本为 <code>v4.0.0</code>，最新版本可以通过执行 <code>tiup list tidb</code> 来查看 TiUP 支持的版本</li>
-<li>初始化配置文件为 <code>topology.yaml</code></li>
-<li>–user root：通过 root 用户登录到目标主机完成集群部署，该用户需要有 ssh 到目标机器的权限，并且在目标机器有 sudo 权限。也可以用其他有 ssh 和 sudo 权限的用户完成部署。</li>
-<li>[-i] 及 [-p]：非必选项，如果已经配置免密登陆目标机，则不需填写。否则选择其一即可，[-i] 为可登录到目标机的 root 用户（或 –user 指定的其他用户）的私钥，也可使用 [-p] 交互式输入该用户的密码</li>
-<li>如果需要指定在目标机创建的用户组名，可以参考<a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml#L7">这个例子</a>。</li>
-</ul>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-1.png" alt="TiUP-1"></p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-2.png" alt="TiUP-2"></p>
-<p>预期日志结尾输出会有 <code>Deployed cluster </code>tidb-test<code> successfully</code> 关键词，表示部署成功。</p>
-<h3 id="第-5-步：查看-TiUP-管理的集群情况"><a href="#第-5-步：查看-TiUP-管理的集群情况" class="headerlink" title="第 5 步：查看 TiUP 管理的集群情况"></a>第 5 步：查看 TiUP 管理的集群情况</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster list</span><br></pre></td></tr></table></figure>
-
-<p>TiUP 支持管理多个 TiDB 集群，该命令会输出当前通过 TiUP cluster 管理的所有集群信息，包括集群名称、部署用户、版本、密钥信息等：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Starting &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;components&#x2F;cluster&#x2F;v1.0.0&#x2F;cluster list</span><br><span class="line">Name              User  Version        Path                                                        PrivateKey</span><br><span class="line">----              ----  -------        ----                                                        ----------</span><br><span class="line">tidb-test         tidb  v4.0.0      &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test         &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test&#x2F;ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-3.png" alt="TiUP-3"></p>
-<h3 id="第-6-步：检查部署的-TiDB-集群情况"><a href="#第-6-步：检查部署的-TiDB-集群情况" class="headerlink" title="第 6 步：检查部署的 TiDB 集群情况"></a>第 6 步：检查部署的 TiDB 集群情况</h3><p>例如，执行如下命令检查 <code>tidb-test</code> 集群情况：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
-
-<p>预期输出包括 <code>tidb-test</code> 集群中实例 ID、角色、主机、监听端口和状态（由于还未启动，所以状态为 Down/inactive）、目录信息。</p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-4.png" alt="TiUP-4"></p>
-<h3 id="第-7-步：启动集群"><a href="#第-7-步：启动集群" class="headerlink" title="第 7 步：启动集群"></a>第 7 步：启动集群</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster start tidb-test</span><br></pre></td></tr></table></figure>
-
-<p>预期结果输出 <code>Started cluster </code>tidb-test<code> successfully</code> 标志启动成功。</p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-5.png" alt="TiUP-5"></p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-6.png" alt="TiUP-6"></p>
-<h3 id="第-8-步：验证集群运行状态"><a href="#第-8-步：验证集群运行状态" class="headerlink" title="第 8 步：验证集群运行状态"></a>第 8 步：验证集群运行状态</h3><ul>
-<li>通过 TiUP 检查集群状态</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
-
-<p>预期结果输出，注意 Status 状态信息为 <code>Up</code> 说明集群状态正常</p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-7.png" alt="TiUP-7"></p>
-<ul>
-<li>执行如下命令登录数据库：</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -h 10.0.1.4 -P 4000</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-8.png" alt="TiUP-8"></p>
-<p>此外，也需要验证监控系统、<a href="https://docs.pingcap.com/zh/tidb/stable/dashboard-intro">TiDB Dashboard</a> 的运行状态，以及简单命令的执行，验证方式可参考<a href="https://docs.pingcap.com/zh/tidb/stable/post-installation-check">验证集群运行状态</a>。</p>
-<h3 id="TiUP管理命令"><a href="#TiUP管理命令" class="headerlink" title="TiUP管理命令"></a>TiUP管理命令</h3><h4 id="集群管理"><a href="#集群管理" class="headerlink" title="集群管理"></a>集群管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看集群列表</span></span><br><span class="line">tiup cluster list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看集群状态</span></span><br><span class="line">tiup cluster display tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动集群</span></span><br><span class="line">tiup cluster start tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止集群</span></span><br><span class="line">tiup cluster stop tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改集群参数</span></span><br><span class="line">tiup cluster edit-config tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除集群</span></span><br><span class="line">tiup cluster destroy tidb-test</span><br></pre></td></tr></table></figure>
-
-<h4 id="集群组件管理"><a href="#集群组件管理" class="headerlink" title="集群组件管理"></a>集群组件管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动组件所有节点</span></span><br><span class="line">tiup cluster start tidb-test -R pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭组件所有节点</span></span><br><span class="line">tiup cluster stop tidb-test -R tidb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动某几个节点的组件</span></span><br><span class="line">tiup cluster start tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭某几个节点的组件</span></span><br><span class="line">tiup cluster stop tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>TiDB</category>
-      </categories>
-      <tags>
-        <tag>TiDB</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vim</title>
     <url>/2020/08/31/Vim/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
@@ -1078,6 +963,146 @@
       </tags>
   </entry>
   <entry>
+    <title>TiDB 安装文档</title>
+    <url>/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>官方文档：<a href="https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup">https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup</a></p>
+<h2 id="使用-TiUP-部署-TiDB-集群"><a href="#使用-TiUP-部署-TiDB-集群" class="headerlink" title="使用 TiUP 部署 TiDB 集群"></a>使用 TiUP 部署 TiDB 集群</h2><p><a href="https://github.com/pingcap/tiup">TiUP</a> 是 TiDB 4.0 版本引入的集群运维工具，<a href="https://github.com/pingcap/tiup/tree/master/components/cluster">TiUP cluster</a> 是 TiUP 提供的使用 Golang 编写的集群管理组件，通过 TiUP cluster 组件就可以进行日常的运维工作，包括部署、启动、关闭、销毁、弹性扩缩容、升级 TiDB 集群；管理 TiDB 集群参数。</p>
+<p>目前 TiUP 可以支持部署 TiDB、TiFlash、TiDB Binlog、TiCDC，以及监控系统。本文将介绍不同集群拓扑的具体部署步骤。</p>
+<h3 id="第-1-步：软硬件环境需求及前置检查"><a href="#第-1-步：软硬件环境需求及前置检查" class="headerlink" title="第 1 步：软硬件环境需求及前置检查"></a>第 1 步：软硬件环境需求及前置检查</h3><p><a href="https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements">软硬件环境需求</a></p>
+<p><a href="https://docs.pingcap.com/zh/tidb/stable/check-before-deployment">环境与系统配置检查</a></p>
+<h3 id="第-2-步：在中控机上安装-TiUP-组件"><a href="#第-2-步：在中控机上安装-TiUP-组件" class="headerlink" title="第 2 步：在中控机上安装 TiUP 组件"></a>第 2 步：在中控机上安装 TiUP 组件</h3><p>使用普通用户登录中控机，以 <code>tidb</code> 用户为例，后续安装 TiUP 及集群管理操作均通过该用户完成：</p>
+<ol>
+<li><p>执行如下命令安装 TiUP 工具：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按如下步骤设置 TiUP 环境变量：</p>
+<p>重新声明全局环境变量：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>确认 TiUP 工具是否安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">which tiup</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 TiUP cluster 组件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果已经安装，则更新 TiUP cluster 组件至最新版本：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup update --self &amp;&amp; tiup update cluster</span><br></pre></td></tr></table></figure>
+
+<p>预期输出 <code>“Update successfully!”</code> 字样。</p>
+</li>
+<li><p>验证当前 TiUP cluster 版本信息。执行如下命令查看 TiUP cluster 组件版本：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup --binary cluster</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h3 id="第-3-步：编辑初始化配置文件"><a href="#第-3-步：编辑初始化配置文件" class="headerlink" title="第 3 步：编辑初始化配置文件"></a>第 3 步：编辑初始化配置文件</h3><p>请根据不同的集群拓扑，编辑 TiUP 所需的集群初始化配置文件。</p>
+<p>这里举出常见的 6 种场景，请根据链接中的拓扑说明，以及给出的配置文件模板，新建一个配置文件 <code>topology.yaml</code>。如果有其他组合场景的需求，请根据多个模板自行调整。</p>
+<ul>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/minimal-deployment-topology">最小拓扑架构</a></p>
+<p>最基本的集群拓扑，包括 tidb-server、tikv-server、pd-server，适合 OLTP 业务。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-deployment-topology">增加 TiFlash 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiFlash。TiFlash 是列式的存储引擎，已经逐步成为集群拓扑的标配。适合 Real-Time HTAP 业务。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/ticdc-deployment-topology">增加 TiCDC 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiCDC。TiCDC 是 4.0 版本开始支持的 TiDB 增量数据同步工具，支持多种下游 (TiDB/MySQL/MQ)。相比于 TiDB Binlog，TiCDC 有延迟更低、天然高可用等优点。在部署完成后，需要启动 TiCDC，<a href="https://docs.pingcap.com/zh/tidb/stable/manage-ticdc">通过 <code>cdc cli</code> 创建同步任务</a>。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tidb-binlog-deployment-topology">增加 TiDB Binlog 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiDB Binlog。TiDB Binlog 是目前广泛使用的增量同步组件，可提供准实时备份和同步功能。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tispark-deployment-topology">增加 TiSpark 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiSpark 组件。TiSpark 是 PingCAP 为解决用户复杂 OLAP 需求而推出的产品。TiUP cluster 组件对 TiSpark 的支持目前为实验性特性。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/hybrid-deployment-topology">混合部署拓扑架构</a></p>
+<p>适用于单台机器，混合部署多个实例的情况，也包括单机多实例，需要额外增加目录、端口、资源配比、label 等配置。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/geo-distributed-deployment-topology">跨机房部署拓扑架构</a></p>
+<p>以典型的 <code>两地三中心</code> 架构为例，介绍跨机房部署架构，以及需要注意的关键设置。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>topology.yaml</code>配置文件内不能使用主机名，需要使用ip地址。使用主机名会在启动时出现报错。</li>
+<li>对于需要全局生效的参数，请在配置文件中 <code>server_configs</code> 的对应组件下配置。</li>
+<li>对于需要某个节点生效的参数，请在具体节点的 <code>config</code> 中配置。</li>
+<li>配置的层次结构使用 <code>.</code> 表示。如：<code>log.slow-threshold</code>。更多格式参考 <a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml">TiUP 配置参数模版</a>。</li>
+<li>更多参数说明，请参考 <a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example">TiDB <code>config.toml.example</code></a>、<a href="https://github.com/tikv/tikv/blob/master/etc/config-template.toml">TiKV <code>config.toml.example</code></a> 、 <a href="https://github.com/pingcap/pd/blob/master/conf/config.toml">PD <code>config.toml.example</code></a> 和 <a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-configuration">TiFlash 配置参数</a>。</li>
+</ul>
+</blockquote>
+<h3 id="第-4-步：执行部署命令"><a href="#第-4-步：执行部署命令" class="headerlink" title="第 4 步：执行部署命令"></a>第 4 步：执行部署命令</h3><blockquote>
+<p><strong>注意：</strong></p>
+<p>通过 TiUP 进行集群部署可以使用密钥或者交互密码方式来进行安全认证：</p>
+<ul>
+<li>如果是密钥方式，可以通过 <code>-i</code> 或者 <code>--identity_file</code> 来指定密钥的路径；</li>
+<li>如果是密码方式，可以通过 <code>-p</code> 进入密码交互窗口；</li>
+<li>如果已经配置免密登陆目标机，则不需填写认证。</li>
+</ul>
+<p>一般情况下 TiUP 会在目标机器上创建 <code>topology.yaml</code> 中约定的用户和组，以下情况例外：</p>
+<ul>
+<li><code>topology.yaml</code> 中设置的用户名在目标机器上已存在。</li>
+<li>在命令行上使用了参数 <code>--skip-create-user</code> 明确指定跳过创建用户的步骤。</li>
+</ul>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster deploy tidb-test v4.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]</span><br></pre></td></tr></table></figure>
+
+<p>以上部署命令中：</p>
+<ul>
+<li>通过 TiUP cluster 部署的集群名称为 <code>tidb-test</code></li>
+<li>部署版本为 <code>v4.0.0</code>，最新版本可以通过执行 <code>tiup list tidb</code> 来查看 TiUP 支持的版本</li>
+<li>初始化配置文件为 <code>topology.yaml</code></li>
+<li>–user root：通过 root 用户登录到目标主机完成集群部署，该用户需要有 ssh 到目标机器的权限，并且在目标机器有 sudo 权限。也可以用其他有 ssh 和 sudo 权限的用户完成部署。</li>
+<li>[-i] 及 [-p]：非必选项，如果已经配置免密登陆目标机，则不需填写。否则选择其一即可，[-i] 为可登录到目标机的 root 用户（或 –user 指定的其他用户）的私钥，也可使用 [-p] 交互式输入该用户的密码</li>
+<li>如果需要指定在目标机创建的用户组名，可以参考<a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml#L7">这个例子</a>。</li>
+</ul>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-1.png" alt="TiUP-1"></p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-2.png" alt="TiUP-2"></p>
+<p>预期日志结尾输出会有 <code>Deployed cluster </code>tidb-test<code> successfully</code> 关键词，表示部署成功。</p>
+<h3 id="第-5-步：查看-TiUP-管理的集群情况"><a href="#第-5-步：查看-TiUP-管理的集群情况" class="headerlink" title="第 5 步：查看 TiUP 管理的集群情况"></a>第 5 步：查看 TiUP 管理的集群情况</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster list</span><br></pre></td></tr></table></figure>
+
+<p>TiUP 支持管理多个 TiDB 集群，该命令会输出当前通过 TiUP cluster 管理的所有集群信息，包括集群名称、部署用户、版本、密钥信息等：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Starting &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;components&#x2F;cluster&#x2F;v1.0.0&#x2F;cluster list</span><br><span class="line">Name              User  Version        Path                                                        PrivateKey</span><br><span class="line">----              ----  -------        ----                                                        ----------</span><br><span class="line">tidb-test         tidb  v4.0.0      &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test         &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test&#x2F;ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-3.png" alt="TiUP-3"></p>
+<h3 id="第-6-步：检查部署的-TiDB-集群情况"><a href="#第-6-步：检查部署的-TiDB-集群情况" class="headerlink" title="第 6 步：检查部署的 TiDB 集群情况"></a>第 6 步：检查部署的 TiDB 集群情况</h3><p>例如，执行如下命令检查 <code>tidb-test</code> 集群情况：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期输出包括 <code>tidb-test</code> 集群中实例 ID、角色、主机、监听端口和状态（由于还未启动，所以状态为 Down/inactive）、目录信息。</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-4.png" alt="TiUP-4"></p>
+<h3 id="第-7-步：启动集群"><a href="#第-7-步：启动集群" class="headerlink" title="第 7 步：启动集群"></a>第 7 步：启动集群</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster start tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期结果输出 <code>Started cluster </code>tidb-test<code> successfully</code> 标志启动成功。</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-5.png" alt="TiUP-5"></p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-6.png" alt="TiUP-6"></p>
+<h3 id="第-8-步：验证集群运行状态"><a href="#第-8-步：验证集群运行状态" class="headerlink" title="第 8 步：验证集群运行状态"></a>第 8 步：验证集群运行状态</h3><ul>
+<li>通过 TiUP 检查集群状态</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期结果输出，注意 Status 状态信息为 <code>Up</code> 说明集群状态正常</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-7.png" alt="TiUP-7"></p>
+<ul>
+<li>执行如下命令登录数据库：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -h 10.0.1.4 -P 4000</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-8.png" alt="TiUP-8"></p>
+<p>此外，也需要验证监控系统、<a href="https://docs.pingcap.com/zh/tidb/stable/dashboard-intro">TiDB Dashboard</a> 的运行状态，以及简单命令的执行，验证方式可参考<a href="https://docs.pingcap.com/zh/tidb/stable/post-installation-check">验证集群运行状态</a>。</p>
+<h3 id="TiUP管理命令"><a href="#TiUP管理命令" class="headerlink" title="TiUP管理命令"></a>TiUP管理命令</h3><h4 id="集群管理"><a href="#集群管理" class="headerlink" title="集群管理"></a>集群管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看集群列表</span></span><br><span class="line">tiup cluster list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看集群状态</span></span><br><span class="line">tiup cluster display tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动集群</span></span><br><span class="line">tiup cluster start tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止集群</span></span><br><span class="line">tiup cluster stop tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改集群参数</span></span><br><span class="line">tiup cluster edit-config tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除集群</span></span><br><span class="line">tiup cluster destroy tidb-test</span><br></pre></td></tr></table></figure>
+
+<h4 id="集群组件管理"><a href="#集群组件管理" class="headerlink" title="集群组件管理"></a>集群组件管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动组件所有节点</span></span><br><span class="line">tiup cluster start tidb-test -R pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭组件所有节点</span></span><br><span class="line">tiup cluster stop tidb-test -R tidb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动某几个节点的组件</span></span><br><span class="line">tiup cluster start tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭某几个节点的组件</span></span><br><span class="line">tiup cluster stop tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>TiDB</category>
+      </categories>
+      <tags>
+        <tag>TiDB</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2020/08/25/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -1101,6 +1126,23 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Dijkstra</title>
+    <url>/2020/08/27/Dijkstra/</url>
+    <content><![CDATA[<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><h3 id="问题1：最短路径"><a href="#问题1：最短路径" class="headerlink" title="问题1：最短路径"></a>问题1：最短路径</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src="/2020/08/27/Dijkstra/Dijkstra-%E9%97%AE%E9%A2%981.png" alt="image-20200731221210621"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 代码构造上图</span><br><span class="line"></span><br><span class="line">graph &#x3D; &#123;</span><br><span class="line">    &quot;A&quot;: &#123;&quot;B&quot;: 5, &quot;C&quot;: 1&#125;,</span><br><span class="line">    &quot;B&quot;: &#123;&quot;A&quot;: 5, &quot;C&quot;: 2, &quot;D&quot;: 1&#125;,</span><br><span class="line">    &quot;C&quot;: &#123;&quot;A&quot;: 1, &quot;B&quot;: 2, &quot;D&quot;: 4, &quot;E&quot;: 8&#125;,</span><br><span class="line">    &quot;D&quot;: &#123;&quot;B&quot;: 1, &quot;C&quot;: 4, &quot;E&quot;: 3, &quot;F&quot;: 6&#125;,</span><br><span class="line">    &quot;E&quot;: &#123;&quot;C&quot;: 8, &quot;D&quot;: 3&#125;,</span><br><span class="line">    &quot;F&quot;: &#123;&quot;D&quot;: 6&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/27</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dijkstra.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化各点距离值，起始点距离为0，其余点距离为正无穷大</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_distance</span>(<span class="params">graph, start</span>):</span></span><br><span class="line">    distance = &#123;start: <span class="number">0</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> vertex <span class="keyword">in</span> graph:</span><br><span class="line">        <span class="keyword">if</span> vertex != start:</span><br><span class="line">            distance[vertex] = math.inf</span><br><span class="line">    <span class="keyword">return</span> distance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 最短路径</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dijkstra</span>(<span class="params">graph, start, end</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 记录未走过的点，使用优先队列维护，权重为起始点至当前节点的最短距离</span></span><br><span class="line">    pqueue = []</span><br><span class="line">    heapq.heappush(pqueue, (<span class="number">0</span>, start))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录已经被走过的点，set()用于去重</span></span><br><span class="line">    seen = set()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录当前节点的父节点，即从哪来的</span></span><br><span class="line">    parent = &#123;start: <span class="literal">None</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录从起始点到各节点的最短距离</span></span><br><span class="line">    distance = init_distance(graph, start)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 寻找起始点至所有点的最短路径</span></span><br><span class="line">    <span class="keyword">while</span> pqueue:</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># 从起始点开始走。队列非空时，拿出队列中权重最小的点</span></span><br><span class="line">        pair = heapq.heappop(pqueue)</span><br><span class="line">        dist = pair[<span class="number">0</span>]</span><br><span class="line">        vertex = pair[<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从队列中拿出的点，即认为被看见</span></span><br><span class="line">        seen.add(vertex)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 从图中查看当前父节点的所有相邻子节点</span></span><br><span class="line">        nodes = graph[vertex].keys()</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> nodes:</span><br><span class="line">            <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">                <span class="comment"># 如果父节点到子节点的距离小于记录中的距离，则把子节点加入队列中，并更新子节点的距离值和子节点的父节点信息</span></span><br><span class="line">                <span class="keyword">if</span> dist + graph[vertex][node] &lt; distance[node]:</span><br><span class="line">                    heapq.heappush(pqueue, (dist + graph[vertex][node], node))</span><br><span class="line">                    distance[node] = dist + graph[vertex][node]</span><br><span class="line">                    parent[node] = vertex</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 回溯最短路径</span></span><br><span class="line">    path = [end]</span><br><span class="line">    <span class="keyword">while</span> parent[path[<span class="number">0</span>]]:</span><br><span class="line">        path.insert(<span class="number">0</span>, parent[path[<span class="number">0</span>]])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> path, distance[end]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line"></span><br><span class="line">    graph = &#123;</span><br><span class="line">	    <span class="string">&quot;A&quot;</span>: &#123;<span class="string">&quot;B&quot;</span>: <span class="number">5</span>, <span class="string">&quot;C&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;B&quot;</span>: &#123;<span class="string">&quot;A&quot;</span>: <span class="number">5</span>, <span class="string">&quot;C&quot;</span>: <span class="number">2</span>, <span class="string">&quot;D&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;C&quot;</span>: &#123;<span class="string">&quot;A&quot;</span>: <span class="number">1</span>, <span class="string">&quot;B&quot;</span>: <span class="number">2</span>, <span class="string">&quot;D&quot;</span>: <span class="number">4</span>, <span class="string">&quot;E&quot;</span>: <span class="number">8</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;D&quot;</span>: &#123;<span class="string">&quot;B&quot;</span>: <span class="number">1</span>, <span class="string">&quot;C&quot;</span>: <span class="number">4</span>, <span class="string">&quot;E&quot;</span>: <span class="number">3</span>, <span class="string">&quot;F&quot;</span>: <span class="number">6</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;E&quot;</span>: &#123;<span class="string">&quot;C&quot;</span>: <span class="number">8</span>, <span class="string">&quot;D&quot;</span>: <span class="number">3</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;F&quot;</span>: &#123;<span class="string">&quot;D&quot;</span>: <span class="number">6</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    path, distance = dijkstra(graph, <span class="string">&quot;A&quot;</span>, <span class="string">&quot;F&quot;</span>)</span><br><span class="line">    print(path)</span><br><span class="line">    print(distance)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
 </search>
