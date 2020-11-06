@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Dijkstra</title>
+    <url>/2020/08/27/Dijkstra/</url>
+    <content><![CDATA[<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><h3 id="问题1：最短路径"><a href="#问题1：最短路径" class="headerlink" title="问题1：最短路径"></a>问题1：最短路径</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src="/2020/08/27/Dijkstra/Dijkstra-%E9%97%AE%E9%A2%981.png" alt="image-20200731221210621"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 代码构造上图</span><br><span class="line"></span><br><span class="line">graph &#x3D; &#123;</span><br><span class="line">    &quot;A&quot;: &#123;&quot;B&quot;: 5, &quot;C&quot;: 1&#125;,</span><br><span class="line">    &quot;B&quot;: &#123;&quot;A&quot;: 5, &quot;C&quot;: 2, &quot;D&quot;: 1&#125;,</span><br><span class="line">    &quot;C&quot;: &#123;&quot;A&quot;: 1, &quot;B&quot;: 2, &quot;D&quot;: 4, &quot;E&quot;: 8&#125;,</span><br><span class="line">    &quot;D&quot;: &#123;&quot;B&quot;: 1, &quot;C&quot;: 4, &quot;E&quot;: 3, &quot;F&quot;: 6&#125;,</span><br><span class="line">    &quot;E&quot;: &#123;&quot;C&quot;: 8, &quot;D&quot;: 3&#125;,</span><br><span class="line">    &quot;F&quot;: &#123;&quot;D&quot;: 6&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/27</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dijkstra.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化各点距离值，起始点距离为0，其余点距离为正无穷大</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_distance</span>(<span class="params">graph, start</span>):</span></span><br><span class="line">    distance = &#123;start: <span class="number">0</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> vertex <span class="keyword">in</span> graph:</span><br><span class="line">        <span class="keyword">if</span> vertex != start:</span><br><span class="line">            distance[vertex] = math.inf</span><br><span class="line">    <span class="keyword">return</span> distance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 最短路径</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dijkstra</span>(<span class="params">graph, start, end</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 记录未走过的点，使用优先队列维护，权重为起始点至当前节点的最短距离</span></span><br><span class="line">    pqueue = []</span><br><span class="line">    heapq.heappush(pqueue, (<span class="number">0</span>, start))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录已经被走过的点，set()用于去重</span></span><br><span class="line">    seen = set()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录当前节点的父节点，即从哪来的</span></span><br><span class="line">    parent = &#123;start: <span class="literal">None</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录从起始点到各节点的最短距离</span></span><br><span class="line">    distance = init_distance(graph, start)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 寻找起始点至所有点的最短路径</span></span><br><span class="line">    <span class="keyword">while</span> pqueue:</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># 从起始点开始走。队列非空时，拿出队列中权重最小的点</span></span><br><span class="line">        pair = heapq.heappop(pqueue)</span><br><span class="line">        dist = pair[<span class="number">0</span>]</span><br><span class="line">        vertex = pair[<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从队列中拿出的点，即认为被看见</span></span><br><span class="line">        seen.add(vertex)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 从图中查看当前父节点的所有相邻子节点</span></span><br><span class="line">        nodes = graph[vertex].keys()</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> nodes:</span><br><span class="line">            <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">                <span class="comment"># 如果父节点到子节点的距离小于记录中的距离，则把子节点加入队列中，并更新子节点的距离值和子节点的父节点信息</span></span><br><span class="line">                <span class="keyword">if</span> dist + graph[vertex][node] &lt; distance[node]:</span><br><span class="line">                    heapq.heappush(pqueue, (dist + graph[vertex][node], node))</span><br><span class="line">                    distance[node] = dist + graph[vertex][node]</span><br><span class="line">                    parent[node] = vertex</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 回溯最短路径</span></span><br><span class="line">    path = [end]</span><br><span class="line">    <span class="keyword">while</span> parent[path[<span class="number">0</span>]]:</span><br><span class="line">        path.insert(<span class="number">0</span>, parent[path[<span class="number">0</span>]])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> path, distance[end]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line"></span><br><span class="line">    graph = &#123;</span><br><span class="line">	    <span class="string">&quot;A&quot;</span>: &#123;<span class="string">&quot;B&quot;</span>: <span class="number">5</span>, <span class="string">&quot;C&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;B&quot;</span>: &#123;<span class="string">&quot;A&quot;</span>: <span class="number">5</span>, <span class="string">&quot;C&quot;</span>: <span class="number">2</span>, <span class="string">&quot;D&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;C&quot;</span>: &#123;<span class="string">&quot;A&quot;</span>: <span class="number">1</span>, <span class="string">&quot;B&quot;</span>: <span class="number">2</span>, <span class="string">&quot;D&quot;</span>: <span class="number">4</span>, <span class="string">&quot;E&quot;</span>: <span class="number">8</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;D&quot;</span>: &#123;<span class="string">&quot;B&quot;</span>: <span class="number">1</span>, <span class="string">&quot;C&quot;</span>: <span class="number">4</span>, <span class="string">&quot;E&quot;</span>: <span class="number">3</span>, <span class="string">&quot;F&quot;</span>: <span class="number">6</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;E&quot;</span>: &#123;<span class="string">&quot;C&quot;</span>: <span class="number">8</span>, <span class="string">&quot;D&quot;</span>: <span class="number">3</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;F&quot;</span>: &#123;<span class="string">&quot;D&quot;</span>: <span class="number">6</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    path, distance = dijkstra(graph, <span class="string">&quot;A&quot;</span>, <span class="string">&quot;F&quot;</span>)</span><br><span class="line">    print(path)</span><br><span class="line">    print(distance)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Dynamic Programming</title>
     <url>/2020/08/27/Dynamic-Programming/</url>
     <content><![CDATA[<h2 id="Dynamic-Programming（动态规划）"><a href="#Dynamic-Programming（动态规划）" class="headerlink" title="Dynamic Programming（动态规划）"></a>Dynamic Programming（动态规划）</h2><p>解决重复子问题</p>
@@ -38,116 +55,17 @@
       </tags>
   </entry>
   <entry>
-    <title>Git</title>
-    <url>/2020/10/28/Git/</url>
-    <content><![CDATA[<h2 id="Git基本操作"><a href="#Git基本操作" class="headerlink" title="Git基本操作"></a>Git基本操作</h2><p>Git 常用的是以下 6 个命令：<strong>git clone</strong>、<strong>git push</strong>、<strong>git add</strong> 、<strong>git commit</strong>、<strong>git checkout</strong>、<strong>git pull</strong></p>
-<p><img src="/2020/10/28/Git/git-command.jpg" alt="Git"></p>
-<p><strong>说明：</strong></p>
-<ul>
-<li>workspace：工作区</li>
-<li>staging area：暂存区/缓存区</li>
-<li>local repository：或本地仓库</li>
-<li>remote repository：远程仓库</li>
-</ul>
-<h2 id="Git命令"><a href="#Git命令" class="headerlink" title="Git命令"></a>Git命令</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 初始化仓库</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆仓库（下载项目）</span></span><br><span class="line">git <span class="built_in">clone</span> &lt;repo&gt;</span><br></pre></td></tr></table></figure>
+    <title>Docker 入门</title>
+    <url>/2020/11/05/Docker-%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 重命名镜像repository和tag</span></span><br><span class="line">docker tag &lt;image id&gt; &lt;new repository&gt;:&lt;new tag&gt;</span><br></pre></td></tr></table></figure>
 
 
-
-<h3 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加文件到仓库</span></span><br><span class="line">git add &lt;file or dir&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看仓库当前的状态，显示有变更的文件</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区到本地仓库中</span></span><br><span class="line">git commit -m &lt;message&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从远程获取代码库</span></span><br><span class="line">git fetch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程代码并合并</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传远程代码并合并</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建分支</span></span><br><span class="line">git branch &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">git checkout &lt;branch name&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="提交日志"><a href="#提交日志" class="headerlink" title="提交日志"></a>提交日志</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看历史提交记录</span></span><br><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://git-scm.com/book/zh/v2">Git官方文档</a></p>
-<p><a href="https://www.runoob.com/git/git-tutorial.html">Git 菜鸟教程</a></p>
 ]]></content>
       <categories>
-        <category>Git</category>
+        <category>Docker</category>
       </categories>
       <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jmeter</title>
-    <url>/2020/09/23/Jmeter/</url>
-    <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址：<a href="http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip">http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip</a></p>
-<h3 id="Windows部署"><a href="#Windows部署" class="headerlink" title="Windows部署"></a>Windows部署</h3><h4 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h4><p>版本：jdk-8u131-windows-i586（链接：<a href="https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg">https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg</a> 提取码：4ztk）</p>
-<p>系统环境变量：</p>
-<ul>
-<li>JAVA_HOME：C:\Program Files (x86)\Java\jdk1.8.0_131</li>
-<li>CLASSPATH：.;%JAVA_HOME%\bin;%JAVA_HOME%\lib\dt.jar%JAVA_HOME%\lib\tools.jar;</li>
-<li>PATH：新增两行，%JAVA_HOME%\bin，%JAVA_HOME%\jre\lib</li>
-</ul>
-<h4 id="Jmeter"><a href="#Jmeter" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>开箱即用。可执行文件：<code>.\bin\jmeter.bat</code></p>
-<h3 id="Linux部署"><a href="#Linux部署" class="headerlink" title="Linux部署"></a>Linux部署</h3><h4 id="Java环境-1"><a href="#Java环境-1" class="headerlink" title="Java环境"></a>Java环境</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br></pre></td></tr></table></figure>
-
-<h4 id="Jmeter-1"><a href="#Jmeter-1" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>环境变量<code>/etc/profile</code>增加如下内容：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export JMETER_HOME=/root/jmeter</span><br><span class="line">export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH</span><br><span class="line">export PATH=$JMETER_HOME/bin:$PATH:$HOME/bin</span><br></pre></td></tr></table></figure>
-
-<p>环境变量配置生效：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-
-<p>验证：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter --version</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>思路：</strong>通过Windows图形界面生成配置文件，上传至服务器进行压测</p>
-<h3 id="http-https-性能测试"><a href="#http-https-性能测试" class="headerlink" title="http/https 性能测试"></a>http/https 性能测试</h3><h4 id="1-添加线程组"><a href="#1-添加线程组" class="headerlink" title="1. 添加线程组"></a>1. 添加线程组</h4><p>Test Plan中添加<code>Thread Group</code></p>
-<p>总请求量 = 并发用户数 * 循环轮次</p>
-<ul>
-<li><p><code>Number of Threads (users)</code>：设置并发用户数</p>
-</li>
-<li><p><code>Loop Count</code>：设置循环轮次</p>
-</li>
-<li><p><code>Ramp-up period (seconds)</code>：设置压力启动时间（从开始到最大压力之间的时间）</p>
-</li>
-</ul>
-<p><img src="/2020/09/23/Jmeter/jmeter-1.png" alt="jmeter-1"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-2.png" alt="jmeter-2"></p>
-<h4 id="2-设置http-https请求"><a href="#2-设置http-https请求" class="headerlink" title="2. 设置http/https请求"></a>2. 设置http/https请求</h4><p>Thread Group中添加<code>HTTP Request</code>，填写http/https请求的配置</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-3.png" alt="jmeter-3"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-4.png" alt="jmeter-4"></p>
-<h4 id="3-添加统计分析功能"><a href="#3-添加统计分析功能" class="headerlink" title="3. 添加统计分析功能"></a>3. 添加统计分析功能</h4><p>通常，添加如下两个统计分析功能：</p>
-<ul>
-<li>Summary Report</li>
-<li>jp@gc - Transactions Per Second（需要单独安装，安装流程见插件 - QPS统计）</li>
-</ul>
-<p><img src="/2020/09/23/Jmeter/jmeter-5.png" alt="jmeter-5"></p>
-<h4 id="4-导出配置"><a href="#4-导出配置" class="headerlink" title="4. 导出配置"></a>4. 导出配置</h4><p>保存jmx文件，上传至压力服务器。</p>
-<h4 id="5-压力执行"><a href="#5-压力执行" class="headerlink" title="5. 压力执行"></a>5. 压力执行</h4><p>linux运行，生成结果文件至<code>test.jtl</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter -n -t vm.jmx -l test.jtl</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="6-查看性能测试结果"><a href="#6-查看性能测试结果" class="headerlink" title="6. 查看性能测试结果"></a>6. 查看性能测试结果</h4><p>下载<code>test.jtl</code>，在Windows Jmeter的统计分析功能中打开查看。</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-6.png" alt="jmeter-6"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-7.png" alt="jmeter-7"></p>
-<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p><strong>Jmeter插件官网：</strong><a href="https://jmeter-plugins.org/wiki/Start/">https://jmeter-plugins.org/wiki/Start/</a></p>
-<h3 id="QPS统计"><a href="#QPS统计" class="headerlink" title="QPS统计"></a>QPS统计</h3><p>下载地址：<a href="https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip">https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip</a></p>
-<p>解压后，移动压缩包内lib目录下的文件至Jmeter\lib目录下同位置即可，重启Jmeter。</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-8.png" alt="jmeter-8"></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://jmeter.apache.org/">Jmeter官方网站</a></p>
-<p><a href="https://jmeter-plugins.org/wiki/Start/">Jmeter官方插件</a></p>
-]]></content>
-      <categories>
-        <category>性能测试工具</category>
-      </categories>
-      <tags>
-        <tag>Jmeter</tag>
+        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -273,6 +191,119 @@
       </tags>
   </entry>
   <entry>
+    <title>Git</title>
+    <url>/2020/10/28/Git/</url>
+    <content><![CDATA[<h2 id="Git基本操作"><a href="#Git基本操作" class="headerlink" title="Git基本操作"></a>Git基本操作</h2><p>Git 常用的是以下 6 个命令：<strong>git clone</strong>、<strong>git push</strong>、<strong>git add</strong> 、<strong>git commit</strong>、<strong>git checkout</strong>、<strong>git pull</strong></p>
+<p><img src="/2020/10/28/Git/git-command.jpg" alt="Git"></p>
+<p><strong>说明：</strong></p>
+<ul>
+<li>workspace：工作区</li>
+<li>staging area：暂存区/缓存区</li>
+<li>local repository：或本地仓库</li>
+<li>remote repository：远程仓库</li>
+</ul>
+<h2 id="Git命令"><a href="#Git命令" class="headerlink" title="Git命令"></a>Git命令</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 初始化仓库</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆仓库（下载项目）</span></span><br><span class="line">git <span class="built_in">clone</span> &lt;repo&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加文件到仓库</span></span><br><span class="line">git add &lt;file or dir&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看仓库当前的状态，显示有变更的文件</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区到本地仓库中</span></span><br><span class="line">git commit -m &lt;message&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从远程获取代码库</span></span><br><span class="line">git fetch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程代码并合并</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传远程代码并合并</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建分支</span></span><br><span class="line">git branch &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">git checkout &lt;branch name&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="提交日志"><a href="#提交日志" class="headerlink" title="提交日志"></a>提交日志</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看历史提交记录</span></span><br><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://git-scm.com/book/zh/v2">Git官方文档</a></p>
+<p><a href="https://www.runoob.com/git/git-tutorial.html">Git 菜鸟教程</a></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jmeter</title>
+    <url>/2020/09/23/Jmeter/</url>
+    <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址：<a href="http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip">http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip</a></p>
+<h3 id="Windows部署"><a href="#Windows部署" class="headerlink" title="Windows部署"></a>Windows部署</h3><h4 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h4><p>版本：jdk-8u131-windows-i586（链接：<a href="https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg">https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg</a> 提取码：4ztk）</p>
+<p>系统环境变量：</p>
+<ul>
+<li>JAVA_HOME：C:\Program Files (x86)\Java\jdk1.8.0_131</li>
+<li>CLASSPATH：.;%JAVA_HOME%\bin;%JAVA_HOME%\lib\dt.jar%JAVA_HOME%\lib\tools.jar;</li>
+<li>PATH：新增两行，%JAVA_HOME%\bin，%JAVA_HOME%\jre\lib</li>
+</ul>
+<h4 id="Jmeter"><a href="#Jmeter" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>开箱即用。可执行文件：<code>.\bin\jmeter.bat</code></p>
+<h3 id="Linux部署"><a href="#Linux部署" class="headerlink" title="Linux部署"></a>Linux部署</h3><h4 id="Java环境-1"><a href="#Java环境-1" class="headerlink" title="Java环境"></a>Java环境</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br></pre></td></tr></table></figure>
+
+<h4 id="Jmeter-1"><a href="#Jmeter-1" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>环境变量<code>/etc/profile</code>增加如下内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export JMETER_HOME=/root/jmeter</span><br><span class="line">export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH</span><br><span class="line">export PATH=$JMETER_HOME/bin:$PATH:$HOME/bin</span><br></pre></td></tr></table></figure>
+
+<p>环境变量配置生效：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>验证：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter --version</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>思路：</strong>通过Windows图形界面生成配置文件，上传至服务器进行压测</p>
+<h3 id="http-https-性能测试"><a href="#http-https-性能测试" class="headerlink" title="http/https 性能测试"></a>http/https 性能测试</h3><h4 id="1-添加线程组"><a href="#1-添加线程组" class="headerlink" title="1. 添加线程组"></a>1. 添加线程组</h4><p>Test Plan中添加<code>Thread Group</code></p>
+<p>总请求量 = 并发用户数 * 循环轮次</p>
+<ul>
+<li><p><code>Number of Threads (users)</code>：设置并发用户数</p>
+</li>
+<li><p><code>Loop Count</code>：设置循环轮次</p>
+</li>
+<li><p><code>Ramp-up period (seconds)</code>：设置压力启动时间（从开始到最大压力之间的时间）</p>
+</li>
+</ul>
+<p><img src="/2020/09/23/Jmeter/jmeter-1.png" alt="jmeter-1"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-2.png" alt="jmeter-2"></p>
+<h4 id="2-设置http-https请求"><a href="#2-设置http-https请求" class="headerlink" title="2. 设置http/https请求"></a>2. 设置http/https请求</h4><p>Thread Group中添加<code>HTTP Request</code>，填写http/https请求的配置</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-3.png" alt="jmeter-3"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-4.png" alt="jmeter-4"></p>
+<h4 id="3-添加统计分析功能"><a href="#3-添加统计分析功能" class="headerlink" title="3. 添加统计分析功能"></a>3. 添加统计分析功能</h4><p>通常，添加如下两个统计分析功能：</p>
+<ul>
+<li>Summary Report</li>
+<li>jp@gc - Transactions Per Second（需要单独安装，安装流程见插件 - QPS统计）</li>
+</ul>
+<p><img src="/2020/09/23/Jmeter/jmeter-5.png" alt="jmeter-5"></p>
+<h4 id="4-导出配置"><a href="#4-导出配置" class="headerlink" title="4. 导出配置"></a>4. 导出配置</h4><p>保存jmx文件，上传至压力服务器。</p>
+<h4 id="5-压力执行"><a href="#5-压力执行" class="headerlink" title="5. 压力执行"></a>5. 压力执行</h4><p>linux运行，生成结果文件至<code>test.jtl</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter -n -t vm.jmx -l test.jtl</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-查看性能测试结果"><a href="#6-查看性能测试结果" class="headerlink" title="6. 查看性能测试结果"></a>6. 查看性能测试结果</h4><p>下载<code>test.jtl</code>，在Windows Jmeter的统计分析功能中打开查看。</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-6.png" alt="jmeter-6"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-7.png" alt="jmeter-7"></p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p><strong>Jmeter插件官网：</strong><a href="https://jmeter-plugins.org/wiki/Start/">https://jmeter-plugins.org/wiki/Start/</a></p>
+<h3 id="QPS统计"><a href="#QPS统计" class="headerlink" title="QPS统计"></a>QPS统计</h3><p>下载地址：<a href="https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip">https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip</a></p>
+<p>解压后，移动压缩包内lib目录下的文件至Jmeter\lib目录下同位置即可，重启Jmeter。</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-8.png" alt="jmeter-8"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://jmeter.apache.org/">Jmeter官方网站</a></p>
+<p><a href="https://jmeter-plugins.org/wiki/Start/">Jmeter官方插件</a></p>
+]]></content>
+      <categories>
+        <category>性能测试工具</category>
+      </categories>
+      <tags>
+        <tag>Jmeter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mosquitto</title>
     <url>/2020/08/31/Mosquitto/</url>
     <content><![CDATA[<h2 id="Mosquitto"><a href="#Mosquitto" class="headerlink" title="Mosquitto"></a>Mosquitto</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型设备、移动应用等方面有较广泛的应用。</p>
@@ -324,6 +355,77 @@
       </categories>
       <tags>
         <tag>MQTT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Openstack使用手册：自定义实例root密码</title>
+    <url>/2020/11/06/Openstack%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/</url>
+    <content><![CDATA[<h2 id="Openstack安装信息"><a href="#Openstack安装信息" class="headerlink" title="Openstack安装信息"></a>Openstack安装信息</h2><ul>
+<li>安装工具：kolla ansible</li>
+<li>安装版本：Train版</li>
+<li>Nova配置：默认配置，未做修改</li>
+</ul>
+<h2 id="官方镜像地址"><a href="#官方镜像地址" class="headerlink" title="官方镜像地址"></a>官方镜像地址</h2><ul>
+<li><p>Cirros：<a href="https://download.cirros-cloud.net/">https://download.cirros-cloud.net/</a></p>
+</li>
+<li><p>Centos：<a href="http://cloud.centos.org/centos/7/images/">http://cloud.centos.org/centos/7/images/</a></p>
+</li>
+</ul>
+<h2 id="自定义root密码"><a href="#自定义root密码" class="headerlink" title="自定义root密码"></a>自定义root密码</h2><h3 id="方式一：通过Horizon修改"><a href="#方式一：通过Horizon修改" class="headerlink" title="方式一：通过Horizon修改"></a>方式一：通过Horizon修改</h3><blockquote>
+<p>cirros镜像适用该方式，版本：cirros-0.4.0-x86_64-disk.img。<br>centos镜像不适用。版本：CentOS-7-x86_64-GenericCloud-2003.qcow2。</p>
+</blockquote>
+<p>创建实例时，在<code>配置项</code>填写<code>定制化脚本</code>，并勾选<code>配置驱动</code>（默认不勾选，不勾选会出现密码不生效的问题）</p>
+<p>参考脚本如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">passwd root &lt;&lt; EOF</span><br><span class="line">1234qwer</span><br><span class="line">1234qwer</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/11/06/Openstack%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/Horizon%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81.png" alt="Horizon修改root密码"></p>
+<h3 id="方式二：后端修改"><a href="#方式二：后端修改" class="headerlink" title="方式二：后端修改"></a>方式二：后端修改</h3><blockquote>
+<p>虚机内部需要安装：qemu-guest-agent</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>版本</th>
+<th>位置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>libvirt</td>
+<td>1.2.16+</td>
+<td>宿主机</td>
+</tr>
+<tr>
+<td>python-libvirt</td>
+<td>1.2.16+</td>
+<td>宿主机</td>
+</tr>
+<tr>
+<td>qemu-guest-agent</td>
+<td>2.3+</td>
+<td>虚机内部</td>
+</tr>
+</tbody></table>
+<p>cirros镜像不适用该方式，版本：cirros-0.4.0-x86_64-disk.img。<br>centos镜像适用。版本：CentOS-7-x86_64-GenericCloud-2003.qcow2。</p>
+</blockquote>
+<h4 id="步骤1：修改image元数据"><a href="#步骤1：修改image元数据" class="headerlink" title="步骤1：修改image元数据"></a>步骤1：修改image元数据</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 增加image元数据信息</span></span><br><span class="line">openstack image list</span><br><span class="line">openstack image set &lt;image id or name&gt; --property hw_qemu_guest_agent=yes</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/11/06/Openstack%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/image%E4%BF%A1%E6%81%AF.png" alt="image信息"></p>
+<p>不设置该参数，修改密码时会报<code>QEMU guest agent is not enabled (HTTP 409)</code>，错误如下：</p>
+<p><img src="/2020/11/06/Openstack%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81409.png" alt="修改root密码409"></p>
+<h4 id="步骤2：使用更新后的镜像创建虚机"><a href="#步骤2：使用更新后的镜像创建虚机" class="headerlink" title="步骤2：使用更新后的镜像创建虚机"></a>步骤2：使用更新后的镜像创建虚机</h4><h4 id="步骤3：后端修改虚机密码"><a href="#步骤3：后端修改虚机密码" class="headerlink" title="步骤3：后端修改虚机密码"></a>步骤3：后端修改虚机密码</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">openstack server list</span><br><span class="line">openstack server set --root-password &lt;server id or name&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://docs.openstack.org/image-guide/">OpenStack Virtual Machine Image Guide</a></p>
+<p><a href="https://blog.51cto.com/11954248/2503692">OpenStack Train版操作笔记（14）—使用官方云镜像启动实例并命令行修改root密码</a></p>
+<p><a href="https://blog.csdn.net/zhongbeida_xue/article/details/80417019">openstack虚拟机系统密码的修改方案</a></p>
+]]></content>
+      <categories>
+        <category>Openstack</category>
+      </categories>
+      <tags>
+        <tag>Openstack使用手册</tag>
+        <tag>Train版本</tag>
       </tags>
   </entry>
   <entry>
@@ -380,190 +482,6 @@
       </categories>
       <tags>
         <tag>Oracle 11.2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Oracle 11.2 快速上手</title>
-    <url>/2020/09/14/Oracle-11-2-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</url>
-    <content><![CDATA[<p>Oracle Database，又名Oracle RDBMS，简称Oracle。是甲骨文公司推出的一款关系数据库管理系统。Oracle数据库系统是目前世界上流行的关系数据库管理系统，拥有可移植性好、使用方便、功能强等优点，在各类大、中、小、微机环境中都适用。Oracle是一种高效率、可靠性好的、适应高吞吐量的数据库解决方案。</p>
-<h3 id="Oracle-登录"><a href="#Oracle-登录" class="headerlink" title="Oracle 登录"></a>Oracle 登录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 格式：sqlplus &lt;username&gt;/&lt;password&gt;[@ip:port/instance name] [as sysdba]</span></span><br><span class="line">sqlplus sys/123@10.121.9.104:49161 as sysdba</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-用户管理"><a href="#Oracle-用户管理" class="headerlink" title="Oracle 用户管理"></a>Oracle 用户管理</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看当前用户</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改用户密码</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> &lt;username&gt; <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">&quot;&lt;new password&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-数据库设置"><a href="#Oracle-数据库设置" class="headerlink" title="Oracle 数据库设置"></a>Oracle 数据库设置</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 开启时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 清空共享池</span></span><br><span class="line"><span class="comment">会清空历史sql的缓存记录，清空后再次执行这些sql时会产生大量的硬解析，影响数据库性能</span></span><br><span class="line"><span class="comment">生产环境慎用，系统繁忙时执行，容易导致数据库宕机</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-表操作"><a href="#Oracle-表操作" class="headerlink" title="Oracle 表操作"></a>Oracle 表操作</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看表结构</span></span><br><span class="line">desc &lt;table name&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看表内容</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，在垃圾桶留下记录，可flashback闪回</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，不会在垃圾桶留下记录，不可恢复</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt; <span class="keyword">purge</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-存储过程语法"><a href="#Oracle-存储过程语法" class="headerlink" title="Oracle 存储过程语法"></a>Oracle 存储过程语法</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> [<span class="keyword">or</span> <span class="keyword">replace</span>] <span class="keyword">procedure</span> 存储过程名（param1 <span class="keyword">in</span> <span class="keyword">type</span>，param2 <span class="keyword">out</span> <span class="keyword">type</span>）</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line">    变量<span class="number">1</span> 类型（值范围）;</span><br><span class="line">    变量2 类型（值范围）;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">into</span> 变量<span class="number">1</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">    <span class="keyword">if</span> (判断条件) <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">select</span> 列名 <span class="keyword">into</span> 变量<span class="number">2</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">        dbms_output.Put_line(<span class="string">&#x27;打印信息&#x27;</span>);</span><br><span class="line">    elsif (判断条件) then</span><br><span class="line">        dbms_output.Put_line(&#x27;打印信息&#x27;);</span><br><span class="line">    else</span><br><span class="line">        raise 异常名（NO_DATA_FOUND）;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">exception</span><br><span class="line">    when others then</span><br><span class="line">        <span class="keyword">rollback</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://docs.oracle.com/cd/E11882_01/index.htm?xd_co_f=94201a14-f246-4e54-ba51-c48c9c02f224">Oracle 官方文档</a></p>
-<p><a href="https://www.cnblogs.com/c1024/p/11012016.html">Oracle数据库初学者入门教程</a></p>
-<p><a href="https://www.cnblogs.com/xswt/p/11394032.html">Oracle常用命令</a></p>
-<p><a href="https://www.cnblogs.com/joeyJss/p/11458653.html">Oracle存储过程的语法</a></p>
-]]></content>
-      <categories>
-        <category>Oracle</category>
-      </categories>
-      <tags>
-        <tag>Oracle 11.2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Oracle 性能测试</title>
-    <url>/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h2 id="使用Oracle-SQL测试"><a href="#使用Oracle-SQL测试" class="headerlink" title="使用Oracle SQL测试"></a>使用Oracle SQL测试</h2><blockquote>
-<p>实验环境</p>
-<p>机器：win10虚机</p>
-<p>配置：4c8G + 500G硬盘</p>
-</blockquote>
-<h3 id="持续写入"><a href="#持续写入" class="headerlink" title="持续写入"></a>持续写入</h3><p>每次insert操作后，进行一次commit操作，性能低。<code>实验用时：00:02:39.66</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">            <span class="keyword">commit</span>;</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%8C%81%E7%BB%AD%E5%86%99%E5%85%A5.png" alt="持续写入"></p>
-<h3 id="批量写入"><a href="#批量写入" class="headerlink" title="批量写入"></a>批量写入</h3><p>对insert操作进行批量提交，性能相较于上者有所提升。<code>实验用时：00:01:25.37</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%89%B9%E9%87%8F%E5%86%99%E5%85%A5.png" alt="批量写入"></p>
-<h3 id="connect-by方式写入"><a href="#connect-by方式写入" class="headerlink" title="connect by方式写入"></a>connect by方式写入</h3><p>Oracle提供的层次查询（Hierarchical Queries）功能中的connect by子句可以快速插入连续数字。该方法会将数据写入数据缓冲区(data buffer)中，然后刷入磁盘中。<code>实验用时：00:00:01.56</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">select</span> <span class="keyword">rownum</span> <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E9%9B%86%E5%90%88%E5%86%99%E5%85%A5.png" alt="connect by写入"></p>
-<h3 id="直接路径写入"><a href="#直接路径写入" class="headerlink" title="直接路径写入"></a>直接路径写入</h3><p>该方式跳过了数据缓冲区(data buffer)， 直接写进磁盘中，这种方式称之为直接路径读写方式。<code>实验用时：00:00:00.78</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E7%9B%B4%E6%8E%A5%E8%B7%AF%E5%BE%84%E5%86%99%E5%85%A5.png" alt="直接路径写入"></p>
-<h3 id="并行模式直接写入"><a href="#并行模式直接写入" class="headerlink" title="并行模式直接写入"></a>并行模式直接写入</h3><p>并行加直接路径，而且是不写日志。<code>实验用时：00:00:00.67</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t nologging <span class="keyword">parallel</span> <span class="number">4</span> <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%B9%B6%E8%A1%8C%E6%A8%A1%E5%BC%8F%E5%86%99%E5%85%A5.png" alt="并行模式写入"></p>
-<h3 id="大对象存储"><a href="#大对象存储" class="headerlink" title="大对象存储"></a>大对象存储</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 创建测试表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建普通序列号</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> sequ_t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 注册目录</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">directory</span> TEST_DIR <span class="keyword">as</span> <span class="string">&#x27;C:\Users\lenovo\Desktop&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 存储文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    tempimg <span class="built_in">blob</span>;  <span class="comment">-- 定义临时变量存放数据   </span></span><br><span class="line">    tempdir bfile := bfilename(&#x27;TEST_DIR&#x27;,&#x27;test.png&#x27;);  <span class="comment">-- 非常重要：DIR必须大写</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span> (sequ_t.nextval,<span class="string">&#x27;test.png&#x27;</span>,empty_blob())</span><br><span class="line">    <span class="keyword">returning</span> tcontent <span class="keyword">into</span> tempimg;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 使用内置的包，给tempimg写入数据</span></span><br><span class="line">    dbms_lob.fileopen(tempdir);  <span class="comment">-- 打开指定文件</span></span><br><span class="line">    dbms_lob.loadfromfile(tempimg,tempdir,dbms_lob.getlength(tempdir));</span><br><span class="line">    dbms_lob.fileclose(tempdir);  <span class="comment">-- 关闭文件        </span></span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span> ;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 读取文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    l_file utl_file.file_type;  <span class="comment">-- 定义写入磁盘文件的类型和格式</span></span><br><span class="line">    l_buffer raw(32767);  <span class="comment">-- 定义缓冲区大小</span></span><br><span class="line">    l_amount binary_integer := 3276;  <span class="comment">-- 每次位移个数</span></span><br><span class="line">    l_pos int :=1;  <span class="comment">-- 开始位置</span></span><br><span class="line">    l_blob blob;  <span class="comment">-- 临时数据存放</span></span><br><span class="line">    l_blob_len int;  <span class="comment">-- 总长度</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="comment">-- 将数据库中的数据，存放在blob变量中  </span></span><br><span class="line">    <span class="keyword">select</span> tcontent <span class="keyword">into</span> l_blob <span class="keyword">from</span> t <span class="keyword">where</span> tname=<span class="string">&#x27;test.png&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 获取blob文件的长度</span></span><br><span class="line">    l_blob_len := dbms_lob.getlength(l_blob);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 准备写入磁盘文件</span></span><br><span class="line">    l_file := utl_file.fopen(&#x27;TEST_DIR&#x27;,&#x27;t.png&#x27;,&#x27;wb&#x27;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 写入数据</span></span><br><span class="line">    while l_pos&lt;l_blob_len</span><br><span class="line">    loop</span><br><span class="line">        dbms_lob.read(l_blob,l_amount,l_pos,l_buffer);</span><br><span class="line">        utl_file.put_raw(l_file,l_buffer,true);</span><br><span class="line">        l_pos := l_pos + l_amount;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    utl_file.fclose(l_file); </span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%AD%98%E5%82%A8image.png" alt="存储image"></p>
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E8%AF%BB%E5%8F%96image.png" alt="读取image"></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://docs.oracle.com/database/121/ARPLS/d_lob.htm#ARPLS600">Oracle 官方文档：DBMS_LOB</a></p>
-]]></content>
-      <categories>
-        <category>Oracle</category>
-      </categories>
-      <tags>
-        <tag>性能测试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Sort</title>
-    <url>/2020/08/27/Sort/</url>
-    <content><![CDATA[<h2 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h2><h3 id="算法1：冒泡排序"><a href="#算法1：冒泡排序" class="headerlink" title="算法1：冒泡排序"></a>算法1：冒泡排序</h3><h4 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h4><blockquote>
-<ol>
-<li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
-<li>对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。</li>
-<li>针对所有的元素重复以上的步骤，除了最后一个。</li>
-<li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较 [1]。</li>
-</ol>
-<p>参考资料：</p>
-<ol>
-<li>吕新平、刘宏铭．二级公共基础知识实战训练教程：西安交通大学出版社，2006.02：30页</li>
-</ol>
-</blockquote>
-<a id="more"></a>
-
-<h4 id="python"><a href="#python" class="headerlink" title="python"></a>python</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># !&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"># @Time    : 2020&#x2F;08&#x2F;01</span><br><span class="line"># @Author  : renyb</span><br><span class="line"># @File    : sort.py</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def bubble_sort(arr):</span><br><span class="line"></span><br><span class="line">    # 这个循环负责设置冒泡排序进行的次数</span><br><span class="line">    for i in range(len(arr) - 1):</span><br><span class="line"></span><br><span class="line">        # j为列表下标</span><br><span class="line">        for j in range(len(arr) - i - 1):  </span><br><span class="line">            if arr[j] &gt; arr[j + 1]:</span><br><span class="line">                arr[j], arr[j + 1] &#x3D; arr[j + 1], arr[j]</span><br><span class="line">    return arr</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    array &#x3D; [2,3,5,7,1,4,6,15,5,2,7,9,10,15,9,17,12]</span><br><span class="line">    print(bubble_sort(array))</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="算法2：选择排序"><a href="#算法2：选择排序" class="headerlink" title="算法2：选择排序"></a>算法2：选择排序</h3><h4 id="思想-1"><a href="#思想-1" class="headerlink" title="思想"></a>思想</h4><blockquote>
-<p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕 [1]。</p>
-<p>参考文档：</p>
-<ol>
-<li><p>Ajay Kumar．Data Structure for C Programming：Firewall Media，2004：268-270</p>
-</li>
-<li><p>Hosam M.Mahmoud．Sorting: A Distribution Theory：John Wiley&amp;Sons, Inc，2000：139-142</p>
-</li>
-</ol>
-</blockquote>
-<h4 id="python-1"><a href="#python-1" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/08/08</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : demo.py</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从数组的前n个中寻找最大值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_max_index</span>(<span class="params">arr, n</span>):</span></span><br><span class="line">    max_index = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">        <span class="keyword">if</span> arr[i] &gt; arr[max_index]:</span><br><span class="line">            max_index = i</span><br><span class="line">    <span class="keyword">return</span> max_index</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择排序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">select_sort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    i = len(arr)</span><br><span class="line">    <span class="keyword">while</span> i &gt; <span class="number">1</span>:</span><br><span class="line">        max_index = find_max_index(arr, i)</span><br><span class="line">        arr[i<span class="number">-1</span>], arr[max_index] = arr[max_index], arr[i<span class="number">-1</span>]</span><br><span class="line">        i -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">15</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">15</span>,<span class="number">9</span>,<span class="number">17</span>,<span class="number">12</span>]</span><br><span class="line">    print(select_sort(arr))</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="算法3：插入排序"><a href="#算法3：插入排序" class="headerlink" title="算法3：插入排序"></a>算法3：插入排序</h3><h4 id="思想-2"><a href="#思想-2" class="headerlink" title="思想"></a>思想</h4><blockquote>
-<p>插入排序的工作方式像许多人排序一手扑克牌。开始时，我们的左手为空并且桌子上的牌面向下。然后，我们每次从桌子上拿走一张牌并将它插入左手中正确的位置。为了找到一张牌的正确位置，我们从右到左将它与已在手中的每张牌进行比较。拿在左手上的牌总是排序好的，原来这些牌是桌子上牌堆中顶部的牌 [1]。</p>
-<p>参考文档：</p>
-<ol>
-<li>（美）科尔曼等著；殷建平等译．算法导论．北京：机械工业出版社，2013：17-29</li>
-</ol>
-</blockquote>
-<h4 id="python-2"><a href="#python-2" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/08/08</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : demo.py</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将索引为i的数插入数组前半部分</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert</span>(<span class="params">arr, i</span>):</span></span><br><span class="line">    temp = arr[i]</span><br><span class="line">    <span class="keyword">while</span> arr[i<span class="number">-1</span>] &gt; temp:</span><br><span class="line">        arr[i] = arr[i<span class="number">-1</span>]</span><br><span class="line">        i -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 防越界</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    arr[i] = temp</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 插入排序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_sort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(arr)):</span><br><span class="line">        insert(arr, i)</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">15</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">15</span>,<span class="number">9</span>,<span class="number">17</span>,<span class="number">12</span>]</span><br><span class="line">    print(insert_sort(arr))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="算法4：快速排序"><a href="#算法4：快速排序" class="headerlink" title="算法4：快速排序"></a>算法4：快速排序</h3><h4 id="思想-3"><a href="#思想-3" class="headerlink" title="思想"></a>思想</h4><blockquote>
-<p>设要排序的数组是A[0]……A[N-1]，首先任意选取一个数据（通常选用数组的第一个数）作为关键数据，然后将所有比它小的数都放到它左边，所有比它大的数都放到它右边，这个过程称为一趟快速排序。值得注意的是，快速排序不是一种稳定的排序算法，也就是说，多个相同的值的相对位置也许会在算法结束时产生变动 [1]。</p>
-<p><img src="/2020/08/27/Sort/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.gif" alt="快速排序"></p>
-<p>一趟快速排序的算法是：</p>
-<p>1）设置两个变量i、j，排序开始的时候：i=0，j=N-1；</p>
-<p>2）以第一个数组元素作为关键数据，赋值给<strong>key</strong>，即<strong>key</strong>=A[0]；</p>
-<p>3）从j开始向前搜索，即由后开始向前搜索(j–)，找到第一个小于<strong>key</strong>的值A[j]，将A[j]和A[i]的值交换；</p>
-<p>4）从i开始向后搜索，即由前开始向后搜索(i++)，找到第一个大于<strong>key</strong>的A[i]，将A[i]和A[j]的值交换；</p>
-<p>5）重复第3、4步，直到i=j； (3,4步中，没找到符合条件的值，即3中A[j]不小于<strong>key</strong>,4中A[i]不大于<strong>key</strong>的时候改变j、i的值，使得j=j-1，i=i+1，直至找到为止。找到符合条件的值，进行交换的时候i， j指针位置不变。另外，i==j这一过程一定正好是i+或j-完成的时候，此时令循环结束）。</p>
-<p>参考资料：</p>
-<ol>
-<li>陈雄达，关晓飞，殷俊锋，张华隆编．数学实验：同济大学出版社，2016.08：第135页</li>
-</ol>
-</blockquote>
-<h4 id="python-3"><a href="#python-3" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/08/01</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : sort.py</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归 + 分而治之</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span>(<span class="params">arr</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 递归入口及出口</span></span><br><span class="line">    <span class="keyword">if</span> len(arr) &gt;= <span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 选取基准值，也可以选取最后一个元素</span></span><br><span class="line">        mid = arr[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义基准值左右两侧的列表</span></span><br><span class="line">        left, right = [], []</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从原始数组中移除基准值</span></span><br><span class="line">        arr.remove(mid)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> arr:</span><br><span class="line">            <span class="keyword">if</span> num &gt;= mid:</span><br><span class="line">                right.append(num)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left.append(num)</span><br><span class="line">        <span class="keyword">return</span> quick_sort(left) + [mid] + quick_sort(right)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    array = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">15</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">15</span>,<span class="number">9</span>,<span class="number">17</span>,<span class="number">12</span>]</span><br><span class="line">    print(quick_sort(array))</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="算法5：堆排序"><a href="#算法5：堆排序" class="headerlink" title="算法5：堆排序"></a>算法5：堆排序</h3><h4 id="思想-4"><a href="#思想-4" class="headerlink" title="思想"></a>思想</h4><blockquote>
-<p>在堆的数据结构中，堆中的最大值总是位于根节点（在优先队列中使用堆的话堆中的最小值位于根节点）。堆中定义以下几种操作 [1]：</p>
-<ul>
-<li>最大堆调整（Max Heapify）：将堆的末端子节点作调整，使得子节点永远小于父节点</li>
-<li>创建最大堆（Build Max Heap）：将堆中的所有数据重新排序</li>
-<li>堆排序（HeapSort）：移除位在第一个数据的根节点，并做最大堆调整的递归运算</li>
-</ul>
-<p><img src="/2020/08/27/Sort/%E5%A0%86%E6%8E%92%E5%BA%8F.gif" alt="堆排序"></p>
-<p>参考资料：</p>
-<ol>
-<li>Floyd, Robert W. (1964), “Algorithm 245 - Treesort 3”, Communications of the ACM, 7 (12): 701, doi:10.1145/355588.365103</li>
-</ol>
-</blockquote>
-<h4 id="python-4"><a href="#python-4" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/08/08</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : demo.py</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 节点间的索引关系：</span></span><br><span class="line"><span class="comment"># 节点：i</span></span><br><span class="line"><span class="comment"># 父节点：(i - 1) / 2</span></span><br><span class="line"><span class="comment"># 左子节点：2i + 1</span></span><br><span class="line"><span class="comment"># 右子节点：2i + 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 堆化</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapify</span>(<span class="params">tree, n, i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> i &gt;= n:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    c1 = <span class="number">2</span> * i + <span class="number">1</span></span><br><span class="line">    c2 = <span class="number">2</span> * i + <span class="number">2</span></span><br><span class="line">    max = i</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> c1 &lt; n <span class="keyword">and</span> tree[c1] &gt; tree[max]:</span><br><span class="line">        max = c1</span><br><span class="line">    <span class="keyword">if</span> c2 &lt; n <span class="keyword">and</span> tree[c2] &gt; tree[max]:</span><br><span class="line">        max = c2</span><br><span class="line">    <span class="keyword">if</span> max != i:</span><br><span class="line">        tree[max], tree[i] = tree[i], tree[max]</span><br><span class="line">        heapify(tree, n, max)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建堆</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_heap</span>(<span class="params">tree, n</span>):</span></span><br><span class="line">    last_node = n - <span class="number">1</span></span><br><span class="line">    parent = (last_node - <span class="number">1</span>) // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> parent &gt;= <span class="number">0</span>:</span><br><span class="line">        heapify(tree, n, parent)</span><br><span class="line">        parent -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 堆排序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heap_sort</span>(<span class="params">tree</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 构建堆</span></span><br><span class="line">    n = len(tree)</span><br><span class="line">    build_heap(tree, n)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">1</span>:</span><br><span class="line">        <span class="comment"># 第一个节点与最后一个节点交换</span></span><br><span class="line">        tree[<span class="number">0</span>], tree[n<span class="number">-1</span>] = tree[n<span class="number">-1</span>], tree[<span class="number">0</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 剩下的节点重新构建堆</span></span><br><span class="line">        build_heap(tree, n<span class="number">-1</span>)</span><br><span class="line">        n -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    tree = [<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">    heap_sort(tree)</span><br><span class="line">    print(tree)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="算法6：归并排序"><a href="#算法6：归并排序" class="headerlink" title="算法6：归并排序"></a>算法6：归并排序</h3><h4 id="思想-5"><a href="#思想-5" class="headerlink" title="思想"></a>思想</h4><blockquote>
-<p>归并操作，也叫归并算法，指的是将两个顺序序列合并成一个顺序序列的方法。</p>
-<p>如　设有数列{6，202，100，301，38，8，1}</p>
-<p>初始状态：6,202,100,301,38,8,1</p>
-<p>第一次归并后：{6,202},{100,301},{8,38},{1}，比较次数：3；</p>
-<p>第二次归并后：{6,100,202,301}，{1,8,38}，比较次数：4；</p>
-<p>第三次归并后：{1,6,8,38,100,202,301},比较次数：4；</p>
-<p>总的比较次数为：3+4+4=11；</p>
-<p>逆序数为14；</p>
-<p><img src="/2020/08/27/Sort/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.gif" alt="归并排序"></p>
-<p>归并操作的工作原理如下：</p>
-<p>第一步：申请空间，使其大小为两个已经<a href="https://baike.baidu.com/item/%E6%8E%92%E5%BA%8F">排序</a>序列之和，该空间用来存放合并后的序列</p>
-<p>第二步：设定两个<a href="https://baike.baidu.com/item/%E6%8C%87%E9%92%88">指针</a>，最初位置分别为两个已经排序序列的起始位置</p>
-<p>第三步：比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置</p>
-<p>重复步骤3直到某一指针超出序列尾</p>
-<p>将另一序列剩下的所有元素直接复制到合并序列尾</p>
-</blockquote>
-<h4 id="python-5"><a href="#python-5" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/08/08</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : demo.py</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将左右两个数组合并</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">left, right</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 指定两个指针，分别指向左右两个数组的开始位置</span></span><br><span class="line">    i, j = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 合并后的数组</span></span><br><span class="line">    record = []</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 左右两个数组均未被遍历完</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; len(left) <span class="keyword">and</span> j &lt; len(right):</span><br><span class="line">        <span class="keyword">if</span> left[i] &lt; right[j]:</span><br><span class="line">            record.append(left[i])</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            record.append(right[j])</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 如果左右两个数组有一个遍历完，将另一个剩余元素添加至record尾部</span></span><br><span class="line">    record += left[i:]</span><br><span class="line">    record += right[j:]</span><br><span class="line">    <span class="keyword">return</span> record</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归 + 分治</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 递归出口</span></span><br><span class="line">    <span class="keyword">if</span> len(arr) &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> arr</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 数组从中间切分</span></span><br><span class="line">    i = len(arr) // <span class="number">2</span></span><br><span class="line">    left = merge_sort(arr[:i])</span><br><span class="line">    right = merge_sort(arr[i:])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> merge(left, right)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">15</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">15</span>,<span class="number">9</span>,<span class="number">17</span>,<span class="number">12</span>]</span><br><span class="line">    print(merge_sort(arr))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -686,6 +604,187 @@
       </tags>
   </entry>
   <entry>
+    <title>Oracle 性能测试</title>
+    <url>/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h2 id="使用Oracle-SQL测试"><a href="#使用Oracle-SQL测试" class="headerlink" title="使用Oracle SQL测试"></a>使用Oracle SQL测试</h2><blockquote>
+<p>实验环境</p>
+<p>机器：win10虚机</p>
+<p>配置：4c8G + 500G硬盘</p>
+</blockquote>
+<h3 id="持续写入"><a href="#持续写入" class="headerlink" title="持续写入"></a>持续写入</h3><p>每次insert操作后，进行一次commit操作，性能低。<code>实验用时：00:02:39.66</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">            <span class="keyword">commit</span>;</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%8C%81%E7%BB%AD%E5%86%99%E5%85%A5.png" alt="持续写入"></p>
+<h3 id="批量写入"><a href="#批量写入" class="headerlink" title="批量写入"></a>批量写入</h3><p>对insert操作进行批量提交，性能相较于上者有所提升。<code>实验用时：00:01:25.37</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%89%B9%E9%87%8F%E5%86%99%E5%85%A5.png" alt="批量写入"></p>
+<h3 id="connect-by方式写入"><a href="#connect-by方式写入" class="headerlink" title="connect by方式写入"></a>connect by方式写入</h3><p>Oracle提供的层次查询（Hierarchical Queries）功能中的connect by子句可以快速插入连续数字。该方法会将数据写入数据缓冲区(data buffer)中，然后刷入磁盘中。<code>实验用时：00:00:01.56</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">select</span> <span class="keyword">rownum</span> <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E9%9B%86%E5%90%88%E5%86%99%E5%85%A5.png" alt="connect by写入"></p>
+<h3 id="直接路径写入"><a href="#直接路径写入" class="headerlink" title="直接路径写入"></a>直接路径写入</h3><p>该方式跳过了数据缓冲区(data buffer)， 直接写进磁盘中，这种方式称之为直接路径读写方式。<code>实验用时：00:00:00.78</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E7%9B%B4%E6%8E%A5%E8%B7%AF%E5%BE%84%E5%86%99%E5%85%A5.png" alt="直接路径写入"></p>
+<h3 id="并行模式直接写入"><a href="#并行模式直接写入" class="headerlink" title="并行模式直接写入"></a>并行模式直接写入</h3><p>并行加直接路径，而且是不写日志。<code>实验用时：00:00:00.67</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t nologging <span class="keyword">parallel</span> <span class="number">4</span> <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%B9%B6%E8%A1%8C%E6%A8%A1%E5%BC%8F%E5%86%99%E5%85%A5.png" alt="并行模式写入"></p>
+<h3 id="大对象存储"><a href="#大对象存储" class="headerlink" title="大对象存储"></a>大对象存储</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 创建测试表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建普通序列号</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> sequ_t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 注册目录</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">directory</span> TEST_DIR <span class="keyword">as</span> <span class="string">&#x27;C:\Users\lenovo\Desktop&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 存储文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    tempimg <span class="built_in">blob</span>;  <span class="comment">-- 定义临时变量存放数据   </span></span><br><span class="line">    tempdir bfile := bfilename(&#x27;TEST_DIR&#x27;,&#x27;test.png&#x27;);  <span class="comment">-- 非常重要：DIR必须大写</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span> (sequ_t.nextval,<span class="string">&#x27;test.png&#x27;</span>,empty_blob())</span><br><span class="line">    <span class="keyword">returning</span> tcontent <span class="keyword">into</span> tempimg;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 使用内置的包，给tempimg写入数据</span></span><br><span class="line">    dbms_lob.fileopen(tempdir);  <span class="comment">-- 打开指定文件</span></span><br><span class="line">    dbms_lob.loadfromfile(tempimg,tempdir,dbms_lob.getlength(tempdir));</span><br><span class="line">    dbms_lob.fileclose(tempdir);  <span class="comment">-- 关闭文件        </span></span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span> ;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 读取文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    l_file utl_file.file_type;  <span class="comment">-- 定义写入磁盘文件的类型和格式</span></span><br><span class="line">    l_buffer raw(32767);  <span class="comment">-- 定义缓冲区大小</span></span><br><span class="line">    l_amount binary_integer := 3276;  <span class="comment">-- 每次位移个数</span></span><br><span class="line">    l_pos int :=1;  <span class="comment">-- 开始位置</span></span><br><span class="line">    l_blob blob;  <span class="comment">-- 临时数据存放</span></span><br><span class="line">    l_blob_len int;  <span class="comment">-- 总长度</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="comment">-- 将数据库中的数据，存放在blob变量中  </span></span><br><span class="line">    <span class="keyword">select</span> tcontent <span class="keyword">into</span> l_blob <span class="keyword">from</span> t <span class="keyword">where</span> tname=<span class="string">&#x27;test.png&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 获取blob文件的长度</span></span><br><span class="line">    l_blob_len := dbms_lob.getlength(l_blob);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 准备写入磁盘文件</span></span><br><span class="line">    l_file := utl_file.fopen(&#x27;TEST_DIR&#x27;,&#x27;t.png&#x27;,&#x27;wb&#x27;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 写入数据</span></span><br><span class="line">    while l_pos&lt;l_blob_len</span><br><span class="line">    loop</span><br><span class="line">        dbms_lob.read(l_blob,l_amount,l_pos,l_buffer);</span><br><span class="line">        utl_file.put_raw(l_file,l_buffer,true);</span><br><span class="line">        l_pos := l_pos + l_amount;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    utl_file.fclose(l_file); </span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%AD%98%E5%82%A8image.png" alt="存储image"></p>
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E8%AF%BB%E5%8F%96image.png" alt="读取image"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://docs.oracle.com/database/121/ARPLS/d_lob.htm#ARPLS600">Oracle 官方文档：DBMS_LOB</a></p>
+]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>性能测试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TiDB 安装文档</title>
+    <url>/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>官方文档：<a href="https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup">https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup</a></p>
+<h2 id="使用-TiUP-部署-TiDB-集群"><a href="#使用-TiUP-部署-TiDB-集群" class="headerlink" title="使用 TiUP 部署 TiDB 集群"></a>使用 TiUP 部署 TiDB 集群</h2><p><a href="https://github.com/pingcap/tiup">TiUP</a> 是 TiDB 4.0 版本引入的集群运维工具，<a href="https://github.com/pingcap/tiup/tree/master/components/cluster">TiUP cluster</a> 是 TiUP 提供的使用 Golang 编写的集群管理组件，通过 TiUP cluster 组件就可以进行日常的运维工作，包括部署、启动、关闭、销毁、弹性扩缩容、升级 TiDB 集群；管理 TiDB 集群参数。</p>
+<p>目前 TiUP 可以支持部署 TiDB、TiFlash、TiDB Binlog、TiCDC，以及监控系统。本文将介绍不同集群拓扑的具体部署步骤。</p>
+<h3 id="第-1-步：软硬件环境需求及前置检查"><a href="#第-1-步：软硬件环境需求及前置检查" class="headerlink" title="第 1 步：软硬件环境需求及前置检查"></a>第 1 步：软硬件环境需求及前置检查</h3><p><a href="https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements">软硬件环境需求</a></p>
+<p><a href="https://docs.pingcap.com/zh/tidb/stable/check-before-deployment">环境与系统配置检查</a></p>
+<h3 id="第-2-步：在中控机上安装-TiUP-组件"><a href="#第-2-步：在中控机上安装-TiUP-组件" class="headerlink" title="第 2 步：在中控机上安装 TiUP 组件"></a>第 2 步：在中控机上安装 TiUP 组件</h3><p>使用普通用户登录中控机，以 <code>tidb</code> 用户为例，后续安装 TiUP 及集群管理操作均通过该用户完成：</p>
+<ol>
+<li><p>执行如下命令安装 TiUP 工具：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按如下步骤设置 TiUP 环境变量：</p>
+<p>重新声明全局环境变量：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>确认 TiUP 工具是否安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">which tiup</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 TiUP cluster 组件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果已经安装，则更新 TiUP cluster 组件至最新版本：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup update --self &amp;&amp; tiup update cluster</span><br></pre></td></tr></table></figure>
+
+<p>预期输出 <code>“Update successfully!”</code> 字样。</p>
+</li>
+<li><p>验证当前 TiUP cluster 版本信息。执行如下命令查看 TiUP cluster 组件版本：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup --binary cluster</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h3 id="第-3-步：编辑初始化配置文件"><a href="#第-3-步：编辑初始化配置文件" class="headerlink" title="第 3 步：编辑初始化配置文件"></a>第 3 步：编辑初始化配置文件</h3><p>请根据不同的集群拓扑，编辑 TiUP 所需的集群初始化配置文件。</p>
+<p>这里举出常见的 6 种场景，请根据链接中的拓扑说明，以及给出的配置文件模板，新建一个配置文件 <code>topology.yaml</code>。如果有其他组合场景的需求，请根据多个模板自行调整。</p>
+<ul>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/minimal-deployment-topology">最小拓扑架构</a></p>
+<p>最基本的集群拓扑，包括 tidb-server、tikv-server、pd-server，适合 OLTP 业务。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-deployment-topology">增加 TiFlash 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiFlash。TiFlash 是列式的存储引擎，已经逐步成为集群拓扑的标配。适合 Real-Time HTAP 业务。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/ticdc-deployment-topology">增加 TiCDC 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiCDC。TiCDC 是 4.0 版本开始支持的 TiDB 增量数据同步工具，支持多种下游 (TiDB/MySQL/MQ)。相比于 TiDB Binlog，TiCDC 有延迟更低、天然高可用等优点。在部署完成后，需要启动 TiCDC，<a href="https://docs.pingcap.com/zh/tidb/stable/manage-ticdc">通过 <code>cdc cli</code> 创建同步任务</a>。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tidb-binlog-deployment-topology">增加 TiDB Binlog 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiDB Binlog。TiDB Binlog 是目前广泛使用的增量同步组件，可提供准实时备份和同步功能。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tispark-deployment-topology">增加 TiSpark 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiSpark 组件。TiSpark 是 PingCAP 为解决用户复杂 OLAP 需求而推出的产品。TiUP cluster 组件对 TiSpark 的支持目前为实验性特性。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/hybrid-deployment-topology">混合部署拓扑架构</a></p>
+<p>适用于单台机器，混合部署多个实例的情况，也包括单机多实例，需要额外增加目录、端口、资源配比、label 等配置。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/geo-distributed-deployment-topology">跨机房部署拓扑架构</a></p>
+<p>以典型的 <code>两地三中心</code> 架构为例，介绍跨机房部署架构，以及需要注意的关键设置。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>topology.yaml</code>配置文件内不能使用主机名，需要使用ip地址。使用主机名会在启动时出现报错。</li>
+<li>对于需要全局生效的参数，请在配置文件中 <code>server_configs</code> 的对应组件下配置。</li>
+<li>对于需要某个节点生效的参数，请在具体节点的 <code>config</code> 中配置。</li>
+<li>配置的层次结构使用 <code>.</code> 表示。如：<code>log.slow-threshold</code>。更多格式参考 <a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml">TiUP 配置参数模版</a>。</li>
+<li>更多参数说明，请参考 <a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example">TiDB <code>config.toml.example</code></a>、<a href="https://github.com/tikv/tikv/blob/master/etc/config-template.toml">TiKV <code>config.toml.example</code></a> 、 <a href="https://github.com/pingcap/pd/blob/master/conf/config.toml">PD <code>config.toml.example</code></a> 和 <a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-configuration">TiFlash 配置参数</a>。</li>
+</ul>
+</blockquote>
+<h3 id="第-4-步：执行部署命令"><a href="#第-4-步：执行部署命令" class="headerlink" title="第 4 步：执行部署命令"></a>第 4 步：执行部署命令</h3><blockquote>
+<p><strong>注意：</strong></p>
+<p>通过 TiUP 进行集群部署可以使用密钥或者交互密码方式来进行安全认证：</p>
+<ul>
+<li>如果是密钥方式，可以通过 <code>-i</code> 或者 <code>--identity_file</code> 来指定密钥的路径；</li>
+<li>如果是密码方式，可以通过 <code>-p</code> 进入密码交互窗口；</li>
+<li>如果已经配置免密登陆目标机，则不需填写认证。</li>
+</ul>
+<p>一般情况下 TiUP 会在目标机器上创建 <code>topology.yaml</code> 中约定的用户和组，以下情况例外：</p>
+<ul>
+<li><code>topology.yaml</code> 中设置的用户名在目标机器上已存在。</li>
+<li>在命令行上使用了参数 <code>--skip-create-user</code> 明确指定跳过创建用户的步骤。</li>
+</ul>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster deploy tidb-test v4.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]</span><br></pre></td></tr></table></figure>
+
+<p>以上部署命令中：</p>
+<ul>
+<li>通过 TiUP cluster 部署的集群名称为 <code>tidb-test</code></li>
+<li>部署版本为 <code>v4.0.0</code>，最新版本可以通过执行 <code>tiup list tidb</code> 来查看 TiUP 支持的版本</li>
+<li>初始化配置文件为 <code>topology.yaml</code></li>
+<li>–user root：通过 root 用户登录到目标主机完成集群部署，该用户需要有 ssh 到目标机器的权限，并且在目标机器有 sudo 权限。也可以用其他有 ssh 和 sudo 权限的用户完成部署。</li>
+<li>[-i] 及 [-p]：非必选项，如果已经配置免密登陆目标机，则不需填写。否则选择其一即可，[-i] 为可登录到目标机的 root 用户（或 –user 指定的其他用户）的私钥，也可使用 [-p] 交互式输入该用户的密码</li>
+<li>如果需要指定在目标机创建的用户组名，可以参考<a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml#L7">这个例子</a>。</li>
+</ul>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-1.png" alt="TiUP-1"></p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-2.png" alt="TiUP-2"></p>
+<p>预期日志结尾输出会有 <code>Deployed cluster </code>tidb-test<code> successfully</code> 关键词，表示部署成功。</p>
+<h3 id="第-5-步：查看-TiUP-管理的集群情况"><a href="#第-5-步：查看-TiUP-管理的集群情况" class="headerlink" title="第 5 步：查看 TiUP 管理的集群情况"></a>第 5 步：查看 TiUP 管理的集群情况</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster list</span><br></pre></td></tr></table></figure>
+
+<p>TiUP 支持管理多个 TiDB 集群，该命令会输出当前通过 TiUP cluster 管理的所有集群信息，包括集群名称、部署用户、版本、密钥信息等：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Starting &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;components&#x2F;cluster&#x2F;v1.0.0&#x2F;cluster list</span><br><span class="line">Name              User  Version        Path                                                        PrivateKey</span><br><span class="line">----              ----  -------        ----                                                        ----------</span><br><span class="line">tidb-test         tidb  v4.0.0      &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test         &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test&#x2F;ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-3.png" alt="TiUP-3"></p>
+<h3 id="第-6-步：检查部署的-TiDB-集群情况"><a href="#第-6-步：检查部署的-TiDB-集群情况" class="headerlink" title="第 6 步：检查部署的 TiDB 集群情况"></a>第 6 步：检查部署的 TiDB 集群情况</h3><p>例如，执行如下命令检查 <code>tidb-test</code> 集群情况：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期输出包括 <code>tidb-test</code> 集群中实例 ID、角色、主机、监听端口和状态（由于还未启动，所以状态为 Down/inactive）、目录信息。</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-4.png" alt="TiUP-4"></p>
+<h3 id="第-7-步：启动集群"><a href="#第-7-步：启动集群" class="headerlink" title="第 7 步：启动集群"></a>第 7 步：启动集群</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster start tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期结果输出 <code>Started cluster </code>tidb-test<code> successfully</code> 标志启动成功。</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-5.png" alt="TiUP-5"></p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-6.png" alt="TiUP-6"></p>
+<h3 id="第-8-步：验证集群运行状态"><a href="#第-8-步：验证集群运行状态" class="headerlink" title="第 8 步：验证集群运行状态"></a>第 8 步：验证集群运行状态</h3><ul>
+<li>通过 TiUP 检查集群状态</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期结果输出，注意 Status 状态信息为 <code>Up</code> 说明集群状态正常</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-7.png" alt="TiUP-7"></p>
+<ul>
+<li>执行如下命令登录数据库：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -h 10.0.1.4 -P 4000</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-8.png" alt="TiUP-8"></p>
+<p>此外，也需要验证监控系统、<a href="https://docs.pingcap.com/zh/tidb/stable/dashboard-intro">TiDB Dashboard</a> 的运行状态，以及简单命令的执行，验证方式可参考<a href="https://docs.pingcap.com/zh/tidb/stable/post-installation-check">验证集群运行状态</a>。</p>
+<h3 id="TiUP管理命令"><a href="#TiUP管理命令" class="headerlink" title="TiUP管理命令"></a>TiUP管理命令</h3><h4 id="集群管理"><a href="#集群管理" class="headerlink" title="集群管理"></a>集群管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看集群列表</span></span><br><span class="line">tiup cluster list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看集群状态</span></span><br><span class="line">tiup cluster display tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动集群</span></span><br><span class="line">tiup cluster start tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止集群</span></span><br><span class="line">tiup cluster stop tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改集群参数</span></span><br><span class="line">tiup cluster edit-config tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除集群</span></span><br><span class="line">tiup cluster destroy tidb-test</span><br></pre></td></tr></table></figure>
+
+<h4 id="集群组件管理"><a href="#集群组件管理" class="headerlink" title="集群组件管理"></a>集群组件管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动组件所有节点</span></span><br><span class="line">tiup cluster start tidb-test -R pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭组件所有节点</span></span><br><span class="line">tiup cluster stop tidb-test -R tidb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动某几个节点的组件</span></span><br><span class="line">tiup cluster start tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭某几个节点的组件</span></span><br><span class="line">tiup cluster stop tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>TiDB</category>
+      </categories>
+      <tags>
+        <tag>TiDB</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vim</title>
     <url>/2020/08/31/Vim/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
@@ -698,7 +797,7 @@
 
 
 
-<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat &gt;&gt; ~/.vimrc &lt;&lt; EOF</span><br><span class="line">&quot;设置编码&quot;</span><br><span class="line">set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936</span><br><span class="line">set termencoding=utf-8</span><br><span class="line">set encoding=utf-8</span><br><span class="line"></span><br><span class="line">&quot;显示行号&quot;</span><br><span class="line">set nu</span><br><span class="line"></span><br><span class="line">&quot;显示括号匹配&quot;</span><br><span class="line">set showmatch</span><br><span class="line"></span><br><span class="line">&quot;设置Tab长度为4空格&quot;</span><br><span class="line">set tabstop=4</span><br><span class="line">&quot;空格替代制表符&quot;</span><br><span class="line">set expandtab</span><br><span class="line">&quot;设置自动缩进长度为4空格&quot;</span><br><span class="line">set shiftwidth=4</span><br><span class="line">&quot;继承前一行的缩进方式，适用于多行注释&quot;</span><br><span class="line">set autoindent</span><br><span class="line"></span><br><span class="line">&quot;括号自动补全&quot;</span><br><span class="line">inoremap &#x27; &#x27;&#x27;&lt;ESC&gt;i</span><br><span class="line">inoremap &quot; &quot;&quot;&lt;ESC&gt;i</span><br><span class="line">inoremap ( ()&lt;ESC&gt;i</span><br><span class="line">inoremap [ []&lt;ESC&gt;i</span><br><span class="line">inoremap &#123; &#123;&lt;CR&gt;&#125;&lt;ESC&gt;O</span><br><span class="line"></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat &gt;&gt; ~/.vimrc &lt;&lt; EOF</span><br><span class="line">&quot;设置编码&quot;</span><br><span class="line">set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936</span><br><span class="line">set termencoding=utf-8</span><br><span class="line">set encoding=utf-8</span><br><span class="line"></span><br><span class="line">&quot;显示行号&quot;</span><br><span class="line">set nu</span><br><span class="line"></span><br><span class="line">&quot;显示括号匹配&quot;</span><br><span class="line">set showmatch</span><br><span class="line"></span><br><span class="line">&quot;设置Tab长度为4空格&quot;</span><br><span class="line">set tabstop=4</span><br><span class="line">&quot;空格替代制表符&quot;</span><br><span class="line">set expandtab</span><br><span class="line">&quot;设置自动缩进长度为4空格&quot;</span><br><span class="line">set shiftwidth=4</span><br><span class="line">&quot;继承前一行的缩进方式，适用于多行注释&quot;</span><br><span class="line">set autoindent</span><br><span class="line"></span><br><span class="line">&quot;启动粘贴模式&quot;</span><br><span class="line">set paste</span><br><span class="line"></span><br><span class="line">&quot;括号自动补全&quot;</span><br><span class="line">inoremap &#x27; &#x27;&#x27;&lt;ESC&gt;i</span><br><span class="line">inoremap &quot; &quot;&quot;&lt;ESC&gt;i</span><br><span class="line">inoremap ( ()&lt;ESC&gt;i</span><br><span class="line">inoremap [ []&lt;ESC&gt;i</span><br><span class="line">inoremap &#123; &#123;&lt;CR&gt;&#125;&lt;ESC&gt;O</span><br><span class="line"></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
 
 
 
@@ -963,146 +1062,6 @@
       </tags>
   </entry>
   <entry>
-    <title>TiDB 安装文档</title>
-    <url>/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<p>官方文档：<a href="https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup">https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup</a></p>
-<h2 id="使用-TiUP-部署-TiDB-集群"><a href="#使用-TiUP-部署-TiDB-集群" class="headerlink" title="使用 TiUP 部署 TiDB 集群"></a>使用 TiUP 部署 TiDB 集群</h2><p><a href="https://github.com/pingcap/tiup">TiUP</a> 是 TiDB 4.0 版本引入的集群运维工具，<a href="https://github.com/pingcap/tiup/tree/master/components/cluster">TiUP cluster</a> 是 TiUP 提供的使用 Golang 编写的集群管理组件，通过 TiUP cluster 组件就可以进行日常的运维工作，包括部署、启动、关闭、销毁、弹性扩缩容、升级 TiDB 集群；管理 TiDB 集群参数。</p>
-<p>目前 TiUP 可以支持部署 TiDB、TiFlash、TiDB Binlog、TiCDC，以及监控系统。本文将介绍不同集群拓扑的具体部署步骤。</p>
-<h3 id="第-1-步：软硬件环境需求及前置检查"><a href="#第-1-步：软硬件环境需求及前置检查" class="headerlink" title="第 1 步：软硬件环境需求及前置检查"></a>第 1 步：软硬件环境需求及前置检查</h3><p><a href="https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements">软硬件环境需求</a></p>
-<p><a href="https://docs.pingcap.com/zh/tidb/stable/check-before-deployment">环境与系统配置检查</a></p>
-<h3 id="第-2-步：在中控机上安装-TiUP-组件"><a href="#第-2-步：在中控机上安装-TiUP-组件" class="headerlink" title="第 2 步：在中控机上安装 TiUP 组件"></a>第 2 步：在中控机上安装 TiUP 组件</h3><p>使用普通用户登录中控机，以 <code>tidb</code> 用户为例，后续安装 TiUP 及集群管理操作均通过该用户完成：</p>
-<ol>
-<li><p>执行如下命令安装 TiUP 工具：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>按如下步骤设置 TiUP 环境变量：</p>
-<p>重新声明全局环境变量：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
-
-<p>确认 TiUP 工具是否安装：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">which tiup</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装 TiUP cluster 组件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果已经安装，则更新 TiUP cluster 组件至最新版本：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup update --self &amp;&amp; tiup update cluster</span><br></pre></td></tr></table></figure>
-
-<p>预期输出 <code>“Update successfully!”</code> 字样。</p>
-</li>
-<li><p>验证当前 TiUP cluster 版本信息。执行如下命令查看 TiUP cluster 组件版本：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup --binary cluster</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<h3 id="第-3-步：编辑初始化配置文件"><a href="#第-3-步：编辑初始化配置文件" class="headerlink" title="第 3 步：编辑初始化配置文件"></a>第 3 步：编辑初始化配置文件</h3><p>请根据不同的集群拓扑，编辑 TiUP 所需的集群初始化配置文件。</p>
-<p>这里举出常见的 6 种场景，请根据链接中的拓扑说明，以及给出的配置文件模板，新建一个配置文件 <code>topology.yaml</code>。如果有其他组合场景的需求，请根据多个模板自行调整。</p>
-<ul>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/minimal-deployment-topology">最小拓扑架构</a></p>
-<p>最基本的集群拓扑，包括 tidb-server、tikv-server、pd-server，适合 OLTP 业务。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-deployment-topology">增加 TiFlash 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiFlash。TiFlash 是列式的存储引擎，已经逐步成为集群拓扑的标配。适合 Real-Time HTAP 业务。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/ticdc-deployment-topology">增加 TiCDC 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiCDC。TiCDC 是 4.0 版本开始支持的 TiDB 增量数据同步工具，支持多种下游 (TiDB/MySQL/MQ)。相比于 TiDB Binlog，TiCDC 有延迟更低、天然高可用等优点。在部署完成后，需要启动 TiCDC，<a href="https://docs.pingcap.com/zh/tidb/stable/manage-ticdc">通过 <code>cdc cli</code> 创建同步任务</a>。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tidb-binlog-deployment-topology">增加 TiDB Binlog 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiDB Binlog。TiDB Binlog 是目前广泛使用的增量同步组件，可提供准实时备份和同步功能。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tispark-deployment-topology">增加 TiSpark 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiSpark 组件。TiSpark 是 PingCAP 为解决用户复杂 OLAP 需求而推出的产品。TiUP cluster 组件对 TiSpark 的支持目前为实验性特性。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/hybrid-deployment-topology">混合部署拓扑架构</a></p>
-<p>适用于单台机器，混合部署多个实例的情况，也包括单机多实例，需要额外增加目录、端口、资源配比、label 等配置。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/geo-distributed-deployment-topology">跨机房部署拓扑架构</a></p>
-<p>以典型的 <code>两地三中心</code> 架构为例，介绍跨机房部署架构，以及需要注意的关键设置。</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>注意：</strong></p>
-<ul>
-<li><code>topology.yaml</code>配置文件内不能使用主机名，需要使用ip地址。使用主机名会在启动时出现报错。</li>
-<li>对于需要全局生效的参数，请在配置文件中 <code>server_configs</code> 的对应组件下配置。</li>
-<li>对于需要某个节点生效的参数，请在具体节点的 <code>config</code> 中配置。</li>
-<li>配置的层次结构使用 <code>.</code> 表示。如：<code>log.slow-threshold</code>。更多格式参考 <a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml">TiUP 配置参数模版</a>。</li>
-<li>更多参数说明，请参考 <a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example">TiDB <code>config.toml.example</code></a>、<a href="https://github.com/tikv/tikv/blob/master/etc/config-template.toml">TiKV <code>config.toml.example</code></a> 、 <a href="https://github.com/pingcap/pd/blob/master/conf/config.toml">PD <code>config.toml.example</code></a> 和 <a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-configuration">TiFlash 配置参数</a>。</li>
-</ul>
-</blockquote>
-<h3 id="第-4-步：执行部署命令"><a href="#第-4-步：执行部署命令" class="headerlink" title="第 4 步：执行部署命令"></a>第 4 步：执行部署命令</h3><blockquote>
-<p><strong>注意：</strong></p>
-<p>通过 TiUP 进行集群部署可以使用密钥或者交互密码方式来进行安全认证：</p>
-<ul>
-<li>如果是密钥方式，可以通过 <code>-i</code> 或者 <code>--identity_file</code> 来指定密钥的路径；</li>
-<li>如果是密码方式，可以通过 <code>-p</code> 进入密码交互窗口；</li>
-<li>如果已经配置免密登陆目标机，则不需填写认证。</li>
-</ul>
-<p>一般情况下 TiUP 会在目标机器上创建 <code>topology.yaml</code> 中约定的用户和组，以下情况例外：</p>
-<ul>
-<li><code>topology.yaml</code> 中设置的用户名在目标机器上已存在。</li>
-<li>在命令行上使用了参数 <code>--skip-create-user</code> 明确指定跳过创建用户的步骤。</li>
-</ul>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster deploy tidb-test v4.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]</span><br></pre></td></tr></table></figure>
-
-<p>以上部署命令中：</p>
-<ul>
-<li>通过 TiUP cluster 部署的集群名称为 <code>tidb-test</code></li>
-<li>部署版本为 <code>v4.0.0</code>，最新版本可以通过执行 <code>tiup list tidb</code> 来查看 TiUP 支持的版本</li>
-<li>初始化配置文件为 <code>topology.yaml</code></li>
-<li>–user root：通过 root 用户登录到目标主机完成集群部署，该用户需要有 ssh 到目标机器的权限，并且在目标机器有 sudo 权限。也可以用其他有 ssh 和 sudo 权限的用户完成部署。</li>
-<li>[-i] 及 [-p]：非必选项，如果已经配置免密登陆目标机，则不需填写。否则选择其一即可，[-i] 为可登录到目标机的 root 用户（或 –user 指定的其他用户）的私钥，也可使用 [-p] 交互式输入该用户的密码</li>
-<li>如果需要指定在目标机创建的用户组名，可以参考<a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml#L7">这个例子</a>。</li>
-</ul>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-1.png" alt="TiUP-1"></p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-2.png" alt="TiUP-2"></p>
-<p>预期日志结尾输出会有 <code>Deployed cluster </code>tidb-test<code> successfully</code> 关键词，表示部署成功。</p>
-<h3 id="第-5-步：查看-TiUP-管理的集群情况"><a href="#第-5-步：查看-TiUP-管理的集群情况" class="headerlink" title="第 5 步：查看 TiUP 管理的集群情况"></a>第 5 步：查看 TiUP 管理的集群情况</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster list</span><br></pre></td></tr></table></figure>
-
-<p>TiUP 支持管理多个 TiDB 集群，该命令会输出当前通过 TiUP cluster 管理的所有集群信息，包括集群名称、部署用户、版本、密钥信息等：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Starting &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;components&#x2F;cluster&#x2F;v1.0.0&#x2F;cluster list</span><br><span class="line">Name              User  Version        Path                                                        PrivateKey</span><br><span class="line">----              ----  -------        ----                                                        ----------</span><br><span class="line">tidb-test         tidb  v4.0.0      &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test         &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test&#x2F;ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-3.png" alt="TiUP-3"></p>
-<h3 id="第-6-步：检查部署的-TiDB-集群情况"><a href="#第-6-步：检查部署的-TiDB-集群情况" class="headerlink" title="第 6 步：检查部署的 TiDB 集群情况"></a>第 6 步：检查部署的 TiDB 集群情况</h3><p>例如，执行如下命令检查 <code>tidb-test</code> 集群情况：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
-
-<p>预期输出包括 <code>tidb-test</code> 集群中实例 ID、角色、主机、监听端口和状态（由于还未启动，所以状态为 Down/inactive）、目录信息。</p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-4.png" alt="TiUP-4"></p>
-<h3 id="第-7-步：启动集群"><a href="#第-7-步：启动集群" class="headerlink" title="第 7 步：启动集群"></a>第 7 步：启动集群</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster start tidb-test</span><br></pre></td></tr></table></figure>
-
-<p>预期结果输出 <code>Started cluster </code>tidb-test<code> successfully</code> 标志启动成功。</p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-5.png" alt="TiUP-5"></p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-6.png" alt="TiUP-6"></p>
-<h3 id="第-8-步：验证集群运行状态"><a href="#第-8-步：验证集群运行状态" class="headerlink" title="第 8 步：验证集群运行状态"></a>第 8 步：验证集群运行状态</h3><ul>
-<li>通过 TiUP 检查集群状态</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
-
-<p>预期结果输出，注意 Status 状态信息为 <code>Up</code> 说明集群状态正常</p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-7.png" alt="TiUP-7"></p>
-<ul>
-<li>执行如下命令登录数据库：</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -h 10.0.1.4 -P 4000</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-8.png" alt="TiUP-8"></p>
-<p>此外，也需要验证监控系统、<a href="https://docs.pingcap.com/zh/tidb/stable/dashboard-intro">TiDB Dashboard</a> 的运行状态，以及简单命令的执行，验证方式可参考<a href="https://docs.pingcap.com/zh/tidb/stable/post-installation-check">验证集群运行状态</a>。</p>
-<h3 id="TiUP管理命令"><a href="#TiUP管理命令" class="headerlink" title="TiUP管理命令"></a>TiUP管理命令</h3><h4 id="集群管理"><a href="#集群管理" class="headerlink" title="集群管理"></a>集群管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看集群列表</span></span><br><span class="line">tiup cluster list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看集群状态</span></span><br><span class="line">tiup cluster display tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动集群</span></span><br><span class="line">tiup cluster start tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止集群</span></span><br><span class="line">tiup cluster stop tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改集群参数</span></span><br><span class="line">tiup cluster edit-config tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除集群</span></span><br><span class="line">tiup cluster destroy tidb-test</span><br></pre></td></tr></table></figure>
-
-<h4 id="集群组件管理"><a href="#集群组件管理" class="headerlink" title="集群组件管理"></a>集群组件管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动组件所有节点</span></span><br><span class="line">tiup cluster start tidb-test -R pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭组件所有节点</span></span><br><span class="line">tiup cluster stop tidb-test -R tidb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动某几个节点的组件</span></span><br><span class="line">tiup cluster start tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭某几个节点的组件</span></span><br><span class="line">tiup cluster stop tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>TiDB</category>
-      </categories>
-      <tags>
-        <tag>TiDB</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2020/08/25/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -1129,14 +1088,140 @@
       </tags>
   </entry>
   <entry>
-    <title>Dijkstra</title>
-    <url>/2020/08/27/Dijkstra/</url>
-    <content><![CDATA[<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><h3 id="问题1：最短路径"><a href="#问题1：最短路径" class="headerlink" title="问题1：最短路径"></a>问题1：最短路径</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src="/2020/08/27/Dijkstra/Dijkstra-%E9%97%AE%E9%A2%981.png" alt="image-20200731221210621"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 代码构造上图</span><br><span class="line"></span><br><span class="line">graph &#x3D; &#123;</span><br><span class="line">    &quot;A&quot;: &#123;&quot;B&quot;: 5, &quot;C&quot;: 1&#125;,</span><br><span class="line">    &quot;B&quot;: &#123;&quot;A&quot;: 5, &quot;C&quot;: 2, &quot;D&quot;: 1&#125;,</span><br><span class="line">    &quot;C&quot;: &#123;&quot;A&quot;: 1, &quot;B&quot;: 2, &quot;D&quot;: 4, &quot;E&quot;: 8&#125;,</span><br><span class="line">    &quot;D&quot;: &#123;&quot;B&quot;: 1, &quot;C&quot;: 4, &quot;E&quot;: 3, &quot;F&quot;: 6&#125;,</span><br><span class="line">    &quot;E&quot;: &#123;&quot;C&quot;: 8, &quot;D&quot;: 3&#125;,</span><br><span class="line">    &quot;F&quot;: &#123;&quot;D&quot;: 6&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>Oracle 11.2 快速上手</title>
+    <url>/2020/09/14/Oracle-11-2-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</url>
+    <content><![CDATA[<p>Oracle Database，又名Oracle RDBMS，简称Oracle。是甲骨文公司推出的一款关系数据库管理系统。Oracle数据库系统是目前世界上流行的关系数据库管理系统，拥有可移植性好、使用方便、功能强等优点，在各类大、中、小、微机环境中都适用。Oracle是一种高效率、可靠性好的、适应高吞吐量的数据库解决方案。</p>
+<h3 id="Oracle-登录"><a href="#Oracle-登录" class="headerlink" title="Oracle 登录"></a>Oracle 登录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 格式：sqlplus &lt;username&gt;/&lt;password&gt;[@ip:port/instance name] [as sysdba]</span></span><br><span class="line">sqlplus sys/123@10.121.9.104:49161 as sysdba</span><br></pre></td></tr></table></figure>
 
+
+
+<h3 id="Oracle-用户管理"><a href="#Oracle-用户管理" class="headerlink" title="Oracle 用户管理"></a>Oracle 用户管理</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看当前用户</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改用户密码</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> &lt;username&gt; <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">&quot;&lt;new password&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-数据库设置"><a href="#Oracle-数据库设置" class="headerlink" title="Oracle 数据库设置"></a>Oracle 数据库设置</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 开启时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 清空共享池</span></span><br><span class="line"><span class="comment">会清空历史sql的缓存记录，清空后再次执行这些sql时会产生大量的硬解析，影响数据库性能</span></span><br><span class="line"><span class="comment">生产环境慎用，系统繁忙时执行，容易导致数据库宕机</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-表操作"><a href="#Oracle-表操作" class="headerlink" title="Oracle 表操作"></a>Oracle 表操作</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看表结构</span></span><br><span class="line">desc &lt;table name&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看表内容</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，在垃圾桶留下记录，可flashback闪回</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，不会在垃圾桶留下记录，不可恢复</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt; <span class="keyword">purge</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-存储过程语法"><a href="#Oracle-存储过程语法" class="headerlink" title="Oracle 存储过程语法"></a>Oracle 存储过程语法</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> [<span class="keyword">or</span> <span class="keyword">replace</span>] <span class="keyword">procedure</span> 存储过程名（param1 <span class="keyword">in</span> <span class="keyword">type</span>，param2 <span class="keyword">out</span> <span class="keyword">type</span>）</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line">    变量<span class="number">1</span> 类型（值范围）;</span><br><span class="line">    变量2 类型（值范围）;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">into</span> 变量<span class="number">1</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">    <span class="keyword">if</span> (判断条件) <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">select</span> 列名 <span class="keyword">into</span> 变量<span class="number">2</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">        dbms_output.Put_line(<span class="string">&#x27;打印信息&#x27;</span>);</span><br><span class="line">    elsif (判断条件) then</span><br><span class="line">        dbms_output.Put_line(&#x27;打印信息&#x27;);</span><br><span class="line">    else</span><br><span class="line">        raise 异常名（NO_DATA_FOUND）;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">exception</span><br><span class="line">    when others then</span><br><span class="line">        <span class="keyword">rollback</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://docs.oracle.com/cd/E11882_01/index.htm?xd_co_f=94201a14-f246-4e54-ba51-c48c9c02f224">Oracle 官方文档</a></p>
+<p><a href="https://www.cnblogs.com/c1024/p/11012016.html">Oracle数据库初学者入门教程</a></p>
+<p><a href="https://www.cnblogs.com/xswt/p/11394032.html">Oracle常用命令</a></p>
+<p><a href="https://www.cnblogs.com/joeyJss/p/11458653.html">Oracle存储过程的语法</a></p>
+]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>Oracle 11.2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Sort</title>
+    <url>/2020/08/27/Sort/</url>
+    <content><![CDATA[<h2 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h2><h3 id="算法1：冒泡排序"><a href="#算法1：冒泡排序" class="headerlink" title="算法1：冒泡排序"></a>算法1：冒泡排序</h3><h4 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h4><blockquote>
+<ol>
+<li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
+<li>对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。</li>
+<li>针对所有的元素重复以上的步骤，除了最后一个。</li>
+<li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较 [1]。</li>
+</ol>
+<p>参考资料：</p>
+<ol>
+<li>吕新平、刘宏铭．二级公共基础知识实战训练教程：西安交通大学出版社，2006.02：30页</li>
+</ol>
+</blockquote>
 <a id="more"></a>
 
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/27</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dijkstra.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化各点距离值，起始点距离为0，其余点距离为正无穷大</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_distance</span>(<span class="params">graph, start</span>):</span></span><br><span class="line">    distance = &#123;start: <span class="number">0</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> vertex <span class="keyword">in</span> graph:</span><br><span class="line">        <span class="keyword">if</span> vertex != start:</span><br><span class="line">            distance[vertex] = math.inf</span><br><span class="line">    <span class="keyword">return</span> distance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 最短路径</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dijkstra</span>(<span class="params">graph, start, end</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 记录未走过的点，使用优先队列维护，权重为起始点至当前节点的最短距离</span></span><br><span class="line">    pqueue = []</span><br><span class="line">    heapq.heappush(pqueue, (<span class="number">0</span>, start))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录已经被走过的点，set()用于去重</span></span><br><span class="line">    seen = set()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录当前节点的父节点，即从哪来的</span></span><br><span class="line">    parent = &#123;start: <span class="literal">None</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录从起始点到各节点的最短距离</span></span><br><span class="line">    distance = init_distance(graph, start)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 寻找起始点至所有点的最短路径</span></span><br><span class="line">    <span class="keyword">while</span> pqueue:</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># 从起始点开始走。队列非空时，拿出队列中权重最小的点</span></span><br><span class="line">        pair = heapq.heappop(pqueue)</span><br><span class="line">        dist = pair[<span class="number">0</span>]</span><br><span class="line">        vertex = pair[<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从队列中拿出的点，即认为被看见</span></span><br><span class="line">        seen.add(vertex)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 从图中查看当前父节点的所有相邻子节点</span></span><br><span class="line">        nodes = graph[vertex].keys()</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> nodes:</span><br><span class="line">            <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">                <span class="comment"># 如果父节点到子节点的距离小于记录中的距离，则把子节点加入队列中，并更新子节点的距离值和子节点的父节点信息</span></span><br><span class="line">                <span class="keyword">if</span> dist + graph[vertex][node] &lt; distance[node]:</span><br><span class="line">                    heapq.heappush(pqueue, (dist + graph[vertex][node], node))</span><br><span class="line">                    distance[node] = dist + graph[vertex][node]</span><br><span class="line">                    parent[node] = vertex</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 回溯最短路径</span></span><br><span class="line">    path = [end]</span><br><span class="line">    <span class="keyword">while</span> parent[path[<span class="number">0</span>]]:</span><br><span class="line">        path.insert(<span class="number">0</span>, parent[path[<span class="number">0</span>]])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> path, distance[end]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line"></span><br><span class="line">    graph = &#123;</span><br><span class="line">	    <span class="string">&quot;A&quot;</span>: &#123;<span class="string">&quot;B&quot;</span>: <span class="number">5</span>, <span class="string">&quot;C&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;B&quot;</span>: &#123;<span class="string">&quot;A&quot;</span>: <span class="number">5</span>, <span class="string">&quot;C&quot;</span>: <span class="number">2</span>, <span class="string">&quot;D&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;C&quot;</span>: &#123;<span class="string">&quot;A&quot;</span>: <span class="number">1</span>, <span class="string">&quot;B&quot;</span>: <span class="number">2</span>, <span class="string">&quot;D&quot;</span>: <span class="number">4</span>, <span class="string">&quot;E&quot;</span>: <span class="number">8</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;D&quot;</span>: &#123;<span class="string">&quot;B&quot;</span>: <span class="number">1</span>, <span class="string">&quot;C&quot;</span>: <span class="number">4</span>, <span class="string">&quot;E&quot;</span>: <span class="number">3</span>, <span class="string">&quot;F&quot;</span>: <span class="number">6</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;E&quot;</span>: &#123;<span class="string">&quot;C&quot;</span>: <span class="number">8</span>, <span class="string">&quot;D&quot;</span>: <span class="number">3</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;F&quot;</span>: &#123;<span class="string">&quot;D&quot;</span>: <span class="number">6</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    path, distance = dijkstra(graph, <span class="string">&quot;A&quot;</span>, <span class="string">&quot;F&quot;</span>)</span><br><span class="line">    print(path)</span><br><span class="line">    print(distance)</span><br></pre></td></tr></table></figure>
+<h4 id="python"><a href="#python" class="headerlink" title="python"></a>python</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># !&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"># @Time    : 2020&#x2F;08&#x2F;01</span><br><span class="line"># @Author  : renyb</span><br><span class="line"># @File    : sort.py</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def bubble_sort(arr):</span><br><span class="line"></span><br><span class="line">    # 这个循环负责设置冒泡排序进行的次数</span><br><span class="line">    for i in range(len(arr) - 1):</span><br><span class="line"></span><br><span class="line">        # j为列表下标</span><br><span class="line">        for j in range(len(arr) - i - 1):  </span><br><span class="line">            if arr[j] &gt; arr[j + 1]:</span><br><span class="line">                arr[j], arr[j + 1] &#x3D; arr[j + 1], arr[j]</span><br><span class="line">    return arr</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    array &#x3D; [2,3,5,7,1,4,6,15,5,2,7,9,10,15,9,17,12]</span><br><span class="line">    print(bubble_sort(array))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="算法2：选择排序"><a href="#算法2：选择排序" class="headerlink" title="算法2：选择排序"></a>算法2：选择排序</h3><h4 id="思想-1"><a href="#思想-1" class="headerlink" title="思想"></a>思想</h4><blockquote>
+<p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕 [1]。</p>
+<p>参考文档：</p>
+<ol>
+<li><p>Ajay Kumar．Data Structure for C Programming：Firewall Media，2004：268-270</p>
+</li>
+<li><p>Hosam M.Mahmoud．Sorting: A Distribution Theory：John Wiley&amp;Sons, Inc，2000：139-142</p>
+</li>
+</ol>
+</blockquote>
+<h4 id="python-1"><a href="#python-1" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/08/08</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : demo.py</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从数组的前n个中寻找最大值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_max_index</span>(<span class="params">arr, n</span>):</span></span><br><span class="line">    max_index = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">        <span class="keyword">if</span> arr[i] &gt; arr[max_index]:</span><br><span class="line">            max_index = i</span><br><span class="line">    <span class="keyword">return</span> max_index</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择排序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">select_sort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    i = len(arr)</span><br><span class="line">    <span class="keyword">while</span> i &gt; <span class="number">1</span>:</span><br><span class="line">        max_index = find_max_index(arr, i)</span><br><span class="line">        arr[i<span class="number">-1</span>], arr[max_index] = arr[max_index], arr[i<span class="number">-1</span>]</span><br><span class="line">        i -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">15</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">15</span>,<span class="number">9</span>,<span class="number">17</span>,<span class="number">12</span>]</span><br><span class="line">    print(select_sort(arr))</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="算法3：插入排序"><a href="#算法3：插入排序" class="headerlink" title="算法3：插入排序"></a>算法3：插入排序</h3><h4 id="思想-2"><a href="#思想-2" class="headerlink" title="思想"></a>思想</h4><blockquote>
+<p>插入排序的工作方式像许多人排序一手扑克牌。开始时，我们的左手为空并且桌子上的牌面向下。然后，我们每次从桌子上拿走一张牌并将它插入左手中正确的位置。为了找到一张牌的正确位置，我们从右到左将它与已在手中的每张牌进行比较。拿在左手上的牌总是排序好的，原来这些牌是桌子上牌堆中顶部的牌 [1]。</p>
+<p>参考文档：</p>
+<ol>
+<li>（美）科尔曼等著；殷建平等译．算法导论．北京：机械工业出版社，2013：17-29</li>
+</ol>
+</blockquote>
+<h4 id="python-2"><a href="#python-2" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/08/08</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : demo.py</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将索引为i的数插入数组前半部分</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert</span>(<span class="params">arr, i</span>):</span></span><br><span class="line">    temp = arr[i]</span><br><span class="line">    <span class="keyword">while</span> arr[i<span class="number">-1</span>] &gt; temp:</span><br><span class="line">        arr[i] = arr[i<span class="number">-1</span>]</span><br><span class="line">        i -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 防越界</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    arr[i] = temp</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 插入排序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_sort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(arr)):</span><br><span class="line">        insert(arr, i)</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">15</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">15</span>,<span class="number">9</span>,<span class="number">17</span>,<span class="number">12</span>]</span><br><span class="line">    print(insert_sort(arr))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="算法4：快速排序"><a href="#算法4：快速排序" class="headerlink" title="算法4：快速排序"></a>算法4：快速排序</h3><h4 id="思想-3"><a href="#思想-3" class="headerlink" title="思想"></a>思想</h4><blockquote>
+<p>设要排序的数组是A[0]……A[N-1]，首先任意选取一个数据（通常选用数组的第一个数）作为关键数据，然后将所有比它小的数都放到它左边，所有比它大的数都放到它右边，这个过程称为一趟快速排序。值得注意的是，快速排序不是一种稳定的排序算法，也就是说，多个相同的值的相对位置也许会在算法结束时产生变动 [1]。</p>
+<p><img src="/2020/08/27/Sort/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.gif" alt="快速排序"></p>
+<p>一趟快速排序的算法是：</p>
+<p>1）设置两个变量i、j，排序开始的时候：i=0，j=N-1；</p>
+<p>2）以第一个数组元素作为关键数据，赋值给<strong>key</strong>，即<strong>key</strong>=A[0]；</p>
+<p>3）从j开始向前搜索，即由后开始向前搜索(j–)，找到第一个小于<strong>key</strong>的值A[j]，将A[j]和A[i]的值交换；</p>
+<p>4）从i开始向后搜索，即由前开始向后搜索(i++)，找到第一个大于<strong>key</strong>的A[i]，将A[i]和A[j]的值交换；</p>
+<p>5）重复第3、4步，直到i=j； (3,4步中，没找到符合条件的值，即3中A[j]不小于<strong>key</strong>,4中A[i]不大于<strong>key</strong>的时候改变j、i的值，使得j=j-1，i=i+1，直至找到为止。找到符合条件的值，进行交换的时候i， j指针位置不变。另外，i==j这一过程一定正好是i+或j-完成的时候，此时令循环结束）。</p>
+<p>参考资料：</p>
+<ol>
+<li>陈雄达，关晓飞，殷俊锋，张华隆编．数学实验：同济大学出版社，2016.08：第135页</li>
+</ol>
+</blockquote>
+<h4 id="python-3"><a href="#python-3" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/08/01</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : sort.py</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归 + 分而治之</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span>(<span class="params">arr</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 递归入口及出口</span></span><br><span class="line">    <span class="keyword">if</span> len(arr) &gt;= <span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 选取基准值，也可以选取最后一个元素</span></span><br><span class="line">        mid = arr[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义基准值左右两侧的列表</span></span><br><span class="line">        left, right = [], []</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从原始数组中移除基准值</span></span><br><span class="line">        arr.remove(mid)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> arr:</span><br><span class="line">            <span class="keyword">if</span> num &gt;= mid:</span><br><span class="line">                right.append(num)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left.append(num)</span><br><span class="line">        <span class="keyword">return</span> quick_sort(left) + [mid] + quick_sort(right)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    array = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">15</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">15</span>,<span class="number">9</span>,<span class="number">17</span>,<span class="number">12</span>]</span><br><span class="line">    print(quick_sort(array))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="算法5：堆排序"><a href="#算法5：堆排序" class="headerlink" title="算法5：堆排序"></a>算法5：堆排序</h3><h4 id="思想-4"><a href="#思想-4" class="headerlink" title="思想"></a>思想</h4><blockquote>
+<p>在堆的数据结构中，堆中的最大值总是位于根节点（在优先队列中使用堆的话堆中的最小值位于根节点）。堆中定义以下几种操作 [1]：</p>
+<ul>
+<li>最大堆调整（Max Heapify）：将堆的末端子节点作调整，使得子节点永远小于父节点</li>
+<li>创建最大堆（Build Max Heap）：将堆中的所有数据重新排序</li>
+<li>堆排序（HeapSort）：移除位在第一个数据的根节点，并做最大堆调整的递归运算</li>
+</ul>
+<p><img src="/2020/08/27/Sort/%E5%A0%86%E6%8E%92%E5%BA%8F.gif" alt="堆排序"></p>
+<p>参考资料：</p>
+<ol>
+<li>Floyd, Robert W. (1964), “Algorithm 245 - Treesort 3”, Communications of the ACM, 7 (12): 701, doi:10.1145/355588.365103</li>
+</ol>
+</blockquote>
+<h4 id="python-4"><a href="#python-4" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/08/08</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : demo.py</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 节点间的索引关系：</span></span><br><span class="line"><span class="comment"># 节点：i</span></span><br><span class="line"><span class="comment"># 父节点：(i - 1) / 2</span></span><br><span class="line"><span class="comment"># 左子节点：2i + 1</span></span><br><span class="line"><span class="comment"># 右子节点：2i + 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 堆化</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapify</span>(<span class="params">tree, n, i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> i &gt;= n:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    c1 = <span class="number">2</span> * i + <span class="number">1</span></span><br><span class="line">    c2 = <span class="number">2</span> * i + <span class="number">2</span></span><br><span class="line">    max = i</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> c1 &lt; n <span class="keyword">and</span> tree[c1] &gt; tree[max]:</span><br><span class="line">        max = c1</span><br><span class="line">    <span class="keyword">if</span> c2 &lt; n <span class="keyword">and</span> tree[c2] &gt; tree[max]:</span><br><span class="line">        max = c2</span><br><span class="line">    <span class="keyword">if</span> max != i:</span><br><span class="line">        tree[max], tree[i] = tree[i], tree[max]</span><br><span class="line">        heapify(tree, n, max)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建堆</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_heap</span>(<span class="params">tree, n</span>):</span></span><br><span class="line">    last_node = n - <span class="number">1</span></span><br><span class="line">    parent = (last_node - <span class="number">1</span>) // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> parent &gt;= <span class="number">0</span>:</span><br><span class="line">        heapify(tree, n, parent)</span><br><span class="line">        parent -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 堆排序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heap_sort</span>(<span class="params">tree</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 构建堆</span></span><br><span class="line">    n = len(tree)</span><br><span class="line">    build_heap(tree, n)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">1</span>:</span><br><span class="line">        <span class="comment"># 第一个节点与最后一个节点交换</span></span><br><span class="line">        tree[<span class="number">0</span>], tree[n<span class="number">-1</span>] = tree[n<span class="number">-1</span>], tree[<span class="number">0</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 剩下的节点重新构建堆</span></span><br><span class="line">        build_heap(tree, n<span class="number">-1</span>)</span><br><span class="line">        n -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    tree = [<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">    heap_sort(tree)</span><br><span class="line">    print(tree)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="算法6：归并排序"><a href="#算法6：归并排序" class="headerlink" title="算法6：归并排序"></a>算法6：归并排序</h3><h4 id="思想-5"><a href="#思想-5" class="headerlink" title="思想"></a>思想</h4><blockquote>
+<p>归并操作，也叫归并算法，指的是将两个顺序序列合并成一个顺序序列的方法。</p>
+<p>如　设有数列{6，202，100，301，38，8，1}</p>
+<p>初始状态：6,202,100,301,38,8,1</p>
+<p>第一次归并后：{6,202},{100,301},{8,38},{1}，比较次数：3；</p>
+<p>第二次归并后：{6,100,202,301}，{1,8,38}，比较次数：4；</p>
+<p>第三次归并后：{1,6,8,38,100,202,301},比较次数：4；</p>
+<p>总的比较次数为：3+4+4=11；</p>
+<p>逆序数为14；</p>
+<p><img src="/2020/08/27/Sort/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.gif" alt="归并排序"></p>
+<p>归并操作的工作原理如下：</p>
+<p>第一步：申请空间，使其大小为两个已经<a href="https://baike.baidu.com/item/%E6%8E%92%E5%BA%8F">排序</a>序列之和，该空间用来存放合并后的序列</p>
+<p>第二步：设定两个<a href="https://baike.baidu.com/item/%E6%8C%87%E9%92%88">指针</a>，最初位置分别为两个已经排序序列的起始位置</p>
+<p>第三步：比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置</p>
+<p>重复步骤3直到某一指针超出序列尾</p>
+<p>将另一序列剩下的所有元素直接复制到合并序列尾</p>
+</blockquote>
+<h4 id="python-5"><a href="#python-5" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/08/08</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : demo.py</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将左右两个数组合并</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">left, right</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 指定两个指针，分别指向左右两个数组的开始位置</span></span><br><span class="line">    i, j = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 合并后的数组</span></span><br><span class="line">    record = []</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 左右两个数组均未被遍历完</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; len(left) <span class="keyword">and</span> j &lt; len(right):</span><br><span class="line">        <span class="keyword">if</span> left[i] &lt; right[j]:</span><br><span class="line">            record.append(left[i])</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            record.append(right[j])</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 如果左右两个数组有一个遍历完，将另一个剩余元素添加至record尾部</span></span><br><span class="line">    record += left[i:]</span><br><span class="line">    record += right[j:]</span><br><span class="line">    <span class="keyword">return</span> record</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归 + 分治</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 递归出口</span></span><br><span class="line">    <span class="keyword">if</span> len(arr) &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> arr</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 数组从中间切分</span></span><br><span class="line">    i = len(arr) // <span class="number">2</span></span><br><span class="line">    left = merge_sort(arr[:i])</span><br><span class="line">    right = merge_sort(arr[i:])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> merge(left, right)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">15</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">15</span>,<span class="number">9</span>,<span class="number">17</span>,<span class="number">12</span>]</span><br><span class="line">    print(merge_sort(arr))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法</category>
