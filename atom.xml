@@ -6,7 +6,7 @@
   <link href="https://renyb2.github.io/atom.xml" rel="self"/>
   
   <link href="https://renyb2.github.io/"/>
-  <updated>2020-11-07T08:34:45.584Z</updated>
+  <updated>2020-11-17T06:47:28.235Z</updated>
   <id>https://renyb2.github.io/</id>
   
   <author>
@@ -15,6 +15,113 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux配置：远程服务器通过本机代理联网</title>
+    <link href="https://renyb2.github.io/2020/11/17/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87%E6%9C%AC%E6%9C%BA%E4%BB%A3%E7%90%86%E8%81%94%E7%BD%91/"/>
+    <id>https://renyb2.github.io/2020/11/17/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87%E6%9C%AC%E6%9C%BA%E4%BB%A3%E7%90%86%E8%81%94%E7%BD%91/</id>
+    <published>2020-11-17T03:33:13.000Z</published>
+    <updated>2020-11-17T06:47:28.235Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>解决问题如下：</p><p>线上服务器无法访问公网，申请公网访问流程过于复杂，部署环境又需要连接公网来安装包，可使用本方式配置代理联网。</p><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><ol><li>通过<code>Fiddler</code>，在本地Windows机器上启动HTTP代理服务</li><li>通过Xshell/MobaXterm等远程连接软件，建立<code>SSH Tunnel</code></li><li>连接远程服务器后，在服务器设置<code>http_proxy</code> <code>https_proxy</code> <code>no_proxy</code></li></ol><p><img src="/2020/11/17/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87%E6%9C%AC%E6%9C%BA%E4%BB%A3%E7%90%86%E8%81%94%E7%BD%91/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%90%86%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="远程代理架构图"></p><h2 id="资源包"><a href="#资源包" class="headerlink" title="资源包"></a>资源包</h2><p><strong>Fiddler</strong></p><ul><li>链接：<a href="https://pan.baidu.com/s/1-0wsdRkJ6MsDG7MvvvZVLQ">https://pan.baidu.com/s/1-0wsdRkJ6MsDG7MvvvZVLQ</a> </li><li>提取码：x0cc </li></ul><h2 id="部署流程"><a href="#部署流程" class="headerlink" title="部署流程"></a>部署流程</h2><h3 id="1-部署Fiddler"><a href="#1-部署Fiddler" class="headerlink" title="1. 部署Fiddler"></a>1. 部署Fiddler</h3><p>下载并解压Fiddler至本地文件夹，双击<code>Fiddler.exe</code>运行Fiddler，对Fiddler做如下配置：</p><ul><li>勾选允许远程计算机连接</li></ul><p><img src="/2020/11/17/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87%E6%9C%AC%E6%9C%BA%E4%BB%A3%E7%90%86%E8%81%94%E7%BD%91/%E9%83%A8%E7%BD%B2Fiddler.png" alt="部署Fiddler"></p><h3 id="2-配置SSH工具"><a href="#2-配置SSH工具" class="headerlink" title="2. 配置SSH工具"></a>2. 配置SSH工具</h3><p>参考配置的工具：MobaXterm</p><ol><li>点击<code>Tunneling</code>，进入<code>SSH Tunneling</code>设置页面</li></ol><p><img src="/2020/11/17/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87%E6%9C%AC%E6%9C%BA%E4%BB%A3%E7%90%86%E8%81%94%E7%BD%91/%E9%85%8D%E7%BD%AEMobaXterm-1.png" alt="配置MobaXterm-1"></p><ol start="2"><li>点击<code>New SSH tunnel</code>，创建新的SSH tunnel</li></ol><p><img src="/2020/11/17/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87%E6%9C%AC%E6%9C%BA%E4%BB%A3%E7%90%86%E8%81%94%E7%BD%91/%E9%85%8D%E7%BD%AEMobaXterm-2.png" alt="配置MobaXterm-2"></p><ol start="3"><li>点击<code>Remote port forwarding</code>，设置远程代理，填写如下参数：<ul><li>Local server：port使用Fiddler中启动的本地代理端口（ <code>hostname</code> + <code>port</code> ）</li><li>SSH server：远程SSH登录信息（ <code>ip</code> + <code>port</code> + <code>username</code> ）</li><li>Remote clients：填写远端服务器的一个端口，程序会在远程服务器启动该端口用于转发（<code>forwarded port</code>）</li></ul></li></ol><p><img src="/2020/11/17/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87%E6%9C%AC%E6%9C%BA%E4%BB%A3%E7%90%86%E8%81%94%E7%BD%91/%E9%85%8D%E7%BD%AEMobaXterm-3.png" alt="配置MobaXterm-3"></p><h3 id="3-配置远端服务器"><a href="#3-配置远端服务器" class="headerlink" title="3. 配置远端服务器"></a>3. 配置远端服务器</h3><p>参考系统：<code>CentOS Linux release 7.6.1810</code></p><ul><li><p>临时配置</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 代理端口使用SSH tunnel中remote clients部分配置的forwarded port</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置环境变量</span></span><br><span class="line">export https_proxy=https://127.0.0.1:8888</span><br><span class="line">export http_proxy=http://127.0.0.1:8888</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试网络访问</span></span><br><span class="line">curl www.baidu.com</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> HTTP与HTTPS可正常访问，ping公网ip是不通的，正常yum安装满足需求</span></span><br></pre></td></tr></table></figure></li><li><p>永久配置</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; /etc/environment &lt;&lt; EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 默认http访问均走如下代理</span></span><br><span class="line">http_proxy=&quot;http://127.0.0.1:8888&quot;</span><br><span class="line">https_proxy=&quot;https://127.0.0.1:8888&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 访问以下ip不经过代理</span></span><br><span class="line">no_proxy=&quot;localhost,10.96.*.*,10.*.*.*,127.0.0.1,188.104.54.*&quot;</span><br><span class="line"></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure></li></ul><h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="问题：代理突然连不上网"><a href="#问题：代理突然连不上网" class="headerlink" title="问题：代理突然连不上网"></a>问题：代理突然连不上网</h3><p>解决方法：</p><ol><li><p>远程服务器检查8888端口是否有异常状态的连接</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunlp | grep 8888</span><br></pre></td></tr></table></figure></li></ol><ol start="2"><li><p>正常状态输出如下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcp        0      0 127.0.0.1:8888          0.0.0.0:*               LISTEN      18860/sshd: boco4a</span><br></pre></td></tr></table></figure></li><li><p>异常状态会存在多个异常状态TCP连接（如TIME_WITE，CLOSE_WITE等）占用8888端口，使用<code>kill -9 &lt;pid&gt;</code>杀掉进程，重新建立SSH tunnel连接即可</p></li></ol><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.jianshu.com/p/75bf2dc43450">如何用fiddler进行代理设置</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;解决问题如下：&lt;/p&gt;
+&lt;p&gt;线上服务器无法访问公网，申请公网访问流程过于复杂，部署环境又需要连接公网来安装包，可使用本方式配置代理联网。&lt;</summary>
+      
+    
+    
+    
+    <category term="Linux" scheme="https://renyb2.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://renyb2.github.io/tags/Linux/"/>
+    
+    <category term="代理" scheme="https://renyb2.github.io/tags/%E4%BB%A3%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Openstack使用文档：Windows镜像制作</title>
+    <link href="https://renyb2.github.io/2020/11/09/Openstack%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3%EF%BC%9AWindows%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/"/>
+    <id>https://renyb2.github.io/2020/11/09/Openstack%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3%EF%BC%9AWindows%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</id>
+    <published>2020-11-09T08:01:39.000Z</published>
+    <updated>2020-11-12T09:03:10.135Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="资源下载地址"><a href="#资源下载地址" class="headerlink" title="资源下载地址"></a>资源下载地址</h2><ul><li>系统镜像：<a href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></li><li>virtio：<a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/</a></li></ul><h2 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h2><h3 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装包</span></span><br><span class="line">yum install qemu-kvm qemu-img –y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建链接</span></span><br><span class="line">ln -sv /usr/libexec/qemu-kvm /usr/bin/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建磁盘</span></span><br><span class="line">qemu-img create -f qcow2 cn_windows_server_2016_vl_x64_cloud_11636695.qcow2 15G</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建虚机</span></span><br><span class="line">qemu-kvm -m 1024 -cdrom cn_windows_server_2016_vl_x64_dvd_11636695.iso -drive file=cn_windows_server_2016_vl_x64_dvd_11636695.qcow2,if=virtio,boot=on -fda virtio-win_amd64.vfd -boot d -nographic -vnc :3</span><br></pre></td></tr></table></figure><h3 id="VNC连接虚机"><a href="#VNC连接虚机" class="headerlink" title="VNC连接虚机"></a>VNC连接虚机</h3><p>连接方式：<code>&lt;server ip&gt;:3</code></p><h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/tcicy/p/7790956.html">Openstack kvm win7镜像制作</a></p><p><a href="https://blog.csdn.net/qq_20154221/article/details/51586537">制作openstack镜像win7.qcow2（centos/ubuntu/win镜像分享）</a></p><p><a href="https://blog.csdn.net/wylfengyujiancheng/article/details/50468173">制作OpenStack Windows Server 2012镜像</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;资源下载地址&quot;&gt;&lt;a href=&quot;#资源下载地址&quot; class=&quot;headerlink&quot; title=&quot;资源下载地址&quot;&gt;&lt;/a&gt;资源下载地址&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;系统镜像：&lt;a href=&quot;https://msdn.itellyou.cn/&quot;&gt;https:/</summary>
+      
+    
+    
+    
+    <category term="Openstack" scheme="https://renyb2.github.io/categories/Openstack/"/>
+    
+    
+    <category term="Openstack使用文档" scheme="https://renyb2.github.io/tags/Openstack%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/"/>
+    
+    <category term="镜像制作" scheme="https://renyb2.github.io/tags/%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux配置：GNOME桌面</title>
+    <link href="https://renyb2.github.io/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AGNOME%E6%A1%8C%E9%9D%A2/"/>
+    <id>https://renyb2.github.io/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AGNOME%E6%A1%8C%E9%9D%A2/</id>
+    <published>2020-11-09T07:34:24.000Z</published>
+    <updated>2020-11-09T07:48:13.410Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote><p>GNOME是一种<a href="https://baike.baidu.com/item/GNU">GNU</a>网络对象模型环境 ，GNU计划的一部分，开放源码运动的一个重要组成部分，是一种让使用者容易操作和设定电脑环境的工具，目标是基于<a href="https://baike.baidu.com/item/%E8%87%AA%E7%94%B1%E8%BD%AF%E4%BB%B6">自由软件</a>，为<a href="https://baike.baidu.com/item/Unix">Unix</a>或者<a href="https://baike.baidu.com/item/%E7%B1%BBUnix">类Unix</a>操作系统构造一个功能完善、操作简单以及界面友好的<a href="https://baike.baidu.com/item/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83">桌面环境</a>，是GNU计划的正式桌面。</p><p>GNOME可以运行在包括GNU/Linux(通常叫做<a href="https://baike.baidu.com/item/Linux">Linux</a>)，<a href="https://baike.baidu.com/item/Solaris">Solaris</a>，<a href="https://baike.baidu.com/item/HP-UX">HP-UX</a>，<a href="https://baike.baidu.com/item/BSD">BSD</a>和Apple’s Darwin系统上. GNOME 拥有很多强大的特性，如：高质量的平滑文本渲染， 首个国际化和可用性支持， 并且包括对反向文本的支持(注: 有些国家的文字是从右到左的排版的）。</p><p>GNOME运行在大多数类Unix系统，并被Sun Microsystems公司采纳为Solaris平台的标准桌面，取代了过时的<a href="https://baike.baidu.com/item/CDE">CDE</a>。Sun Microsystems公司也以Java Desktop System名义发布一个商业版的桌面：一个被SUSELinux系统使用的基于GNOME的桌面。GNOME也移植到Cygwin使其能运行于Microsoft Windows。GNOME 还被众多LiveCDLinux发行版使用，如<a href="https://baike.baidu.com/item/Gnoppix">Gnoppix</a>和Morphix。</p></blockquote><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 列出可安装的桌面环境</span></span><br><span class="line">yum grouplist</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看安装的包有哪些内容</span></span><br><span class="line">yum group info  &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装GNOME及相应桌面管理工具</span></span><br><span class="line">yum -y groups install &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看当前默认启动模式</span></span><br><span class="line">systemctl get-default</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动图形化界面</span></span><br><span class="line">systemctl set-default graphical.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动命令行界面</span></span><br><span class="line">systemctl set-default multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令行界面热切换到图形界面</span></span><br><span class="line">init 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 图形界面热切换到命令行界面</span></span><br><span class="line">init 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载GNOME</span></span><br><span class="line">yum -y groupremove &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br></pre></td></tr></table></figure><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/gentsir/p/10300655.html">Centos 7 安装GNOME桌面环境</a></p><p><a href="https://blog.csdn.net/wqh0830/article/details/86701379">CentOS-7安装GNOME桌面</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;GNOME是一种&lt;a href=&quot;https://baike.baidu.com/item/GNU&quot;&gt;GNU&lt;/a</summary>
+      
+    
+    
+    
+    <category term="Linux" scheme="https://renyb2.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://renyb2.github.io/tags/Linux/"/>
+    
+    <category term="GNOME" scheme="https://renyb2.github.io/tags/GNOME/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux配置：VNC Server</title>
+    <link href="https://renyb2.github.io/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AVNC-Server/"/>
+    <id>https://renyb2.github.io/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AVNC-Server/</id>
+    <published>2020-11-09T06:57:15.000Z</published>
+    <updated>2020-11-09T07:32:20.373Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>VNC</strong> (Virtual Network Console)，即 <strong>虚拟网络控制台</strong>。它是一款优秀的远程控制工具软件，而且是基于 UNIX 和 Linux 操作系统的<strong>免费开源</strong>的。</p><blockquote><p><strong>1、优点</strong><br>远程控制能力强大，高效实用，其性能可以和 Windows 和 MAC 中的任何远程控制软件媲美</p></blockquote><blockquote><p><strong>2、VNC基本上是由两部分组成</strong></p><ul><li>一部分是客户端的应用程序(vncviewer)；</li><li>另外一部分是服务器端的应用程序(vncserver)；</li></ul></blockquote><blockquote><p><strong>3、特点</strong></p><ul><li>同样可以远程连入UNIX、Linux进行图形化操作的还有流行的Xmanager，VNC与之相比——两者工作原理不一样；</li><li><strong>VNC</strong> 是远程连入操作系统，所有操作在UNIX、Linux主机服务端进行，即使操作过程中“本地电脑与操作主机网络断开”，也不影响操作的顺利进行；</li><li><strong>Xmanager</strong> 是通过端口将主机服务器的UI界面引导到本地电脑进行展现，如操作过程出现“本地电脑与操作主机网络断开”，操作将中断失败！如果操作中进行的工作任务非常重要，不能中断，如ORACLE RAC实施，结果是灾难性的；</li><li>更重要的是，VNC是免费的、开源的，Xmanager收费的；</li></ul></blockquote><blockquote><p><strong>4、工作流程</strong></p><ul><li>（1）在服务器端启动 VNC Server。</li><li>（2）VNC客户端通过浏览器或 VNC Viewer 连接至VNC Server；</li><li>（3）VNC Server传送一对话窗口至客户端，要求输入连接密码， 以及存取的VNC Server显示装置。</li><li>（4）在客户端输入联机密码后，VNC Server验证客户端是否具有存取权限。</li><li>（5）若是客户端通过 VNC Server 的验证，客户端即要求VNC Server显示桌面环境。</li><li>（6）VNC Server通过X Protocol 要求X Server将画面显示控制权交由VNC Server负责。</li><li>（7）VNC Server将来由 X Server 的桌面环境利用VNC通信协议送至客户端， 并且允许客户端控制VNC Server的桌面环境及输入装置。</li></ul></blockquote><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h3><ul><li>系统：CentOS Linux release 7.7.1908 (Core)</li><li>VNC RPM ( rpm -qa | grep vnc )：<ul><li>tigervnc-icons-1.8.0-19.el7.noarch</li><li>tigervnc-server-1.8.0-19.el7.x86_64</li><li>gtk-vnc2-0.7.0-3.el7.x86_64</li><li>tigervnc-license-1.8.0-19.el7.noarch</li><li>gvnc-0.7.0-3.el7.x86_64</li><li>tigervnc-server-minimal-1.8.0-19.el7.x86_64</li><li>tigervnc-1.8.0-19.el7.x86_64</li></ul></li></ul><h3 id="VNC-服务端安装"><a href="#VNC-服务端安装" class="headerlink" title="VNC 服务端安装"></a>VNC 服务端安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 检查服务器是否安装了 VNC</span></span><br><span class="line">rpm -qa | grep vnc</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装VNC</span></span><br><span class="line">yum install tigervnc tigervnc-server -y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看VNC Server模板配置文件</span></span><br><span class="line">cat /lib/systemd/system/vncserver@.service</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Quick HowTo:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. Copy this file to /etc/systemd/system/vncserver@.service</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. Replace &lt;USER&gt; with the actual user name and edit vncserver</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    parameters <span class="keyword">in</span> the wrapper script located <span class="keyword">in</span> /usr/bin/vncserver_wrapper</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3. Run `systemctl daemon-reload`</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4. Run `systemctl <span class="built_in">enable</span> vncserver@:&lt;display&gt;.service`</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;USER&gt; 配置登录远程桌面的用户名</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;display&gt; 配置登录远程桌面的端口</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> VNC 的默认监听端口是 5900，监听端口规则为590+usernumber【如 1:root对应端口号5901】</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> cp vnc config</span></span><br><span class="line">cp /lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@.service</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> update config</span></span><br><span class="line">sed -i &#x27;s/&lt;USER&gt;/root/&#x27; /etc/systemd/system/vncserver@.service</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> vnc password</span></span><br><span class="line">vncpasswd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> systemctl</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl enable vncserver@:1.service</span><br><span class="line">systemctl start vncserver@:1.service</span><br><span class="line">systemctl status vncserver@:1.service</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> check port</span></span><br><span class="line">netstat -lantu | grep 5901</span><br></pre></td></tr></table></figure><h3 id="VNC-客户端安装"><a href="#VNC-客户端安装" class="headerlink" title="VNC 客户端安装"></a>VNC 客户端安装</h3><p>下载地址：<a href="https://www.realvnc.com/en/connect/download/viewer/">https://www.realvnc.com/en/connect/download/viewer/</a></p><p>VNC address：<code>&lt;ip&gt;:&lt;port&gt;</code></p><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://blog.csdn.net/llag_haveboy/article/details/84960479">Linux 上安装配置 VNC Server</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;VNC&lt;/strong&gt; (Virtual Network Console)，即 &lt;strong&gt;虚拟网络控制台&lt;/stro</summary>
+      
+    
+    
+    
+    <category term="Linux" scheme="https://renyb2.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://renyb2.github.io/tags/Linux/"/>
+    
+    <category term="VNC" scheme="https://renyb2.github.io/tags/VNC/"/>
+    
+  </entry>
   
   <entry>
     <title>Openstack部署文档：Kolla安装Octavia</title>
@@ -67,7 +174,7 @@
     <link href="https://renyb2.github.io/2020/11/05/Docker-%E5%85%A5%E9%97%A8/"/>
     <id>https://renyb2.github.io/2020/11/05/Docker-%E5%85%A5%E9%97%A8/</id>
     <published>2020-11-05T00:54:13.000Z</published>
-    <updated>2020-11-06T10:30:14.131Z</updated>
+    <updated>2020-11-17T03:37:53.389Z</updated>
     
     <content type="html"><![CDATA[<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 重命名镜像repository和tag</span></span><br><span class="line">docker tag &lt;image id&gt; &lt;new repository&gt;:&lt;new tag&gt;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -403,27 +510,6 @@
     
     
     <category term="算法" scheme="https://renyb2.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://renyb2.github.io/2020/08/25/hello-world/"/>
-    <id>https://renyb2.github.io/2020/08/25/hello-world/</id>
-    <published>2020-08-25T09:49:35.000Z</published>
-    <updated>2020-09-11T03:22:12.270Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><a id="more"></a><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Hexo" scheme="https://renyb2.github.io/categories/Hexo/"/>
-    
-    
-    <category term="Hexo" scheme="https://renyb2.github.io/tags/Hexo/"/>
     
   </entry>
   
