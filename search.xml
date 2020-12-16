@@ -239,6 +239,77 @@
       </tags>
   </entry>
   <entry>
+    <title>Jmeter</title>
+    <url>/2020/09/23/Jmeter/</url>
+    <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址：<a href="http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip">http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip</a></p>
+<h3 id="Windows部署"><a href="#Windows部署" class="headerlink" title="Windows部署"></a>Windows部署</h3><h4 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h4><p>版本：jdk-8u131-windows-i586（链接：<a href="https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg">https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg</a> 提取码：4ztk）</p>
+<p>系统环境变量：</p>
+<ul>
+<li>JAVA_HOME：C:\Program Files (x86)\Java\jdk1.8.0_131</li>
+<li>CLASSPATH：.;%JAVA_HOME%\bin;%JAVA_HOME%\lib\dt.jar%JAVA_HOME%\lib\tools.jar;</li>
+<li>PATH：新增两行，%JAVA_HOME%\bin，%JAVA_HOME%\jre\lib</li>
+</ul>
+<h4 id="Jmeter"><a href="#Jmeter" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>开箱即用。可执行文件：<code>.\bin\jmeter.bat</code></p>
+<h3 id="Linux部署"><a href="#Linux部署" class="headerlink" title="Linux部署"></a>Linux部署</h3><h4 id="Java环境-1"><a href="#Java环境-1" class="headerlink" title="Java环境"></a>Java环境</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br></pre></td></tr></table></figure>
+
+<h4 id="Jmeter-1"><a href="#Jmeter-1" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>环境变量<code>/etc/profile</code>增加如下内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export JMETER_HOME=/root/jmeter</span><br><span class="line">export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH</span><br><span class="line">export PATH=$JMETER_HOME/bin:$PATH:$HOME/bin</span><br></pre></td></tr></table></figure>
+
+<p>环境变量配置生效：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>验证：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter --version</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>思路：</strong>通过Windows图形界面生成配置文件，上传至服务器进行压测</p>
+<h3 id="http-https-性能测试"><a href="#http-https-性能测试" class="headerlink" title="http/https 性能测试"></a>http/https 性能测试</h3><h4 id="1-添加线程组"><a href="#1-添加线程组" class="headerlink" title="1. 添加线程组"></a>1. 添加线程组</h4><p>Test Plan中添加<code>Thread Group</code></p>
+<p>总请求量 = 并发用户数 * 循环轮次</p>
+<ul>
+<li><p><code>Number of Threads (users)</code>：设置并发用户数</p>
+</li>
+<li><p><code>Loop Count</code>：设置循环轮次</p>
+</li>
+<li><p><code>Ramp-up period (seconds)</code>：设置压力启动时间（从开始到最大压力之间的时间）</p>
+</li>
+</ul>
+<p><img src="/2020/09/23/Jmeter/jmeter-1.png" alt="jmeter-1"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-2.png" alt="jmeter-2"></p>
+<h4 id="2-设置http-https请求"><a href="#2-设置http-https请求" class="headerlink" title="2. 设置http/https请求"></a>2. 设置http/https请求</h4><p>Thread Group中添加<code>HTTP Request</code>，填写http/https请求的配置</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-3.png" alt="jmeter-3"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-4.png" alt="jmeter-4"></p>
+<h4 id="3-添加统计分析功能"><a href="#3-添加统计分析功能" class="headerlink" title="3. 添加统计分析功能"></a>3. 添加统计分析功能</h4><p>通常，添加如下两个统计分析功能：</p>
+<ul>
+<li>Summary Report</li>
+<li>jp@gc - Transactions Per Second（需要单独安装，安装流程见插件 - QPS统计）</li>
+</ul>
+<p><img src="/2020/09/23/Jmeter/jmeter-5.png" alt="jmeter-5"></p>
+<h4 id="4-导出配置"><a href="#4-导出配置" class="headerlink" title="4. 导出配置"></a>4. 导出配置</h4><p>保存jmx文件，上传至压力服务器。</p>
+<h4 id="5-压力执行"><a href="#5-压力执行" class="headerlink" title="5. 压力执行"></a>5. 压力执行</h4><p>linux运行，生成结果文件至<code>test.jtl</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter -n -t vm.jmx -l test.jtl</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-查看性能测试结果"><a href="#6-查看性能测试结果" class="headerlink" title="6. 查看性能测试结果"></a>6. 查看性能测试结果</h4><p>下载<code>test.jtl</code>，在Windows Jmeter的统计分析功能中打开查看。</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-6.png" alt="jmeter-6"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-7.png" alt="jmeter-7"></p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p><strong>Jmeter插件官网：</strong><a href="https://jmeter-plugins.org/wiki/Start/">https://jmeter-plugins.org/wiki/Start/</a></p>
+<h3 id="QPS统计"><a href="#QPS统计" class="headerlink" title="QPS统计"></a>QPS统计</h3><p>下载地址：<a href="https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip">https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip</a></p>
+<p>解压后，移动压缩包内lib目录下的文件至Jmeter\lib目录下同位置即可，重启Jmeter。</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-8.png" alt="jmeter-8"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://jmeter.apache.org/">Jmeter官方网站</a></p>
+<p><a href="https://jmeter-plugins.org/wiki/Start/">Jmeter官方插件</a></p>
+]]></content>
+      <categories>
+        <category>性能测试工具</category>
+      </categories>
+      <tags>
+        <tag>Jmeter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Kubernetes部署：kubeadm部署高可用集群</title>
     <url>/2020/12/16/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9Akubeadm%E9%83%A8%E7%BD%B2%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/</url>
     <content><![CDATA[<h2 id="高可用集群部署"><a href="#高可用集群部署" class="headerlink" title="高可用集群部署"></a>高可用集群部署</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><h4 id="1-检查centos版本-hostname"><a href="#1-检查centos版本-hostname" class="headerlink" title="1. 检查centos版本 / hostname"></a>1. 检查centos版本 / hostname</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看centos版本</span></span><br><span class="line">cat /etc/centos-release</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; CentOS Linux release 7.7.1908 (Core)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此处 hostname 的输出将会是该机器在 Kubernetes 集群中的节点名字</span></span><br><span class="line">hostname</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改hostname</span></span><br><span class="line">hostnamectl set-hostname NAME</span><br></pre></td></tr></table></figure>
@@ -316,77 +387,6 @@
       <tags>
         <tag>Kubernetes部署</tag>
         <tag>kubeadm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jmeter</title>
-    <url>/2020/09/23/Jmeter/</url>
-    <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址：<a href="http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip">http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip</a></p>
-<h3 id="Windows部署"><a href="#Windows部署" class="headerlink" title="Windows部署"></a>Windows部署</h3><h4 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h4><p>版本：jdk-8u131-windows-i586（链接：<a href="https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg">https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg</a> 提取码：4ztk）</p>
-<p>系统环境变量：</p>
-<ul>
-<li>JAVA_HOME：C:\Program Files (x86)\Java\jdk1.8.0_131</li>
-<li>CLASSPATH：.;%JAVA_HOME%\bin;%JAVA_HOME%\lib\dt.jar%JAVA_HOME%\lib\tools.jar;</li>
-<li>PATH：新增两行，%JAVA_HOME%\bin，%JAVA_HOME%\jre\lib</li>
-</ul>
-<h4 id="Jmeter"><a href="#Jmeter" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>开箱即用。可执行文件：<code>.\bin\jmeter.bat</code></p>
-<h3 id="Linux部署"><a href="#Linux部署" class="headerlink" title="Linux部署"></a>Linux部署</h3><h4 id="Java环境-1"><a href="#Java环境-1" class="headerlink" title="Java环境"></a>Java环境</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br></pre></td></tr></table></figure>
-
-<h4 id="Jmeter-1"><a href="#Jmeter-1" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>环境变量<code>/etc/profile</code>增加如下内容：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export JMETER_HOME=/root/jmeter</span><br><span class="line">export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH</span><br><span class="line">export PATH=$JMETER_HOME/bin:$PATH:$HOME/bin</span><br></pre></td></tr></table></figure>
-
-<p>环境变量配置生效：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-
-<p>验证：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter --version</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>思路：</strong>通过Windows图形界面生成配置文件，上传至服务器进行压测</p>
-<h3 id="http-https-性能测试"><a href="#http-https-性能测试" class="headerlink" title="http/https 性能测试"></a>http/https 性能测试</h3><h4 id="1-添加线程组"><a href="#1-添加线程组" class="headerlink" title="1. 添加线程组"></a>1. 添加线程组</h4><p>Test Plan中添加<code>Thread Group</code></p>
-<p>总请求量 = 并发用户数 * 循环轮次</p>
-<ul>
-<li><p><code>Number of Threads (users)</code>：设置并发用户数</p>
-</li>
-<li><p><code>Loop Count</code>：设置循环轮次</p>
-</li>
-<li><p><code>Ramp-up period (seconds)</code>：设置压力启动时间（从开始到最大压力之间的时间）</p>
-</li>
-</ul>
-<p><img src="/2020/09/23/Jmeter/jmeter-1.png" alt="jmeter-1"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-2.png" alt="jmeter-2"></p>
-<h4 id="2-设置http-https请求"><a href="#2-设置http-https请求" class="headerlink" title="2. 设置http/https请求"></a>2. 设置http/https请求</h4><p>Thread Group中添加<code>HTTP Request</code>，填写http/https请求的配置</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-3.png" alt="jmeter-3"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-4.png" alt="jmeter-4"></p>
-<h4 id="3-添加统计分析功能"><a href="#3-添加统计分析功能" class="headerlink" title="3. 添加统计分析功能"></a>3. 添加统计分析功能</h4><p>通常，添加如下两个统计分析功能：</p>
-<ul>
-<li>Summary Report</li>
-<li>jp@gc - Transactions Per Second（需要单独安装，安装流程见插件 - QPS统计）</li>
-</ul>
-<p><img src="/2020/09/23/Jmeter/jmeter-5.png" alt="jmeter-5"></p>
-<h4 id="4-导出配置"><a href="#4-导出配置" class="headerlink" title="4. 导出配置"></a>4. 导出配置</h4><p>保存jmx文件，上传至压力服务器。</p>
-<h4 id="5-压力执行"><a href="#5-压力执行" class="headerlink" title="5. 压力执行"></a>5. 压力执行</h4><p>linux运行，生成结果文件至<code>test.jtl</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter -n -t vm.jmx -l test.jtl</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="6-查看性能测试结果"><a href="#6-查看性能测试结果" class="headerlink" title="6. 查看性能测试结果"></a>6. 查看性能测试结果</h4><p>下载<code>test.jtl</code>，在Windows Jmeter的统计分析功能中打开查看。</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-6.png" alt="jmeter-6"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-7.png" alt="jmeter-7"></p>
-<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p><strong>Jmeter插件官网：</strong><a href="https://jmeter-plugins.org/wiki/Start/">https://jmeter-plugins.org/wiki/Start/</a></p>
-<h3 id="QPS统计"><a href="#QPS统计" class="headerlink" title="QPS统计"></a>QPS统计</h3><p>下载地址：<a href="https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip">https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip</a></p>
-<p>解压后，移动压缩包内lib目录下的文件至Jmeter\lib目录下同位置即可，重启Jmeter。</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-8.png" alt="jmeter-8"></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://jmeter.apache.org/">Jmeter官方网站</a></p>
-<p><a href="https://jmeter-plugins.org/wiki/Start/">Jmeter官方插件</a></p>
-]]></content>
-      <categories>
-        <category>性能测试工具</category>
-      </categories>
-      <tags>
-        <tag>Jmeter</tag>
       </tags>
   </entry>
   <entry>
@@ -607,8 +607,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Openstack使用：Windows镜像制作</title>
-    <url>/2020/11/09/Openstack%E4%BD%BF%E7%94%A8%EF%BC%9AWindows%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</url>
+    <title>OpenStack使用：Windows镜像制作</title>
+    <url>/2020/11/09/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9AWindows%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</url>
     <content><![CDATA[<h2 id="资源下载地址"><a href="#资源下载地址" class="headerlink" title="资源下载地址"></a>资源下载地址</h2><ul>
 <li>系统镜像：<a href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></li>
 <li>virtio：<a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/</a></li>
@@ -619,22 +619,22 @@
 
 
 <h3 id="VNC连接虚机"><a href="#VNC连接虚机" class="headerlink" title="VNC连接虚机"></a>VNC连接虚机</h3><p>连接方式：<code>&lt;server ip&gt;:3</code></p>
-<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/tcicy/p/7790956.html">Openstack kvm win7镜像制作</a></p>
-<p><a href="https://blog.csdn.net/qq_20154221/article/details/51586537">制作openstack镜像win7.qcow2（centos/ubuntu/win镜像分享）</a></p>
+<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/tcicy/p/7790956.html">OpenStack kvm win7镜像制作</a></p>
+<p><a href="https://blog.csdn.net/qq_20154221/article/details/51586537">制作OpenStack镜像win7.qcow2（centos/ubuntu/win镜像分享）</a></p>
 <p><a href="https://blog.csdn.net/wylfengyujiancheng/article/details/50468173">制作OpenStack Windows Server 2012镜像</a></p>
 ]]></content>
       <categories>
-        <category>Openstack</category>
+        <category>OpenStack</category>
       </categories>
       <tags>
-        <tag>Openstack使用</tag>
+        <tag>OpenStack使用</tag>
         <tag>镜像制作</tag>
       </tags>
   </entry>
   <entry>
-    <title>Openstack使用：自定义实例root密码</title>
-    <url>/2020/11/06/Openstack%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/</url>
-    <content><![CDATA[<h2 id="Openstack安装信息"><a href="#Openstack安装信息" class="headerlink" title="Openstack安装信息"></a>Openstack安装信息</h2><ul>
+    <title>OpenStack使用：自定义实例root密码</title>
+    <url>/2020/11/06/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/</url>
+    <content><![CDATA[<h2 id="OpenStack安装信息"><a href="#OpenStack安装信息" class="headerlink" title="OpenStack安装信息"></a>OpenStack安装信息</h2><ul>
 <li>安装工具：kolla ansible</li>
 <li>安装版本：Train版</li>
 <li>虚拟化层：qemu</li>
@@ -652,7 +652,7 @@
 <p>参考脚本如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">passwd root &lt;&lt; EOF</span><br><span class="line">1234qwer</span><br><span class="line">1234qwer</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/11/06/Openstack%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/Horizon%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81.png" alt="Horizon修改root密码"></p>
+<p><img src="/2020/11/06/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/Horizon%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81.png" alt="Horizon修改root密码"></p>
 <h3 id="方式二：后端修改"><a href="#方式二：后端修改" class="headerlink" title="方式二：后端修改"></a>方式二：后端修改</h3><blockquote>
 <p><strong>镜像内部需要安装：qemu-guest-agent</strong></p>
 <table>
@@ -682,12 +682,12 @@
 <p>cirros镜像不适用该方式，版本：cirros-0.4.0-x86_64-disk.img。<br>centos镜像适用。版本：CentOS-7-x86_64-GenericCloud-2003.qcow2。</p>
 </blockquote>
 <h4 id="步骤1：修改image元数据"><a href="#步骤1：修改image元数据" class="headerlink" title="步骤1：修改image元数据"></a>步骤1：修改image元数据</h4><h5 id="方式1：前端修改"><a href="#方式1：前端修改" class="headerlink" title="方式1：前端修改"></a>方式1：前端修改</h5><p>编辑镜像，在<code>元数据</code> - <code>libvirt Driver Options for Images</code> - <code>QEMU Guest Agent</code>，设置为<code>yes</code>即可</p>
-<p><img src="/2020/11/06/Openstack%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/Horizon%E8%AE%BE%E7%BD%AEimage%E5%85%83%E6%95%B0%E6%8D%AE.png" alt="Horizon设置image元数据"></p>
+<p><img src="/2020/11/06/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/Horizon%E8%AE%BE%E7%BD%AEimage%E5%85%83%E6%95%B0%E6%8D%AE.png" alt="Horizon设置image元数据"></p>
 <h5 id="方式2：后端修改"><a href="#方式2：后端修改" class="headerlink" title="方式2：后端修改"></a>方式2：后端修改</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 增加image元数据信息</span></span><br><span class="line">openstack image list</span><br><span class="line">openstack image set &lt;image id or name&gt; --property hw_qemu_guest_agent=yes</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/11/06/Openstack%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/image%E4%BF%A1%E6%81%AF.png" alt="image信息"></p>
+<p><img src="/2020/11/06/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/image%E4%BF%A1%E6%81%AF.png" alt="image信息"></p>
 <p>不设置该参数，修改密码时会报<code>QEMU guest agent is not enabled (HTTP 409)</code>，错误如下：</p>
-<p><img src="/2020/11/06/Openstack%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81409.png" alt="修改root密码409"></p>
+<p><img src="/2020/11/06/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81409.png" alt="修改root密码409"></p>
 <h4 id="步骤2：使用更新后的镜像创建虚机"><a href="#步骤2：使用更新后的镜像创建虚机" class="headerlink" title="步骤2：使用更新后的镜像创建虚机"></a>步骤2：使用更新后的镜像创建虚机</h4><h4 id="步骤3：后端修改虚机密码"><a href="#步骤3：后端修改虚机密码" class="headerlink" title="步骤3：后端修改虚机密码"></a>步骤3：后端修改虚机密码</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">openstack server list</span><br><span class="line">openstack server set --root-password &lt;server id or name&gt;</span><br></pre></td></tr></table></figure>
 
 
@@ -697,19 +697,19 @@
 <p><a href="https://blog.csdn.net/zhongbeida_xue/article/details/80417019">openstack虚拟机系统密码的修改方案</a></p>
 ]]></content>
       <categories>
-        <category>Openstack</category>
+        <category>OpenStack</category>
       </categories>
       <tags>
-        <tag>Openstack使用</tag>
+        <tag>OpenStack使用</tag>
         <tag>Train版本</tag>
       </tags>
   </entry>
   <entry>
-    <title>Openstack开发：novaclient解析</title>
-    <url>/2020/12/16/Openstack%E5%BC%80%E5%8F%91%EF%BC%9Anovaclient%E8%A7%A3%E6%9E%90/</url>
+    <title>OpenStack开发：novaclient解析</title>
+    <url>/2020/12/16/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9Anovaclient%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><ul>
 <li>系统：CentOS Linux release 7.7.1908 (Core)</li>
-<li>Openstack：Train版 </li>
+<li>OpenStack：Train版 </li>
 <li>Python：2.7.5</li>
 </ul>
 <table>
@@ -787,85 +787,29 @@
 <p><a href="https://www.cnblogs.com/ggykx/p/12175689.html">OpenStack中创建实例流程详解</a></p>
 ]]></content>
       <categories>
-        <category>Openstack</category>
+        <category>OpenStack</category>
       </categories>
       <tags>
         <tag>Train版本</tag>
-        <tag>Openstack开发</tag>
+        <tag>OpenStack开发</tag>
         <tag>novaclient</tag>
       </tags>
   </entry>
   <entry>
-    <title>Openstack部署：Kolla安装Octavia</title>
-    <url>/2020/11/07/Openstack%E9%83%A8%E7%BD%B2%EF%BC%9AKolla%E5%AE%89%E8%A3%85Octavia/</url>
+    <title>OpenStack部署：Kolla安装Octavia</title>
+    <url>/2020/11/07/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AKolla%E5%AE%89%E8%A3%85Octavia/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Openstack</category>
+        <category>OpenStack</category>
       </categories>
       <tags>
         <tag>Train版本</tag>
-        <tag>Openstack部署</tag>
+        <tag>OpenStack部署</tag>
       </tags>
   </entry>
   <entry>
-    <title>Oracle 11.2 安装文档</title>
-    <url>/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<h2 id="win10安装"><a href="#win10安装" class="headerlink" title="win10安装"></a>win10安装</h2><h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle 11.2.0.1.0</p>
-<p>链接：<a href="https://pan.baidu.com/s/12ctlN7GaU4JbIOuawpsiqA">https://pan.baidu.com/s/12ctlN7GaU4JbIOuawpsiqA</a> </p>
-<p>提取码：bah3</p>
-<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><h4 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h4><p>解压后，双击setup.exe。目录建议全英文</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-1.png" alt="win10-1"></p>
-<h4 id="环境检测"><a href="#环境检测" class="headerlink" title="环境检测"></a>环境检测</h4><p>双击setup.exe后，自动启动安装程序，检测环境配置。</p>
-<p>我本次目的是测试安装流程，点击是继续安装即可。对安装无影响，对性能有影响。</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-2.png" alt="win10-2"></p>
-<h4 id="配置安全更新"><a href="#配置安全更新" class="headerlink" title="配置安全更新"></a>配置安全更新</h4><p>电子邮箱配置自己的即可，会接受安全问题通知，也可以不填</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-3.png" alt="win10-3"></p>
-<h4 id="安装选项"><a href="#安装选项" class="headerlink" title="安装选项"></a>安装选项</h4><p>选择创建和配置数据库，点击下一步</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-4.png" alt="win10-4"></p>
-<h4 id="系统类"><a href="#系统类" class="headerlink" title="系统类"></a>系统类</h4><p>这里在win10上实验，选择的桌面类</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-5.png" alt="win10-5"></p>
-<h4 id="典型安装"><a href="#典型安装" class="headerlink" title="典型安装"></a>典型安装</h4><p>设置数据库文件存储目录、数据库版本、字符集、数据库名及管理口令（用户名为<code>system</code>）</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-6.png" alt="win10-6"></p>
-<h4 id="后续步骤"><a href="#后续步骤" class="headerlink" title="后续步骤"></a>后续步骤</h4><p>典型安装完成后，按照流程下一步即可完成安装</p>
-<h4 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h4><p>CMD：<code>sqlplus system/&lt;system password&gt;</code></p>
-<p>网页：<code>https://localhost:1158/em</code>，用户名<code>system</code>，口令为典型安装中配置的管理口令</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-8.png" alt="win10-8"></p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-7.png" alt="win10-7"></p>
-<h2 id="Ubuntu-18-Docker安装"><a href="#Ubuntu-18-Docker安装" class="headerlink" title="Ubuntu 18 Docker安装"></a>Ubuntu 18 Docker安装</h2><h3 id="安装包-1"><a href="#安装包-1" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle Express Edition 11g Release 2</p>
-<p>GitHub：<a href="https://github.com/wnameless/docker-oracle-xe-11g">https://github.com/wnameless/docker-oracle-xe-11g</a></p>
-<h3 id="安装步骤-1"><a href="#安装步骤-1" class="headerlink" title="安装步骤"></a>安装步骤</h3><h4 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h4><p>参考文档：<a href="https://www.runoob.com/docker/ubuntu-docker-install.html">https://www.runoob.com/docker/ubuntu-docker-install.html</a></p>
-<p>安装命令如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</span><br></pre></td></tr></table></figure>
-
-<p>也可以使用国内 daocloud 一键安装命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -sSL https://get.daocloud.io/docker | sh</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装Oracle-11G"><a href="#安装Oracle-11G" class="headerlink" title="安装Oracle 11G"></a>安装Oracle 11G</h4><h5 id="Installation-Local"><a href="#Installation-Local" class="headerlink" title="Installation(Local)"></a>Installation(Local)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/wnameless/docker-oracle-xe-11g.git</span><br><span class="line">cd docker-oracle-xe-11g</span><br><span class="line">docker build -t wnameless/oracle-xe-11g .</span><br></pre></td></tr></table></figure>
-
-<h5 id="Installation-DockerHub"><a href="#Installation-DockerHub" class="headerlink" title="Installation(DockerHub)"></a>Installation(DockerHub)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
-
-<p>SSH server has been removed since 18.04, please use “docker exec”</p>
-<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>Run with 1521 port opened:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 49161:1521 wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
-
-<p>Run this, if you want the database to be connected remotely:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 49161:1521 -e ORACLE_ALLOW_REMOTE=true wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
-
-<h4 id="默认信息"><a href="#默认信息" class="headerlink" title="默认信息"></a>默认信息</h4><p>By default, the password verification is disable(password never expired)<br>Connect database with following setting:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hostname: localhost</span><br><span class="line">port: 49161</span><br><span class="line">sid: xe</span><br><span class="line">username: system</span><br><span class="line">password: oracle</span><br></pre></td></tr></table></figure>
-
-<p>Password for SYS &amp; SYSTEM</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">oracle</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Oracle</category>
-      </categories>
-      <tags>
-        <tag>Oracle 11.2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Openstack部署：默认端口号</title>
-    <url>/2020/12/05/Openstack%E9%83%A8%E7%BD%B2%EF%BC%9A%E9%BB%98%E8%AE%A4%E7%AB%AF%E5%8F%A3%E5%8F%B7/</url>
+    <title>OpenStack部署：默认端口号</title>
+    <url>/2020/12/05/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9A%E9%BB%98%E8%AE%A4%E7%AB%AF%E5%8F%A3%E5%8F%B7/</url>
     <content><![CDATA[<h2 id="组件默认端口号"><a href="#组件默认端口号" class="headerlink" title="组件默认端口号"></a>组件默认端口号</h2><table>
 <thead>
 <tr>
@@ -1011,10 +955,66 @@
 </tbody></table>
 ]]></content>
       <categories>
-        <category>Openstack</category>
+        <category>OpenStack</category>
       </categories>
       <tags>
-        <tag>Openstack部署</tag>
+        <tag>OpenStack部署</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle 11.2 安装文档</title>
+    <url>/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<h2 id="win10安装"><a href="#win10安装" class="headerlink" title="win10安装"></a>win10安装</h2><h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle 11.2.0.1.0</p>
+<p>链接：<a href="https://pan.baidu.com/s/12ctlN7GaU4JbIOuawpsiqA">https://pan.baidu.com/s/12ctlN7GaU4JbIOuawpsiqA</a> </p>
+<p>提取码：bah3</p>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><h4 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h4><p>解压后，双击setup.exe。目录建议全英文</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-1.png" alt="win10-1"></p>
+<h4 id="环境检测"><a href="#环境检测" class="headerlink" title="环境检测"></a>环境检测</h4><p>双击setup.exe后，自动启动安装程序，检测环境配置。</p>
+<p>我本次目的是测试安装流程，点击是继续安装即可。对安装无影响，对性能有影响。</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-2.png" alt="win10-2"></p>
+<h4 id="配置安全更新"><a href="#配置安全更新" class="headerlink" title="配置安全更新"></a>配置安全更新</h4><p>电子邮箱配置自己的即可，会接受安全问题通知，也可以不填</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-3.png" alt="win10-3"></p>
+<h4 id="安装选项"><a href="#安装选项" class="headerlink" title="安装选项"></a>安装选项</h4><p>选择创建和配置数据库，点击下一步</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-4.png" alt="win10-4"></p>
+<h4 id="系统类"><a href="#系统类" class="headerlink" title="系统类"></a>系统类</h4><p>这里在win10上实验，选择的桌面类</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-5.png" alt="win10-5"></p>
+<h4 id="典型安装"><a href="#典型安装" class="headerlink" title="典型安装"></a>典型安装</h4><p>设置数据库文件存储目录、数据库版本、字符集、数据库名及管理口令（用户名为<code>system</code>）</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-6.png" alt="win10-6"></p>
+<h4 id="后续步骤"><a href="#后续步骤" class="headerlink" title="后续步骤"></a>后续步骤</h4><p>典型安装完成后，按照流程下一步即可完成安装</p>
+<h4 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h4><p>CMD：<code>sqlplus system/&lt;system password&gt;</code></p>
+<p>网页：<code>https://localhost:1158/em</code>，用户名<code>system</code>，口令为典型安装中配置的管理口令</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-8.png" alt="win10-8"></p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-7.png" alt="win10-7"></p>
+<h2 id="Ubuntu-18-Docker安装"><a href="#Ubuntu-18-Docker安装" class="headerlink" title="Ubuntu 18 Docker安装"></a>Ubuntu 18 Docker安装</h2><h3 id="安装包-1"><a href="#安装包-1" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle Express Edition 11g Release 2</p>
+<p>GitHub：<a href="https://github.com/wnameless/docker-oracle-xe-11g">https://github.com/wnameless/docker-oracle-xe-11g</a></p>
+<h3 id="安装步骤-1"><a href="#安装步骤-1" class="headerlink" title="安装步骤"></a>安装步骤</h3><h4 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h4><p>参考文档：<a href="https://www.runoob.com/docker/ubuntu-docker-install.html">https://www.runoob.com/docker/ubuntu-docker-install.html</a></p>
+<p>安装命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用国内 daocloud 一键安装命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -sSL https://get.daocloud.io/docker | sh</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装Oracle-11G"><a href="#安装Oracle-11G" class="headerlink" title="安装Oracle 11G"></a>安装Oracle 11G</h4><h5 id="Installation-Local"><a href="#Installation-Local" class="headerlink" title="Installation(Local)"></a>Installation(Local)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/wnameless/docker-oracle-xe-11g.git</span><br><span class="line">cd docker-oracle-xe-11g</span><br><span class="line">docker build -t wnameless/oracle-xe-11g .</span><br></pre></td></tr></table></figure>
+
+<h5 id="Installation-DockerHub"><a href="#Installation-DockerHub" class="headerlink" title="Installation(DockerHub)"></a>Installation(DockerHub)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
+
+<p>SSH server has been removed since 18.04, please use “docker exec”</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>Run with 1521 port opened:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 49161:1521 wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
+
+<p>Run this, if you want the database to be connected remotely:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 49161:1521 -e ORACLE_ALLOW_REMOTE=true wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
+
+<h4 id="默认信息"><a href="#默认信息" class="headerlink" title="默认信息"></a>默认信息</h4><p>By default, the password verification is disable(password never expired)<br>Connect database with following setting:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hostname: localhost</span><br><span class="line">port: 49161</span><br><span class="line">sid: xe</span><br><span class="line">username: system</span><br><span class="line">password: oracle</span><br></pre></td></tr></table></figure>
+
+<p>Password for SYS &amp; SYSTEM</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">oracle</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>Oracle 11.2</tag>
       </tags>
   </entry>
   <entry>
@@ -1764,8 +1764,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Openstack开发：curl接口调试</title>
-    <url>/2020/12/14/Openstack%E5%BC%80%E5%8F%91%EF%BC%9Acurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95/</url>
+    <title>OpenStack开发：curl接口调试</title>
+    <url>/2020/12/14/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9Acurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95/</url>
     <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote>
 <h3 id="keystone"><a href="#keystone" class="headerlink" title="keystone"></a>keystone</h3><p>OpenStack 的 Keystone V3 中引入了 Domain 的概念</p>
 <h3 id="Domain，project，user，role，token-的概念和关系"><a href="#Domain，project，user，role，token-的概念和关系" class="headerlink" title="Domain，project，user，role，token 的概念和关系"></a>Domain，project，user，role，token 的概念和关系</h3><p>简单来说，</p>
@@ -1777,7 +1777,7 @@
 <li>Token - 一个 user 对于某个目标（project 或者 domain）的一个有限时间段内的身份令牌</li>
 </ul>
 <p>它们之间的关系用一个不完整的图来表示：</p>
-<p><img src="/2020/12/14/Openstack%E5%BC%80%E5%8F%91%EF%BC%9Acurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95/%E8%B5%84%E6%BA%90%E5%85%B3%E7%B3%BB.jpg" alt="资源关系"></p>
+<p><img src="/2020/12/14/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9Acurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95/%E8%B5%84%E6%BA%90%E5%85%B3%E7%B3%BB.jpg" alt="资源关系"></p>
 <p>说明：</p>
 <ul>
 <li>Domain 可以认为是 project，user，group 的 namespace。 一个 domain 内，这些元素的名称不可以重复，但是在两个不同的domain内，它们的名称可以重复。因此，在确定这些元素时，需要同时使用它们的名称和它们的 domain 的 id 或者 name。</li>
@@ -1789,7 +1789,7 @@
 <li>Token 具有 scope 的概念，分为 unscoped token，domain-scoped token 和 project-scoped token。下文有说明。</li>
 </ul>
 <h3 id="token"><a href="#token" class="headerlink" title="token"></a>token</h3><p>token即令牌，身份的凭证。在整个openstack项目中服务与服务之间的通信都需要token来进行身份认证，我们来举个例子：</p>
-<p><img src="/2020/12/14/Openstack%E5%BC%80%E5%8F%91%EF%BC%9Acurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95/%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B.jpg" alt="请求流程"></p>
+<p><img src="/2020/12/14/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9Acurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95/%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B.jpg" alt="请求流程"></p>
 <p>如上图所示，一个用户需要创建一台虚拟机，用户首先要登入之后先拿到一个project_scope token 这个token包含了用户具有的角色以及服务列表，用户拿着这个令牌去请求nova服务，nova首先会去keystone认证该token是否有效，之后会向glance发送获取镜像的请求，glance接收请求后也会向之前的步骤一样去keystone认证token有效性，最终返回镜像给nova，nova再用镜像去给用户创建虚拟机。<br> 另外需要说明的是token中包含用户所拥有的角色，nova和其他服务还会根据token中的role来判断用户是否有操作权限。</p>
 <h3 id="token类型"><a href="#token类型" class="headerlink" title="token类型"></a>token类型</h3><h4 id="unscope-token"><a href="#unscope-token" class="headerlink" title="unscope token"></a>unscope token</h4><p>示例：</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;token&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;issued_at&quot;</span>: <span class="string">&quot;2016-11-30T03:50:49.277102Z&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;audit_ids&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;AbSBE-XmTc-gacd4cxrZAQ&quot;</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;methods&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;password&quot;</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;expires_at&quot;</span>: <span class="string">&quot;2016-12-01T03:50:49.277079Z&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;user&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;domain&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;id&quot;</span>: <span class="string">&quot;default&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Default&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;id&quot;</span>: <span class="string">&quot;fb7cdca584894c7ca3faa7388ee3a98f&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;admin&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1826,7 +1826,7 @@
 
 
 
-<h3 id="3-访问Openstack-API接口"><a href="#3-访问Openstack-API接口" class="headerlink" title="3. 访问Openstack API接口"></a>3. 访问Openstack API接口</h3><p>Openstack API地址使用<code>openstack endpoint list</code>中的对应地址</p>
+<h3 id="3-访问OpenStack-API接口"><a href="#3-访问OpenStack-API接口" class="headerlink" title="3. 访问OpenStack API接口"></a>3. 访问OpenStack API接口</h3><p>OpenStack API地址使用<code>openstack endpoint list</code>中的对应地址</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> List images</span></span><br><span class="line">curl -H &quot;X-Auth-Token:$USER_TOKEN&quot; -H &quot;Content-type: application/json&quot; http://111.111.111.80:9292/v2/images | python -m json.tool</span><br><span class="line"></span><br><span class="line"><span class="meta">  %</span><span class="bash"> Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span></span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100  1633  100  1633    0     0   3019      0 --:--:-- --:--:-- --:--:--  3018</span><br><span class="line">&#123;</span><br><span class="line">    &quot;first&quot;: &quot;/v2/images&quot;,</span><br><span class="line">    &quot;images&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;checksum&quot;: &quot;7734eb3945297adc90ddc6cebe8bb082&quot;,</span><br><span class="line">            &quot;container_format&quot;: &quot;bare&quot;,</span><br><span class="line">            &quot;created_at&quot;: &quot;2020-12-14T14:17:36Z&quot;,</span><br><span class="line">            &quot;disk_format&quot;: &quot;qcow2&quot;,</span><br><span class="line">            &quot;file&quot;: &quot;/v2/images/9defe6f1-397d-4d58-a91f-d247fcde5b12/file&quot;,</span><br><span class="line">            &quot;id&quot;: &quot;9defe6f1-397d-4d58-a91f-d247fcde5b12&quot;,</span><br><span class="line">            &quot;min_disk&quot;: 0,</span><br><span class="line">            &quot;min_ram&quot;: 0,</span><br><span class="line">            &quot;name&quot;: &quot;demo&quot;,</span><br><span class="line">            &quot;os_hash_algo&quot;: &quot;sha512&quot;,</span><br><span class="line">            &quot;os_hash_value&quot;: &quot;3958def70c03a9734c89de42466f54c7c172e9493d5649ead0b4fee8ba8c4604742f59724a5f74f321be1afcaf85a321d2f2e492539800cff51f1f9684d70c1e&quot;,</span><br><span class="line">            &quot;os_hidden&quot;: false,</span><br><span class="line">            &quot;owner&quot;: &quot;42c2cc9bb3854f0fb63a52973bf4acd8&quot;,</span><br><span class="line">            &quot;protected&quot;: false,</span><br><span class="line">            &quot;schema&quot;: &quot;/v2/schemas/image&quot;,</span><br><span class="line">            &quot;self&quot;: &quot;/v2/images/9defe6f1-397d-4d58-a91f-d247fcde5b12&quot;,</span><br><span class="line">            &quot;size&quot;: 16344576,</span><br><span class="line">            &quot;status&quot;: &quot;active&quot;,</span><br><span class="line">            &quot;tags&quot;: [],</span><br><span class="line">            &quot;updated_at&quot;: &quot;2020-12-14T14:17:36Z&quot;,</span><br><span class="line">            &quot;virtual_size&quot;: null,</span><br><span class="line">            &quot;visibility&quot;: &quot;shared&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    &quot;schema&quot;: &quot;/v2/schemas/images&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Deactivate image</span></span><br><span class="line">curl -H &quot;X-Auth-Token:$USER_TOKEN&quot; -H &quot;Content-type: application/json&quot; -X POST http://111.111.111.80:9292/v2/images/9defe6f1-397d-4d58-a91f-d247fcde5b12/actions/deactivate | python -m json.tool</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Reactivate image</span></span><br><span class="line">curl -H &quot;X-Auth-Token:$USER_TOKEN&quot; -H &quot;Content-type: application/json&quot; -X POST http://111.111.111.80:9292/v2/images/9defe6f1-397d-4d58-a91f-d247fcde5b12/actions/reactivate | python -m json.tool</span><br></pre></td></tr></table></figure>
 
 
@@ -1840,11 +1840,11 @@
 <p><a href="https://docs.openstack.org/api-ref/block-storage/v3/index.html?expanded=#volume-type-access-types-action-types-os-volume-type-access">OpenStack API Documentation：Block Storage API V3 (CURRENT)</a></p>
 ]]></content>
       <categories>
-        <category>Openstack</category>
+        <category>OpenStack</category>
       </categories>
       <tags>
         <tag>Train版本</tag>
-        <tag>Openstack开发</tag>
+        <tag>OpenStack开发</tag>
         <tag>Curl</tag>
       </tags>
   </entry>
