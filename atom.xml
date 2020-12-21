@@ -6,7 +6,7 @@
   <link href="https://renyb2.github.io/atom.xml" rel="self"/>
   
   <link href="https://renyb2.github.io/"/>
-  <updated>2020-12-16T07:44:09.108Z</updated>
+  <updated>2020-12-21T12:53:50.366Z</updated>
   <id>https://renyb2.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>开发小工具：Chrome翻墙</title>
+    <link href="https://renyb2.github.io/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/"/>
+    <id>https://renyb2.github.io/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/</id>
+    <published>2020-12-21T12:30:14.000Z</published>
+    <updated>2020-12-21T12:53:50.366Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="谷歌上网助手GHelper-–-Chrome插件"><a href="#谷歌上网助手GHelper-–-Chrome插件" class="headerlink" title="谷歌上网助手GHelper – Chrome插件"></a>谷歌上网助手GHelper – Chrome插件</h2><blockquote><p>专门为科研、外贸、跨境电商、海淘人员、开发人员服务的上网加速工具，chrome内核浏览器专用!可以解决chrome扩展无法自动更新的问题，同时可以访问谷歌google搜索，gmail邮箱，google+等谷歌产品</p><p>简单易用的《谷歌上网助手》，可以解决chrome扩展无法自动更新的问题，同时可以访问谷歌google搜索，gmail邮箱，google+等谷歌服务。</p><p>《谷歌上网助手》一键安装，无需其他配置，即可访问谷歌。</p><p>使用本插件可以免费上：</p><ul><li>google.com     谷歌搜索</li><li>mail.google.com   gmail邮箱</li><li>chrome商店访问</li></ul></blockquote><h2 id="资源包"><a href="#资源包" class="headerlink" title="资源包"></a>资源包</h2><p>链接：<a href="https://pan.baidu.com/s/1Q7ltgX75BwLRyrrUSsQg4A">https://pan.baidu.com/s/1Q7ltgX75BwLRyrrUSsQg4A</a><br>提取码：tav2 </p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol><li>下载解压资源包，找见<code>Ghelper2.2.1.crx</code></li></ol><p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95.png" alt="文件目录"></p><ol start="2"><li>打开<code>Chrome浏览器</code>，点击<code>设置</code> - <code>扩展应用</code>（也可直接浏览地址：<code>chrome://extensions/</code>），打开<code>开发者模式</code>开关</li></ol><p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/Chrome%E6%89%A9%E5%B1%95%E7%A8%8B%E5%BA%8F.png" alt="image-20201221203859502"></p><ol start="3"><li>拖拽<code>Ghelper2.2.1.crx</code>至Chrome页面，进行安装</li><li>点击谷歌上网助手，注册并登陆账户即可访问Google</li></ol><p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/%E8%BF%9B%E5%85%A5Ghelper.png" alt="image-20201221204045444"></p><p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/%E7%99%BB%E5%BD%95Ghelper.png" alt="image-20201221204105401"></p><ol start="5"><li><p>访问Google搜索</p><p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/%E8%AE%BF%E9%97%AEGoogle.png" alt="image-20201221204155970"></p></li></ol><p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/Google%E6%90%9C%E7%B4%A2.png" alt="image-20201221204215545"></p><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://chrome.google.com/webstore/detail/%E8%B0%B7%E6%AD%8C%E4%B8%8A%E7%BD%91%E5%8A%A9%E6%89%8B/nonmafimegllfoonjgplbabhmgfanaka?hl=zh-CN">Chrome应用商店：谷歌上网助手</a></p><p><a href="https://www.wonxun.net/share/426">谷歌上网助手GHelper – Chrome插件下载(谷歌浏览器插件)</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;谷歌上网助手GHelper-–-Chrome插件&quot;&gt;&lt;a href=&quot;#谷歌上网助手GHelper-–-Chrome插件&quot; class=&quot;headerlink&quot; title=&quot;谷歌上网助手GHelper – Chrome插件&quot;&gt;&lt;/a&gt;谷歌上网助手GHelper </summary>
+      
+    
+    
+    
+    <category term="算法" scheme="https://renyb2.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="开发小工具" scheme="https://renyb2.github.io/tags/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7/"/>
+    
+    <category term="翻墙" scheme="https://renyb2.github.io/tags/%E7%BF%BB%E5%A2%99/"/>
+    
+    <category term="Google" scheme="https://renyb2.github.io/tags/Google/"/>
+    
+  </entry>
   
   <entry>
     <title>OpenStack开发：novaclient解析</title>
@@ -498,32 +526,6 @@
     
     
     <category term="Hexo" scheme="https://renyb2.github.io/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vim</title>
-    <link href="https://renyb2.github.io/2020/08/31/Vim/"/>
-    <id>https://renyb2.github.io/2020/08/31/Vim/</id>
-    <published>2020-08-31T07:42:15.000Z</published>
-    <updated>2020-10-30T07:29:18.412Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote><p>Vim是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。</p><p>简单的来说， vi 是老式的字处理器，不过功能已经很齐全了，但是还是有可以进步的地方。 vim 则可以说是程序开发者的一项很好用的工具。</p><p>连 vim 的官方网站 (<a href="http://www.vim.org/">http://www.vim.org</a>) 自己也说 vim 是一个程序开发工具而不是文字处理软件。</p><p>参考文档：<a href="https://www.runoob.com/linux/linux-vim.html">https://www.runoob.com/linux/linux-vim.html</a></p></blockquote><a id="more"></a><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; ~/.vimrc &lt;&lt; EOF</span><br><span class="line">&quot;设置编码&quot;</span><br><span class="line">set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936</span><br><span class="line">set termencoding=utf-8</span><br><span class="line">set encoding=utf-8</span><br><span class="line"></span><br><span class="line">&quot;显示行号&quot;</span><br><span class="line">set nu</span><br><span class="line"></span><br><span class="line">&quot;显示括号匹配&quot;</span><br><span class="line">set showmatch</span><br><span class="line"></span><br><span class="line">&quot;设置Tab长度为4空格&quot;</span><br><span class="line">set tabstop=4</span><br><span class="line">&quot;空格替代制表符&quot;</span><br><span class="line">set expandtab</span><br><span class="line">&quot;设置自动缩进长度为4空格&quot;</span><br><span class="line">set shiftwidth=4</span><br><span class="line">&quot;继承前一行的缩进方式，适用于多行注释&quot;</span><br><span class="line">set autoindent</span><br><span class="line"></span><br><span class="line">&quot;启动粘贴模式&quot;</span><br><span class="line">set paste</span><br><span class="line"></span><br><span class="line">&quot;括号自动补全&quot;</span><br><span class="line">inoremap &#x27; &#x27;&#x27;&lt;ESC&gt;i</span><br><span class="line">inoremap &quot; &quot;&quot;&lt;ESC&gt;i</span><br><span class="line">inoremap ( ()&lt;ESC&gt;i</span><br><span class="line">inoremap [ []&lt;ESC&gt;i</span><br><span class="line">inoremap &#123; &#123;&lt;CR&gt;&#125;&lt;ESC&gt;O</span><br><span class="line"></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure><h2 id="常用按键"><a href="#常用按键" class="headerlink" title="常用按键"></a>常用按键</h2><h3 id="第一部分：一般模式"><a href="#第一部分：一般模式" class="headerlink" title="第一部分：一般模式"></a>第一部分：一般模式</h3><h4 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h4><table><thead><tr><th></th><th>功能</th></tr></thead><tbody><tr><td>h, j, k, l</td><td>光标向左，下，上，右移动</td></tr><tr><td>Ctrl + f / b</td><td>屏幕向下/上移动</td></tr><tr><td>Ctrl + d / u</td><td>屏幕向下/上移动半页</td></tr><tr><td>0</td><td>移动到一行的最前面</td></tr><tr><td>$</td><td>移动到一行的最后面字符</td></tr><tr><td>H / M / L</td><td>移动到屏幕最上方/中央/最下方那一行的第一个字符</td></tr><tr><td>G</td><td>移动到文件的最后一行</td></tr><tr><td>nG / ngg</td><td>移动到文件的第n行</td></tr><tr><td>gg</td><td>移动到文件的第一行</td></tr><tr><td>n[Enter]</td><td>向下移动n行</td></tr></tbody></table><h4 id="查找替换"><a href="#查找替换" class="headerlink" title="查找替换"></a>查找替换</h4><table><thead><tr><th></th><th>功能</th></tr></thead><tbody><tr><td>/ <word></word></td><td>向下查找word字符串</td></tr><tr><td>? <word></word></td><td>向上查找word字符串</td></tr><tr><td>n</td><td>代表重复前一个查找动作</td></tr><tr><td>N</td><td>代表反向重复前一个查找动作</td></tr><tr><td>: s/<old>/<new></new></old></td><td>将第一个old替换为new</td></tr><tr><td>: s/<old>/<new>/g</new></old></td><td>将一行中所有的old替换为new</td></tr><tr><td>:n1, n2s/<word1>/<word2>/g</word2></word1></td><td>将行n1与n2之间的word1替换为word2</td></tr><tr><td>:%s/<old>/<new>/g</new></old></td><td>将文件所有的old替换为new</td></tr><tr><td>:%s/<old>/<new>/gc</new></old></td><td>替换前要求确认</td></tr></tbody></table><h4 id="删除复制粘贴"><a href="#删除复制粘贴" class="headerlink" title="删除复制粘贴"></a>删除复制粘贴</h4><table><thead><tr><th></th><th>功能</th></tr></thead><tbody><tr><td>x/X</td><td>向后/前删除一个字符</td></tr><tr><td>nx</td><td>连续删除n个字符</td></tr><tr><td>dd</td><td>删除整行</td></tr><tr><td>ndd</td><td>删除n行</td></tr><tr><td>d1G</td><td>删除光标所在到第一行数据</td></tr><tr><td>dG</td><td>删除光标所在到最后一行数据</td></tr><tr><td>d$</td><td>删除光标所在到该行最后一个字符</td></tr><tr><td>d0</td><td>删除光标所在到该行最前面一个字符</td></tr><tr><td>yy</td><td>复制光标所在的一行</td></tr><tr><td>nyy</td><td>向下复制n行</td></tr><tr><td>y1G</td><td>复制光标所在到第一行数据</td></tr><tr><td>yG</td><td>复制光标所在到最后一行数据</td></tr><tr><td>y$</td><td>复制光标所在到该行最后一个字符</td></tr><tr><td>y0</td><td>复制光标所在到该行最前面一个字符</td></tr><tr><td>p/P</td><td>粘贴数据在光标下/上一行</td></tr><tr><td>J</td><td>将光标所在行与下一行数据结合成同一行</td></tr><tr><td>u</td><td>回撤前一操作</td></tr><tr><td>Ctrl + r</td><td>重做前一操作</td></tr><tr><td>.</td><td>重复前一个操作</td></tr></tbody></table><h3 id="第二部分：编辑模式"><a href="#第二部分：编辑模式" class="headerlink" title="第二部分：编辑模式"></a>第二部分：编辑模式</h3><h4 id="进入插入或替换的编辑模式"><a href="#进入插入或替换的编辑模式" class="headerlink" title="进入插入或替换的编辑模式"></a>进入插入或替换的编辑模式</h4><table><thead><tr><th></th><th>功能</th></tr></thead><tbody><tr><td>i, I</td><td>进入插入模式： i从当前光标所在处插入，I在目前所在行的第一个非空格符处插入</td></tr><tr><td>a, A</td><td>进入插入模式： a从当前光标所在的下一个字符插入，A从光标所在行的最后一个字符后插入</td></tr><tr><td>o, O</td><td>进入插入模式： o从当前光标所在行的下一行插入新的一行；O正好相反，从上一行插入新行</td></tr><tr><td>r, R</td><td>进入替换模式： r只会替换光标所在的那一个字符一次；R会一直替换光标所在文字，直到Esc</td></tr></tbody></table><h4 id="块选择"><a href="#块选择" class="headerlink" title="块选择"></a>块选择</h4><table><thead><tr><th></th><th>功能</th></tr></thead><tbody><tr><td>v</td><td>字符选择，将光标经过的地方反白选择</td></tr><tr><td>V</td><td>行选择，将光标经过的行反白选择</td></tr><tr><td>Ctrl + v</td><td>块选择，可以用长方形选择数据</td></tr><tr><td>y</td><td>将反白的地方复制</td></tr><tr><td>d</td><td>删除反白的地方</td></tr></tbody></table><h4 id="多窗口"><a href="#多窗口" class="headerlink" title="多窗口"></a>多窗口</h4><table><thead><tr><th></th><th>功能</th></tr></thead><tbody><tr><td>：sp filename</td><td>打开新窗口，如果有加filename,新窗口打开新文件，否则打开相同文件</td></tr><tr><td>Ctrl + w + s/v</td><td>水平/垂直分割打开新窗口</td></tr><tr><td>Ctrl + w + h/j/k/l</td><td>光标移动到左/下/上/右窗口</td></tr><tr><td>Ctrl + w + q</td><td>退出窗口</td></tr></tbody></table>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;Vim是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。&lt;/p&gt;
-&lt;p&gt;简单的来说， vi 是老式的字处理器，不过功能已经很齐全了，但是还是有可以进步的地方。 vim 则可以说是程序开发者的一项很好用的工具。&lt;/p&gt;
-&lt;p&gt;连 vim 的官方网站 (&lt;a href=&quot;http://www.vim.org/&quot;&gt;http://www.vim.org&lt;/a&gt;) 自己也说 vim 是一个程序开发工具而不是文字处理软件。&lt;/p&gt;
-&lt;p&gt;参考文档：&lt;a href=&quot;https://www.runoob.com/linux/linux-vim.html&quot;&gt;https://www.runoob.com/linux/linux-vim.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="Linux" scheme="https://renyb2.github.io/categories/Linux/"/>
-    
-    
-    <category term="Vim" scheme="https://renyb2.github.io/tags/Vim/"/>
     
   </entry>
   
