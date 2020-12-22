@@ -18,6 +18,22 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker 入门</title>
+    <url>/2020/11/05/Docker-%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 调整docker <span class="built_in">exec</span>终端高度和宽度</span></span><br><span class="line">docker exec -it --env COLUMNS=`tput cols` --env LINES=`tput lines` mariadb bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重命名镜像repository和tag</span></span><br><span class="line">docker tag &lt;image id&gt; &lt;new repository&gt;:&lt;new tag&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/moby/moby/issues/35407">Docker Exec does not resize terminal</a></p>
+]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Dynamic Programming</title>
     <url>/2020/08/27/Dynamic-Programming/</url>
     <content><![CDATA[<h2 id="Dynamic-Programming（动态规划）"><a href="#Dynamic-Programming（动态规划）" class="headerlink" title="Dynamic Programming（动态规划）"></a>Dynamic Programming（动态规划）</h2><p>解决重复子问题</p>
@@ -55,19 +71,49 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker 入门</title>
-    <url>/2020/11/05/Docker-%E5%85%A5%E9%97%A8/</url>
-    <content><![CDATA[<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 调整docker <span class="built_in">exec</span>终端高度和宽度</span></span><br><span class="line">docker exec -it --env COLUMNS=`tput cols` --env LINES=`tput lines` mariadb bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重命名镜像repository和tag</span></span><br><span class="line">docker tag &lt;image id&gt; &lt;new repository&gt;:&lt;new tag&gt;</span><br></pre></td></tr></table></figure>
+    <title>Git</title>
+    <url>/2020/10/28/Git/</url>
+    <content><![CDATA[<h2 id="Git基本操作"><a href="#Git基本操作" class="headerlink" title="Git基本操作"></a>Git基本操作</h2><p>Git 常用的是以下 6 个命令：<strong>git clone</strong>、<strong>git push</strong>、<strong>git add</strong> 、<strong>git commit</strong>、<strong>git checkout</strong>、<strong>git pull</strong></p>
+<p><img src="/2020/10/28/Git/git-command.jpg" alt="Git"></p>
+<p><strong>说明：</strong></p>
+<ul>
+<li>workspace：工作区</li>
+<li>staging area：暂存区/缓存区</li>
+<li>local repository：或本地仓库</li>
+<li>remote repository：远程仓库</li>
+</ul>
+<h2 id="Git常用流程"><a href="#Git常用流程" class="headerlink" title="Git常用流程"></a>Git常用流程</h2><h3 id="远端master分支代码合并到自己分支"><a href="#远端master分支代码合并到自己分支" class="headerlink" title="远端master分支代码合并到自己分支"></a>远端master分支代码合并到自己分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 备份当前修改</span></span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换至本地master分支</span></span><br><span class="line">git checkout master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取远端master分支代码</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换至本地dev分支</span></span><br><span class="line">git checkout renyb_dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并master分支至dev分支</span></span><br><span class="line">git merge master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复备份中的修改</span></span><br><span class="line">git stash pop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 命令用途</span></span><br><span class="line"><span class="comment"># git stash：备份当前的工作区的内容，从最近的一次提交中读取相关内容，让工作区保证和上次提交的内容一致。同时，将当前的工作区内容保存到Git栈中。</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># git stash pop: 从Git栈中读取最近一次保存的内容，恢复工作区的相关内容。由于可能存在多个Stash的内容，所以用栈来管理，pop会从最近的一个stash中读取内容并恢复。</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># git stash list: 显示Git栈内的所有备份，可以利用这个列表来决定从那个地方恢复。</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># git stash clear: 清空Git栈。此时使用gitg等图形化工具会发现，原来stash的哪些节点都消失了。</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/moby/moby/issues/35407">Docker Exec does not resize terminal</a></p>
+<h2 id="Git命令"><a href="#Git命令" class="headerlink" title="Git命令"></a>Git命令</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 初始化仓库</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆仓库（下载项目）</span></span><br><span class="line">git <span class="built_in">clone</span> &lt;repo&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加文件到仓库</span></span><br><span class="line">git add &lt;file or dir&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看仓库当前的状态，显示有变更的文件</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区到本地仓库中</span></span><br><span class="line">git commit -m &lt;message&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从远程获取代码库</span></span><br><span class="line">git fetch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程代码并合并</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传远程代码并合并</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建分支</span></span><br><span class="line">git branch &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">git checkout &lt;branch name&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="提交日志"><a href="#提交日志" class="headerlink" title="提交日志"></a>提交日志</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看历史提交记录</span></span><br><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://git-scm.com/book/zh/v2">Git官方文档</a></p>
+<p><a href="https://www.runoob.com/git/git-tutorial.html">Git 菜鸟教程</a></p>
 ]]></content>
       <categories>
-        <category>Docker</category>
+        <category>Git</category>
       </categories>
       <tags>
-        <tag>Docker</tag>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -190,52 +236,6 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git</title>
-    <url>/2020/10/28/Git/</url>
-    <content><![CDATA[<h2 id="Git基本操作"><a href="#Git基本操作" class="headerlink" title="Git基本操作"></a>Git基本操作</h2><p>Git 常用的是以下 6 个命令：<strong>git clone</strong>、<strong>git push</strong>、<strong>git add</strong> 、<strong>git commit</strong>、<strong>git checkout</strong>、<strong>git pull</strong></p>
-<p><img src="/2020/10/28/Git/git-command.jpg" alt="Git"></p>
-<p><strong>说明：</strong></p>
-<ul>
-<li>workspace：工作区</li>
-<li>staging area：暂存区/缓存区</li>
-<li>local repository：或本地仓库</li>
-<li>remote repository：远程仓库</li>
-</ul>
-<h2 id="Git常用流程"><a href="#Git常用流程" class="headerlink" title="Git常用流程"></a>Git常用流程</h2><h3 id="远端master分支代码合并到自己分支"><a href="#远端master分支代码合并到自己分支" class="headerlink" title="远端master分支代码合并到自己分支"></a>远端master分支代码合并到自己分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 备份当前修改</span></span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换至本地master分支</span></span><br><span class="line">git checkout master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取远端master分支代码</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换至本地dev分支</span></span><br><span class="line">git checkout renyb_dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并master分支至dev分支</span></span><br><span class="line">git merge master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复备份中的修改</span></span><br><span class="line">git stash pop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 命令用途</span></span><br><span class="line"><span class="comment"># git stash：备份当前的工作区的内容，从最近的一次提交中读取相关内容，让工作区保证和上次提交的内容一致。同时，将当前的工作区内容保存到Git栈中。</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># git stash pop: 从Git栈中读取最近一次保存的内容，恢复工作区的相关内容。由于可能存在多个Stash的内容，所以用栈来管理，pop会从最近的一个stash中读取内容并恢复。</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># git stash list: 显示Git栈内的所有备份，可以利用这个列表来决定从那个地方恢复。</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># git stash clear: 清空Git栈。此时使用gitg等图形化工具会发现，原来stash的哪些节点都消失了。</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Git命令"><a href="#Git命令" class="headerlink" title="Git命令"></a>Git命令</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 初始化仓库</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆仓库（下载项目）</span></span><br><span class="line">git <span class="built_in">clone</span> &lt;repo&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加文件到仓库</span></span><br><span class="line">git add &lt;file or dir&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看仓库当前的状态，显示有变更的文件</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区到本地仓库中</span></span><br><span class="line">git commit -m &lt;message&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从远程获取代码库</span></span><br><span class="line">git fetch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程代码并合并</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传远程代码并合并</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建分支</span></span><br><span class="line">git branch &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">git checkout &lt;branch name&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="提交日志"><a href="#提交日志" class="headerlink" title="提交日志"></a>提交日志</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看历史提交记录</span></span><br><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://git-scm.com/book/zh/v2">Git官方文档</a></p>
-<p><a href="https://www.runoob.com/git/git-tutorial.html">Git 菜鸟教程</a></p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -477,60 +477,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Mosquitto</title>
-    <url>/2020/08/31/Mosquitto/</url>
-    <content><![CDATA[<h2 id="Mosquitto"><a href="#Mosquitto" class="headerlink" title="Mosquitto"></a>Mosquitto</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型设备、移动应用等方面有较广泛的应用。</p>
-<p>MQTT是一个基于客户端-服务器的消息发布/订阅传输协议。MQTT协议是轻量、简单、开放和易于实现的，这些特点使它适用范围非常广泛。在很多情况下，包括受限的环境中，如：机器与机器（M2M）通信和物联网（IoT）。其在，通过卫星链路通信传感器、偶尔拨号的医疗设备、智能家居、及一些小型化设备中已广泛使用。</p>
-<a id="more"></a>
-
-<p><img src="/2020/08/31/Mosquitto/1573118328615.png" alt="1573118328615"></p>
-<h3 id="config-解析"><a href="#config-解析" class="headerlink" title="config 解析"></a>config 解析</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim mosquitto.conf</span><br><span class="line"></span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># General configuration</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 客户端心跳的间隔时间</span><br><span class="line">#retry_interval 20</span><br><span class="line"> </span><br><span class="line"># 系统状态的刷新时间</span><br><span class="line">#sys_interval 10</span><br><span class="line"> </span><br><span class="line"># 系统资源的回收时间，0表示尽快处理</span><br><span class="line">#store_clean_interval 10</span><br><span class="line"> </span><br><span class="line"># 服务进程的PID</span><br><span class="line">#pid_file &#x2F;var&#x2F;run&#x2F;mosquitto.pid</span><br><span class="line"> </span><br><span class="line"># 服务进程的系统用户</span><br><span class="line">#user mosquitto</span><br><span class="line"> </span><br><span class="line"># 客户端心跳消息的最大并发数</span><br><span class="line">#max_inflight_messages 10</span><br><span class="line"> </span><br><span class="line"># 客户端心跳消息缓存队列</span><br><span class="line">#max_queued_messages 100</span><br><span class="line"> </span><br><span class="line"># 用于设置客户端长连接的过期时间，默认永不过期</span><br><span class="line">#persistent_client_expiration</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Default listener</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 服务绑定的IP地址</span><br><span class="line">#bind_address</span><br><span class="line"> </span><br><span class="line"># 服务绑定的端口号</span><br><span class="line">#port 1883</span><br><span class="line"> </span><br><span class="line"># 允许的最大连接数，-1表示没有限制</span><br><span class="line">#max_connections -1</span><br><span class="line"> </span><br><span class="line"># cafile：CA证书文件</span><br><span class="line"># capath：CA证书目录</span><br><span class="line"># certfile：PEM证书文件</span><br><span class="line"># keyfile：PEM密钥文件</span><br><span class="line">#cafile</span><br><span class="line">#capath</span><br><span class="line">#certfile</span><br><span class="line">#keyfile</span><br><span class="line"> </span><br><span class="line"># 必须提供证书以保证数据安全性</span><br><span class="line">#require_certificate false</span><br><span class="line"> </span><br><span class="line"># 若require_certificate值为true，use_identity_as_username也必须为true</span><br><span class="line">#use_identity_as_username false</span><br><span class="line"> </span><br><span class="line"># 启用PSK（Pre-shared-key）支持</span><br><span class="line">#psk_hint</span><br><span class="line"> </span><br><span class="line"># SSL&#x2F;TSL加密算法，可以使用“openssl ciphers”命令获取</span><br><span class="line"># as the output of that command.</span><br><span class="line">#ciphers</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Persistence</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 消息自动保存的间隔时间</span><br><span class="line">#autosave_interval 1800</span><br><span class="line"> </span><br><span class="line"># 消息自动保存功能的开关</span><br><span class="line">#autosave_on_changes false</span><br><span class="line"> </span><br><span class="line"># 持久化功能的开关</span><br><span class="line">persistence true</span><br><span class="line"> </span><br><span class="line"># 持久化DB文件</span><br><span class="line">#persistence_file mosquitto.db</span><br><span class="line"> </span><br><span class="line"># 持久化DB文件目录</span><br><span class="line">#persistence_location &#x2F;var&#x2F;lib&#x2F;mosquitto&#x2F;</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Logging</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 4种日志模式：stdout、stderr、syslog、topic</span><br><span class="line"># none 则表示不记日志，此配置可以提升些许性能</span><br><span class="line">log_dest none</span><br><span class="line"> </span><br><span class="line"># 选择日志的级别（可设置多项）</span><br><span class="line">#log_type error</span><br><span class="line">#log_type warning</span><br><span class="line">#log_type notice</span><br><span class="line">#log_type information</span><br><span class="line"> </span><br><span class="line"># 是否记录客户端连接信息</span><br><span class="line">#connection_messages true</span><br><span class="line"> </span><br><span class="line"># 是否记录日志时间</span><br><span class="line">#log_timestamp true</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Security</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 客户端ID的前缀限制，可用于保证安全性</span><br><span class="line">#clientid_prefixes</span><br><span class="line"> </span><br><span class="line"># 允许匿名用户</span><br><span class="line">#allow_anonymous true</span><br><span class="line"> </span><br><span class="line"># 用户&#x2F;密码文件，默认格式：username:password</span><br><span class="line">#password_file</span><br><span class="line"> </span><br><span class="line"># PSK格式密码文件，默认格式：identity:key</span><br><span class="line">#psk_file</span><br><span class="line"> </span><br><span class="line"># pattern write sensor&#x2F;%u&#x2F;data</span><br><span class="line"># ACL权限配置，常用语法如下：</span><br><span class="line"># 用户限制：user &lt;username&gt;</span><br><span class="line"># 话题限制：topic [read|write] &lt;topic&gt;</span><br><span class="line"># 正则限制：pattern write sensor&#x2F;%u&#x2F;data</span><br><span class="line">#acl_file</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Bridges</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 允许服务之间使用“桥接”模式（可用于分布式部署）</span><br><span class="line">#connection &lt;name&gt;</span><br><span class="line">#address &lt;host&gt;[:&lt;port&gt;]</span><br><span class="line">#topic &lt;topic&gt; [[[out | in | both] qos-level] local-prefix remote-prefix]</span><br><span class="line"> </span><br><span class="line"># 设置桥接的客户端ID</span><br><span class="line">#clientid</span><br><span class="line"> </span><br><span class="line"># 桥接断开时，是否清除远程服务器中的消息</span><br><span class="line">#cleansession false</span><br><span class="line"> </span><br><span class="line"># 是否发布桥接的状态信息</span><br><span class="line">#notifications true</span><br><span class="line"> </span><br><span class="line"># 设置桥接模式下，消息将会发布到的话题地址</span><br><span class="line"># $SYS&#x2F;broker&#x2F;connection&#x2F;&lt;clientid&gt;&#x2F;state</span><br><span class="line">#notification_topic</span><br><span class="line"> </span><br><span class="line"># 设置桥接的keepalive数值</span><br><span class="line">#keepalive_interval 60</span><br><span class="line"> </span><br><span class="line"># 桥接模式，目前有三种：automatic、lazy、once</span><br><span class="line">#start_type automatic</span><br><span class="line"> </span><br><span class="line"># 桥接模式automatic的超时时间</span><br><span class="line">#restart_timeout 30</span><br><span class="line"> </span><br><span class="line"># 桥接模式lazy的超时时间</span><br><span class="line">#idle_timeout 60</span><br><span class="line"> </span><br><span class="line"># 桥接客户端的用户名</span><br><span class="line">#username</span><br><span class="line"> </span><br><span class="line"># 桥接客户端的密码</span><br><span class="line">#password</span><br><span class="line"> </span><br><span class="line"># bridge_cafile：桥接客户端的CA证书文件</span><br><span class="line"># bridge_capath：桥接客户端的CA证书目录</span><br><span class="line"># bridge_certfile：桥接客户端的PEM证书文件</span><br><span class="line"># bridge_keyfile：桥接客户端的PEM密钥文件</span><br><span class="line">#bridge_cafile</span><br><span class="line">#bridge_capath</span><br><span class="line">#bridge_certfile</span><br><span class="line">#bridge_keyfile</span><br><span class="line"> </span><br><span class="line"># 自己的配置可以放到以下目录中</span><br><span class="line">#include_dir &#x2F;mqtt&#x2F;config&#x2F;conf.d</span><br></pre></td></tr></table></figure>
-
-<h3 id="Qos-解析"><a href="#Qos-解析" class="headerlink" title="Qos 解析"></a>Qos 解析</h3><h4 id="Qos-0-–-gt-最多一次"><a href="#Qos-0-–-gt-最多一次" class="headerlink" title="Qos=0 –&gt; 最多一次"></a>Qos=0 –&gt; 最多一次</h4><blockquote>
-<p>sequenceDiagram</p>
-<p>ClientA-&gt;&gt;ServerBroker: 发送消息<br>ServerBroker-&gt;&gt;ClientB: 发送消息</p>
-</blockquote>
-<h4 id="Qos-1-–-gt-至少一次"><a href="#Qos-1-–-gt-至少一次" class="headerlink" title="Qos=1 –&gt; 至少一次"></a>Qos=1 –&gt; 至少一次</h4><blockquote>
-<p>sequenceDiagram</p>
-<p>ClientA-&gt;&gt;ServerBroker: 1.发送消息PUBLISH<br>ServerBroker-&gt;&gt;ServerBroker: 1.1存储消息<br>ServerBroker-&gt;&gt;ClientA: 1.2发送消息回应PUBACK<br>ServerBroker-&gt;&gt;ClientB: 2.发送消息<br>ClientB-&gt;&gt;ServerBroker: 2.1发送消息回应PUBACK<br>ServerBroker-&gt;&gt;ServerBroker: 2.2删除消息</p>
-</blockquote>
-<h4 id="Qos-2-–-gt-有且仅有一次"><a href="#Qos-2-–-gt-有且仅有一次" class="headerlink" title="Qos=2 –&gt; 有且仅有一次"></a>Qos=2 –&gt; 有且仅有一次</h4><blockquote>
-<p>sequenceDiagram</p>
-<p>ClientA-&gt;&gt;ServerBroker: 1.发送消息PUBLISH<br>ServerBroker-&gt;&gt;ServerBroker: 1.1存储消息<br>ServerBroker-&gt;&gt;ClientA: 1.2发送消息回应Rec<br>ClientA-&gt;&gt;ServerBroker: 2.发送消息Rel<br>ServerBroker-&gt;&gt;ServerBroker: 2.1删除消息<br>ServerBroker-&gt;&gt;ServerBroker: 2.2存储消息到发送列队<br>ServerBroker-&gt;&gt;ClientB: 2.3发送消息<br>ServerBroker-&gt;&gt;ClientA: 2.4发送消息回应Comp<br>ClientB-&gt;&gt;ServerBroker: 3.发送消息回应Rec<br>ServerBroker-&gt;&gt;ServerBroker: 3.1删除2.2中存储的消息（一次确认）<br>ServerBroker-&gt;&gt;ServerBroker: 3.2存储消息<br>ServerBroker-&gt;&gt;ClientB: 3.3发送消息Rel<br>ClientB-&gt;&gt;ServerBroker: 3.4发送消息回应Comp<br>ServerBroker-&gt;&gt;ServerBroker: 3.5删除消息(二次确认)</p>
-</blockquote>
-<p><img src="/2020/08/31/Mosquitto/1573118624880.png" alt="1573118624880"></p>
-<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><h4 id="实验1：Mosquitto-内存数据落盘机制"><a href="#实验1：Mosquitto-内存数据落盘机制" class="headerlink" title="实验1：Mosquitto 内存数据落盘机制"></a>实验1：Mosquitto 内存数据落盘机制</h4><h5 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h5><p>​    Mosquitto 内存数据落盘持久化时，是否会产生重复数据</p>
-<h5 id="实验结论"><a href="#实验结论" class="headerlink" title="实验结论"></a>实验结论</h5><p>​    Mosquitto 不会重复持久化已经持久化过的数据</p>
-<h5 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h5><p>​    mosquitto version 1.4.15</p>
-<h5 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h5><ol>
-<li>发送者保持同样的发送速率，降低订阅者消费速度，触发mqtt的持久化机制</li>
-<li>更改mqtt持久化的间隔（3s 和 30s），观测持久化的数据大小是否不同</li>
-</ol>
-<h5 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h5><blockquote>
-<p>发送者：发送1w条消息，用时 31.16837883 s</p>
-<p>订阅者：每分钟消化1条，1min内堆积9999条消息</p>
-<p>Mosquitto：持久化间隔 3s，1min内涨幅 27842 Byte</p>
-</blockquote>
-<p><img src="/2020/08/31/Mosquitto/1573112430542.png" alt="1573112430542"></p>
-<blockquote>
-<p>发送者：发送1w条消息，</p>
-<p>订阅者：每分钟消化1条，1min内堆积9999条消息</p>
-<p>Mosquitto：持久化间隔 30s，1min内涨幅 27842 Byte</p>
-</blockquote>
-<p><img src="/2020/08/31/Mosquitto/1573113441213.png" alt="1573113441213"></p>
-<h5 id="实验脚本"><a href="#实验脚本" class="headerlink" title="实验脚本"></a>实验脚本</h5><h6 id="send-py"><a href="#send-py" class="headerlink" title="send.py"></a>send.py</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">Send msg to mqtt (linux, python2)</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">__author__ &#x3D; &#39;RYB&#39;</span><br><span class="line"></span><br><span class="line">import json</span><br><span class="line">import time</span><br><span class="line">import random</span><br><span class="line">import string</span><br><span class="line">import paho.mqtt.publish as publish</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def ranstr(num):</span><br><span class="line">    salt &#x3D; &#39;&#39;.join(random.sample(string.ascii_letters + string.digits, num))</span><br><span class="line">    return salt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def publish_msg(msg_num):</span><br><span class="line">    for i in range(msg_num):</span><br><span class="line">        msg &#x3D; &#123;</span><br><span class="line">            &quot;id&quot;: i,</span><br><span class="line">            &quot;Timestamp&quot;: int(time.time() * 1000),</span><br><span class="line">            &quot;str1&quot;: ranstr(50),</span><br><span class="line">            &quot;str2&quot;: ranstr(50)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        publish.single(&quot;test&quot;, payload&#x3D;json.dumps(msg), qos&#x3D;2, hostname&#x3D;&quot;10.244.0.164&quot;, port&#x3D;1883)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; Start &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)</span><br><span class="line">start &#x3D; time.time()</span><br><span class="line">print(&quot;Running...&quot;)</span><br><span class="line">publish_msg(10000)</span><br><span class="line">end &#x3D; time.time()</span><br><span class="line">print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; End &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)</span><br><span class="line">print(&quot;Run Time: %s s&quot; % str(end - start))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h6 id="rec-py"><a href="#rec-py" class="headerlink" title="rec.py"></a>rec.py</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">Receive msg from mqtt (linux, python2)</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">__author__ &#x3D; &#39;RYB&#39;</span><br><span class="line"></span><br><span class="line">import time</span><br><span class="line">import paho.mqtt.subscribe as subscribe</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def on_message_sleep(client, userdata, msg):</span><br><span class="line">    print(msg.topic + &#39; --&gt; &#39; + msg.payload)</span><br><span class="line">    time.sleep(60)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subscribe.callback(on_message_sleep, &quot;test&quot;, qos&#x3D;2, hostname&#x3D;&quot;mosquitto&quot;, port&#x3D;1883)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3>]]></content>
-      <categories>
-        <category>中间件</category>
-      </categories>
-      <tags>
-        <tag>MQTT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux配置：远程服务器通过本机代理联网</title>
     <url>/2020/11/17/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E8%BF%87%E6%9C%AC%E6%9C%BA%E4%BB%A3%E7%90%86%E8%81%94%E7%BD%91/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>解决问题如下：</p>
@@ -607,6 +553,85 @@
       </tags>
   </entry>
   <entry>
+    <title>Mosquitto</title>
+    <url>/2020/08/31/Mosquitto/</url>
+    <content><![CDATA[<h2 id="Mosquitto"><a href="#Mosquitto" class="headerlink" title="Mosquitto"></a>Mosquitto</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型设备、移动应用等方面有较广泛的应用。</p>
+<p>MQTT是一个基于客户端-服务器的消息发布/订阅传输协议。MQTT协议是轻量、简单、开放和易于实现的，这些特点使它适用范围非常广泛。在很多情况下，包括受限的环境中，如：机器与机器（M2M）通信和物联网（IoT）。其在，通过卫星链路通信传感器、偶尔拨号的医疗设备、智能家居、及一些小型化设备中已广泛使用。</p>
+<a id="more"></a>
+
+<p><img src="/2020/08/31/Mosquitto/1573118328615.png" alt="1573118328615"></p>
+<h3 id="config-解析"><a href="#config-解析" class="headerlink" title="config 解析"></a>config 解析</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim mosquitto.conf</span><br><span class="line"></span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># General configuration</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 客户端心跳的间隔时间</span><br><span class="line">#retry_interval 20</span><br><span class="line"> </span><br><span class="line"># 系统状态的刷新时间</span><br><span class="line">#sys_interval 10</span><br><span class="line"> </span><br><span class="line"># 系统资源的回收时间，0表示尽快处理</span><br><span class="line">#store_clean_interval 10</span><br><span class="line"> </span><br><span class="line"># 服务进程的PID</span><br><span class="line">#pid_file &#x2F;var&#x2F;run&#x2F;mosquitto.pid</span><br><span class="line"> </span><br><span class="line"># 服务进程的系统用户</span><br><span class="line">#user mosquitto</span><br><span class="line"> </span><br><span class="line"># 客户端心跳消息的最大并发数</span><br><span class="line">#max_inflight_messages 10</span><br><span class="line"> </span><br><span class="line"># 客户端心跳消息缓存队列</span><br><span class="line">#max_queued_messages 100</span><br><span class="line"> </span><br><span class="line"># 用于设置客户端长连接的过期时间，默认永不过期</span><br><span class="line">#persistent_client_expiration</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Default listener</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 服务绑定的IP地址</span><br><span class="line">#bind_address</span><br><span class="line"> </span><br><span class="line"># 服务绑定的端口号</span><br><span class="line">#port 1883</span><br><span class="line"> </span><br><span class="line"># 允许的最大连接数，-1表示没有限制</span><br><span class="line">#max_connections -1</span><br><span class="line"> </span><br><span class="line"># cafile：CA证书文件</span><br><span class="line"># capath：CA证书目录</span><br><span class="line"># certfile：PEM证书文件</span><br><span class="line"># keyfile：PEM密钥文件</span><br><span class="line">#cafile</span><br><span class="line">#capath</span><br><span class="line">#certfile</span><br><span class="line">#keyfile</span><br><span class="line"> </span><br><span class="line"># 必须提供证书以保证数据安全性</span><br><span class="line">#require_certificate false</span><br><span class="line"> </span><br><span class="line"># 若require_certificate值为true，use_identity_as_username也必须为true</span><br><span class="line">#use_identity_as_username false</span><br><span class="line"> </span><br><span class="line"># 启用PSK（Pre-shared-key）支持</span><br><span class="line">#psk_hint</span><br><span class="line"> </span><br><span class="line"># SSL&#x2F;TSL加密算法，可以使用“openssl ciphers”命令获取</span><br><span class="line"># as the output of that command.</span><br><span class="line">#ciphers</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Persistence</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 消息自动保存的间隔时间</span><br><span class="line">#autosave_interval 1800</span><br><span class="line"> </span><br><span class="line"># 消息自动保存功能的开关</span><br><span class="line">#autosave_on_changes false</span><br><span class="line"> </span><br><span class="line"># 持久化功能的开关</span><br><span class="line">persistence true</span><br><span class="line"> </span><br><span class="line"># 持久化DB文件</span><br><span class="line">#persistence_file mosquitto.db</span><br><span class="line"> </span><br><span class="line"># 持久化DB文件目录</span><br><span class="line">#persistence_location &#x2F;var&#x2F;lib&#x2F;mosquitto&#x2F;</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Logging</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 4种日志模式：stdout、stderr、syslog、topic</span><br><span class="line"># none 则表示不记日志，此配置可以提升些许性能</span><br><span class="line">log_dest none</span><br><span class="line"> </span><br><span class="line"># 选择日志的级别（可设置多项）</span><br><span class="line">#log_type error</span><br><span class="line">#log_type warning</span><br><span class="line">#log_type notice</span><br><span class="line">#log_type information</span><br><span class="line"> </span><br><span class="line"># 是否记录客户端连接信息</span><br><span class="line">#connection_messages true</span><br><span class="line"> </span><br><span class="line"># 是否记录日志时间</span><br><span class="line">#log_timestamp true</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Security</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 客户端ID的前缀限制，可用于保证安全性</span><br><span class="line">#clientid_prefixes</span><br><span class="line"> </span><br><span class="line"># 允许匿名用户</span><br><span class="line">#allow_anonymous true</span><br><span class="line"> </span><br><span class="line"># 用户&#x2F;密码文件，默认格式：username:password</span><br><span class="line">#password_file</span><br><span class="line"> </span><br><span class="line"># PSK格式密码文件，默认格式：identity:key</span><br><span class="line">#psk_file</span><br><span class="line"> </span><br><span class="line"># pattern write sensor&#x2F;%u&#x2F;data</span><br><span class="line"># ACL权限配置，常用语法如下：</span><br><span class="line"># 用户限制：user &lt;username&gt;</span><br><span class="line"># 话题限制：topic [read|write] &lt;topic&gt;</span><br><span class="line"># 正则限制：pattern write sensor&#x2F;%u&#x2F;data</span><br><span class="line">#acl_file</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Bridges</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 允许服务之间使用“桥接”模式（可用于分布式部署）</span><br><span class="line">#connection &lt;name&gt;</span><br><span class="line">#address &lt;host&gt;[:&lt;port&gt;]</span><br><span class="line">#topic &lt;topic&gt; [[[out | in | both] qos-level] local-prefix remote-prefix]</span><br><span class="line"> </span><br><span class="line"># 设置桥接的客户端ID</span><br><span class="line">#clientid</span><br><span class="line"> </span><br><span class="line"># 桥接断开时，是否清除远程服务器中的消息</span><br><span class="line">#cleansession false</span><br><span class="line"> </span><br><span class="line"># 是否发布桥接的状态信息</span><br><span class="line">#notifications true</span><br><span class="line"> </span><br><span class="line"># 设置桥接模式下，消息将会发布到的话题地址</span><br><span class="line"># $SYS&#x2F;broker&#x2F;connection&#x2F;&lt;clientid&gt;&#x2F;state</span><br><span class="line">#notification_topic</span><br><span class="line"> </span><br><span class="line"># 设置桥接的keepalive数值</span><br><span class="line">#keepalive_interval 60</span><br><span class="line"> </span><br><span class="line"># 桥接模式，目前有三种：automatic、lazy、once</span><br><span class="line">#start_type automatic</span><br><span class="line"> </span><br><span class="line"># 桥接模式automatic的超时时间</span><br><span class="line">#restart_timeout 30</span><br><span class="line"> </span><br><span class="line"># 桥接模式lazy的超时时间</span><br><span class="line">#idle_timeout 60</span><br><span class="line"> </span><br><span class="line"># 桥接客户端的用户名</span><br><span class="line">#username</span><br><span class="line"> </span><br><span class="line"># 桥接客户端的密码</span><br><span class="line">#password</span><br><span class="line"> </span><br><span class="line"># bridge_cafile：桥接客户端的CA证书文件</span><br><span class="line"># bridge_capath：桥接客户端的CA证书目录</span><br><span class="line"># bridge_certfile：桥接客户端的PEM证书文件</span><br><span class="line"># bridge_keyfile：桥接客户端的PEM密钥文件</span><br><span class="line">#bridge_cafile</span><br><span class="line">#bridge_capath</span><br><span class="line">#bridge_certfile</span><br><span class="line">#bridge_keyfile</span><br><span class="line"> </span><br><span class="line"># 自己的配置可以放到以下目录中</span><br><span class="line">#include_dir &#x2F;mqtt&#x2F;config&#x2F;conf.d</span><br></pre></td></tr></table></figure>
+
+<h3 id="Qos-解析"><a href="#Qos-解析" class="headerlink" title="Qos 解析"></a>Qos 解析</h3><h4 id="Qos-0-–-gt-最多一次"><a href="#Qos-0-–-gt-最多一次" class="headerlink" title="Qos=0 –&gt; 最多一次"></a>Qos=0 –&gt; 最多一次</h4><blockquote>
+<p>sequenceDiagram</p>
+<p>ClientA-&gt;&gt;ServerBroker: 发送消息<br>ServerBroker-&gt;&gt;ClientB: 发送消息</p>
+</blockquote>
+<h4 id="Qos-1-–-gt-至少一次"><a href="#Qos-1-–-gt-至少一次" class="headerlink" title="Qos=1 –&gt; 至少一次"></a>Qos=1 –&gt; 至少一次</h4><blockquote>
+<p>sequenceDiagram</p>
+<p>ClientA-&gt;&gt;ServerBroker: 1.发送消息PUBLISH<br>ServerBroker-&gt;&gt;ServerBroker: 1.1存储消息<br>ServerBroker-&gt;&gt;ClientA: 1.2发送消息回应PUBACK<br>ServerBroker-&gt;&gt;ClientB: 2.发送消息<br>ClientB-&gt;&gt;ServerBroker: 2.1发送消息回应PUBACK<br>ServerBroker-&gt;&gt;ServerBroker: 2.2删除消息</p>
+</blockquote>
+<h4 id="Qos-2-–-gt-有且仅有一次"><a href="#Qos-2-–-gt-有且仅有一次" class="headerlink" title="Qos=2 –&gt; 有且仅有一次"></a>Qos=2 –&gt; 有且仅有一次</h4><blockquote>
+<p>sequenceDiagram</p>
+<p>ClientA-&gt;&gt;ServerBroker: 1.发送消息PUBLISH<br>ServerBroker-&gt;&gt;ServerBroker: 1.1存储消息<br>ServerBroker-&gt;&gt;ClientA: 1.2发送消息回应Rec<br>ClientA-&gt;&gt;ServerBroker: 2.发送消息Rel<br>ServerBroker-&gt;&gt;ServerBroker: 2.1删除消息<br>ServerBroker-&gt;&gt;ServerBroker: 2.2存储消息到发送列队<br>ServerBroker-&gt;&gt;ClientB: 2.3发送消息<br>ServerBroker-&gt;&gt;ClientA: 2.4发送消息回应Comp<br>ClientB-&gt;&gt;ServerBroker: 3.发送消息回应Rec<br>ServerBroker-&gt;&gt;ServerBroker: 3.1删除2.2中存储的消息（一次确认）<br>ServerBroker-&gt;&gt;ServerBroker: 3.2存储消息<br>ServerBroker-&gt;&gt;ClientB: 3.3发送消息Rel<br>ClientB-&gt;&gt;ServerBroker: 3.4发送消息回应Comp<br>ServerBroker-&gt;&gt;ServerBroker: 3.5删除消息(二次确认)</p>
+</blockquote>
+<p><img src="/2020/08/31/Mosquitto/1573118624880.png" alt="1573118624880"></p>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><h4 id="实验1：Mosquitto-内存数据落盘机制"><a href="#实验1：Mosquitto-内存数据落盘机制" class="headerlink" title="实验1：Mosquitto 内存数据落盘机制"></a>实验1：Mosquitto 内存数据落盘机制</h4><h5 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h5><p>​    Mosquitto 内存数据落盘持久化时，是否会产生重复数据</p>
+<h5 id="实验结论"><a href="#实验结论" class="headerlink" title="实验结论"></a>实验结论</h5><p>​    Mosquitto 不会重复持久化已经持久化过的数据</p>
+<h5 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h5><p>​    mosquitto version 1.4.15</p>
+<h5 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h5><ol>
+<li>发送者保持同样的发送速率，降低订阅者消费速度，触发mqtt的持久化机制</li>
+<li>更改mqtt持久化的间隔（3s 和 30s），观测持久化的数据大小是否不同</li>
+</ol>
+<h5 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h5><blockquote>
+<p>发送者：发送1w条消息，用时 31.16837883 s</p>
+<p>订阅者：每分钟消化1条，1min内堆积9999条消息</p>
+<p>Mosquitto：持久化间隔 3s，1min内涨幅 27842 Byte</p>
+</blockquote>
+<p><img src="/2020/08/31/Mosquitto/1573112430542.png" alt="1573112430542"></p>
+<blockquote>
+<p>发送者：发送1w条消息，</p>
+<p>订阅者：每分钟消化1条，1min内堆积9999条消息</p>
+<p>Mosquitto：持久化间隔 30s，1min内涨幅 27842 Byte</p>
+</blockquote>
+<p><img src="/2020/08/31/Mosquitto/1573113441213.png" alt="1573113441213"></p>
+<h5 id="实验脚本"><a href="#实验脚本" class="headerlink" title="实验脚本"></a>实验脚本</h5><h6 id="send-py"><a href="#send-py" class="headerlink" title="send.py"></a>send.py</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">Send msg to mqtt (linux, python2)</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">__author__ &#x3D; &#39;RYB&#39;</span><br><span class="line"></span><br><span class="line">import json</span><br><span class="line">import time</span><br><span class="line">import random</span><br><span class="line">import string</span><br><span class="line">import paho.mqtt.publish as publish</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def ranstr(num):</span><br><span class="line">    salt &#x3D; &#39;&#39;.join(random.sample(string.ascii_letters + string.digits, num))</span><br><span class="line">    return salt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def publish_msg(msg_num):</span><br><span class="line">    for i in range(msg_num):</span><br><span class="line">        msg &#x3D; &#123;</span><br><span class="line">            &quot;id&quot;: i,</span><br><span class="line">            &quot;Timestamp&quot;: int(time.time() * 1000),</span><br><span class="line">            &quot;str1&quot;: ranstr(50),</span><br><span class="line">            &quot;str2&quot;: ranstr(50)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        publish.single(&quot;test&quot;, payload&#x3D;json.dumps(msg), qos&#x3D;2, hostname&#x3D;&quot;10.244.0.164&quot;, port&#x3D;1883)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; Start &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)</span><br><span class="line">start &#x3D; time.time()</span><br><span class="line">print(&quot;Running...&quot;)</span><br><span class="line">publish_msg(10000)</span><br><span class="line">end &#x3D; time.time()</span><br><span class="line">print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; End &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)</span><br><span class="line">print(&quot;Run Time: %s s&quot; % str(end - start))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6 id="rec-py"><a href="#rec-py" class="headerlink" title="rec.py"></a>rec.py</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">Receive msg from mqtt (linux, python2)</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">__author__ &#x3D; &#39;RYB&#39;</span><br><span class="line"></span><br><span class="line">import time</span><br><span class="line">import paho.mqtt.subscribe as subscribe</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def on_message_sleep(client, userdata, msg):</span><br><span class="line">    print(msg.topic + &#39; --&gt; &#39; + msg.payload)</span><br><span class="line">    time.sleep(60)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subscribe.callback(on_message_sleep, &quot;test&quot;, qos&#x3D;2, hostname&#x3D;&quot;mosquitto&quot;, port&#x3D;1883)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3>]]></content>
+      <categories>
+        <category>中间件</category>
+      </categories>
+      <tags>
+        <tag>MQTT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenStack使用：Windows镜像制作</title>
+    <url>/2020/11/09/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9AWindows%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</url>
+    <content><![CDATA[<h2 id="资源下载地址"><a href="#资源下载地址" class="headerlink" title="资源下载地址"></a>资源下载地址</h2><ul>
+<li>系统镜像：<a href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></li>
+<li>virtio：<a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/</a></li>
+</ul>
+<p>PS：新版本的virtio需要下载iso文件，内部驱动全面</p>
+<h2 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h2><h3 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装包</span></span><br><span class="line">yum install qemu-kvm qemu-img –y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建链接</span></span><br><span class="line">ln -sv /usr/libexec/qemu-kvm /usr/bin/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建磁盘</span></span><br><span class="line">qemu-img create -f qcow2 cn_windows_server_2016_vl_x64_cloud_11636695.qcow2 15G</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建虚机</span></span><br><span class="line">qemu-kvm -m 1024 -cdrom cn_windows_server_2016_vl_x64_dvd_11636695.iso -drive file=cn_windows_server_2016_vl_x64_dvd_11636695.qcow2,if=virtio,boot=on -fda virtio-win_amd64.vfd -boot d -nographic -vnc :3</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="VNC连接虚机"><a href="#VNC连接虚机" class="headerlink" title="VNC连接虚机"></a>VNC连接虚机</h3><p>连接方式：<code>&lt;server ip&gt;:3</code></p>
+<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/tcicy/p/7790956.html">OpenStack kvm win7镜像制作</a></p>
+<p><a href="https://blog.csdn.net/qq_20154221/article/details/51586537">制作OpenStack镜像win7.qcow2（centos/ubuntu/win镜像分享）</a></p>
+<p><a href="https://blog.csdn.net/wylfengyujiancheng/article/details/50468173">制作OpenStack Windows Server 2012镜像</a></p>
+]]></content>
+      <categories>
+        <category>OpenStack使用</category>
+      </categories>
+      <tags>
+        <tag>OpenStack使用</tag>
+        <tag>镜像制作</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OpenStack使用：自定义实例root密码</title>
     <url>/2020/11/06/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/</url>
     <content><![CDATA[<h2 id="OpenStack安装信息"><a href="#OpenStack安装信息" class="headerlink" title="OpenStack安装信息"></a>OpenStack安装信息</h2><ul>
@@ -672,11 +697,129 @@
 <p><a href="https://blog.csdn.net/zhongbeida_xue/article/details/80417019">openstack虚拟机系统密码的修改方案</a></p>
 ]]></content>
       <categories>
-        <category>OpenStack</category>
+        <category>OpenStack使用</category>
       </categories>
       <tags>
         <tag>OpenStack使用</tag>
         <tag>Train版本</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenStack开发：Glance Image Cache</title>
+    <url>/2020/12/22/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9AGlance-Image-Cache/</url>
+    <content><![CDATA[<h2 id="The-Glance-Image-Cache"><a href="#The-Glance-Image-Cache" class="headerlink" title="The Glance Image Cache"></a>The Glance Image Cache</h2><blockquote>
+<p>The Glance API server may be configured to have an optional local image cache. A local image cache stores a copy of image files, essentially enabling multiple API servers to serve the same image file, resulting in an increase in scalability due to an increased number of endpoints serving an image file.</p>
+<p>This local image cache is transparent to the end user – in other words, the end user doesn’t know that the Glance API is streaming an image file from its local cache or from the actual backend storage system.</p>
+</blockquote>
+<h2 id="Configuration-options-for-the-Image-Cache"><a href="#Configuration-options-for-the-Image-Cache" class="headerlink" title="Configuration options for the Image Cache"></a>Configuration options for the Image Cache</h2><p>Config File：<code>glance-api.conf</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[DEFAULT]</span><br><span class="line"><span class="comment"># This is the base directory where Glance stores the cache data (Required to be set, as does not have a default).</span></span><br><span class="line">image_cache_dir = /var/lib/glance/image-cache</span><br><span class="line"></span><br><span class="line"><span class="comment"># Path to the sqlite file database that will be used for cache management.</span></span><br><span class="line">image_cache_driver = sqlite</span><br><span class="line"></span><br><span class="line"><span class="comment"># This is a relative path from the image_cache_dir directory (Default:cache.db)</span></span><br><span class="line">image_cache_sqlite_db = cache.db</span><br><span class="line"></span><br><span class="line"><span class="comment"># The size when the glance-cache-pruner will remove the oldest images, to reduce the bytes until under this value. (Default:10 GB)</span></span><br><span class="line">image_cache_max_size = 1073741824</span><br><span class="line"></span><br><span class="line">[paste_deploy]</span><br><span class="line"><span class="comment"># Enabling the Image Cache Management Middlewar. There are three types you can chose: </span></span><br><span class="line"><span class="comment">#   - cachemanagement</span></span><br><span class="line"><span class="comment">#   - keystone+cachemanagement</span></span><br><span class="line"><span class="comment">#   - trusted-auth+cachemanagement.</span></span><br><span class="line">flavor = keystone+cachemanagement</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Managing-the-Glance-Image-Cache"><a href="#Managing-the-Glance-Image-Cache" class="headerlink" title="Managing the Glance Image Cache"></a>Managing the Glance Image Cache</h2><blockquote>
+<p>While image files are automatically placed in the image cache on successful requests to <code>GET /v2/images/&#123;image_id&#125;/file</code>, eg: <code>openstack image save --file &lt;file name&gt; &lt;image id&gt;</code>.</p>
+<p>the image cache is not automatically managed. Here, we describe the basics of how to manage the local image cache on Glance API servers and how to automate this cache management.</p>
+</blockquote>
+<h3 id="Glance-Image-Cache-API"><a href="#Glance-Image-Cache-API" class="headerlink" title="Glance Image Cache API"></a>Glance Image Cache API</h3><table>
+<thead>
+<tr>
+<th>Description</th>
+<th>Method</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Get cached image</td>
+<td>GET</td>
+<td><code>/v2/cached_images</code></td>
+</tr>
+<tr>
+<td>Delete cached image</td>
+<td>DELETE</td>
+<td><code>/v2/cached_images/&#123;image_id&#125;</code></td>
+</tr>
+<tr>
+<td>Delete all cached image</td>
+<td>DELETE</td>
+<td><code>/v2/cached_images</code></td>
+</tr>
+<tr>
+<td>Get queued image</td>
+<td>GET</td>
+<td><code>/v2/queued_images</code></td>
+</tr>
+<tr>
+<td>Put image to queue</td>
+<td>PUT</td>
+<td><code>/v2/queued_images/&#123;image_id&#125;</code></td>
+</tr>
+<tr>
+<td>Delete queued image</td>
+<td>DELETE</td>
+<td><code>/v2/queued_images/&#123;image_id&#125;</code></td>
+</tr>
+<tr>
+<td>Delete all queued image</td>
+<td>DELETE</td>
+<td><code>/v2/queued_images</code></td>
+</tr>
+</tbody></table>
+<p>Src File：<code>glance/api/middleware/cache_manage.py</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Copyright 2011 OpenStack Foundation</span></span><br><span class="line"><span class="comment"># All Rights Reserved.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may</span></span><br><span class="line"><span class="comment">#    not use this file except in compliance with the License. You may obtain</span></span><br><span class="line"><span class="comment">#    a copy of the License at</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#         http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#    Unless required by applicable law or agreed to in writing, software</span></span><br><span class="line"><span class="comment">#    distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT</span></span><br><span class="line"><span class="comment">#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the</span></span><br><span class="line"><span class="comment">#    License for the specific language governing permissions and limitations</span></span><br><span class="line"><span class="comment">#    under the License.</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Image Cache Management API</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> oslo_log <span class="keyword">import</span> log <span class="keyword">as</span> logging</span><br><span class="line"><span class="keyword">import</span> routes</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> glance.api.v2 <span class="keyword">import</span> cached_images</span><br><span class="line"><span class="keyword">from</span> glance.common <span class="keyword">import</span> wsgi</span><br><span class="line"><span class="keyword">from</span> glance.i18n <span class="keyword">import</span> _LI</span><br><span class="line"></span><br><span class="line">LOG = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CacheManageFilter</span>(<span class="params">wsgi.Middleware</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, app</span>):</span></span><br><span class="line">        mapper = routes.Mapper()</span><br><span class="line">        resource = cached_images.create_resource()</span><br><span class="line"></span><br><span class="line">        mapper.connect(<span class="string">&quot;/v2/cached_images&quot;</span>,</span><br><span class="line">                       controller=resource,</span><br><span class="line">                       action=<span class="string">&quot;get_cached_images&quot;</span>,</span><br><span class="line">                       conditions=dict(method=[<span class="string">&quot;GET&quot;</span>]))</span><br><span class="line"></span><br><span class="line">        mapper.connect(<span class="string">&quot;/v2/cached_images/&#123;image_id&#125;&quot;</span>,</span><br><span class="line">                       controller=resource,</span><br><span class="line">                       action=<span class="string">&quot;delete_cached_image&quot;</span>,</span><br><span class="line">                       conditions=dict(method=[<span class="string">&quot;DELETE&quot;</span>]))</span><br><span class="line"></span><br><span class="line">        mapper.connect(<span class="string">&quot;/v2/cached_images&quot;</span>,</span><br><span class="line">                       controller=resource,</span><br><span class="line">                       action=<span class="string">&quot;delete_cached_images&quot;</span>,</span><br><span class="line">                       conditions=dict(method=[<span class="string">&quot;DELETE&quot;</span>]))</span><br><span class="line"></span><br><span class="line">        mapper.connect(<span class="string">&quot;/v2/queued_images/&#123;image_id&#125;&quot;</span>,</span><br><span class="line">                       controller=resource,</span><br><span class="line">                       action=<span class="string">&quot;queue_image&quot;</span>,</span><br><span class="line">                       conditions=dict(method=[<span class="string">&quot;PUT&quot;</span>]))</span><br><span class="line"></span><br><span class="line">        mapper.connect(<span class="string">&quot;/v2/queued_images&quot;</span>,</span><br><span class="line">                       controller=resource,</span><br><span class="line">                       action=<span class="string">&quot;get_queued_images&quot;</span>,</span><br><span class="line">                       conditions=dict(method=[<span class="string">&quot;GET&quot;</span>]))</span><br><span class="line"></span><br><span class="line">        mapper.connect(<span class="string">&quot;/v2/queued_images/&#123;image_id&#125;&quot;</span>,</span><br><span class="line">                       controller=resource,</span><br><span class="line">                       action=<span class="string">&quot;delete_queued_image&quot;</span>,</span><br><span class="line">                       conditions=dict(method=[<span class="string">&quot;DELETE&quot;</span>]))</span><br><span class="line"></span><br><span class="line">        mapper.connect(<span class="string">&quot;/v2/queued_images&quot;</span>,</span><br><span class="line">                       controller=resource,</span><br><span class="line">                       action=<span class="string">&quot;delete_queued_images&quot;</span>,</span><br><span class="line">                       conditions=dict(method=[<span class="string">&quot;DELETE&quot;</span>]))</span><br><span class="line"></span><br><span class="line">        self._mapper = mapper</span><br><span class="line">        self._resource = resource</span><br><span class="line"></span><br><span class="line">        LOG.info(_LI(<span class="string">&quot;Initialized image cache management middleware&quot;</span>))</span><br><span class="line">        super(CacheManageFilter, self).__init__(app)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_request</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        <span class="comment"># Map request to our resource object if we can handle it</span></span><br><span class="line">        match = self._mapper.match(request.path_info, request.environ)</span><br><span class="line">        <span class="keyword">if</span> match:</span><br><span class="line">            request.environ[<span class="string">&#x27;wsgiorg.routing_args&#x27;</span>] = (<span class="literal">None</span>, match)</span><br><span class="line">            <span class="keyword">return</span> self._resource(request)</span><br><span class="line">        <span class="comment"># Pass off downstream if we don&#x27;t match the request path</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="sqlite数据库"><a href="#sqlite数据库" class="headerlink" title="sqlite数据库"></a>sqlite数据库</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sqlite&gt; .tables</span><br><span class="line">cached_images</span><br><span class="line">sqlite&gt; .schema cached_images</span><br><span class="line">CREATE TABLE cached_images (</span><br><span class="line">                        image_id TEXT PRIMARY KEY,</span><br><span class="line">                        last_accessed REAL DEFAULT 0.0,</span><br><span class="line">                        last_modified REAL DEFAULT 0.0,</span><br><span class="line">                        size INTEGER DEFAULT 0,</span><br><span class="line">                        hits INTEGER DEFAULT 0,</span><br><span class="line">                        checksum TEXT</span><br><span class="line">                    );</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>image_id：缓存镜像id</li>
+<li>last_accessed：镜像最近一次被访问的时间</li>
+<li>last_modified：镜像最近一次更改的时间</li>
+<li>size：镜像大小</li>
+<li>hits：镜像缓存命中次数，命中一次 +1</li>
+<li>checksum：校验值</li>
+</ul>
+<p>Src File：<code>glance/image_cache/drivers/sqlite.py</code></p>
+<p><code>SQLite Driver</code>创建表的流程如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_db</span>(<span class="params">self</span>):</span></span><br><span class="line">    db = CONF.image_cache_sqlite_db</span><br><span class="line">    self.db_path = os.path.join(self.base_dir, db)</span><br><span class="line">    lockutils.set_defaults(self.base_dir)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @lockutils.synchronized(&#x27;image_cache_db_init&#x27;, external=True)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">create_db</span>():</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            conn = sqlite3.connect(self.db_path, check_same_thread=<span class="literal">False</span>,</span><br><span class="line">                                   factory=SqliteConnection)</span><br><span class="line">            conn.executescript(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                CREATE TABLE IF NOT EXISTS cached_images (</span></span><br><span class="line"><span class="string">                    image_id TEXT PRIMARY KEY,</span></span><br><span class="line"><span class="string">                    last_accessed REAL DEFAULT 0.0,</span></span><br><span class="line"><span class="string">                    last_modified REAL DEFAULT 0.0,</span></span><br><span class="line"><span class="string">                    size INTEGER DEFAULT 0,</span></span><br><span class="line"><span class="string">                    hits INTEGER DEFAULT 0,</span></span><br><span class="line"><span class="string">                    checksum TEXT</span></span><br><span class="line"><span class="string">                );</span></span><br><span class="line"><span class="string">            &quot;&quot;&quot;</span>)</span><br><span class="line">            conn.close()</span><br><span class="line">        <span class="keyword">except</span> sqlite3.DatabaseError <span class="keyword">as</span> e:</span><br><span class="line">            msg = _(<span class="string">&quot;Failed to initialize the image cache database. &quot;</span></span><br><span class="line">                    <span class="string">&quot;Got error: %s&quot;</span>) % e</span><br><span class="line">            LOG.error(msg)</span><br><span class="line">            <span class="keyword">raise</span> exception.BadDriverConfiguration(driver_name=<span class="string">&#x27;sqlite&#x27;</span>,</span><br><span class="line">                                                   reason=msg)</span><br><span class="line"></span><br><span class="line">    create_db()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h2><h3 id="Glance-image-cache流程"><a href="#Glance-image-cache流程" class="headerlink" title="Glance image cache流程"></a>Glance image cache流程</h3><p>Src File：<code>glance/image_cache/__init__.py</code></p>
+<p>入口函数：主要传入CHUNKSIZE值</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cache_image_file</span>(<span class="params">self, image_id, image_file</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Cache an image file.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :param image_id: Image ID</span></span><br><span class="line"><span class="string">        :param image_file: Image file to cache</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :returns: True if image file was cached, False otherwise</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        CHUNKSIZE = <span class="number">64</span> * units.Mi</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.cache_image_iter(image_id,</span><br><span class="line">                                     utils.chunkiter(image_file, CHUNKSIZE))</span><br></pre></td></tr></table></figure>
+
+<p><code>cache_image_iter()</code> &gt; <code>get_caching_iter()</code> &gt; <code>cache_tee_iter</code>，打开缓存文件写入缓存内容，文件名为<code>image_id</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cache_image_iter</span>(<span class="params">self, image_id, image_iter, image_checksum=None</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Cache an image with supplied iterator.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :param image_id: Image ID</span></span><br><span class="line"><span class="string">    :param image_file: Iterator retrieving image chunks</span></span><br><span class="line"><span class="string">    :param image_checksum: Checksum of image</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :returns: True if image file was cached, False otherwise</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> self.driver.is_cacheable(image_id):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> chunk <span class="keyword">in</span> self.get_caching_iter(image_id, image_checksum,</span><br><span class="line">                                       image_iter):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_caching_iter</span>(<span class="params">self, image_id, image_checksum, image_iter</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Returns an iterator that caches the contents of an image</span></span><br><span class="line"><span class="string">    while the image contents are read through the supplied</span></span><br><span class="line"><span class="string">    iterator.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :param image_id: Image ID</span></span><br><span class="line"><span class="string">    :param image_checksum: checksum expected to be generated while</span></span><br><span class="line"><span class="string">                           iterating over image data</span></span><br><span class="line"><span class="string">    :param image_iter: Iterator that will read image contents</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> self.driver.is_cacheable(image_id):</span><br><span class="line">        <span class="keyword">return</span> image_iter</span><br><span class="line"></span><br><span class="line">    LOG.debug(<span class="string">&quot;Tee&#x27;ing image &#x27;%s&#x27; into cache&quot;</span>, image_id)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> self.cache_tee_iter(image_id, image_iter, image_checksum)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cache_tee_iter</span>(<span class="params">self, image_id, image_iter, image_checksum</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        current_checksum = hashlib.md5()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> self.driver.open_for_write(image_id) <span class="keyword">as</span> cache_file:</span><br><span class="line">            <span class="keyword">for</span> chunk <span class="keyword">in</span> image_iter:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    cache_file.write(chunk)</span><br><span class="line">                <span class="keyword">finally</span>:</span><br><span class="line">                    current_checksum.update(chunk)</span><br><span class="line">                    <span class="keyword">yield</span> chunk</span><br><span class="line">            cache_file.flush()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (image_checksum <span class="keyword">and</span></span><br><span class="line">                    image_checksum != current_checksum.hexdigest()):</span><br><span class="line">                msg = _(<span class="string">&quot;Checksum verification failed. Aborted &quot;</span></span><br><span class="line">                        <span class="string">&quot;caching of image &#x27;%s&#x27;.&quot;</span>) % image_id</span><br><span class="line">                <span class="keyword">raise</span> exception.GlanceException(msg)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> exception.GlanceException <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">with</span> excutils.save_and_reraise_exception():</span><br><span class="line">            <span class="comment"># image_iter has given us bad, (size_checked_iter has found a</span></span><br><span class="line">            <span class="comment"># bad length), or corrupt data (checksum is wrong).</span></span><br><span class="line">            LOG.exception(encodeutils.exception_to_unicode(e))</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        LOG.exception(_LE(<span class="string">&quot;Exception encountered while tee&#x27;ing &quot;</span></span><br><span class="line">                          <span class="string">&quot;image &#x27;%(image_id)s&#x27; into cache: %(error)s. &quot;</span></span><br><span class="line">                          <span class="string">&quot;Continuing with response.&quot;</span>) %</span><br><span class="line">                      &#123;<span class="string">&#x27;image_id&#x27;</span>: image_id,</span><br><span class="line">                       <span class="string">&#x27;error&#x27;</span>: encodeutils.exception_to_unicode(e)&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># If no checksum provided continue responding even if</span></span><br><span class="line">        <span class="comment"># caching failed.</span></span><br><span class="line">        <span class="keyword">for</span> chunk <span class="keyword">in</span> image_iter:</span><br><span class="line">            <span class="keyword">yield</span> chunk</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Glance-image-cache清理流程"><a href="#Glance-image-cache清理流程" class="headerlink" title="Glance image cache清理流程"></a>Glance image cache清理流程</h3><p>源生为一次性可执行命令，官方建议使用<code>cron</code>运行<code>glance-cache-pruner</code></p>
+<p>Src File：<code>glance/image_cache/__init__.py</code></p>
+<p>当前缓存文件大小与配置中的<code>image_cache_max_size</code>值进行比较，大于<code>image_cache_max_size</code>则开启清理操作，根据缓存文件的<code>last_accessed</code>字段，依次删除活跃度最低的镜像，直至缓存文件大小小于<code>image_cache_max_size</code>值</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prune</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Removes all cached image files above the cache&#x27;s maximum</span></span><br><span class="line"><span class="string">    size. Returns a tuple containing the total number of cached</span></span><br><span class="line"><span class="string">    files removed and the total size of all pruned image files.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    max_size = CONF.image_cache_max_size</span><br><span class="line">    current_size = self.driver.get_cache_size()</span><br><span class="line">    <span class="keyword">if</span> max_size &gt; current_size:</span><br><span class="line">        LOG.debug(<span class="string">&quot;Image cache has free space, skipping prune...&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    overage = current_size - max_size</span><br><span class="line">    LOG.debug(<span class="string">&quot;Image cache currently %(overage)d bytes over max &quot;</span></span><br><span class="line">              <span class="string">&quot;size. Starting prune to max size of %(max_size)d &quot;</span>,</span><br><span class="line">              &#123;<span class="string">&#x27;overage&#x27;</span>: overage, <span class="string">&#x27;max_size&#x27;</span>: max_size&#125;)</span><br><span class="line"></span><br><span class="line">    total_bytes_pruned = <span class="number">0</span></span><br><span class="line">    total_files_pruned = <span class="number">0</span></span><br><span class="line">    entry = self.driver.get_least_recently_accessed()</span><br><span class="line">    <span class="keyword">while</span> entry <span class="keyword">and</span> current_size &gt; max_size:</span><br><span class="line">        image_id, size = entry</span><br><span class="line">        LOG.debug(<span class="string">&quot;Pruning &#x27;%(image_id)s&#x27; to free %(size)d bytes&quot;</span>,</span><br><span class="line">                  &#123;<span class="string">&#x27;image_id&#x27;</span>: image_id, <span class="string">&#x27;size&#x27;</span>: size&#125;)</span><br><span class="line">        self.driver.delete_cached_image(image_id)</span><br><span class="line">        total_bytes_pruned = total_bytes_pruned + size</span><br><span class="line">        total_files_pruned = total_files_pruned + <span class="number">1</span></span><br><span class="line">        current_size = current_size - size</span><br><span class="line">        entry = self.driver.get_least_recently_accessed()</span><br><span class="line"></span><br><span class="line">    LOG.debug(<span class="string">&quot;Pruning finished pruning. &quot;</span></span><br><span class="line">              <span class="string">&quot;Pruned %(total_files_pruned)d and &quot;</span></span><br><span class="line">              <span class="string">&quot;%(total_bytes_pruned)d.&quot;</span>,</span><br><span class="line">              &#123;<span class="string">&#x27;total_files_pruned&#x27;</span>: total_files_pruned,</span><br><span class="line">               <span class="string">&#x27;total_bytes_pruned&#x27;</span>: total_bytes_pruned&#125;)</span><br><span class="line">    <span class="keyword">return</span> total_files_pruned, total_bytes_pruned</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://docs.openstack.org/glance/train/admin/cache.html">OpenStack Documentation：The Glance Image Cache</a></p>
+<p><a href="https://docs.openstack.org/glance/train/admin/">OpenStack Documentation：Glance Administration Guide</a></p>
+<p><a href="https://docs.openstack.org/glance/train/configuration/configuring.html">OpenStack Documentation：Basic Configuration</a></p>
+]]></content>
+      <categories>
+        <category>OpenStack开发</category>
+      </categories>
+      <tags>
+        <tag>Train版本</tag>
+        <tag>OpenStack开发</tag>
+        <tag>Glance</tag>
       </tags>
   </entry>
   <entry>
@@ -762,7 +905,7 @@
 <p><a href="https://www.cnblogs.com/ggykx/p/12175689.html">OpenStack中创建实例流程详解</a></p>
 ]]></content>
       <categories>
-        <category>OpenStack</category>
+        <category>OpenStack开发</category>
       </categories>
       <tags>
         <tag>Train版本</tag>
@@ -771,133 +914,11 @@
       </tags>
   </entry>
   <entry>
-    <title>OpenStack使用：Windows镜像制作</title>
-    <url>/2020/11/09/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9AWindows%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</url>
-    <content><![CDATA[<h2 id="资源下载地址"><a href="#资源下载地址" class="headerlink" title="资源下载地址"></a>资源下载地址</h2><ul>
-<li>系统镜像：<a href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></li>
-<li>virtio：<a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/</a></li>
-</ul>
-<p>PS：新版本的virtio需要下载iso文件，内部驱动全面</p>
-<h2 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h2><h3 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装包</span></span><br><span class="line">yum install qemu-kvm qemu-img –y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建链接</span></span><br><span class="line">ln -sv /usr/libexec/qemu-kvm /usr/bin/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建磁盘</span></span><br><span class="line">qemu-img create -f qcow2 cn_windows_server_2016_vl_x64_cloud_11636695.qcow2 15G</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建虚机</span></span><br><span class="line">qemu-kvm -m 1024 -cdrom cn_windows_server_2016_vl_x64_dvd_11636695.iso -drive file=cn_windows_server_2016_vl_x64_dvd_11636695.qcow2,if=virtio,boot=on -fda virtio-win_amd64.vfd -boot d -nographic -vnc :3</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="VNC连接虚机"><a href="#VNC连接虚机" class="headerlink" title="VNC连接虚机"></a>VNC连接虚机</h3><p>连接方式：<code>&lt;server ip&gt;:3</code></p>
-<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/tcicy/p/7790956.html">OpenStack kvm win7镜像制作</a></p>
-<p><a href="https://blog.csdn.net/qq_20154221/article/details/51586537">制作OpenStack镜像win7.qcow2（centos/ubuntu/win镜像分享）</a></p>
-<p><a href="https://blog.csdn.net/wylfengyujiancheng/article/details/50468173">制作OpenStack Windows Server 2012镜像</a></p>
-]]></content>
-      <categories>
-        <category>OpenStack</category>
-      </categories>
-      <tags>
-        <tag>OpenStack使用</tag>
-        <tag>镜像制作</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Oracle 11.2 安装文档</title>
-    <url>/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<h2 id="win10安装"><a href="#win10安装" class="headerlink" title="win10安装"></a>win10安装</h2><h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle 11.2.0.1.0</p>
-<p>链接：<a href="https://pan.baidu.com/s/12ctlN7GaU4JbIOuawpsiqA">https://pan.baidu.com/s/12ctlN7GaU4JbIOuawpsiqA</a> </p>
-<p>提取码：bah3</p>
-<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><h4 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h4><p>解压后，双击setup.exe。目录建议全英文</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-1.png" alt="win10-1"></p>
-<h4 id="环境检测"><a href="#环境检测" class="headerlink" title="环境检测"></a>环境检测</h4><p>双击setup.exe后，自动启动安装程序，检测环境配置。</p>
-<p>我本次目的是测试安装流程，点击是继续安装即可。对安装无影响，对性能有影响。</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-2.png" alt="win10-2"></p>
-<h4 id="配置安全更新"><a href="#配置安全更新" class="headerlink" title="配置安全更新"></a>配置安全更新</h4><p>电子邮箱配置自己的即可，会接受安全问题通知，也可以不填</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-3.png" alt="win10-3"></p>
-<h4 id="安装选项"><a href="#安装选项" class="headerlink" title="安装选项"></a>安装选项</h4><p>选择创建和配置数据库，点击下一步</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-4.png" alt="win10-4"></p>
-<h4 id="系统类"><a href="#系统类" class="headerlink" title="系统类"></a>系统类</h4><p>这里在win10上实验，选择的桌面类</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-5.png" alt="win10-5"></p>
-<h4 id="典型安装"><a href="#典型安装" class="headerlink" title="典型安装"></a>典型安装</h4><p>设置数据库文件存储目录、数据库版本、字符集、数据库名及管理口令（用户名为<code>system</code>）</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-6.png" alt="win10-6"></p>
-<h4 id="后续步骤"><a href="#后续步骤" class="headerlink" title="后续步骤"></a>后续步骤</h4><p>典型安装完成后，按照流程下一步即可完成安装</p>
-<h4 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h4><p>CMD：<code>sqlplus system/&lt;system password&gt;</code></p>
-<p>网页：<code>https://localhost:1158/em</code>，用户名<code>system</code>，口令为典型安装中配置的管理口令</p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-8.png" alt="win10-8"></p>
-<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-7.png" alt="win10-7"></p>
-<h2 id="Ubuntu-18-Docker安装"><a href="#Ubuntu-18-Docker安装" class="headerlink" title="Ubuntu 18 Docker安装"></a>Ubuntu 18 Docker安装</h2><h3 id="安装包-1"><a href="#安装包-1" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle Express Edition 11g Release 2</p>
-<p>GitHub：<a href="https://github.com/wnameless/docker-oracle-xe-11g">https://github.com/wnameless/docker-oracle-xe-11g</a></p>
-<h3 id="安装步骤-1"><a href="#安装步骤-1" class="headerlink" title="安装步骤"></a>安装步骤</h3><h4 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h4><p>参考文档：<a href="https://www.runoob.com/docker/ubuntu-docker-install.html">https://www.runoob.com/docker/ubuntu-docker-install.html</a></p>
-<p>安装命令如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</span><br></pre></td></tr></table></figure>
-
-<p>也可以使用国内 daocloud 一键安装命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -sSL https://get.daocloud.io/docker | sh</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装Oracle-11G"><a href="#安装Oracle-11G" class="headerlink" title="安装Oracle 11G"></a>安装Oracle 11G</h4><h5 id="Installation-Local"><a href="#Installation-Local" class="headerlink" title="Installation(Local)"></a>Installation(Local)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/wnameless/docker-oracle-xe-11g.git</span><br><span class="line">cd docker-oracle-xe-11g</span><br><span class="line">docker build -t wnameless/oracle-xe-11g .</span><br></pre></td></tr></table></figure>
-
-<h5 id="Installation-DockerHub"><a href="#Installation-DockerHub" class="headerlink" title="Installation(DockerHub)"></a>Installation(DockerHub)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
-
-<p>SSH server has been removed since 18.04, please use “docker exec”</p>
-<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>Run with 1521 port opened:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 49161:1521 wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
-
-<p>Run this, if you want the database to be connected remotely:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 49161:1521 -e ORACLE_ALLOW_REMOTE=true wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
-
-<h4 id="默认信息"><a href="#默认信息" class="headerlink" title="默认信息"></a>默认信息</h4><p>By default, the password verification is disable(password never expired)<br>Connect database with following setting:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hostname: localhost</span><br><span class="line">port: 49161</span><br><span class="line">sid: xe</span><br><span class="line">username: system</span><br><span class="line">password: oracle</span><br></pre></td></tr></table></figure>
-
-<p>Password for SYS &amp; SYSTEM</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">oracle</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Oracle</category>
-      </categories>
-      <tags>
-        <tag>Oracle 11.2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Oracle 性能测试</title>
-    <url>/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h2 id="使用Oracle-SQL测试"><a href="#使用Oracle-SQL测试" class="headerlink" title="使用Oracle SQL测试"></a>使用Oracle SQL测试</h2><blockquote>
-<p>实验环境</p>
-<p>机器：win10虚机</p>
-<p>配置：4c8G + 500G硬盘</p>
-</blockquote>
-<h3 id="持续写入"><a href="#持续写入" class="headerlink" title="持续写入"></a>持续写入</h3><p>每次insert操作后，进行一次commit操作，性能低。<code>实验用时：00:02:39.66</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">            <span class="keyword">commit</span>;</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%8C%81%E7%BB%AD%E5%86%99%E5%85%A5.png" alt="持续写入"></p>
-<h3 id="批量写入"><a href="#批量写入" class="headerlink" title="批量写入"></a>批量写入</h3><p>对insert操作进行批量提交，性能相较于上者有所提升。<code>实验用时：00:01:25.37</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%89%B9%E9%87%8F%E5%86%99%E5%85%A5.png" alt="批量写入"></p>
-<h3 id="connect-by方式写入"><a href="#connect-by方式写入" class="headerlink" title="connect by方式写入"></a>connect by方式写入</h3><p>Oracle提供的层次查询（Hierarchical Queries）功能中的connect by子句可以快速插入连续数字。该方法会将数据写入数据缓冲区(data buffer)中，然后刷入磁盘中。<code>实验用时：00:00:01.56</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">select</span> <span class="keyword">rownum</span> <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E9%9B%86%E5%90%88%E5%86%99%E5%85%A5.png" alt="connect by写入"></p>
-<h3 id="直接路径写入"><a href="#直接路径写入" class="headerlink" title="直接路径写入"></a>直接路径写入</h3><p>该方式跳过了数据缓冲区(data buffer)， 直接写进磁盘中，这种方式称之为直接路径读写方式。<code>实验用时：00:00:00.78</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E7%9B%B4%E6%8E%A5%E8%B7%AF%E5%BE%84%E5%86%99%E5%85%A5.png" alt="直接路径写入"></p>
-<h3 id="并行模式直接写入"><a href="#并行模式直接写入" class="headerlink" title="并行模式直接写入"></a>并行模式直接写入</h3><p>并行加直接路径，而且是不写日志。<code>实验用时：00:00:00.67</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t nologging <span class="keyword">parallel</span> <span class="number">4</span> <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%B9%B6%E8%A1%8C%E6%A8%A1%E5%BC%8F%E5%86%99%E5%85%A5.png" alt="并行模式写入"></p>
-<h3 id="大对象存储"><a href="#大对象存储" class="headerlink" title="大对象存储"></a>大对象存储</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 创建测试表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建普通序列号</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> sequ_t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 注册目录</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">directory</span> TEST_DIR <span class="keyword">as</span> <span class="string">&#x27;C:\Users\lenovo\Desktop&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 存储文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    tempimg <span class="built_in">blob</span>;  <span class="comment">-- 定义临时变量存放数据   </span></span><br><span class="line">    tempdir bfile := bfilename(&#x27;TEST_DIR&#x27;,&#x27;test.png&#x27;);  <span class="comment">-- 非常重要：DIR必须大写</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span> (sequ_t.nextval,<span class="string">&#x27;test.png&#x27;</span>,empty_blob())</span><br><span class="line">    <span class="keyword">returning</span> tcontent <span class="keyword">into</span> tempimg;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 使用内置的包，给tempimg写入数据</span></span><br><span class="line">    dbms_lob.fileopen(tempdir);  <span class="comment">-- 打开指定文件</span></span><br><span class="line">    dbms_lob.loadfromfile(tempimg,tempdir,dbms_lob.getlength(tempdir));</span><br><span class="line">    dbms_lob.fileclose(tempdir);  <span class="comment">-- 关闭文件        </span></span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span> ;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 读取文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    l_file utl_file.file_type;  <span class="comment">-- 定义写入磁盘文件的类型和格式</span></span><br><span class="line">    l_buffer raw(32767);  <span class="comment">-- 定义缓冲区大小</span></span><br><span class="line">    l_amount binary_integer := 3276;  <span class="comment">-- 每次位移个数</span></span><br><span class="line">    l_pos int :=1;  <span class="comment">-- 开始位置</span></span><br><span class="line">    l_blob blob;  <span class="comment">-- 临时数据存放</span></span><br><span class="line">    l_blob_len int;  <span class="comment">-- 总长度</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="comment">-- 将数据库中的数据，存放在blob变量中  </span></span><br><span class="line">    <span class="keyword">select</span> tcontent <span class="keyword">into</span> l_blob <span class="keyword">from</span> t <span class="keyword">where</span> tname=<span class="string">&#x27;test.png&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 获取blob文件的长度</span></span><br><span class="line">    l_blob_len := dbms_lob.getlength(l_blob);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 准备写入磁盘文件</span></span><br><span class="line">    l_file := utl_file.fopen(&#x27;TEST_DIR&#x27;,&#x27;t.png&#x27;,&#x27;wb&#x27;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 写入数据</span></span><br><span class="line">    while l_pos&lt;l_blob_len</span><br><span class="line">    loop</span><br><span class="line">        dbms_lob.read(l_blob,l_amount,l_pos,l_buffer);</span><br><span class="line">        utl_file.put_raw(l_file,l_buffer,true);</span><br><span class="line">        l_pos := l_pos + l_amount;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    utl_file.fclose(l_file); </span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%AD%98%E5%82%A8image.png" alt="存储image"></p>
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E8%AF%BB%E5%8F%96image.png" alt="读取image"></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://docs.oracle.com/database/121/ARPLS/d_lob.htm#ARPLS600">Oracle 官方文档：DBMS_LOB</a></p>
-]]></content>
-      <categories>
-        <category>Oracle</category>
-      </categories>
-      <tags>
-        <tag>性能测试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>OpenStack部署：Kolla安装Octavia</title>
     <url>/2020/11/07/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AKolla%E5%AE%89%E8%A3%85Octavia/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>OpenStack</category>
+        <category>OpenStack部署</category>
       </categories>
       <tags>
         <tag>Train版本</tag>
@@ -1052,10 +1073,143 @@
 </tbody></table>
 ]]></content>
       <categories>
-        <category>OpenStack</category>
+        <category>OpenStack部署</category>
       </categories>
       <tags>
         <tag>OpenStack部署</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle 11.2 安装文档</title>
+    <url>/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<h2 id="win10安装"><a href="#win10安装" class="headerlink" title="win10安装"></a>win10安装</h2><h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle 11.2.0.1.0</p>
+<p>链接：<a href="https://pan.baidu.com/s/12ctlN7GaU4JbIOuawpsiqA">https://pan.baidu.com/s/12ctlN7GaU4JbIOuawpsiqA</a> </p>
+<p>提取码：bah3</p>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><h4 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h4><p>解压后，双击setup.exe。目录建议全英文</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-1.png" alt="win10-1"></p>
+<h4 id="环境检测"><a href="#环境检测" class="headerlink" title="环境检测"></a>环境检测</h4><p>双击setup.exe后，自动启动安装程序，检测环境配置。</p>
+<p>我本次目的是测试安装流程，点击是继续安装即可。对安装无影响，对性能有影响。</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-2.png" alt="win10-2"></p>
+<h4 id="配置安全更新"><a href="#配置安全更新" class="headerlink" title="配置安全更新"></a>配置安全更新</h4><p>电子邮箱配置自己的即可，会接受安全问题通知，也可以不填</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-3.png" alt="win10-3"></p>
+<h4 id="安装选项"><a href="#安装选项" class="headerlink" title="安装选项"></a>安装选项</h4><p>选择创建和配置数据库，点击下一步</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-4.png" alt="win10-4"></p>
+<h4 id="系统类"><a href="#系统类" class="headerlink" title="系统类"></a>系统类</h4><p>这里在win10上实验，选择的桌面类</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-5.png" alt="win10-5"></p>
+<h4 id="典型安装"><a href="#典型安装" class="headerlink" title="典型安装"></a>典型安装</h4><p>设置数据库文件存储目录、数据库版本、字符集、数据库名及管理口令（用户名为<code>system</code>）</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-6.png" alt="win10-6"></p>
+<h4 id="后续步骤"><a href="#后续步骤" class="headerlink" title="后续步骤"></a>后续步骤</h4><p>典型安装完成后，按照流程下一步即可完成安装</p>
+<h4 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h4><p>CMD：<code>sqlplus system/&lt;system password&gt;</code></p>
+<p>网页：<code>https://localhost:1158/em</code>，用户名<code>system</code>，口令为典型安装中配置的管理口令</p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-8.png" alt="win10-8"></p>
+<p><img src="/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/win10-7.png" alt="win10-7"></p>
+<h2 id="Ubuntu-18-Docker安装"><a href="#Ubuntu-18-Docker安装" class="headerlink" title="Ubuntu 18 Docker安装"></a>Ubuntu 18 Docker安装</h2><h3 id="安装包-1"><a href="#安装包-1" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle Express Edition 11g Release 2</p>
+<p>GitHub：<a href="https://github.com/wnameless/docker-oracle-xe-11g">https://github.com/wnameless/docker-oracle-xe-11g</a></p>
+<h3 id="安装步骤-1"><a href="#安装步骤-1" class="headerlink" title="安装步骤"></a>安装步骤</h3><h4 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h4><p>参考文档：<a href="https://www.runoob.com/docker/ubuntu-docker-install.html">https://www.runoob.com/docker/ubuntu-docker-install.html</a></p>
+<p>安装命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用国内 daocloud 一键安装命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -sSL https://get.daocloud.io/docker | sh</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装Oracle-11G"><a href="#安装Oracle-11G" class="headerlink" title="安装Oracle 11G"></a>安装Oracle 11G</h4><h5 id="Installation-Local"><a href="#Installation-Local" class="headerlink" title="Installation(Local)"></a>Installation(Local)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/wnameless/docker-oracle-xe-11g.git</span><br><span class="line">cd docker-oracle-xe-11g</span><br><span class="line">docker build -t wnameless/oracle-xe-11g .</span><br></pre></td></tr></table></figure>
+
+<h5 id="Installation-DockerHub"><a href="#Installation-DockerHub" class="headerlink" title="Installation(DockerHub)"></a>Installation(DockerHub)</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
+
+<p>SSH server has been removed since 18.04, please use “docker exec”</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>Run with 1521 port opened:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 49161:1521 wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
+
+<p>Run this, if you want the database to be connected remotely:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 49161:1521 -e ORACLE_ALLOW_REMOTE=true wnameless/oracle-xe-11g-r2</span><br></pre></td></tr></table></figure>
+
+<h4 id="默认信息"><a href="#默认信息" class="headerlink" title="默认信息"></a>默认信息</h4><p>By default, the password verification is disable(password never expired)<br>Connect database with following setting:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hostname: localhost</span><br><span class="line">port: 49161</span><br><span class="line">sid: xe</span><br><span class="line">username: system</span><br><span class="line">password: oracle</span><br></pre></td></tr></table></figure>
+
+<p>Password for SYS &amp; SYSTEM</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">oracle</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>Oracle 11.2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle 11.2 快速上手</title>
+    <url>/2020/09/14/Oracle-11-2-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</url>
+    <content><![CDATA[<p>Oracle Database，又名Oracle RDBMS，简称Oracle。是甲骨文公司推出的一款关系数据库管理系统。Oracle数据库系统是目前世界上流行的关系数据库管理系统，拥有可移植性好、使用方便、功能强等优点，在各类大、中、小、微机环境中都适用。Oracle是一种高效率、可靠性好的、适应高吞吐量的数据库解决方案。</p>
+<h3 id="Oracle-登录"><a href="#Oracle-登录" class="headerlink" title="Oracle 登录"></a>Oracle 登录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 格式：sqlplus &lt;username&gt;/&lt;password&gt;[@ip:port/instance name] [as sysdba]</span></span><br><span class="line">sqlplus sys/123@10.121.9.104:49161 as sysdba</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-用户管理"><a href="#Oracle-用户管理" class="headerlink" title="Oracle 用户管理"></a>Oracle 用户管理</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看当前用户</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改用户密码</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> &lt;username&gt; <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">&quot;&lt;new password&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-数据库设置"><a href="#Oracle-数据库设置" class="headerlink" title="Oracle 数据库设置"></a>Oracle 数据库设置</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 开启时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 清空共享池</span></span><br><span class="line"><span class="comment">会清空历史sql的缓存记录，清空后再次执行这些sql时会产生大量的硬解析，影响数据库性能</span></span><br><span class="line"><span class="comment">生产环境慎用，系统繁忙时执行，容易导致数据库宕机</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-表操作"><a href="#Oracle-表操作" class="headerlink" title="Oracle 表操作"></a>Oracle 表操作</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看表结构</span></span><br><span class="line">desc &lt;table name&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看表内容</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，在垃圾桶留下记录，可flashback闪回</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，不会在垃圾桶留下记录，不可恢复</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt; <span class="keyword">purge</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-存储过程语法"><a href="#Oracle-存储过程语法" class="headerlink" title="Oracle 存储过程语法"></a>Oracle 存储过程语法</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> [<span class="keyword">or</span> <span class="keyword">replace</span>] <span class="keyword">procedure</span> 存储过程名（param1 <span class="keyword">in</span> <span class="keyword">type</span>，param2 <span class="keyword">out</span> <span class="keyword">type</span>）</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line">    变量<span class="number">1</span> 类型（值范围）;</span><br><span class="line">    变量2 类型（值范围）;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">into</span> 变量<span class="number">1</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">    <span class="keyword">if</span> (判断条件) <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">select</span> 列名 <span class="keyword">into</span> 变量<span class="number">2</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">        dbms_output.Put_line(<span class="string">&#x27;打印信息&#x27;</span>);</span><br><span class="line">    elsif (判断条件) then</span><br><span class="line">        dbms_output.Put_line(&#x27;打印信息&#x27;);</span><br><span class="line">    else</span><br><span class="line">        raise 异常名（NO_DATA_FOUND）;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">exception</span><br><span class="line">    when others then</span><br><span class="line">        <span class="keyword">rollback</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://docs.oracle.com/cd/E11882_01/index.htm?xd_co_f=94201a14-f246-4e54-ba51-c48c9c02f224">Oracle 官方文档</a></p>
+<p><a href="https://www.cnblogs.com/c1024/p/11012016.html">Oracle数据库初学者入门教程</a></p>
+<p><a href="https://www.cnblogs.com/xswt/p/11394032.html">Oracle常用命令</a></p>
+<p><a href="https://www.cnblogs.com/joeyJss/p/11458653.html">Oracle存储过程的语法</a></p>
+]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>Oracle 11.2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle 性能测试</title>
+    <url>/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h2 id="使用Oracle-SQL测试"><a href="#使用Oracle-SQL测试" class="headerlink" title="使用Oracle SQL测试"></a>使用Oracle SQL测试</h2><blockquote>
+<p>实验环境</p>
+<p>机器：win10虚机</p>
+<p>配置：4c8G + 500G硬盘</p>
+</blockquote>
+<h3 id="持续写入"><a href="#持续写入" class="headerlink" title="持续写入"></a>持续写入</h3><p>每次insert操作后，进行一次commit操作，性能低。<code>实验用时：00:02:39.66</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">            <span class="keyword">commit</span>;</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%8C%81%E7%BB%AD%E5%86%99%E5%85%A5.png" alt="持续写入"></p>
+<h3 id="批量写入"><a href="#批量写入" class="headerlink" title="批量写入"></a>批量写入</h3><p>对insert操作进行批量提交，性能相较于上者有所提升。<code>实验用时：00:01:25.37</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%89%B9%E9%87%8F%E5%86%99%E5%85%A5.png" alt="批量写入"></p>
+<h3 id="connect-by方式写入"><a href="#connect-by方式写入" class="headerlink" title="connect by方式写入"></a>connect by方式写入</h3><p>Oracle提供的层次查询（Hierarchical Queries）功能中的connect by子句可以快速插入连续数字。该方法会将数据写入数据缓冲区(data buffer)中，然后刷入磁盘中。<code>实验用时：00:00:01.56</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">select</span> <span class="keyword">rownum</span> <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E9%9B%86%E5%90%88%E5%86%99%E5%85%A5.png" alt="connect by写入"></p>
+<h3 id="直接路径写入"><a href="#直接路径写入" class="headerlink" title="直接路径写入"></a>直接路径写入</h3><p>该方式跳过了数据缓冲区(data buffer)， 直接写进磁盘中，这种方式称之为直接路径读写方式。<code>实验用时：00:00:00.78</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E7%9B%B4%E6%8E%A5%E8%B7%AF%E5%BE%84%E5%86%99%E5%85%A5.png" alt="直接路径写入"></p>
+<h3 id="并行模式直接写入"><a href="#并行模式直接写入" class="headerlink" title="并行模式直接写入"></a>并行模式直接写入</h3><p>并行加直接路径，而且是不写日志。<code>实验用时：00:00:00.67</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t nologging <span class="keyword">parallel</span> <span class="number">4</span> <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%B9%B6%E8%A1%8C%E6%A8%A1%E5%BC%8F%E5%86%99%E5%85%A5.png" alt="并行模式写入"></p>
+<h3 id="大对象存储"><a href="#大对象存储" class="headerlink" title="大对象存储"></a>大对象存储</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 创建测试表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建普通序列号</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> sequ_t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 注册目录</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">directory</span> TEST_DIR <span class="keyword">as</span> <span class="string">&#x27;C:\Users\lenovo\Desktop&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 存储文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    tempimg <span class="built_in">blob</span>;  <span class="comment">-- 定义临时变量存放数据   </span></span><br><span class="line">    tempdir bfile := bfilename(&#x27;TEST_DIR&#x27;,&#x27;test.png&#x27;);  <span class="comment">-- 非常重要：DIR必须大写</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span> (sequ_t.nextval,<span class="string">&#x27;test.png&#x27;</span>,empty_blob())</span><br><span class="line">    <span class="keyword">returning</span> tcontent <span class="keyword">into</span> tempimg;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 使用内置的包，给tempimg写入数据</span></span><br><span class="line">    dbms_lob.fileopen(tempdir);  <span class="comment">-- 打开指定文件</span></span><br><span class="line">    dbms_lob.loadfromfile(tempimg,tempdir,dbms_lob.getlength(tempdir));</span><br><span class="line">    dbms_lob.fileclose(tempdir);  <span class="comment">-- 关闭文件        </span></span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span> ;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 读取文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    l_file utl_file.file_type;  <span class="comment">-- 定义写入磁盘文件的类型和格式</span></span><br><span class="line">    l_buffer raw(32767);  <span class="comment">-- 定义缓冲区大小</span></span><br><span class="line">    l_amount binary_integer := 3276;  <span class="comment">-- 每次位移个数</span></span><br><span class="line">    l_pos int :=1;  <span class="comment">-- 开始位置</span></span><br><span class="line">    l_blob blob;  <span class="comment">-- 临时数据存放</span></span><br><span class="line">    l_blob_len int;  <span class="comment">-- 总长度</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="comment">-- 将数据库中的数据，存放在blob变量中  </span></span><br><span class="line">    <span class="keyword">select</span> tcontent <span class="keyword">into</span> l_blob <span class="keyword">from</span> t <span class="keyword">where</span> tname=<span class="string">&#x27;test.png&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 获取blob文件的长度</span></span><br><span class="line">    l_blob_len := dbms_lob.getlength(l_blob);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 准备写入磁盘文件</span></span><br><span class="line">    l_file := utl_file.fopen(&#x27;TEST_DIR&#x27;,&#x27;t.png&#x27;,&#x27;wb&#x27;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 写入数据</span></span><br><span class="line">    while l_pos&lt;l_blob_len</span><br><span class="line">    loop</span><br><span class="line">        dbms_lob.read(l_blob,l_amount,l_pos,l_buffer);</span><br><span class="line">        utl_file.put_raw(l_file,l_buffer,true);</span><br><span class="line">        l_pos := l_pos + l_amount;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    utl_file.fclose(l_file); </span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%AD%98%E5%82%A8image.png" alt="存储image"></p>
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E8%AF%BB%E5%8F%96image.png" alt="读取image"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://docs.oracle.com/database/121/ARPLS/d_lob.htm#ARPLS600">Oracle 官方文档：DBMS_LOB</a></p>
+]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>性能测试</tag>
       </tags>
   </entry>
   <entry>
@@ -1285,86 +1439,143 @@
       </tags>
   </entry>
   <entry>
-    <title>Oracle 11.2 快速上手</title>
-    <url>/2020/09/14/Oracle-11-2-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</url>
-    <content><![CDATA[<p>Oracle Database，又名Oracle RDBMS，简称Oracle。是甲骨文公司推出的一款关系数据库管理系统。Oracle数据库系统是目前世界上流行的关系数据库管理系统，拥有可移植性好、使用方便、功能强等优点，在各类大、中、小、微机环境中都适用。Oracle是一种高效率、可靠性好的、适应高吞吐量的数据库解决方案。</p>
-<h3 id="Oracle-登录"><a href="#Oracle-登录" class="headerlink" title="Oracle 登录"></a>Oracle 登录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 格式：sqlplus &lt;username&gt;/&lt;password&gt;[@ip:port/instance name] [as sysdba]</span></span><br><span class="line">sqlplus sys/123@10.121.9.104:49161 as sysdba</span><br></pre></td></tr></table></figure>
+    <title>TiDB 安装文档</title>
+    <url>/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>官方文档：<a href="https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup">https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup</a></p>
+<h2 id="使用-TiUP-部署-TiDB-集群"><a href="#使用-TiUP-部署-TiDB-集群" class="headerlink" title="使用 TiUP 部署 TiDB 集群"></a>使用 TiUP 部署 TiDB 集群</h2><p><a href="https://github.com/pingcap/tiup">TiUP</a> 是 TiDB 4.0 版本引入的集群运维工具，<a href="https://github.com/pingcap/tiup/tree/master/components/cluster">TiUP cluster</a> 是 TiUP 提供的使用 Golang 编写的集群管理组件，通过 TiUP cluster 组件就可以进行日常的运维工作，包括部署、启动、关闭、销毁、弹性扩缩容、升级 TiDB 集群；管理 TiDB 集群参数。</p>
+<p>目前 TiUP 可以支持部署 TiDB、TiFlash、TiDB Binlog、TiCDC，以及监控系统。本文将介绍不同集群拓扑的具体部署步骤。</p>
+<h3 id="第-1-步：软硬件环境需求及前置检查"><a href="#第-1-步：软硬件环境需求及前置检查" class="headerlink" title="第 1 步：软硬件环境需求及前置检查"></a>第 1 步：软硬件环境需求及前置检查</h3><p><a href="https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements">软硬件环境需求</a></p>
+<p><a href="https://docs.pingcap.com/zh/tidb/stable/check-before-deployment">环境与系统配置检查</a></p>
+<h3 id="第-2-步：在中控机上安装-TiUP-组件"><a href="#第-2-步：在中控机上安装-TiUP-组件" class="headerlink" title="第 2 步：在中控机上安装 TiUP 组件"></a>第 2 步：在中控机上安装 TiUP 组件</h3><p>使用普通用户登录中控机，以 <code>tidb</code> 用户为例，后续安装 TiUP 及集群管理操作均通过该用户完成：</p>
+<ol>
+<li><p>执行如下命令安装 TiUP 工具：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按如下步骤设置 TiUP 环境变量：</p>
+<p>重新声明全局环境变量：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>确认 TiUP 工具是否安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">which tiup</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 TiUP cluster 组件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果已经安装，则更新 TiUP cluster 组件至最新版本：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup update --self &amp;&amp; tiup update cluster</span><br></pre></td></tr></table></figure>
+
+<p>预期输出 <code>“Update successfully!”</code> 字样。</p>
+</li>
+<li><p>验证当前 TiUP cluster 版本信息。执行如下命令查看 TiUP cluster 组件版本：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup --binary cluster</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="Oracle-用户管理"><a href="#Oracle-用户管理" class="headerlink" title="Oracle 用户管理"></a>Oracle 用户管理</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看当前用户</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改用户密码</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> &lt;username&gt; <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">&quot;&lt;new password&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-数据库设置"><a href="#Oracle-数据库设置" class="headerlink" title="Oracle 数据库设置"></a>Oracle 数据库设置</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 开启时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 清空共享池</span></span><br><span class="line"><span class="comment">会清空历史sql的缓存记录，清空后再次执行这些sql时会产生大量的硬解析，影响数据库性能</span></span><br><span class="line"><span class="comment">生产环境慎用，系统繁忙时执行，容易导致数据库宕机</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-表操作"><a href="#Oracle-表操作" class="headerlink" title="Oracle 表操作"></a>Oracle 表操作</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看表结构</span></span><br><span class="line">desc &lt;table name&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看表内容</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，在垃圾桶留下记录，可flashback闪回</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，不会在垃圾桶留下记录，不可恢复</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt; <span class="keyword">purge</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-存储过程语法"><a href="#Oracle-存储过程语法" class="headerlink" title="Oracle 存储过程语法"></a>Oracle 存储过程语法</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> [<span class="keyword">or</span> <span class="keyword">replace</span>] <span class="keyword">procedure</span> 存储过程名（param1 <span class="keyword">in</span> <span class="keyword">type</span>，param2 <span class="keyword">out</span> <span class="keyword">type</span>）</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line">    变量<span class="number">1</span> 类型（值范围）;</span><br><span class="line">    变量2 类型（值范围）;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">into</span> 变量<span class="number">1</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">    <span class="keyword">if</span> (判断条件) <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">select</span> 列名 <span class="keyword">into</span> 变量<span class="number">2</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">        dbms_output.Put_line(<span class="string">&#x27;打印信息&#x27;</span>);</span><br><span class="line">    elsif (判断条件) then</span><br><span class="line">        dbms_output.Put_line(&#x27;打印信息&#x27;);</span><br><span class="line">    else</span><br><span class="line">        raise 异常名（NO_DATA_FOUND）;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">exception</span><br><span class="line">    when others then</span><br><span class="line">        <span class="keyword">rollback</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://docs.oracle.com/cd/E11882_01/index.htm?xd_co_f=94201a14-f246-4e54-ba51-c48c9c02f224">Oracle 官方文档</a></p>
-<p><a href="https://www.cnblogs.com/c1024/p/11012016.html">Oracle数据库初学者入门教程</a></p>
-<p><a href="https://www.cnblogs.com/xswt/p/11394032.html">Oracle常用命令</a></p>
-<p><a href="https://www.cnblogs.com/joeyJss/p/11458653.html">Oracle存储过程的语法</a></p>
-]]></content>
-      <categories>
-        <category>Oracle</category>
-      </categories>
-      <tags>
-        <tag>Oracle 11.2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>开发小工具：Chrome翻墙</title>
-    <url>/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/</url>
-    <content><![CDATA[<h2 id="谷歌上网助手GHelper-–-Chrome插件"><a href="#谷歌上网助手GHelper-–-Chrome插件" class="headerlink" title="谷歌上网助手GHelper – Chrome插件"></a>谷歌上网助手GHelper – Chrome插件</h2><blockquote>
-<p>专门为科研、外贸、跨境电商、海淘人员、开发人员服务的上网加速工具，chrome内核浏览器专用!可以解决chrome扩展无法自动更新的问题，同时可以访问谷歌google搜索，gmail邮箱，google+等谷歌产品</p>
-<p>简单易用的《谷歌上网助手》，可以解决chrome扩展无法自动更新的问题，同时可以访问谷歌google搜索，gmail邮箱，google+等谷歌服务。</p>
-<p>《谷歌上网助手》一键安装，无需其他配置，即可访问谷歌。</p>
-<p>使用本插件可以免费上：</p>
-<ul>
-<li>google.com     谷歌搜索</li>
-<li>mail.google.com   gmail邮箱</li>
-<li>chrome商店访问</li>
-</ul>
-</blockquote>
-<h2 id="资源包"><a href="#资源包" class="headerlink" title="资源包"></a>资源包</h2><p>链接：<a href="https://pan.baidu.com/s/1Q7ltgX75BwLRyrrUSsQg4A">https://pan.baidu.com/s/1Q7ltgX75BwLRyrrUSsQg4A</a><br>提取码：tav2 </p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
-<li>下载解压资源包，找见<code>Ghelper2.2.1.crx</code></li>
-</ol>
-<p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95.png" alt="文件目录"></p>
-<ol start="2">
-<li>打开<code>Chrome浏览器</code>，点击<code>设置</code> - <code>扩展应用</code>（也可直接浏览地址：<code>chrome://extensions/</code>），打开<code>开发者模式</code>开关</li>
-</ol>
-<p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/Chrome%E6%89%A9%E5%B1%95%E7%A8%8B%E5%BA%8F.png" alt="image-20201221203859502"></p>
-<ol start="3">
-<li>拖拽<code>Ghelper2.2.1.crx</code>至Chrome页面，进行安装</li>
-<li>点击谷歌上网助手，注册并登陆账户即可访问Google</li>
-</ol>
-<p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/%E8%BF%9B%E5%85%A5Ghelper.png" alt="image-20201221204045444"></p>
-<p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/%E7%99%BB%E5%BD%95Ghelper.png" alt="image-20201221204105401"></p>
-<ol start="5">
-<li><p>访问Google搜索</p>
-<p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/%E8%AE%BF%E9%97%AEGoogle.png" alt="image-20201221204155970"></p>
 </li>
 </ol>
-<p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/Google%E6%90%9C%E7%B4%A2.png" alt="image-20201221204215545"></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://chrome.google.com/webstore/detail/%E8%B0%B7%E6%AD%8C%E4%B8%8A%E7%BD%91%E5%8A%A9%E6%89%8B/nonmafimegllfoonjgplbabhmgfanaka?hl=zh-CN">Chrome应用商店：谷歌上网助手</a></p>
-<p><a href="https://www.wonxun.net/share/426">谷歌上网助手GHelper – Chrome插件下载(谷歌浏览器插件)</a></p>
+<h3 id="第-3-步：编辑初始化配置文件"><a href="#第-3-步：编辑初始化配置文件" class="headerlink" title="第 3 步：编辑初始化配置文件"></a>第 3 步：编辑初始化配置文件</h3><p>请根据不同的集群拓扑，编辑 TiUP 所需的集群初始化配置文件。</p>
+<p>这里举出常见的 6 种场景，请根据链接中的拓扑说明，以及给出的配置文件模板，新建一个配置文件 <code>topology.yaml</code>。如果有其他组合场景的需求，请根据多个模板自行调整。</p>
+<ul>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/minimal-deployment-topology">最小拓扑架构</a></p>
+<p>最基本的集群拓扑，包括 tidb-server、tikv-server、pd-server，适合 OLTP 业务。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-deployment-topology">增加 TiFlash 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiFlash。TiFlash 是列式的存储引擎，已经逐步成为集群拓扑的标配。适合 Real-Time HTAP 业务。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/ticdc-deployment-topology">增加 TiCDC 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiCDC。TiCDC 是 4.0 版本开始支持的 TiDB 增量数据同步工具，支持多种下游 (TiDB/MySQL/MQ)。相比于 TiDB Binlog，TiCDC 有延迟更低、天然高可用等优点。在部署完成后，需要启动 TiCDC，<a href="https://docs.pingcap.com/zh/tidb/stable/manage-ticdc">通过 <code>cdc cli</code> 创建同步任务</a>。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tidb-binlog-deployment-topology">增加 TiDB Binlog 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiDB Binlog。TiDB Binlog 是目前广泛使用的增量同步组件，可提供准实时备份和同步功能。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tispark-deployment-topology">增加 TiSpark 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiSpark 组件。TiSpark 是 PingCAP 为解决用户复杂 OLAP 需求而推出的产品。TiUP cluster 组件对 TiSpark 的支持目前为实验性特性。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/hybrid-deployment-topology">混合部署拓扑架构</a></p>
+<p>适用于单台机器，混合部署多个实例的情况，也包括单机多实例，需要额外增加目录、端口、资源配比、label 等配置。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/geo-distributed-deployment-topology">跨机房部署拓扑架构</a></p>
+<p>以典型的 <code>两地三中心</code> 架构为例，介绍跨机房部署架构，以及需要注意的关键设置。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>topology.yaml</code>配置文件内不能使用主机名，需要使用ip地址。使用主机名会在启动时出现报错。</li>
+<li>对于需要全局生效的参数，请在配置文件中 <code>server_configs</code> 的对应组件下配置。</li>
+<li>对于需要某个节点生效的参数，请在具体节点的 <code>config</code> 中配置。</li>
+<li>配置的层次结构使用 <code>.</code> 表示。如：<code>log.slow-threshold</code>。更多格式参考 <a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml">TiUP 配置参数模版</a>。</li>
+<li>更多参数说明，请参考 <a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example">TiDB <code>config.toml.example</code></a>、<a href="https://github.com/tikv/tikv/blob/master/etc/config-template.toml">TiKV <code>config.toml.example</code></a> 、 <a href="https://github.com/pingcap/pd/blob/master/conf/config.toml">PD <code>config.toml.example</code></a> 和 <a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-configuration">TiFlash 配置参数</a>。</li>
+</ul>
+</blockquote>
+<h3 id="第-4-步：执行部署命令"><a href="#第-4-步：执行部署命令" class="headerlink" title="第 4 步：执行部署命令"></a>第 4 步：执行部署命令</h3><blockquote>
+<p><strong>注意：</strong></p>
+<p>通过 TiUP 进行集群部署可以使用密钥或者交互密码方式来进行安全认证：</p>
+<ul>
+<li>如果是密钥方式，可以通过 <code>-i</code> 或者 <code>--identity_file</code> 来指定密钥的路径；</li>
+<li>如果是密码方式，可以通过 <code>-p</code> 进入密码交互窗口；</li>
+<li>如果已经配置免密登陆目标机，则不需填写认证。</li>
+</ul>
+<p>一般情况下 TiUP 会在目标机器上创建 <code>topology.yaml</code> 中约定的用户和组，以下情况例外：</p>
+<ul>
+<li><code>topology.yaml</code> 中设置的用户名在目标机器上已存在。</li>
+<li>在命令行上使用了参数 <code>--skip-create-user</code> 明确指定跳过创建用户的步骤。</li>
+</ul>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster deploy tidb-test v4.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]</span><br></pre></td></tr></table></figure>
+
+<p>以上部署命令中：</p>
+<ul>
+<li>通过 TiUP cluster 部署的集群名称为 <code>tidb-test</code></li>
+<li>部署版本为 <code>v4.0.0</code>，最新版本可以通过执行 <code>tiup list tidb</code> 来查看 TiUP 支持的版本</li>
+<li>初始化配置文件为 <code>topology.yaml</code></li>
+<li>–user root：通过 root 用户登录到目标主机完成集群部署，该用户需要有 ssh 到目标机器的权限，并且在目标机器有 sudo 权限。也可以用其他有 ssh 和 sudo 权限的用户完成部署。</li>
+<li>[-i] 及 [-p]：非必选项，如果已经配置免密登陆目标机，则不需填写。否则选择其一即可，[-i] 为可登录到目标机的 root 用户（或 –user 指定的其他用户）的私钥，也可使用 [-p] 交互式输入该用户的密码</li>
+<li>如果需要指定在目标机创建的用户组名，可以参考<a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml#L7">这个例子</a>。</li>
+</ul>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-1.png" alt="TiUP-1"></p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-2.png" alt="TiUP-2"></p>
+<p>预期日志结尾输出会有 <code>Deployed cluster </code>tidb-test<code> successfully</code> 关键词，表示部署成功。</p>
+<h3 id="第-5-步：查看-TiUP-管理的集群情况"><a href="#第-5-步：查看-TiUP-管理的集群情况" class="headerlink" title="第 5 步：查看 TiUP 管理的集群情况"></a>第 5 步：查看 TiUP 管理的集群情况</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster list</span><br></pre></td></tr></table></figure>
+
+<p>TiUP 支持管理多个 TiDB 集群，该命令会输出当前通过 TiUP cluster 管理的所有集群信息，包括集群名称、部署用户、版本、密钥信息等：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Starting &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;components&#x2F;cluster&#x2F;v1.0.0&#x2F;cluster list</span><br><span class="line">Name              User  Version        Path                                                        PrivateKey</span><br><span class="line">----              ----  -------        ----                                                        ----------</span><br><span class="line">tidb-test         tidb  v4.0.0      &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test         &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test&#x2F;ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-3.png" alt="TiUP-3"></p>
+<h3 id="第-6-步：检查部署的-TiDB-集群情况"><a href="#第-6-步：检查部署的-TiDB-集群情况" class="headerlink" title="第 6 步：检查部署的 TiDB 集群情况"></a>第 6 步：检查部署的 TiDB 集群情况</h3><p>例如，执行如下命令检查 <code>tidb-test</code> 集群情况：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期输出包括 <code>tidb-test</code> 集群中实例 ID、角色、主机、监听端口和状态（由于还未启动，所以状态为 Down/inactive）、目录信息。</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-4.png" alt="TiUP-4"></p>
+<h3 id="第-7-步：启动集群"><a href="#第-7-步：启动集群" class="headerlink" title="第 7 步：启动集群"></a>第 7 步：启动集群</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster start tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期结果输出 <code>Started cluster </code>tidb-test<code> successfully</code> 标志启动成功。</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-5.png" alt="TiUP-5"></p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-6.png" alt="TiUP-6"></p>
+<h3 id="第-8-步：验证集群运行状态"><a href="#第-8-步：验证集群运行状态" class="headerlink" title="第 8 步：验证集群运行状态"></a>第 8 步：验证集群运行状态</h3><ul>
+<li>通过 TiUP 检查集群状态</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期结果输出，注意 Status 状态信息为 <code>Up</code> 说明集群状态正常</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-7.png" alt="TiUP-7"></p>
+<ul>
+<li>执行如下命令登录数据库：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -h 10.0.1.4 -P 4000</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-8.png" alt="TiUP-8"></p>
+<p>此外，也需要验证监控系统、<a href="https://docs.pingcap.com/zh/tidb/stable/dashboard-intro">TiDB Dashboard</a> 的运行状态，以及简单命令的执行，验证方式可参考<a href="https://docs.pingcap.com/zh/tidb/stable/post-installation-check">验证集群运行状态</a>。</p>
+<h3 id="TiUP管理命令"><a href="#TiUP管理命令" class="headerlink" title="TiUP管理命令"></a>TiUP管理命令</h3><h4 id="集群管理"><a href="#集群管理" class="headerlink" title="集群管理"></a>集群管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看集群列表</span></span><br><span class="line">tiup cluster list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看集群状态</span></span><br><span class="line">tiup cluster display tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动集群</span></span><br><span class="line">tiup cluster start tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止集群</span></span><br><span class="line">tiup cluster stop tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改集群参数</span></span><br><span class="line">tiup cluster edit-config tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除集群</span></span><br><span class="line">tiup cluster destroy tidb-test</span><br></pre></td></tr></table></figure>
+
+<h4 id="集群组件管理"><a href="#集群组件管理" class="headerlink" title="集群组件管理"></a>集群组件管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动组件所有节点</span></span><br><span class="line">tiup cluster start tidb-test -R pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭组件所有节点</span></span><br><span class="line">tiup cluster stop tidb-test -R tidb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动某几个节点的组件</span></span><br><span class="line">tiup cluster start tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭某几个节点的组件</span></span><br><span class="line">tiup cluster stop tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>开发小工具</category>
+        <category>TiDB</category>
       </categories>
       <tags>
-        <tag>开发小工具</tag>
-        <tag>翻墙</tag>
-        <tag>Google</tag>
+        <tag>TiDB</tag>
       </tags>
   </entry>
   <entry>
@@ -1671,143 +1882,50 @@
       </tags>
   </entry>
   <entry>
-    <title>TiDB 安装文档</title>
-    <url>/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<p>官方文档：<a href="https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup">https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup</a></p>
-<h2 id="使用-TiUP-部署-TiDB-集群"><a href="#使用-TiUP-部署-TiDB-集群" class="headerlink" title="使用 TiUP 部署 TiDB 集群"></a>使用 TiUP 部署 TiDB 集群</h2><p><a href="https://github.com/pingcap/tiup">TiUP</a> 是 TiDB 4.0 版本引入的集群运维工具，<a href="https://github.com/pingcap/tiup/tree/master/components/cluster">TiUP cluster</a> 是 TiUP 提供的使用 Golang 编写的集群管理组件，通过 TiUP cluster 组件就可以进行日常的运维工作，包括部署、启动、关闭、销毁、弹性扩缩容、升级 TiDB 集群；管理 TiDB 集群参数。</p>
-<p>目前 TiUP 可以支持部署 TiDB、TiFlash、TiDB Binlog、TiCDC，以及监控系统。本文将介绍不同集群拓扑的具体部署步骤。</p>
-<h3 id="第-1-步：软硬件环境需求及前置检查"><a href="#第-1-步：软硬件环境需求及前置检查" class="headerlink" title="第 1 步：软硬件环境需求及前置检查"></a>第 1 步：软硬件环境需求及前置检查</h3><p><a href="https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements">软硬件环境需求</a></p>
-<p><a href="https://docs.pingcap.com/zh/tidb/stable/check-before-deployment">环境与系统配置检查</a></p>
-<h3 id="第-2-步：在中控机上安装-TiUP-组件"><a href="#第-2-步：在中控机上安装-TiUP-组件" class="headerlink" title="第 2 步：在中控机上安装 TiUP 组件"></a>第 2 步：在中控机上安装 TiUP 组件</h3><p>使用普通用户登录中控机，以 <code>tidb</code> 用户为例，后续安装 TiUP 及集群管理操作均通过该用户完成：</p>
-<ol>
-<li><p>执行如下命令安装 TiUP 工具：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>按如下步骤设置 TiUP 环境变量：</p>
-<p>重新声明全局环境变量：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
-
-<p>确认 TiUP 工具是否安装：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">which tiup</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装 TiUP cluster 组件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果已经安装，则更新 TiUP cluster 组件至最新版本：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup update --self &amp;&amp; tiup update cluster</span><br></pre></td></tr></table></figure>
-
-<p>预期输出 <code>“Update successfully!”</code> 字样。</p>
-</li>
-<li><p>验证当前 TiUP cluster 版本信息。执行如下命令查看 TiUP cluster 组件版本：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup --binary cluster</span><br></pre></td></tr></table></figure>
-
-
-
+    <title>开发小工具：Chrome翻墙</title>
+    <url>/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/</url>
+    <content><![CDATA[<h2 id="谷歌上网助手GHelper-–-Chrome插件"><a href="#谷歌上网助手GHelper-–-Chrome插件" class="headerlink" title="谷歌上网助手GHelper – Chrome插件"></a>谷歌上网助手GHelper – Chrome插件</h2><blockquote>
+<p>专门为科研、外贸、跨境电商、海淘人员、开发人员服务的上网加速工具，chrome内核浏览器专用!可以解决chrome扩展无法自动更新的问题，同时可以访问谷歌google搜索，gmail邮箱，google+等谷歌产品</p>
+<p>简单易用的《谷歌上网助手》，可以解决chrome扩展无法自动更新的问题，同时可以访问谷歌google搜索，gmail邮箱，google+等谷歌服务。</p>
+<p>《谷歌上网助手》一键安装，无需其他配置，即可访问谷歌。</p>
+<p>使用本插件可以免费上：</p>
+<ul>
+<li>google.com     谷歌搜索</li>
+<li>mail.google.com   gmail邮箱</li>
+<li>chrome商店访问</li>
+</ul>
+</blockquote>
+<h2 id="资源包"><a href="#资源包" class="headerlink" title="资源包"></a>资源包</h2><p>链接：<a href="https://pan.baidu.com/s/1Q7ltgX75BwLRyrrUSsQg4A">https://pan.baidu.com/s/1Q7ltgX75BwLRyrrUSsQg4A</a><br>提取码：tav2 </p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
+<li>下载解压资源包，找见<code>Ghelper2.2.1.crx</code></li>
+</ol>
+<p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95.png" alt="文件目录"></p>
+<ol start="2">
+<li>打开<code>Chrome浏览器</code>，点击<code>设置</code> - <code>扩展应用</code>（也可直接浏览地址：<code>chrome://extensions/</code>），打开<code>开发者模式</code>开关</li>
+</ol>
+<p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/Chrome%E6%89%A9%E5%B1%95%E7%A8%8B%E5%BA%8F.png" alt="image-20201221203859502"></p>
+<ol start="3">
+<li>拖拽<code>Ghelper2.2.1.crx</code>至Chrome页面，进行安装</li>
+<li>点击谷歌上网助手，注册并登陆账户即可访问Google</li>
+</ol>
+<p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/%E8%BF%9B%E5%85%A5Ghelper.png" alt="image-20201221204045444"></p>
+<p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/%E7%99%BB%E5%BD%95Ghelper.png" alt="image-20201221204105401"></p>
+<ol start="5">
+<li><p>访问Google搜索</p>
+<p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/%E8%AE%BF%E9%97%AEGoogle.png" alt="image-20201221204155970"></p>
 </li>
 </ol>
-<h3 id="第-3-步：编辑初始化配置文件"><a href="#第-3-步：编辑初始化配置文件" class="headerlink" title="第 3 步：编辑初始化配置文件"></a>第 3 步：编辑初始化配置文件</h3><p>请根据不同的集群拓扑，编辑 TiUP 所需的集群初始化配置文件。</p>
-<p>这里举出常见的 6 种场景，请根据链接中的拓扑说明，以及给出的配置文件模板，新建一个配置文件 <code>topology.yaml</code>。如果有其他组合场景的需求，请根据多个模板自行调整。</p>
-<ul>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/minimal-deployment-topology">最小拓扑架构</a></p>
-<p>最基本的集群拓扑，包括 tidb-server、tikv-server、pd-server，适合 OLTP 业务。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-deployment-topology">增加 TiFlash 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiFlash。TiFlash 是列式的存储引擎，已经逐步成为集群拓扑的标配。适合 Real-Time HTAP 业务。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/ticdc-deployment-topology">增加 TiCDC 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiCDC。TiCDC 是 4.0 版本开始支持的 TiDB 增量数据同步工具，支持多种下游 (TiDB/MySQL/MQ)。相比于 TiDB Binlog，TiCDC 有延迟更低、天然高可用等优点。在部署完成后，需要启动 TiCDC，<a href="https://docs.pingcap.com/zh/tidb/stable/manage-ticdc">通过 <code>cdc cli</code> 创建同步任务</a>。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tidb-binlog-deployment-topology">增加 TiDB Binlog 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiDB Binlog。TiDB Binlog 是目前广泛使用的增量同步组件，可提供准实时备份和同步功能。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tispark-deployment-topology">增加 TiSpark 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiSpark 组件。TiSpark 是 PingCAP 为解决用户复杂 OLAP 需求而推出的产品。TiUP cluster 组件对 TiSpark 的支持目前为实验性特性。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/hybrid-deployment-topology">混合部署拓扑架构</a></p>
-<p>适用于单台机器，混合部署多个实例的情况，也包括单机多实例，需要额外增加目录、端口、资源配比、label 等配置。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/geo-distributed-deployment-topology">跨机房部署拓扑架构</a></p>
-<p>以典型的 <code>两地三中心</code> 架构为例，介绍跨机房部署架构，以及需要注意的关键设置。</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>注意：</strong></p>
-<ul>
-<li><code>topology.yaml</code>配置文件内不能使用主机名，需要使用ip地址。使用主机名会在启动时出现报错。</li>
-<li>对于需要全局生效的参数，请在配置文件中 <code>server_configs</code> 的对应组件下配置。</li>
-<li>对于需要某个节点生效的参数，请在具体节点的 <code>config</code> 中配置。</li>
-<li>配置的层次结构使用 <code>.</code> 表示。如：<code>log.slow-threshold</code>。更多格式参考 <a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml">TiUP 配置参数模版</a>。</li>
-<li>更多参数说明，请参考 <a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example">TiDB <code>config.toml.example</code></a>、<a href="https://github.com/tikv/tikv/blob/master/etc/config-template.toml">TiKV <code>config.toml.example</code></a> 、 <a href="https://github.com/pingcap/pd/blob/master/conf/config.toml">PD <code>config.toml.example</code></a> 和 <a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-configuration">TiFlash 配置参数</a>。</li>
-</ul>
-</blockquote>
-<h3 id="第-4-步：执行部署命令"><a href="#第-4-步：执行部署命令" class="headerlink" title="第 4 步：执行部署命令"></a>第 4 步：执行部署命令</h3><blockquote>
-<p><strong>注意：</strong></p>
-<p>通过 TiUP 进行集群部署可以使用密钥或者交互密码方式来进行安全认证：</p>
-<ul>
-<li>如果是密钥方式，可以通过 <code>-i</code> 或者 <code>--identity_file</code> 来指定密钥的路径；</li>
-<li>如果是密码方式，可以通过 <code>-p</code> 进入密码交互窗口；</li>
-<li>如果已经配置免密登陆目标机，则不需填写认证。</li>
-</ul>
-<p>一般情况下 TiUP 会在目标机器上创建 <code>topology.yaml</code> 中约定的用户和组，以下情况例外：</p>
-<ul>
-<li><code>topology.yaml</code> 中设置的用户名在目标机器上已存在。</li>
-<li>在命令行上使用了参数 <code>--skip-create-user</code> 明确指定跳过创建用户的步骤。</li>
-</ul>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster deploy tidb-test v4.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]</span><br></pre></td></tr></table></figure>
-
-<p>以上部署命令中：</p>
-<ul>
-<li>通过 TiUP cluster 部署的集群名称为 <code>tidb-test</code></li>
-<li>部署版本为 <code>v4.0.0</code>，最新版本可以通过执行 <code>tiup list tidb</code> 来查看 TiUP 支持的版本</li>
-<li>初始化配置文件为 <code>topology.yaml</code></li>
-<li>–user root：通过 root 用户登录到目标主机完成集群部署，该用户需要有 ssh 到目标机器的权限，并且在目标机器有 sudo 权限。也可以用其他有 ssh 和 sudo 权限的用户完成部署。</li>
-<li>[-i] 及 [-p]：非必选项，如果已经配置免密登陆目标机，则不需填写。否则选择其一即可，[-i] 为可登录到目标机的 root 用户（或 –user 指定的其他用户）的私钥，也可使用 [-p] 交互式输入该用户的密码</li>
-<li>如果需要指定在目标机创建的用户组名，可以参考<a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml#L7">这个例子</a>。</li>
-</ul>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-1.png" alt="TiUP-1"></p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-2.png" alt="TiUP-2"></p>
-<p>预期日志结尾输出会有 <code>Deployed cluster </code>tidb-test<code> successfully</code> 关键词，表示部署成功。</p>
-<h3 id="第-5-步：查看-TiUP-管理的集群情况"><a href="#第-5-步：查看-TiUP-管理的集群情况" class="headerlink" title="第 5 步：查看 TiUP 管理的集群情况"></a>第 5 步：查看 TiUP 管理的集群情况</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster list</span><br></pre></td></tr></table></figure>
-
-<p>TiUP 支持管理多个 TiDB 集群，该命令会输出当前通过 TiUP cluster 管理的所有集群信息，包括集群名称、部署用户、版本、密钥信息等：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Starting &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;components&#x2F;cluster&#x2F;v1.0.0&#x2F;cluster list</span><br><span class="line">Name              User  Version        Path                                                        PrivateKey</span><br><span class="line">----              ----  -------        ----                                                        ----------</span><br><span class="line">tidb-test         tidb  v4.0.0      &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test         &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test&#x2F;ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-3.png" alt="TiUP-3"></p>
-<h3 id="第-6-步：检查部署的-TiDB-集群情况"><a href="#第-6-步：检查部署的-TiDB-集群情况" class="headerlink" title="第 6 步：检查部署的 TiDB 集群情况"></a>第 6 步：检查部署的 TiDB 集群情况</h3><p>例如，执行如下命令检查 <code>tidb-test</code> 集群情况：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
-
-<p>预期输出包括 <code>tidb-test</code> 集群中实例 ID、角色、主机、监听端口和状态（由于还未启动，所以状态为 Down/inactive）、目录信息。</p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-4.png" alt="TiUP-4"></p>
-<h3 id="第-7-步：启动集群"><a href="#第-7-步：启动集群" class="headerlink" title="第 7 步：启动集群"></a>第 7 步：启动集群</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster start tidb-test</span><br></pre></td></tr></table></figure>
-
-<p>预期结果输出 <code>Started cluster </code>tidb-test<code> successfully</code> 标志启动成功。</p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-5.png" alt="TiUP-5"></p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-6.png" alt="TiUP-6"></p>
-<h3 id="第-8-步：验证集群运行状态"><a href="#第-8-步：验证集群运行状态" class="headerlink" title="第 8 步：验证集群运行状态"></a>第 8 步：验证集群运行状态</h3><ul>
-<li>通过 TiUP 检查集群状态</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
-
-<p>预期结果输出，注意 Status 状态信息为 <code>Up</code> 说明集群状态正常</p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-7.png" alt="TiUP-7"></p>
-<ul>
-<li>执行如下命令登录数据库：</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -h 10.0.1.4 -P 4000</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-8.png" alt="TiUP-8"></p>
-<p>此外，也需要验证监控系统、<a href="https://docs.pingcap.com/zh/tidb/stable/dashboard-intro">TiDB Dashboard</a> 的运行状态，以及简单命令的执行，验证方式可参考<a href="https://docs.pingcap.com/zh/tidb/stable/post-installation-check">验证集群运行状态</a>。</p>
-<h3 id="TiUP管理命令"><a href="#TiUP管理命令" class="headerlink" title="TiUP管理命令"></a>TiUP管理命令</h3><h4 id="集群管理"><a href="#集群管理" class="headerlink" title="集群管理"></a>集群管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看集群列表</span></span><br><span class="line">tiup cluster list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看集群状态</span></span><br><span class="line">tiup cluster display tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动集群</span></span><br><span class="line">tiup cluster start tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止集群</span></span><br><span class="line">tiup cluster stop tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改集群参数</span></span><br><span class="line">tiup cluster edit-config tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除集群</span></span><br><span class="line">tiup cluster destroy tidb-test</span><br></pre></td></tr></table></figure>
-
-<h4 id="集群组件管理"><a href="#集群组件管理" class="headerlink" title="集群组件管理"></a>集群组件管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动组件所有节点</span></span><br><span class="line">tiup cluster start tidb-test -R pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭组件所有节点</span></span><br><span class="line">tiup cluster stop tidb-test -R tidb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动某几个节点的组件</span></span><br><span class="line">tiup cluster start tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭某几个节点的组件</span></span><br><span class="line">tiup cluster stop tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br></pre></td></tr></table></figure>
-
+<p><img src="/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/Google%E6%90%9C%E7%B4%A2.png" alt="image-20201221204215545"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://chrome.google.com/webstore/detail/%E8%B0%B7%E6%AD%8C%E4%B8%8A%E7%BD%91%E5%8A%A9%E6%89%8B/nonmafimegllfoonjgplbabhmgfanaka?hl=zh-CN">Chrome应用商店：谷歌上网助手</a></p>
+<p><a href="https://www.wonxun.net/share/426">谷歌上网助手GHelper – Chrome插件下载(谷歌浏览器插件)</a></p>
 ]]></content>
       <categories>
-        <category>TiDB</category>
+        <category>开发小工具</category>
       </categories>
       <tags>
-        <tag>TiDB</tag>
+        <tag>开发小工具</tag>
+        <tag>翻墙</tag>
+        <tag>Google</tag>
       </tags>
   </entry>
   <entry>
@@ -1887,7 +2005,7 @@
 <p><a href="https://docs.openstack.org/api-ref/block-storage/v3/index.html?expanded=#volume-type-access-types-action-types-os-volume-type-access">OpenStack API Documentation：Block Storage API V3 (CURRENT)</a></p>
 ]]></content>
       <categories>
-        <category>OpenStack</category>
+        <category>OpenStack开发</category>
       </categories>
       <tags>
         <tag>Train版本</tag>
