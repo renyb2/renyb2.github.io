@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Docker 入门</title>
-    <url>/2020/11/05/Docker-%E5%85%A5%E9%97%A8/</url>
-    <content><![CDATA[<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 调整docker <span class="built_in">exec</span>终端高度和宽度</span></span><br><span class="line">docker exec -it --env COLUMNS=`tput cols` --env LINES=`tput lines` mariadb bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重命名镜像repository和tag</span></span><br><span class="line">docker tag &lt;image id&gt; &lt;new repository&gt;:&lt;new tag&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/moby/moby/issues/35407">Docker Exec does not resize terminal</a></p>
-]]></content>
-      <categories>
-        <category>Docker</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Dijkstra</title>
     <url>/2020/08/27/Dijkstra/</url>
     <content><![CDATA[<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><h3 id="问题1：最短路径"><a href="#问题1：最短路径" class="headerlink" title="问题1：最短路径"></a>问题1：最短路径</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src="/2020/08/27/Dijkstra/Dijkstra-%E9%97%AE%E9%A2%981.png" alt="image-20200731221210621"></p>
@@ -31,6 +15,22 @@
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker 入门</title>
+    <url>/2020/11/05/Docker-%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 调整docker <span class="built_in">exec</span>终端高度和宽度</span></span><br><span class="line">docker exec -it --env COLUMNS=`tput cols` --env LINES=`tput lines` mariadb bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重命名镜像repository和tag</span></span><br><span class="line">docker tag &lt;image id&gt; &lt;new repository&gt;:&lt;new tag&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/moby/moby/issues/35407">Docker Exec does not resize terminal</a></p>
+]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -310,6 +310,29 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux配置：GNOME桌面</title>
+    <url>/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AGNOME%E6%A1%8C%E9%9D%A2/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>GNOME是一种<a href="https://baike.baidu.com/item/GNU">GNU</a>网络对象模型环境 ，GNU计划的一部分，开放源码运动的一个重要组成部分，是一种让使用者容易操作和设定电脑环境的工具，目标是基于<a href="https://baike.baidu.com/item/%E8%87%AA%E7%94%B1%E8%BD%AF%E4%BB%B6">自由软件</a>，为<a href="https://baike.baidu.com/item/Unix">Unix</a>或者<a href="https://baike.baidu.com/item/%E7%B1%BBUnix">类Unix</a>操作系统构造一个功能完善、操作简单以及界面友好的<a href="https://baike.baidu.com/item/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83">桌面环境</a>，是GNU计划的正式桌面。</p>
+<p>GNOME可以运行在包括GNU/Linux(通常叫做<a href="https://baike.baidu.com/item/Linux">Linux</a>)，<a href="https://baike.baidu.com/item/Solaris">Solaris</a>，<a href="https://baike.baidu.com/item/HP-UX">HP-UX</a>，<a href="https://baike.baidu.com/item/BSD">BSD</a>和Apple’s Darwin系统上. GNOME 拥有很多强大的特性，如：高质量的平滑文本渲染， 首个国际化和可用性支持， 并且包括对反向文本的支持(注: 有些国家的文字是从右到左的排版的）。</p>
+<p>GNOME运行在大多数类Unix系统，并被Sun Microsystems公司采纳为Solaris平台的标准桌面，取代了过时的<a href="https://baike.baidu.com/item/CDE">CDE</a>。Sun Microsystems公司也以Java Desktop System名义发布一个商业版的桌面：一个被SUSELinux系统使用的基于GNOME的桌面。GNOME也移植到Cygwin使其能运行于Microsoft Windows。GNOME 还被众多LiveCDLinux发行版使用，如<a href="https://baike.baidu.com/item/Gnoppix">Gnoppix</a>和Morphix。</p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 列出可安装的桌面环境</span></span><br><span class="line">yum grouplist</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看安装的包有哪些内容</span></span><br><span class="line">yum group info  &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装GNOME及相应桌面管理工具</span></span><br><span class="line">yum -y groups install &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看当前默认启动模式</span></span><br><span class="line">systemctl get-default</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动图形化界面</span></span><br><span class="line">systemctl set-default graphical.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动命令行界面</span></span><br><span class="line">systemctl set-default multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令行界面热切换到图形界面</span></span><br><span class="line">init 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 图形界面热切换到命令行界面</span></span><br><span class="line">init 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载GNOME</span></span><br><span class="line">yum -y groupremove &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/gentsir/p/10300655.html">Centos 7 安装GNOME桌面环境</a></p>
+<p><a href="https://blog.csdn.net/wqh0830/article/details/86701379">CentOS-7安装GNOME桌面</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>GNOME</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Kubernetes部署：kubeadm部署高可用集群</title>
     <url>/2020/12/16/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9Akubeadm%E9%83%A8%E7%BD%B2%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/</url>
     <content><![CDATA[<h2 id="高可用集群部署"><a href="#高可用集群部署" class="headerlink" title="高可用集群部署"></a>高可用集群部署</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><h4 id="1-检查centos版本-hostname"><a href="#1-检查centos版本-hostname" class="headerlink" title="1. 检查centos版本 / hostname"></a>1. 检查centos版本 / hostname</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看centos版本</span></span><br><span class="line">cat /etc/centos-release</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; CentOS Linux release 7.7.1908 (Core)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此处 hostname 的输出将会是该机器在 Kubernetes 集群中的节点名字</span></span><br><span class="line">hostname</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改hostname</span></span><br><span class="line">hostnamectl set-hostname NAME</span><br></pre></td></tr></table></figure>
@@ -390,27 +413,9 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux配置：GNOME桌面</title>
-    <url>/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AGNOME%E6%A1%8C%E9%9D%A2/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>GNOME是一种<a href="https://baike.baidu.com/item/GNU">GNU</a>网络对象模型环境 ，GNU计划的一部分，开放源码运动的一个重要组成部分，是一种让使用者容易操作和设定电脑环境的工具，目标是基于<a href="https://baike.baidu.com/item/%E8%87%AA%E7%94%B1%E8%BD%AF%E4%BB%B6">自由软件</a>，为<a href="https://baike.baidu.com/item/Unix">Unix</a>或者<a href="https://baike.baidu.com/item/%E7%B1%BBUnix">类Unix</a>操作系统构造一个功能完善、操作简单以及界面友好的<a href="https://baike.baidu.com/item/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83">桌面环境</a>，是GNU计划的正式桌面。</p>
-<p>GNOME可以运行在包括GNU/Linux(通常叫做<a href="https://baike.baidu.com/item/Linux">Linux</a>)，<a href="https://baike.baidu.com/item/Solaris">Solaris</a>，<a href="https://baike.baidu.com/item/HP-UX">HP-UX</a>，<a href="https://baike.baidu.com/item/BSD">BSD</a>和Apple’s Darwin系统上. GNOME 拥有很多强大的特性，如：高质量的平滑文本渲染， 首个国际化和可用性支持， 并且包括对反向文本的支持(注: 有些国家的文字是从右到左的排版的）。</p>
-<p>GNOME运行在大多数类Unix系统，并被Sun Microsystems公司采纳为Solaris平台的标准桌面，取代了过时的<a href="https://baike.baidu.com/item/CDE">CDE</a>。Sun Microsystems公司也以Java Desktop System名义发布一个商业版的桌面：一个被SUSELinux系统使用的基于GNOME的桌面。GNOME也移植到Cygwin使其能运行于Microsoft Windows。GNOME 还被众多LiveCDLinux发行版使用，如<a href="https://baike.baidu.com/item/Gnoppix">Gnoppix</a>和Morphix。</p>
-</blockquote>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 列出可安装的桌面环境</span></span><br><span class="line">yum grouplist</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看安装的包有哪些内容</span></span><br><span class="line">yum group info  &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装GNOME及相应桌面管理工具</span></span><br><span class="line">yum -y groups install &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看当前默认启动模式</span></span><br><span class="line">systemctl get-default</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动图形化界面</span></span><br><span class="line">systemctl set-default graphical.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动命令行界面</span></span><br><span class="line">systemctl set-default multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令行界面热切换到图形界面</span></span><br><span class="line">init 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 图形界面热切换到命令行界面</span></span><br><span class="line">init 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载GNOME</span></span><br><span class="line">yum -y groupremove &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/gentsir/p/10300655.html">Centos 7 安装GNOME桌面环境</a></p>
-<p><a href="https://blog.csdn.net/wqh0830/article/details/86701379">CentOS-7安装GNOME桌面</a></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>GNOME</tag>
-      </tags>
+    <title>Linux配置：LVM</title>
+    <url>/2021/01/19/Linux%E9%85%8D%E7%BD%AE%EF%BC%9ALVM/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Linux配置：VNC Server</title>
@@ -673,31 +678,6 @@
       </tags>
   </entry>
   <entry>
-    <title>OpenStack使用：Windows镜像制作</title>
-    <url>/2020/11/09/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9AWindows%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</url>
-    <content><![CDATA[<h2 id="资源下载地址"><a href="#资源下载地址" class="headerlink" title="资源下载地址"></a>资源下载地址</h2><ul>
-<li>系统镜像：<a href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></li>
-<li>virtio：<a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/</a></li>
-</ul>
-<p>PS：新版本的virtio需要下载iso文件，内部驱动全面</p>
-<h2 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h2><h3 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装包</span></span><br><span class="line">yum install qemu-kvm qemu-img –y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建链接</span></span><br><span class="line">ln -sv /usr/libexec/qemu-kvm /usr/bin/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建磁盘</span></span><br><span class="line">qemu-img create -f qcow2 cn_windows_server_2016_vl_x64_cloud_11636695.qcow2 15G</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建虚机</span></span><br><span class="line">qemu-kvm -m 1024 -cdrom cn_windows_server_2016_vl_x64_dvd_11636695.iso -drive file=cn_windows_server_2016_vl_x64_dvd_11636695.qcow2,if=virtio,boot=on -fda virtio-win_amd64.vfd -boot d -nographic -vnc :3</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="VNC连接虚机"><a href="#VNC连接虚机" class="headerlink" title="VNC连接虚机"></a>VNC连接虚机</h3><p>连接方式：<code>&lt;server ip&gt;:3</code></p>
-<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/tcicy/p/7790956.html">OpenStack kvm win7镜像制作</a></p>
-<p><a href="https://blog.csdn.net/qq_20154221/article/details/51586537">制作OpenStack镜像win7.qcow2（centos/ubuntu/win镜像分享）</a></p>
-<p><a href="https://blog.csdn.net/wylfengyujiancheng/article/details/50468173">制作OpenStack Windows Server 2012镜像</a></p>
-]]></content>
-      <categories>
-        <category>OpenStack使用</category>
-      </categories>
-      <tags>
-        <tag>OpenStack使用</tag>
-        <tag>镜像制作</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>OpenStack使用：自定义实例root密码</title>
     <url>/2020/11/06/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BE%8Broot%E5%AF%86%E7%A0%81/</url>
     <content><![CDATA[<h2 id="OpenStack安装信息"><a href="#OpenStack安装信息" class="headerlink" title="OpenStack安装信息"></a>OpenStack安装信息</h2><ul>
@@ -768,6 +748,31 @@
       <tags>
         <tag>OpenStack使用</tag>
         <tag>Train版本</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenStack使用：Windows镜像制作</title>
+    <url>/2020/11/09/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9AWindows%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</url>
+    <content><![CDATA[<h2 id="资源下载地址"><a href="#资源下载地址" class="headerlink" title="资源下载地址"></a>资源下载地址</h2><ul>
+<li>系统镜像：<a href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></li>
+<li>virtio：<a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/</a></li>
+</ul>
+<p>PS：新版本的virtio需要下载iso文件，内部驱动全面</p>
+<h2 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h2><h3 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装包</span></span><br><span class="line">yum install qemu-kvm qemu-img –y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建链接</span></span><br><span class="line">ln -sv /usr/libexec/qemu-kvm /usr/bin/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建磁盘</span></span><br><span class="line">qemu-img create -f qcow2 cn_windows_server_2016_vl_x64_cloud_11636695.qcow2 15G</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建虚机</span></span><br><span class="line">qemu-kvm -m 1024 -cdrom cn_windows_server_2016_vl_x64_dvd_11636695.iso -drive file=cn_windows_server_2016_vl_x64_dvd_11636695.qcow2,if=virtio,boot=on -fda virtio-win_amd64.vfd -boot d -nographic -vnc :3</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="VNC连接虚机"><a href="#VNC连接虚机" class="headerlink" title="VNC连接虚机"></a>VNC连接虚机</h3><p>连接方式：<code>&lt;server ip&gt;:3</code></p>
+<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/tcicy/p/7790956.html">OpenStack kvm win7镜像制作</a></p>
+<p><a href="https://blog.csdn.net/qq_20154221/article/details/51586537">制作OpenStack镜像win7.qcow2（centos/ubuntu/win镜像分享）</a></p>
+<p><a href="https://blog.csdn.net/wylfengyujiancheng/article/details/50468173">制作OpenStack Windows Server 2012镜像</a></p>
+]]></content>
+      <categories>
+        <category>OpenStack使用</category>
+      </categories>
+      <tags>
+        <tag>OpenStack使用</tag>
+        <tag>镜像制作</tag>
       </tags>
   </entry>
   <entry>
@@ -1538,172 +1543,6 @@
       </tags>
   </entry>
   <entry>
-    <title>TiDB 安装文档</title>
-    <url>/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<p>官方文档：<a href="https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup">https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup</a></p>
-<h2 id="使用-TiUP-部署-TiDB-集群"><a href="#使用-TiUP-部署-TiDB-集群" class="headerlink" title="使用 TiUP 部署 TiDB 集群"></a>使用 TiUP 部署 TiDB 集群</h2><p><a href="https://github.com/pingcap/tiup">TiUP</a> 是 TiDB 4.0 版本引入的集群运维工具，<a href="https://github.com/pingcap/tiup/tree/master/components/cluster">TiUP cluster</a> 是 TiUP 提供的使用 Golang 编写的集群管理组件，通过 TiUP cluster 组件就可以进行日常的运维工作，包括部署、启动、关闭、销毁、弹性扩缩容、升级 TiDB 集群；管理 TiDB 集群参数。</p>
-<p>目前 TiUP 可以支持部署 TiDB、TiFlash、TiDB Binlog、TiCDC，以及监控系统。本文将介绍不同集群拓扑的具体部署步骤。</p>
-<h3 id="第-1-步：软硬件环境需求及前置检查"><a href="#第-1-步：软硬件环境需求及前置检查" class="headerlink" title="第 1 步：软硬件环境需求及前置检查"></a>第 1 步：软硬件环境需求及前置检查</h3><p><a href="https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements">软硬件环境需求</a></p>
-<p><a href="https://docs.pingcap.com/zh/tidb/stable/check-before-deployment">环境与系统配置检查</a></p>
-<h3 id="第-2-步：在中控机上安装-TiUP-组件"><a href="#第-2-步：在中控机上安装-TiUP-组件" class="headerlink" title="第 2 步：在中控机上安装 TiUP 组件"></a>第 2 步：在中控机上安装 TiUP 组件</h3><p>使用普通用户登录中控机，以 <code>tidb</code> 用户为例，后续安装 TiUP 及集群管理操作均通过该用户完成：</p>
-<ol>
-<li><p>执行如下命令安装 TiUP 工具：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>按如下步骤设置 TiUP 环境变量：</p>
-<p>重新声明全局环境变量：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
-
-<p>确认 TiUP 工具是否安装：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">which tiup</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装 TiUP cluster 组件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果已经安装，则更新 TiUP cluster 组件至最新版本：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup update --self &amp;&amp; tiup update cluster</span><br></pre></td></tr></table></figure>
-
-<p>预期输出 <code>“Update successfully!”</code> 字样。</p>
-</li>
-<li><p>验证当前 TiUP cluster 版本信息。执行如下命令查看 TiUP cluster 组件版本：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup --binary cluster</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<h3 id="第-3-步：编辑初始化配置文件"><a href="#第-3-步：编辑初始化配置文件" class="headerlink" title="第 3 步：编辑初始化配置文件"></a>第 3 步：编辑初始化配置文件</h3><p>请根据不同的集群拓扑，编辑 TiUP 所需的集群初始化配置文件。</p>
-<p>这里举出常见的 6 种场景，请根据链接中的拓扑说明，以及给出的配置文件模板，新建一个配置文件 <code>topology.yaml</code>。如果有其他组合场景的需求，请根据多个模板自行调整。</p>
-<ul>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/minimal-deployment-topology">最小拓扑架构</a></p>
-<p>最基本的集群拓扑，包括 tidb-server、tikv-server、pd-server，适合 OLTP 业务。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-deployment-topology">增加 TiFlash 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiFlash。TiFlash 是列式的存储引擎，已经逐步成为集群拓扑的标配。适合 Real-Time HTAP 业务。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/ticdc-deployment-topology">增加 TiCDC 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiCDC。TiCDC 是 4.0 版本开始支持的 TiDB 增量数据同步工具，支持多种下游 (TiDB/MySQL/MQ)。相比于 TiDB Binlog，TiCDC 有延迟更低、天然高可用等优点。在部署完成后，需要启动 TiCDC，<a href="https://docs.pingcap.com/zh/tidb/stable/manage-ticdc">通过 <code>cdc cli</code> 创建同步任务</a>。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tidb-binlog-deployment-topology">增加 TiDB Binlog 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiDB Binlog。TiDB Binlog 是目前广泛使用的增量同步组件，可提供准实时备份和同步功能。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tispark-deployment-topology">增加 TiSpark 拓扑架构</a></p>
-<p>包含最小拓扑的基础上，同时部署 TiSpark 组件。TiSpark 是 PingCAP 为解决用户复杂 OLAP 需求而推出的产品。TiUP cluster 组件对 TiSpark 的支持目前为实验性特性。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/hybrid-deployment-topology">混合部署拓扑架构</a></p>
-<p>适用于单台机器，混合部署多个实例的情况，也包括单机多实例，需要额外增加目录、端口、资源配比、label 等配置。</p>
-</li>
-<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/geo-distributed-deployment-topology">跨机房部署拓扑架构</a></p>
-<p>以典型的 <code>两地三中心</code> 架构为例，介绍跨机房部署架构，以及需要注意的关键设置。</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>注意：</strong></p>
-<ul>
-<li><code>topology.yaml</code>配置文件内不能使用主机名，需要使用ip地址。使用主机名会在启动时出现报错。</li>
-<li>对于需要全局生效的参数，请在配置文件中 <code>server_configs</code> 的对应组件下配置。</li>
-<li>对于需要某个节点生效的参数，请在具体节点的 <code>config</code> 中配置。</li>
-<li>配置的层次结构使用 <code>.</code> 表示。如：<code>log.slow-threshold</code>。更多格式参考 <a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml">TiUP 配置参数模版</a>。</li>
-<li>更多参数说明，请参考 <a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example">TiDB <code>config.toml.example</code></a>、<a href="https://github.com/tikv/tikv/blob/master/etc/config-template.toml">TiKV <code>config.toml.example</code></a> 、 <a href="https://github.com/pingcap/pd/blob/master/conf/config.toml">PD <code>config.toml.example</code></a> 和 <a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-configuration">TiFlash 配置参数</a>。</li>
-</ul>
-</blockquote>
-<h3 id="第-4-步：执行部署命令"><a href="#第-4-步：执行部署命令" class="headerlink" title="第 4 步：执行部署命令"></a>第 4 步：执行部署命令</h3><blockquote>
-<p><strong>注意：</strong></p>
-<p>通过 TiUP 进行集群部署可以使用密钥或者交互密码方式来进行安全认证：</p>
-<ul>
-<li>如果是密钥方式，可以通过 <code>-i</code> 或者 <code>--identity_file</code> 来指定密钥的路径；</li>
-<li>如果是密码方式，可以通过 <code>-p</code> 进入密码交互窗口；</li>
-<li>如果已经配置免密登陆目标机，则不需填写认证。</li>
-</ul>
-<p>一般情况下 TiUP 会在目标机器上创建 <code>topology.yaml</code> 中约定的用户和组，以下情况例外：</p>
-<ul>
-<li><code>topology.yaml</code> 中设置的用户名在目标机器上已存在。</li>
-<li>在命令行上使用了参数 <code>--skip-create-user</code> 明确指定跳过创建用户的步骤。</li>
-</ul>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster deploy tidb-test v4.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]</span><br></pre></td></tr></table></figure>
-
-<p>以上部署命令中：</p>
-<ul>
-<li>通过 TiUP cluster 部署的集群名称为 <code>tidb-test</code></li>
-<li>部署版本为 <code>v4.0.0</code>，最新版本可以通过执行 <code>tiup list tidb</code> 来查看 TiUP 支持的版本</li>
-<li>初始化配置文件为 <code>topology.yaml</code></li>
-<li>–user root：通过 root 用户登录到目标主机完成集群部署，该用户需要有 ssh 到目标机器的权限，并且在目标机器有 sudo 权限。也可以用其他有 ssh 和 sudo 权限的用户完成部署。</li>
-<li>[-i] 及 [-p]：非必选项，如果已经配置免密登陆目标机，则不需填写。否则选择其一即可，[-i] 为可登录到目标机的 root 用户（或 –user 指定的其他用户）的私钥，也可使用 [-p] 交互式输入该用户的密码</li>
-<li>如果需要指定在目标机创建的用户组名，可以参考<a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml#L7">这个例子</a>。</li>
-</ul>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-1.png" alt="TiUP-1"></p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-2.png" alt="TiUP-2"></p>
-<p>预期日志结尾输出会有 <code>Deployed cluster </code>tidb-test<code> successfully</code> 关键词，表示部署成功。</p>
-<h3 id="第-5-步：查看-TiUP-管理的集群情况"><a href="#第-5-步：查看-TiUP-管理的集群情况" class="headerlink" title="第 5 步：查看 TiUP 管理的集群情况"></a>第 5 步：查看 TiUP 管理的集群情况</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster list</span><br></pre></td></tr></table></figure>
-
-<p>TiUP 支持管理多个 TiDB 集群，该命令会输出当前通过 TiUP cluster 管理的所有集群信息，包括集群名称、部署用户、版本、密钥信息等：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Starting &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;components&#x2F;cluster&#x2F;v1.0.0&#x2F;cluster list</span><br><span class="line">Name              User  Version        Path                                                        PrivateKey</span><br><span class="line">----              ----  -------        ----                                                        ----------</span><br><span class="line">tidb-test         tidb  v4.0.0      &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test         &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test&#x2F;ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-3.png" alt="TiUP-3"></p>
-<h3 id="第-6-步：检查部署的-TiDB-集群情况"><a href="#第-6-步：检查部署的-TiDB-集群情况" class="headerlink" title="第 6 步：检查部署的 TiDB 集群情况"></a>第 6 步：检查部署的 TiDB 集群情况</h3><p>例如，执行如下命令检查 <code>tidb-test</code> 集群情况：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
-
-<p>预期输出包括 <code>tidb-test</code> 集群中实例 ID、角色、主机、监听端口和状态（由于还未启动，所以状态为 Down/inactive）、目录信息。</p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-4.png" alt="TiUP-4"></p>
-<h3 id="第-7-步：启动集群"><a href="#第-7-步：启动集群" class="headerlink" title="第 7 步：启动集群"></a>第 7 步：启动集群</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster start tidb-test</span><br></pre></td></tr></table></figure>
-
-<p>预期结果输出 <code>Started cluster </code>tidb-test<code> successfully</code> 标志启动成功。</p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-5.png" alt="TiUP-5"></p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-6.png" alt="TiUP-6"></p>
-<h3 id="第-8-步：验证集群运行状态"><a href="#第-8-步：验证集群运行状态" class="headerlink" title="第 8 步：验证集群运行状态"></a>第 8 步：验证集群运行状态</h3><ul>
-<li>通过 TiUP 检查集群状态</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
-
-<p>预期结果输出，注意 Status 状态信息为 <code>Up</code> 说明集群状态正常</p>
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-7.png" alt="TiUP-7"></p>
-<ul>
-<li>执行如下命令登录数据库：</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -h 10.0.1.4 -P 4000</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-8.png" alt="TiUP-8"></p>
-<p>此外，也需要验证监控系统、<a href="https://docs.pingcap.com/zh/tidb/stable/dashboard-intro">TiDB Dashboard</a> 的运行状态，以及简单命令的执行，验证方式可参考<a href="https://docs.pingcap.com/zh/tidb/stable/post-installation-check">验证集群运行状态</a>。</p>
-<h3 id="TiUP管理命令"><a href="#TiUP管理命令" class="headerlink" title="TiUP管理命令"></a>TiUP管理命令</h3><h4 id="集群管理"><a href="#集群管理" class="headerlink" title="集群管理"></a>集群管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看集群列表</span></span><br><span class="line">tiup cluster list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看集群状态</span></span><br><span class="line">tiup cluster display tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动集群</span></span><br><span class="line">tiup cluster start tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止集群</span></span><br><span class="line">tiup cluster stop tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改集群参数</span></span><br><span class="line">tiup cluster edit-config tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除集群</span></span><br><span class="line">tiup cluster destroy tidb-test</span><br></pre></td></tr></table></figure>
-
-<h4 id="集群组件管理"><a href="#集群组件管理" class="headerlink" title="集群组件管理"></a>集群组件管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动组件所有节点</span></span><br><span class="line">tiup cluster start tidb-test -R pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭组件所有节点</span></span><br><span class="line">tiup cluster stop tidb-test -R tidb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动某几个节点的组件</span></span><br><span class="line">tiup cluster start tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭某几个节点的组件</span></span><br><span class="line">tiup cluster stop tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>TiDB</category>
-      </categories>
-      <tags>
-        <tag>TiDB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/08/25/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<a id="more"></a>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vim</title>
     <url>/2020/08/31/Vim/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
@@ -1981,6 +1820,172 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2020/08/25/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<a id="more"></a>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TiDB 安装文档</title>
+    <url>/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>官方文档：<a href="https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup">https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup</a></p>
+<h2 id="使用-TiUP-部署-TiDB-集群"><a href="#使用-TiUP-部署-TiDB-集群" class="headerlink" title="使用 TiUP 部署 TiDB 集群"></a>使用 TiUP 部署 TiDB 集群</h2><p><a href="https://github.com/pingcap/tiup">TiUP</a> 是 TiDB 4.0 版本引入的集群运维工具，<a href="https://github.com/pingcap/tiup/tree/master/components/cluster">TiUP cluster</a> 是 TiUP 提供的使用 Golang 编写的集群管理组件，通过 TiUP cluster 组件就可以进行日常的运维工作，包括部署、启动、关闭、销毁、弹性扩缩容、升级 TiDB 集群；管理 TiDB 集群参数。</p>
+<p>目前 TiUP 可以支持部署 TiDB、TiFlash、TiDB Binlog、TiCDC，以及监控系统。本文将介绍不同集群拓扑的具体部署步骤。</p>
+<h3 id="第-1-步：软硬件环境需求及前置检查"><a href="#第-1-步：软硬件环境需求及前置检查" class="headerlink" title="第 1 步：软硬件环境需求及前置检查"></a>第 1 步：软硬件环境需求及前置检查</h3><p><a href="https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements">软硬件环境需求</a></p>
+<p><a href="https://docs.pingcap.com/zh/tidb/stable/check-before-deployment">环境与系统配置检查</a></p>
+<h3 id="第-2-步：在中控机上安装-TiUP-组件"><a href="#第-2-步：在中控机上安装-TiUP-组件" class="headerlink" title="第 2 步：在中控机上安装 TiUP 组件"></a>第 2 步：在中控机上安装 TiUP 组件</h3><p>使用普通用户登录中控机，以 <code>tidb</code> 用户为例，后续安装 TiUP 及集群管理操作均通过该用户完成：</p>
+<ol>
+<li><p>执行如下命令安装 TiUP 工具：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按如下步骤设置 TiUP 环境变量：</p>
+<p>重新声明全局环境变量：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>确认 TiUP 工具是否安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">which tiup</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 TiUP cluster 组件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果已经安装，则更新 TiUP cluster 组件至最新版本：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup update --self &amp;&amp; tiup update cluster</span><br></pre></td></tr></table></figure>
+
+<p>预期输出 <code>“Update successfully!”</code> 字样。</p>
+</li>
+<li><p>验证当前 TiUP cluster 版本信息。执行如下命令查看 TiUP cluster 组件版本：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup --binary cluster</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h3 id="第-3-步：编辑初始化配置文件"><a href="#第-3-步：编辑初始化配置文件" class="headerlink" title="第 3 步：编辑初始化配置文件"></a>第 3 步：编辑初始化配置文件</h3><p>请根据不同的集群拓扑，编辑 TiUP 所需的集群初始化配置文件。</p>
+<p>这里举出常见的 6 种场景，请根据链接中的拓扑说明，以及给出的配置文件模板，新建一个配置文件 <code>topology.yaml</code>。如果有其他组合场景的需求，请根据多个模板自行调整。</p>
+<ul>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/minimal-deployment-topology">最小拓扑架构</a></p>
+<p>最基本的集群拓扑，包括 tidb-server、tikv-server、pd-server，适合 OLTP 业务。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-deployment-topology">增加 TiFlash 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiFlash。TiFlash 是列式的存储引擎，已经逐步成为集群拓扑的标配。适合 Real-Time HTAP 业务。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/ticdc-deployment-topology">增加 TiCDC 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiCDC。TiCDC 是 4.0 版本开始支持的 TiDB 增量数据同步工具，支持多种下游 (TiDB/MySQL/MQ)。相比于 TiDB Binlog，TiCDC 有延迟更低、天然高可用等优点。在部署完成后，需要启动 TiCDC，<a href="https://docs.pingcap.com/zh/tidb/stable/manage-ticdc">通过 <code>cdc cli</code> 创建同步任务</a>。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tidb-binlog-deployment-topology">增加 TiDB Binlog 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiDB Binlog。TiDB Binlog 是目前广泛使用的增量同步组件，可提供准实时备份和同步功能。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/tispark-deployment-topology">增加 TiSpark 拓扑架构</a></p>
+<p>包含最小拓扑的基础上，同时部署 TiSpark 组件。TiSpark 是 PingCAP 为解决用户复杂 OLAP 需求而推出的产品。TiUP cluster 组件对 TiSpark 的支持目前为实验性特性。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/hybrid-deployment-topology">混合部署拓扑架构</a></p>
+<p>适用于单台机器，混合部署多个实例的情况，也包括单机多实例，需要额外增加目录、端口、资源配比、label 等配置。</p>
+</li>
+<li><p><a href="https://docs.pingcap.com/zh/tidb/stable/geo-distributed-deployment-topology">跨机房部署拓扑架构</a></p>
+<p>以典型的 <code>两地三中心</code> 架构为例，介绍跨机房部署架构，以及需要注意的关键设置。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>topology.yaml</code>配置文件内不能使用主机名，需要使用ip地址。使用主机名会在启动时出现报错。</li>
+<li>对于需要全局生效的参数，请在配置文件中 <code>server_configs</code> 的对应组件下配置。</li>
+<li>对于需要某个节点生效的参数，请在具体节点的 <code>config</code> 中配置。</li>
+<li>配置的层次结构使用 <code>.</code> 表示。如：<code>log.slow-threshold</code>。更多格式参考 <a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml">TiUP 配置参数模版</a>。</li>
+<li>更多参数说明，请参考 <a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example">TiDB <code>config.toml.example</code></a>、<a href="https://github.com/tikv/tikv/blob/master/etc/config-template.toml">TiKV <code>config.toml.example</code></a> 、 <a href="https://github.com/pingcap/pd/blob/master/conf/config.toml">PD <code>config.toml.example</code></a> 和 <a href="https://docs.pingcap.com/zh/tidb/stable/tiflash-configuration">TiFlash 配置参数</a>。</li>
+</ul>
+</blockquote>
+<h3 id="第-4-步：执行部署命令"><a href="#第-4-步：执行部署命令" class="headerlink" title="第 4 步：执行部署命令"></a>第 4 步：执行部署命令</h3><blockquote>
+<p><strong>注意：</strong></p>
+<p>通过 TiUP 进行集群部署可以使用密钥或者交互密码方式来进行安全认证：</p>
+<ul>
+<li>如果是密钥方式，可以通过 <code>-i</code> 或者 <code>--identity_file</code> 来指定密钥的路径；</li>
+<li>如果是密码方式，可以通过 <code>-p</code> 进入密码交互窗口；</li>
+<li>如果已经配置免密登陆目标机，则不需填写认证。</li>
+</ul>
+<p>一般情况下 TiUP 会在目标机器上创建 <code>topology.yaml</code> 中约定的用户和组，以下情况例外：</p>
+<ul>
+<li><code>topology.yaml</code> 中设置的用户名在目标机器上已存在。</li>
+<li>在命令行上使用了参数 <code>--skip-create-user</code> 明确指定跳过创建用户的步骤。</li>
+</ul>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster deploy tidb-test v4.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]</span><br></pre></td></tr></table></figure>
+
+<p>以上部署命令中：</p>
+<ul>
+<li>通过 TiUP cluster 部署的集群名称为 <code>tidb-test</code></li>
+<li>部署版本为 <code>v4.0.0</code>，最新版本可以通过执行 <code>tiup list tidb</code> 来查看 TiUP 支持的版本</li>
+<li>初始化配置文件为 <code>topology.yaml</code></li>
+<li>–user root：通过 root 用户登录到目标主机完成集群部署，该用户需要有 ssh 到目标机器的权限，并且在目标机器有 sudo 权限。也可以用其他有 ssh 和 sudo 权限的用户完成部署。</li>
+<li>[-i] 及 [-p]：非必选项，如果已经配置免密登陆目标机，则不需填写。否则选择其一即可，[-i] 为可登录到目标机的 root 用户（或 –user 指定的其他用户）的私钥，也可使用 [-p] 交互式输入该用户的密码</li>
+<li>如果需要指定在目标机创建的用户组名，可以参考<a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml#L7">这个例子</a>。</li>
+</ul>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-1.png" alt="TiUP-1"></p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-2.png" alt="TiUP-2"></p>
+<p>预期日志结尾输出会有 <code>Deployed cluster </code>tidb-test<code> successfully</code> 关键词，表示部署成功。</p>
+<h3 id="第-5-步：查看-TiUP-管理的集群情况"><a href="#第-5-步：查看-TiUP-管理的集群情况" class="headerlink" title="第 5 步：查看 TiUP 管理的集群情况"></a>第 5 步：查看 TiUP 管理的集群情况</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster list</span><br></pre></td></tr></table></figure>
+
+<p>TiUP 支持管理多个 TiDB 集群，该命令会输出当前通过 TiUP cluster 管理的所有集群信息，包括集群名称、部署用户、版本、密钥信息等：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Starting &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;components&#x2F;cluster&#x2F;v1.0.0&#x2F;cluster list</span><br><span class="line">Name              User  Version        Path                                                        PrivateKey</span><br><span class="line">----              ----  -------        ----                                                        ----------</span><br><span class="line">tidb-test         tidb  v4.0.0      &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test         &#x2F;home&#x2F;tidb&#x2F;.tiup&#x2F;storage&#x2F;cluster&#x2F;clusters&#x2F;tidb-test&#x2F;ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-3.png" alt="TiUP-3"></p>
+<h3 id="第-6-步：检查部署的-TiDB-集群情况"><a href="#第-6-步：检查部署的-TiDB-集群情况" class="headerlink" title="第 6 步：检查部署的 TiDB 集群情况"></a>第 6 步：检查部署的 TiDB 集群情况</h3><p>例如，执行如下命令检查 <code>tidb-test</code> 集群情况：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期输出包括 <code>tidb-test</code> 集群中实例 ID、角色、主机、监听端口和状态（由于还未启动，所以状态为 Down/inactive）、目录信息。</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-4.png" alt="TiUP-4"></p>
+<h3 id="第-7-步：启动集群"><a href="#第-7-步：启动集群" class="headerlink" title="第 7 步：启动集群"></a>第 7 步：启动集群</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster start tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期结果输出 <code>Started cluster </code>tidb-test<code> successfully</code> 标志启动成功。</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-5.png" alt="TiUP-5"></p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-6.png" alt="TiUP-6"></p>
+<h3 id="第-8-步：验证集群运行状态"><a href="#第-8-步：验证集群运行状态" class="headerlink" title="第 8 步：验证集群运行状态"></a>第 8 步：验证集群运行状态</h3><ul>
+<li>通过 TiUP 检查集群状态</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tiup cluster display tidb-test</span><br></pre></td></tr></table></figure>
+
+<p>预期结果输出，注意 Status 状态信息为 <code>Up</code> 说明集群状态正常</p>
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-7.png" alt="TiUP-7"></p>
+<ul>
+<li>执行如下命令登录数据库：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -h 10.0.1.4 -P 4000</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/16/TiDB-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/tiup-8.png" alt="TiUP-8"></p>
+<p>此外，也需要验证监控系统、<a href="https://docs.pingcap.com/zh/tidb/stable/dashboard-intro">TiDB Dashboard</a> 的运行状态，以及简单命令的执行，验证方式可参考<a href="https://docs.pingcap.com/zh/tidb/stable/post-installation-check">验证集群运行状态</a>。</p>
+<h3 id="TiUP管理命令"><a href="#TiUP管理命令" class="headerlink" title="TiUP管理命令"></a>TiUP管理命令</h3><h4 id="集群管理"><a href="#集群管理" class="headerlink" title="集群管理"></a>集群管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看集群列表</span></span><br><span class="line">tiup cluster list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看集群状态</span></span><br><span class="line">tiup cluster display tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动集群</span></span><br><span class="line">tiup cluster start tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止集群</span></span><br><span class="line">tiup cluster stop tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改集群参数</span></span><br><span class="line">tiup cluster edit-config tidb-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除集群</span></span><br><span class="line">tiup cluster destroy tidb-test</span><br></pre></td></tr></table></figure>
+
+<h4 id="集群组件管理"><a href="#集群组件管理" class="headerlink" title="集群组件管理"></a>集群组件管理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动组件所有节点</span></span><br><span class="line">tiup cluster start tidb-test -R pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭组件所有节点</span></span><br><span class="line">tiup cluster stop tidb-test -R tidb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动某几个节点的组件</span></span><br><span class="line">tiup cluster start tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭某几个节点的组件</span></span><br><span class="line">tiup cluster stop tidb-test -N &lt;ip&gt;:&lt;port&gt;,&lt;ip&gt;:&lt;port&gt;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>TiDB</category>
+      </categories>
+      <tags>
+        <tag>TiDB</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>开发小工具：Chrome翻墙</title>
     <url>/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/</url>
     <content><![CDATA[<h2 id="谷歌上网助手GHelper-–-Chrome插件"><a href="#谷歌上网助手GHelper-–-Chrome插件" class="headerlink" title="谷歌上网助手GHelper – Chrome插件"></a>谷歌上网助手GHelper – Chrome插件</h2><blockquote>
@@ -2028,8 +2033,8 @@
       </tags>
   </entry>
   <entry>
-    <title>OpenStack开发：curl接口调试</title>
-    <url>/2020/12/14/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9Acurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95/</url>
+    <title>OpenStack开发：Curl接口调试</title>
+    <url>/2020/12/14/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9ACurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95a/</url>
     <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote>
 <h3 id="keystone"><a href="#keystone" class="headerlink" title="keystone"></a>keystone</h3><p>OpenStack 的 Keystone V3 中引入了 Domain 的概念</p>
 <h3 id="Domain，project，user，role，token-的概念和关系"><a href="#Domain，project，user，role，token-的概念和关系" class="headerlink" title="Domain，project，user，role，token 的概念和关系"></a>Domain，project，user，role，token 的概念和关系</h3><p>简单来说，</p>
@@ -2041,7 +2046,7 @@
 <li>Token - 一个 user 对于某个目标（project 或者 domain）的一个有限时间段内的身份令牌</li>
 </ul>
 <p>它们之间的关系用一个不完整的图来表示：</p>
-<p><img src="/2020/12/14/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9Acurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95/%E8%B5%84%E6%BA%90%E5%85%B3%E7%B3%BB.jpg" alt="资源关系"></p>
+<p><img src="/2020/12/14/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9ACurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95a/%E8%B5%84%E6%BA%90%E5%85%B3%E7%B3%BB.jpg" alt="资源关系"></p>
 <p>说明：</p>
 <ul>
 <li>Domain 可以认为是 project，user，group 的 namespace。 一个 domain 内，这些元素的名称不可以重复，但是在两个不同的domain内，它们的名称可以重复。因此，在确定这些元素时，需要同时使用它们的名称和它们的 domain 的 id 或者 name。</li>
@@ -2053,7 +2058,7 @@
 <li>Token 具有 scope 的概念，分为 unscoped token，domain-scoped token 和 project-scoped token。下文有说明。</li>
 </ul>
 <h3 id="token"><a href="#token" class="headerlink" title="token"></a>token</h3><p>token即令牌，身份的凭证。在整个openstack项目中服务与服务之间的通信都需要token来进行身份认证，我们来举个例子：</p>
-<p><img src="/2020/12/14/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9Acurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95/%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B.jpg" alt="请求流程"></p>
+<p><img src="/2020/12/14/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9ACurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95a/%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B.jpg" alt="请求流程"></p>
 <p>如上图所示，一个用户需要创建一台虚拟机，用户首先要登入之后先拿到一个project_scope token 这个token包含了用户具有的角色以及服务列表，用户拿着这个令牌去请求nova服务，nova首先会去keystone认证该token是否有效，之后会向glance发送获取镜像的请求，glance接收请求后也会向之前的步骤一样去keystone认证token有效性，最终返回镜像给nova，nova再用镜像去给用户创建虚拟机。<br> 另外需要说明的是token中包含用户所拥有的角色，nova和其他服务还会根据token中的role来判断用户是否有操作权限。</p>
 <h3 id="token类型"><a href="#token类型" class="headerlink" title="token类型"></a>token类型</h3><h4 id="unscope-token"><a href="#unscope-token" class="headerlink" title="unscope token"></a>unscope token</h4><p>示例：</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;token&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;issued_at&quot;</span>: <span class="string">&quot;2016-11-30T03:50:49.277102Z&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;audit_ids&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;AbSBE-XmTc-gacd4cxrZAQ&quot;</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;methods&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;password&quot;</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;expires_at&quot;</span>: <span class="string">&quot;2016-12-01T03:50:49.277079Z&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;user&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;domain&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;id&quot;</span>: <span class="string">&quot;default&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Default&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;id&quot;</span>: <span class="string">&quot;fb7cdca584894c7ca3faa7388ee3a98f&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;admin&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2110,6 +2115,204 @@
         <tag>Train版本</tag>
         <tag>OpenStack开发</tag>
         <tag>Curl</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenStack部署：HTTPS</title>
+    <url>/2021/01/19/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AHTTPS/</url>
+    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p><strong>需求：</strong>需要为openstack所有服务更新为https方式访问</p>
+<p><strong>方案：</strong>使用HAProxy进行负载均衡和https证书卸载，通过HAProxy frontend进行https证书验证，验证通过后，转发至backend的后端http server。openstack各服务之间，通过https进行访问，需要配置各个服务的CA证书，同时更新keystone的endpoint</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>系统：CentOS Linux release 7.7.1908 (Core)</li>
+<li>OpenStack部署方式：kolla-ansible部署，control节点1台，compute节点3台</li>
+<li>kolla-ansible版本：9.2.0</li>
+<li>OpenStack版本：Train</li>
+</ul>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用kolla生成证书</span></span><br><span class="line">kolla-ansible certificates</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> haproxy</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy.pem /etc/kolla/haproxy/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> glance</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/glance-api/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> cinder</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/cinder-api/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/cinder-backup/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/cinder-scheduler/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/cinder-volume/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node02:/etc/kolla/cinder-backup/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node03:/etc/kolla/cinder-backup/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node02:/etc/kolla/cinder-volume/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node03:/etc/kolla/cinder-volume/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> neutron</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/neutron-server/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/neutron-openvswitch-agent/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/neutron-metadata-agent/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/neutron-l3-agent/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/neutron-dhcp-agent/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node02:/etc/kolla/neutron-openvswitch-agent/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node03:/etc/kolla/neutron-openvswitch-agent/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> placement</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/placement-api/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> nova</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-api/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-api-bootstrap/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-cell-bootstrap/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-compute/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-conductor/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-novncproxy/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-scheduler/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node02:/etc/kolla/nova-compute/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node03:/etc/kolla/nova-compute/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> horizon</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/horizon/</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>admin-openrc.sh</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Clear any old environment that may conflict.</span></span><br><span class="line">for key in $( set | awk &#x27;&#123;FS=&quot;=&quot;&#125;  /^OS_/ &#123;print $1&#125;&#x27; ); do unset $key ; done</span><br><span class="line">export OS_PROJECT_DOMAIN_NAME=Default</span><br><span class="line">export OS_USER_DOMAIN_NAME=Default</span><br><span class="line">export OS_PROJECT_NAME=admin</span><br><span class="line">export OS_TENANT_NAME=admin</span><br><span class="line">export OS_USERNAME=admin</span><br><span class="line">export OS_PASSWORD=admin</span><br><span class="line">export OS_AUTH_URL=https://111.111.111.80:35357/v3</span><br><span class="line">export OS_CACERT=/etc/kolla/certificates/haproxy-ca.crt</span><br><span class="line">export OS_INTERFACE=internal</span><br><span class="line">export OS_ENDPOINT_TYPE=internalURL</span><br><span class="line">export OS_IDENTITY_API_VERSION=3</span><br><span class="line">export OS_REGION_NAME=RegionOne</span><br><span class="line">export OS_AUTH_PLUGIN=password</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Keystone配置证书"><a href="#Keystone配置证书" class="headerlink" title="Keystone配置证书"></a>Keystone配置证书</h3><ol>
+<li>使用http协议，先创建 <code>https endpoint</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">openstack endpoint create --region RegionOne identity public https://111.111.111.80:5000</span><br><span class="line">openstack endpoint create --region RegionOne identity internal https://111.111.111.80:5000</span><br><span class="line">openstack endpoint create --region RegionOne identity admin https://111.111.111.80:35357</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>删除http endpoint</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 如果环境变量interface使用的是internal，则删除掉internal http的endpoint之后，删除其他endpoint会报错，属于正常现象。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 原因：https尚未在haproxy上配置，请求https端口会报错</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解决：需要执行第3步，更新haproxy。配置https证书验证后，可正常执行其余操作</span></span><br><span class="line">root@node01: kolla # openstack endpoint delete 9200b3fcad1e42e8a8d8277e8c7ba71c</span><br><span class="line">Failed to contact the endpoint at https://111.111.111.80:5000 for discovery. Fallback to using that endpoint as the base url.</span><br><span class="line">Failed to contact the endpoint at https://111.111.111.80:5000 for discovery. Fallback to using that endpoint as the base url.</span><br><span class="line">Failed to contact the endpoint at https://111.111.111.80:5000 for discovery. Fallback to using that endpoint as the base url.</span><br><span class="line">Failed to delete endpoint with ID &#x27;9200b3fcad1e42e8a8d8277e8c7ba71c&#x27;: SSL exception connecting to https://111.111.111.80:5000/endpoints?: HTTPSConnectionPool(host=&#x27;111.111.111.80&#x27;, port=5000): Max retries exceeded with url: /endpoints (Caused by SSLError(SSLError(1, u&#x27;[SSL: UNKNOWN_PROTOCOL] unknown protocol (_ssl.c:618)&#x27;),))</span><br><span class="line">1 of 1 endpoints failed to delete.</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>更新haproxy中 <code>keystone.cfg</code> 配置，重启haproxy。此时keystone的https端口正常响应</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">frontend keystone_internal_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.80:5000 ssl crt &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy.pem</span><br><span class="line">    default_backend keystone_internal_back</span><br><span class="line"></span><br><span class="line">backend keystone_internal_back</span><br><span class="line">    mode http</span><br><span class="line">    server node01 111.111.111.81:5000 check inter 2000 rise 2 fall 5</span><br><span class="line"></span><br><span class="line">frontend keystone_admin_front</span><br><span class="line">    mode http</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    option httplog</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.80:35357 ssl crt &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy.pem</span><br><span class="line">    default_backend keystone_admin_back</span><br><span class="line"></span><br><span class="line">backend keystone_admin_back</span><br><span class="line">    mode http</span><br><span class="line">    server node01 111.111.111.81:35357 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>继续删除其余未删除的keystone http endpoint</li>
+<li>更新其他组件endpoint协议，切换为https</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">openstack endpoint list | sed &#x27;1,3d&#x27; | sed &#x27;$d&#x27; &gt; /tmp/endpoint</span><br><span class="line"></span><br><span class="line">while read -r line</span><br><span class="line">do</span><br><span class="line">    echo $line</span><br><span class="line">    id=`echo $line | awk &#x27;&#123;print $2&#125;&#x27;`</span><br><span class="line">    region=`echo $line | awk &#x27;&#123;print $4&#125;&#x27;`</span><br><span class="line">    service_name=`echo $line | awk &#x27;&#123;print $6&#125;&#x27;`</span><br><span class="line">    service_type=`echo $line | awk &#x27;&#123;print $8&#125;&#x27;`</span><br><span class="line">    interface=`echo $line | awk &#x27;&#123;print $12&#125;&#x27;`</span><br><span class="line">    url=`echo $line | awk &#x27;&#123;print $14&#125;&#x27;`</span><br><span class="line">    </span><br><span class="line">    if [ $(echo $url | awk -F : &#x27;&#123;print $1&#125;&#x27;) == &#x27;http&#x27; ]; then</span><br><span class="line">        openstack endpoint delete $id</span><br><span class="line">        openstack endpoint create --region $region \</span><br><span class="line">            $service_type $interface \</span><br><span class="line">            $(echo $url | sed &#x27;s/http/https/g&#x27;)</span><br><span class="line">    fi</span><br><span class="line">done &lt; /tmp/endpoint</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>验证</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">openstack endpoint list</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Glance配置证书"><a href="#Glance配置证书" class="headerlink" title="Glance配置证书"></a>Glance配置证书</h3><ol>
+<li>更新haproxy中 <code>glance-api.cfg</code> 配置，重启haproxy</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">frontend glance_api_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    timeout client 6h</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.80:9292 ssl crt &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy.pem</span><br><span class="line">    default_backend glance_api_back</span><br><span class="line"></span><br><span class="line">backend glance_api_back</span><br><span class="line">    mode http</span><br><span class="line">    timeout server 6h</span><br><span class="line">    server node01 111.111.111.81:9292 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>更新glance服务配置文件：<code>glance-api.conf</code>，重启glance服务</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[keystone_authtoken]</span><br><span class="line">www_authenticate_uri = https://111.111.111.80:5000</span><br><span class="line">auth_url = https://111.111.111.80:35357</span><br><span class="line">cafile = /var/lib/kolla/config_files/haproxy-ca.crt</span><br><span class="line">insecure = true</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>验证</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">openstack image list</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Cinder配置证书"><a href="#Cinder配置证书" class="headerlink" title="Cinder配置证书"></a>Cinder配置证书</h3><ol>
+<li>更新haproxy中 <code>cinder-api.cfg</code> 配置，重启haproxy</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">frontend cinder_api_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.80:8776 ssl crt &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy.pem</span><br><span class="line">    default_backend cinder_api_back</span><br><span class="line"></span><br><span class="line">backend cinder_api_back</span><br><span class="line">    mode http</span><br><span class="line">    server node01 111.111.111.81:8776 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>更新服务配置文件：<code>cinder.conf</code> 。同步所有节点配置文件，重启cinder相关服务</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[DEFAULT]</span><br><span class="line">glance_api_servers = https://111.111.111.80:9292</span><br><span class="line">glance_api_insecure = true</span><br><span class="line">glance_ca_certificates_file = /var/lib/kolla/config_files/haproxy-ca.crt</span><br><span class="line"></span><br><span class="line">[nova]</span><br><span class="line">auth_url = https://111.111.111.80:35357</span><br><span class="line">cafile = /var/lib/kolla/config_files/haproxy-ca.crt</span><br><span class="line">insecure = true</span><br><span class="line"></span><br><span class="line">[keystone_authtoken]</span><br><span class="line">www_authenticate_uri = https://111.111.111.80:5000</span><br><span class="line">auth_url = https://111.111.111.80:35357</span><br><span class="line">cafile = /var/lib/kolla/config_files/haproxy-ca.crt</span><br><span class="line">insecure = true</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>验证</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@node01: kolla # openstack volume service list</span><br><span class="line">+------------------+--------------+------+---------+-------+----------------------------+</span><br><span class="line">| Binary           | Host         | Zone | Status  | State | Updated At                 |</span><br><span class="line">+------------------+--------------+------+---------+-------+----------------------------+</span><br><span class="line">| cinder-scheduler | node01       | nova | enabled | up    | 2021-01-18T06:13:08.000000 |</span><br><span class="line">| cinder-volume    | node01@lvm-1 | nova | enabled | up    | 2021-01-18T06:13:09.000000 |</span><br><span class="line">| cinder-volume    | node03@lvm-1 | nova | enabled | up    | 2021-01-18T06:13:11.000000 |</span><br><span class="line">| cinder-volume    | node02@lvm-1 | nova | enabled | up    | 2021-01-18T06:13:11.000000 |</span><br><span class="line">| cinder-backup    | node01       | nova | enabled | up    | 2021-01-18T06:13:17.000000 |</span><br><span class="line">| cinder-backup    | node02       | nova | enabled | up    | 2021-01-18T06:13:10.000000 |</span><br><span class="line">| cinder-backup    | node03       | nova | enabled | up    | 2021-01-18T06:13:10.000000 |</span><br><span class="line">+------------------+--------------+------+---------+-------+----------------------------+</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Neutron配置证书"><a href="#Neutron配置证书" class="headerlink" title="Neutron配置证书"></a>Neutron配置证书</h3><ol>
+<li>更新haproxy中 <code>neutron-server.cfg</code> 配置，重启haproxy</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">frontend neutron_server_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    option http-tunnel</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.80:9696 ssl crt &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy.pem</span><br><span class="line">    default_backend neutron_server_back</span><br><span class="line"></span><br><span class="line">backend neutron_server_back</span><br><span class="line">    mode http</span><br><span class="line">    server node01 111.111.111.81:9696 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>更新neutron服务配置文件：<code>neutron.conf</code> 。同步所有节点配置文件，重启neutron相关服务</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[nova]</span><br><span class="line">auth_url &#x3D; https:&#x2F;&#x2F;111.111.111.80:35357</span><br><span class="line">cafile &#x3D; &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy-ca.crt</span><br><span class="line">insecure &#x3D; true</span><br><span class="line"></span><br><span class="line">[keystone_authtoken]</span><br><span class="line">www_authenticate_uri &#x3D; https:&#x2F;&#x2F;111.111.111.80:5000</span><br><span class="line">auth_url &#x3D; https:&#x2F;&#x2F;111.111.111.80:35357</span><br><span class="line">cafile &#x3D; &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy-ca.crt</span><br><span class="line">insecure &#x3D; true</span><br><span class="line"></span><br><span class="line">[placement]</span><br><span class="line">auth_url &#x3D; https:&#x2F;&#x2F;111.111.111.80:35357</span><br><span class="line">cafile &#x3D; &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy-ca.crt</span><br><span class="line">insecure &#x3D; true</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>验证</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@node01: kolla # openstack network agent list</span><br><span class="line">+--------------------------------------+--------------------+--------+-------------------+-------+-------+---------------------------+</span><br><span class="line">| ID                                   | Agent Type         | Host   | Availability Zone | Alive | State | Binary                    |</span><br><span class="line">+--------------------------------------+--------------------+--------+-------------------+-------+-------+---------------------------+</span><br><span class="line">| 07a53564-2518-4550-b222-e1d740e51772 | Open vSwitch agent | node01 | None              | :-)   | UP    | neutron-openvswitch-agent |</span><br><span class="line">| 07c00fbe-9da4-4747-9a60-5af739733eb3 | Open vSwitch agent | node03 | None              | :-)   | UP    | neutron-openvswitch-agent |</span><br><span class="line">| 0fd1203e-1fdc-4261-bf87-0a76b5883f5b | Metadata agent     | node01 | None              | :-)   | UP    | neutron-metadata-agent    |</span><br><span class="line">| 333408d8-3a49-4ae1-8251-e52f2a09da78 | Open vSwitch agent | node02 | None              | :-)   | UP    | neutron-openvswitch-agent |</span><br><span class="line">| 48c2a3d0-5818-4df2-8054-41befae51b44 | L3 agent           | node01 | nova              | :-)   | UP    | neutron-l3-agent          |</span><br><span class="line">| 4df37b6c-2a77-4f1f-8dad-a15e758955e9 | DHCP agent         | node01 | nova              | :-)   | UP    | neutron-dhcp-agent        |</span><br><span class="line">+--------------------------------------+--------------------+--------+-------------------+-------+-------+---------------------------+</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Placement配置证书"><a href="#Placement配置证书" class="headerlink" title="Placement配置证书"></a>Placement配置证书</h3><ol>
+<li>更新haproxy中 <code>placement-api.cfg</code> 配置，重启haproxy</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">frontend placement_api_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.80:8780 ssl crt &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy.pem</span><br><span class="line">    default_backend placement_api_back</span><br><span class="line"></span><br><span class="line">backend placement_api_back</span><br><span class="line">    mode http</span><br><span class="line">    server node01 111.111.111.81:8780 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>更新placement服务配置文件：<code>placement.conf</code> 。同步所有节点配置文件，重启placement相关服务</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[keystone_authtoken]</span><br><span class="line">www_authenticate_uri &#x3D; https:&#x2F;&#x2F;111.111.111.80:5000</span><br><span class="line">auth_url &#x3D; https:&#x2F;&#x2F;111.111.111.80:35357</span><br><span class="line">cafile &#x3D; &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy-ca.crt</span><br><span class="line">insecure &#x3D; true</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>验证</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 配置nova后，查看nova_compute日志，是否有如下报错：</span></span><br><span class="line">2021-01-18 02:28:39.196 7 WARNING keystoneauth.discover [req-a08df9fe-e10d-4836-b2cd-3fc922461ea3 - - - - -] Failed to contact the endpoint at https://111.111.111.80:8780 for discovery. Fallback to using that endpoint as the base url.: SSLError: SSL exception connecting to https://111.111.111.80:8780: HTTPSConnectionPool(host=&#x27;111.111.111.80&#x27;, port=8780): Max retries exceeded with url: / (Caused by SSLError(SSLError(&quot;bad handshake: Error([(&#x27;SSL routines&#x27;, &#x27;ssl3_get_record&#x27;, &#x27;wrong version number&#x27;)],)&quot;,),))</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看placement日志，有如下信息，200表示请求正常响应：</span></span><br><span class="line">111.111.111.82 - - [18/Jan/2021:02:30:59 -0500] &quot;GET / HTTP/1.1&quot; 200 136 2191 &quot;-&quot; &quot;nova-compute keystoneauth1/3.17.3 python-requests/2.22.0 CPython/2.7.5&quot;</span><br><span class="line">111.111.111.80 - - [18/Jan/2021:02:31:06 -0500] &quot;GET / HTTP/1.1&quot; 200 136 2366 &quot;-&quot; &quot;nova-compute keystoneauth1/3.17.3 python-requests/2.22.0 CPython/2.7.5&quot;</span><br><span class="line">111.111.111.83 - - [18/Jan/2021:02:32:01 -0500] &quot;GET / HTTP/1.1&quot; 200 136 4198 &quot;-&quot; &quot;nova-compute keystoneauth1/3.17.3 python-requests/2.22.0 CPython/2.7.5&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Nova配置证书"><a href="#Nova配置证书" class="headerlink" title="Nova配置证书"></a>Nova配置证书</h3><ol>
+<li>更新haproxy中 <code>nova-api.cfg</code>, <code>nova-novncproxy.cfg</code> 配置，重启haproxy</li>
+</ol>
+<p><strong>nova-api.cfg</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">frontend nova_api_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.80:8774 ssl crt &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy.pem</span><br><span class="line">    default_backend nova_api_back</span><br><span class="line"></span><br><span class="line">backend nova_api_back</span><br><span class="line">    mode http</span><br><span class="line">    server node01 111.111.111.81:8774 check inter 2000 rise 2 fall 5</span><br><span class="line"></span><br><span class="line">frontend nova_metadata_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.80:8775 ssl crt &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy.pem</span><br><span class="line">    default_backend nova_metadata_back</span><br><span class="line"></span><br><span class="line">backend nova_metadata_back</span><br><span class="line">    mode http</span><br><span class="line">    server node01 111.111.111.81:8775 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<p><strong>nova-novncproxy.cfg</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">frontend nova_novncproxy_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.80:6080 ssl crt &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy.pem</span><br><span class="line">    default_backend nova_novncproxy_back</span><br><span class="line"></span><br><span class="line">backend nova_novncproxy_back</span><br><span class="line">    mode http</span><br><span class="line">    timeout tunnel 1h</span><br><span class="line">    server node01 111.111.111.81:6080 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>更新nova服务配置文件：<code>nova.conf</code> 。同步所有节点配置文件，重启nova相关服务</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[glance]</span><br><span class="line">api_servers = https://111.111.111.80:9292</span><br><span class="line">cafile = /var/lib/kolla/config_files/haproxy-ca.crt</span><br><span class="line">insecure = true</span><br><span class="line"></span><br><span class="line">[cinder]</span><br><span class="line">auth_url = https://111.111.111.80:35357</span><br><span class="line">cafile = /var/lib/kolla/config_files/haproxy-ca.crt</span><br><span class="line">insecure = true</span><br><span class="line"></span><br><span class="line">[neutron]</span><br><span class="line">auth_url = https://111.111.111.80:35357</span><br><span class="line">cafile = /var/lib/kolla/config_files/haproxy-ca.crt</span><br><span class="line">insecure = true</span><br><span class="line"></span><br><span class="line">[keystone_authtoken]</span><br><span class="line">www_authenticate_uri = https://111.111.111.80:5000</span><br><span class="line">auth_url = https://111.111.111.80:35357</span><br><span class="line">cafile = /var/lib/kolla/config_files/haproxy-ca.crt</span><br><span class="line">insecure = true</span><br><span class="line"></span><br><span class="line">[placement]</span><br><span class="line">auth_url = https://111.111.111.80:35357</span><br><span class="line">cafile = /var/lib/kolla/config_files/haproxy-ca.crt</span><br><span class="line">insecure = true</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>验证</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@node01: kolla # openstack compute service list</span><br><span class="line">+----+----------------+--------+----------+---------+-------+----------------------------+</span><br><span class="line">| ID | Binary         | Host   | Zone     | Status  | State | Updated At                 |</span><br><span class="line">+----+----------------+--------+----------+---------+-------+----------------------------+</span><br><span class="line">| 10 | nova-scheduler | node01 | internal | enabled | up    | 2021-01-18T17:37:46.000000 |</span><br><span class="line">|  1 | nova-conductor | node01 | internal | enabled | up    | 2021-01-18T17:37:44.000000 |</span><br><span class="line">|  6 | nova-compute   | node01 | nova     | enabled | up    | 2021-01-18T17:37:52.000000 |</span><br><span class="line">|  7 | nova-compute   | node02 | nova     | enabled | up    | 2021-01-18T17:37:37.000000 |</span><br><span class="line">|  8 | nova-compute   | node03 | nova     | enabled | up    | 2021-01-18T17:37:51.000000 |</span><br><span class="line">+----+----------------+--------+----------+---------+-------+----------------------------+</span><br><span class="line">root@node01: kolla # openstack server create --image cirros --flavor m1.tiny --key-name mykey --network demo-net --boot-from-volume 1 demo</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>常见问题</li>
+</ol>
+<blockquote>
+<p><strong>问题1：</strong>HostMappingNotFound: Host ‘node01’ is not mapped to any cell</p>
+<p><strong>解决：</strong>nova_api pod中执行如下命令，重新发现node01<br>nova-manage cell_v2 discover_hosts –verbos</p>
+</blockquote>
+<h3 id="Horizon配置证书"><a href="#Horizon配置证书" class="headerlink" title="Horizon配置证书"></a>Horizon配置证书</h3><ol>
+<li>更新haproxy中 <code>nova-api.cfg</code>, <code>nova-novncproxy.cfg</code> 配置，重启haproxy</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">frontend horizon_redirect_front</span><br><span class="line">    mode http</span><br><span class="line">    bind 111.111.111.80:80</span><br><span class="line">    redirect scheme https code 301 if !&#123; ssl_fc &#125;</span><br><span class="line"></span><br><span class="line">frontend horizon_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.80:443 ssl crt &#x2F;var&#x2F;lib&#x2F;kolla&#x2F;config_files&#x2F;haproxy.pem</span><br><span class="line">    default_backend horizon_back</span><br><span class="line"></span><br><span class="line">backend horizon_back</span><br><span class="line">    mode http</span><br><span class="line">    balance source</span><br><span class="line">    server node01 111.111.111.81:80 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>更改horizon服务的配置文件：<code>local_settings</code>， 重启horizon、memcached服务</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Set SSL proxy settings:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Pass this header from the proxy after terminating the SSL,</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> and don<span class="string">&#x27;t forget to strip it from the client&#x27;</span>s request.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> For more information see:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> https://docs.djangoproject.com/en/dev/ref/settings/<span class="comment">#secure-proxy-ssl-header</span></span></span><br><span class="line">SECURE_PROXY_SSL_HEADER = (&#x27;HTTP_X_FORWARDED_PROTO&#x27;, &#x27;https&#x27;)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> If Horizon is being served through SSL, <span class="keyword">then</span> uncomment the following two</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> settings to better secure the cookies from security exploits</span></span><br><span class="line">CSRF_COOKIE_SECURE = True</span><br><span class="line">SESSION_COOKIE_SECURE = True</span><br><span class="line"></span><br><span class="line">OPENSTACK_KEYSTONE_URL = &quot;https://111.111.111.80:5000/v3&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Disable SSL certificate checks <span class="keyword">in</span> the OpenStack clients (useful <span class="keyword">for</span> self-signed certificates).</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 自签名证书，需要设置为True，不验证SSL</span></span><br><span class="line">OPENSTACK_SSL_NO_VERIFY = True</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> When <span class="built_in">unset</span> or <span class="built_in">set</span> to None the default CA certificate on the system is used <span class="keyword">for</span> SSL verification.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> When <span class="built_in">set</span> with the path to a custom CA certificate file, this overrides use of the default system CA certificate. This custom certificate is used to verify all connections to openstack services when making API calls.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 自签名证书，不需要设置此项</span></span><br><span class="line">OPENSTACK_SSL_CACERT = &#x27;/var/lib/kolla/config_files/haproxy-ca.crt&#x27;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>验证</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 访问vip:80端口，自动跳转至https 443端口</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> horizon可正常登录，界面功能正常</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>常见问题</li>
+</ol>
+<blockquote>
+<p><strong>问题1</strong>：horizon登录后，界面显示验证错误，后端haproxy出现如下报错：<br>{“Payload”:”Jan 19 11:01:56 haproxy[33]: 111.111.111.80:60552 [19/Jan/2021:11:01:56.143] <strong>keystone_internal_front/1: SSL handshake failure</strong>“,”log_level”:”info”,”Hostname”:”node01”,”programname”:”haproxy”}</p>
+<p>期望结果：{“Payload”:”Jan 19 03:06:58 haproxy[32]: 111.111.111.80:53822 [19/Jan/2021:03:06:58.236] keystone_internal_front~ <strong>keystone_internal_back/node01</strong> 3/0/0/10/13 300 538 – —- 64/1/0/1/0 0/0 &quot;GET / HTTP/1.1&quot;“,”log_level”:”info”,”Hostname”:”node01”,”programname”:”haproxy”}</p>
+<p><strong>原因：</strong>horizon请求后端接口时，使用的证书验证存在异常，未通过keystone_internal_front的SSL验证，无法转到keystone后端server服务</p>
+<p><strong>解决：</strong>自签名证书，SSL验证存在异常。需要Disable SSL certificate checks in the OpenStack clients。设置 <code>local_settings</code> 配置中的 <code>OPENSTACK_SSL_NO_VERIFY = True</code></p>
+<p><strong>问题2：</strong>界面显示：无法与keystone服务终端建立连接。</p>
+<p><strong>解决：</strong>检查 <code>local_settings</code> 配置中的 <code>OPENSTACK_KEYSTONE_URL</code> 是否切换为https</p>
+</blockquote>
+<h3 id="参考脚本"><a href="#参考脚本" class="headerlink" title="参考脚本"></a>参考脚本</h3><h4 id="单节点更新配置文件"><a href="#单节点更新配置文件" class="headerlink" title="单节点更新配置文件"></a>单节点更新配置文件</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">module=&#x27;cinder&#x27;</span><br><span class="line">module_config=&#x27;cinder-api/cinder.conf&#x27;</span><br><span class="line">config_root_dir=&#x27;/etc/kolla&#x27;</span><br><span class="line"></span><br><span class="line">cd $config_root_dir</span><br><span class="line">dir_lists=`ls | grep $module`</span><br><span class="line"></span><br><span class="line">for dir in $dir_lists</span><br><span class="line">do</span><br><span class="line">	if [ $dir != $(echo $module_config | awk -F &#x27;/&#x27; &#x27;&#123;print $1&#125;&#x27;) ]; then</span><br><span class="line">		\cp $module_config $dir</span><br><span class="line">	fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://docs.openstack.org/horizon/latest/configuration/settings.html#openstack-ssl-cacert">OpenStack Configuration Guide: horizon 19.0.1.dev25 - Settings Reference</a></p>
+<p><a href="https://docs.openstack.org/security-guide/secure-communication.html">OpenStack Documentation: Secure communication</a></p>
+<p><a href="https://docs.openstack.org/kolla-ansible/train/admin/advanced-configuration.html#tls-configuration">OpenStack Documentation: Kolla-ansible 9.2.1.dev132 - Advanced Configuration</a></p>
+<p><a href="https://docs.openstack.org/kolla-ansible/latest/admin/tls.html">OpenStack Documentation: Kolla-ansible 11.1.0 dev101 - TLS</a></p>
+<p><a href="https://docs.djangoproject.com/en/3.1/">Django Documentation</a></p>
+<p><a href="https://blog.csdn.net/zhongbeida_xue/article/details/101017148">配置OpenStack各服务组件使用SSL通信（HTTPS）</a></p>
+<p><a href="https://blog.csdn.net/liu_baoqing/article/details/77412135">kolla部署的openstack配置https</a></p>
+<p><a href="https://gist.github.com/blomquisg/103e1c898a3b6085986e">Setting up HAProxy for OpenStack SSL</a></p>
+<p><a href="https://www.cnblogs.com/paul8339/p/8042776.html">haproxy代理https配置方法</a></p>
+<p><a href>HAProxy Configuration Manual</a></p>
+<p><a href="http://www.ttlsa.com/linux/haproxy-study-tutorial/">HAProxy用法详解</a></p>
+<p><a href="https://support.ptc.com/help/thingworx/platform/r9/zh_CN/index.html#page/ThingWorx%2FHelp%2FThingWorxHighAvailability%2FHAProxyExample.html%23">HAProxy 示例</a></p>
+<p><a href="https://www.cnblogs.com/reblue520/p/6841237.html">haproxy配置基于ssl证书的https负载均衡</a></p>
+<p><a href="https://www.linuxidc.com/Linux/2016-04/130692.htm">在HAProxy中使用SSL证书进行连接</a></p>
+<p><a href="https://segmentfault.com/a/1190000009002353">SSL/TLS及证书概述</a></p>
+<p><a href="https://blog.csdn.net/bbwangj/article/details/82503675">使用 openssl 生成证书（含openssl详解）</a></p>
+<p><a href="https://blog.csdn.net/zuoyigehaizei/article/details/93486460">https安全认证流程简介</a></p>
+]]></content>
+      <categories>
+        <category>OpenStack部署</category>
+      </categories>
+      <tags>
+        <tag>OpenStack部署</tag>
+        <tag>HTTPS</tag>
       </tags>
   </entry>
 </search>
