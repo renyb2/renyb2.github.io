@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Docker 入门</title>
-    <url>/2020/11/05/Docker-%E5%85%A5%E9%97%A8/</url>
-    <content><![CDATA[<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 调整docker <span class="built_in">exec</span>终端高度和宽度</span></span><br><span class="line">docker exec -it --env COLUMNS=`tput cols` --env LINES=`tput lines` mariadb bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重命名镜像repository和tag</span></span><br><span class="line">docker tag &lt;image id&gt; &lt;new repository&gt;:&lt;new tag&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/moby/moby/issues/35407">Docker Exec does not resize terminal</a></p>
-]]></content>
-      <categories>
-        <category>Docker</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Dijkstra</title>
     <url>/2020/08/27/Dijkstra/</url>
     <content><![CDATA[<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><h3 id="问题1：最短路径"><a href="#问题1：最短路径" class="headerlink" title="问题1：最短路径"></a>问题1：最短路径</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src="/2020/08/27/Dijkstra/Dijkstra-%E9%97%AE%E9%A2%981.png" alt="image-20200731221210621"></p>
@@ -31,6 +15,22 @@
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker 入门</title>
+    <url>/2020/11/05/Docker-%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 调整docker <span class="built_in">exec</span>终端高度和宽度</span></span><br><span class="line">docker exec -it --env COLUMNS=`tput cols` --env LINES=`tput lines` mariadb bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重命名镜像repository和tag</span></span><br><span class="line">docker tag &lt;image id&gt; &lt;new repository&gt;:&lt;new tag&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/moby/moby/issues/35407">Docker Exec does not resize terminal</a></p>
+]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -310,6 +310,29 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux配置：GNOME桌面</title>
+    <url>/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AGNOME%E6%A1%8C%E9%9D%A2/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>GNOME是一种<a href="https://baike.baidu.com/item/GNU">GNU</a>网络对象模型环境 ，GNU计划的一部分，开放源码运动的一个重要组成部分，是一种让使用者容易操作和设定电脑环境的工具，目标是基于<a href="https://baike.baidu.com/item/%E8%87%AA%E7%94%B1%E8%BD%AF%E4%BB%B6">自由软件</a>，为<a href="https://baike.baidu.com/item/Unix">Unix</a>或者<a href="https://baike.baidu.com/item/%E7%B1%BBUnix">类Unix</a>操作系统构造一个功能完善、操作简单以及界面友好的<a href="https://baike.baidu.com/item/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83">桌面环境</a>，是GNU计划的正式桌面。</p>
+<p>GNOME可以运行在包括GNU/Linux(通常叫做<a href="https://baike.baidu.com/item/Linux">Linux</a>)，<a href="https://baike.baidu.com/item/Solaris">Solaris</a>，<a href="https://baike.baidu.com/item/HP-UX">HP-UX</a>，<a href="https://baike.baidu.com/item/BSD">BSD</a>和Apple’s Darwin系统上. GNOME 拥有很多强大的特性，如：高质量的平滑文本渲染， 首个国际化和可用性支持， 并且包括对反向文本的支持(注: 有些国家的文字是从右到左的排版的）。</p>
+<p>GNOME运行在大多数类Unix系统，并被Sun Microsystems公司采纳为Solaris平台的标准桌面，取代了过时的<a href="https://baike.baidu.com/item/CDE">CDE</a>。Sun Microsystems公司也以Java Desktop System名义发布一个商业版的桌面：一个被SUSELinux系统使用的基于GNOME的桌面。GNOME也移植到Cygwin使其能运行于Microsoft Windows。GNOME 还被众多LiveCDLinux发行版使用，如<a href="https://baike.baidu.com/item/Gnoppix">Gnoppix</a>和Morphix。</p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 列出可安装的桌面环境</span></span><br><span class="line">yum grouplist</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看安装的包有哪些内容</span></span><br><span class="line">yum group info  &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装GNOME及相应桌面管理工具</span></span><br><span class="line">yum -y groups install &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看当前默认启动模式</span></span><br><span class="line">systemctl get-default</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动图形化界面</span></span><br><span class="line">systemctl set-default graphical.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动命令行界面</span></span><br><span class="line">systemctl set-default multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令行界面热切换到图形界面</span></span><br><span class="line">init 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 图形界面热切换到命令行界面</span></span><br><span class="line">init 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载GNOME</span></span><br><span class="line">yum -y groupremove &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/gentsir/p/10300655.html">Centos 7 安装GNOME桌面环境</a></p>
+<p><a href="https://blog.csdn.net/wqh0830/article/details/86701379">CentOS-7安装GNOME桌面</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>GNOME</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Kubernetes部署：kubeadm部署高可用集群</title>
     <url>/2020/12/16/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9Akubeadm%E9%83%A8%E7%BD%B2%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/</url>
     <content><![CDATA[<h2 id="高可用集群部署"><a href="#高可用集群部署" class="headerlink" title="高可用集群部署"></a>高可用集群部署</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><h4 id="1-检查centos版本-hostname"><a href="#1-检查centos版本-hostname" class="headerlink" title="1. 检查centos版本 / hostname"></a>1. 检查centos版本 / hostname</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看centos版本</span></span><br><span class="line">cat /etc/centos-release</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; CentOS Linux release 7.7.1908 (Core)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此处 hostname 的输出将会是该机器在 Kubernetes 集群中的节点名字</span></span><br><span class="line">hostname</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改hostname</span></span><br><span class="line">hostnamectl set-hostname NAME</span><br></pre></td></tr></table></figure>
@@ -390,32 +413,57 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux配置：GNOME桌面</title>
-    <url>/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AGNOME%E6%A1%8C%E9%9D%A2/</url>
+    <title>Linux配置：LVM</title>
+    <url>/2021/01/19/Linux%E9%85%8D%E7%BD%AE%EF%BC%9ALVM/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>GNOME是一种<a href="https://baike.baidu.com/item/GNU">GNU</a>网络对象模型环境 ，GNU计划的一部分，开放源码运动的一个重要组成部分，是一种让使用者容易操作和设定电脑环境的工具，目标是基于<a href="https://baike.baidu.com/item/%E8%87%AA%E7%94%B1%E8%BD%AF%E4%BB%B6">自由软件</a>，为<a href="https://baike.baidu.com/item/Unix">Unix</a>或者<a href="https://baike.baidu.com/item/%E7%B1%BBUnix">类Unix</a>操作系统构造一个功能完善、操作简单以及界面友好的<a href="https://baike.baidu.com/item/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83">桌面环境</a>，是GNU计划的正式桌面。</p>
-<p>GNOME可以运行在包括GNU/Linux(通常叫做<a href="https://baike.baidu.com/item/Linux">Linux</a>)，<a href="https://baike.baidu.com/item/Solaris">Solaris</a>，<a href="https://baike.baidu.com/item/HP-UX">HP-UX</a>，<a href="https://baike.baidu.com/item/BSD">BSD</a>和Apple’s Darwin系统上. GNOME 拥有很多强大的特性，如：高质量的平滑文本渲染， 首个国际化和可用性支持， 并且包括对反向文本的支持(注: 有些国家的文字是从右到左的排版的）。</p>
-<p>GNOME运行在大多数类Unix系统，并被Sun Microsystems公司采纳为Solaris平台的标准桌面，取代了过时的<a href="https://baike.baidu.com/item/CDE">CDE</a>。Sun Microsystems公司也以Java Desktop System名义发布一个商业版的桌面：一个被SUSELinux系统使用的基于GNOME的桌面。GNOME也移植到Cygwin使其能运行于Microsoft Windows。GNOME 还被众多LiveCDLinux发行版使用，如<a href="https://baike.baidu.com/item/Gnoppix">Gnoppix</a>和Morphix。</p>
+<p>​        LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM将一个或多个硬盘的分区在逻辑上集合，相当于一个大硬盘来使用，当硬盘的空间不够使用的时候，可以继续将其它的硬盘的分区加入其中，这样可以实现磁盘空间的动态管理，相对于普通的磁盘分区有很大的灵活性。</p>
+<p>​        与传统的磁盘与分区相比，LVM为计算机提供了更高层次的磁盘存储。它使系统管理员可以更方便的为应用与用户分配存储空间。在LVM管理下的存储卷可以按需要随时改变大小与移除(可能需对文件系统工具进行升级)。LVM也允许按用户组对存储卷进行管理，允许管理员用更直观的名称(如”sales’、 ‘development’)代替物理磁盘名(如’sda’、’sdb’)来标识存储卷。</p>
 </blockquote>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 列出可安装的桌面环境</span></span><br><span class="line">yum grouplist</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看安装的包有哪些内容</span></span><br><span class="line">yum group info  &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装GNOME及相应桌面管理工具</span></span><br><span class="line">yum -y groups install &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看当前默认启动模式</span></span><br><span class="line">systemctl get-default</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动图形化界面</span></span><br><span class="line">systemctl set-default graphical.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动命令行界面</span></span><br><span class="line">systemctl set-default multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令行界面热切换到图形界面</span></span><br><span class="line">init 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 图形界面热切换到命令行界面</span></span><br><span class="line">init 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载GNOME</span></span><br><span class="line">yum -y groupremove &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="LVM基本术语"><a href="#LVM基本术语" class="headerlink" title="LVM基本术语"></a>LVM基本术语</h2><p>前面谈到，LVM是在磁盘分区和文件系统之间添加的一个逻辑层，来为文件系统屏蔽下层磁盘分区布局，提供一个抽象的盘卷，在盘卷上建立文件系统。首先我们讨论以下几个LVM术语：</p>
+<ul>
+<li><p>物理存储介质（The physical media）：这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。</p>
+</li>
+<li><p>物理卷（physical volume）：物理卷就是指硬盘分区或从逻辑上与磁盘分区具有同样功能的设备(如RAID)，是LVM的基本存储逻辑块，但和基本的物理存储介质（如分区、磁盘等）比较，却包含有与LVM相关的管理参数。</p>
+</li>
+<li><p>卷组（Volume Group）：LVM卷组类似于非LVM系统中的物理硬盘，其由物理卷组成。可以在卷组上创建一个或多个“LVM分区”（逻辑卷），LVM卷组由一个或多个物理卷组成。</p>
+</li>
+<li><p>逻辑卷（logical volume）：LVM的逻辑卷类似于非LVM系统中的硬盘分区，在逻辑卷之上可以建立文件系统(比如/home或者/usr等)。</p>
+</li>
+<li><p>PE（physical extent）：每一个物理卷被划分为称为PE(Physical Extents)的基本单元，具有唯一编号的PE是可以被LVM寻址的最小单元。PE的大小是可配置的，默认为4MB。</p>
+</li>
+<li><p>LE（logical extent）：逻辑卷也被划分为被称为LE(Logical Extents) 的可被寻址的基本单位。在同一个卷组中，LE的大小和PE是相同的，并且一一对应。</p>
+</li>
+</ul>
+<p>简单来说就是：</p>
+<ul>
+<li>PV:是物理的磁盘分区</li>
+<li>VG:LVM中的物理的磁盘分区，也就是PV，必须加入VG，可以将VG理解为一个仓库或者是几个大的硬盘。</li>
+<li>LV：也就是从VG中划分的逻辑分区</li>
+</ul>
+<p>如下图所示PV、VG、LV三者关系：</p>
+<p><img src="/2021/01/19/Linux%E9%85%8D%E7%BD%AE%EF%BC%9ALVM/LVM-1.jpg" alt="LVM关系"></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 新磁盘分区</span></span><br><span class="line">fdisk /dev/sdb</span><br><span class="line">n         # 新建分区</span><br><span class="line">l         # 选择逻辑分区，如果没有，则首先创建扩展分区，然后再添加逻辑分区（硬盘：最多四个分区P-P-P-P或P-P-P-E）</span><br><span class="line">6         # 分区号（从5开始），/dev/hda6</span><br><span class="line">t    8e   # 分区类型8e表示LVM分区</span><br><span class="line">w         # 写入分区表</span><br><span class="line"></span><br><span class="line">partprobe # 重读分区表</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看pv/vg/lv概要信息</span></span><br><span class="line">pvs</span><br><span class="line">vgs</span><br><span class="line">lvs</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看pv/vg/lv详情</span></span><br><span class="line">pvdisplay</span><br><span class="line">vgdisplay</span><br><span class="line">lvdisplay</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建pv</span></span><br><span class="line">pvcreate /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除pv</span></span><br><span class="line">pvremove /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建vg</span></span><br><span class="line">vgcreate vg_name /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 扩容</span></span><br><span class="line">vgextend vg_name /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除vg</span></span><br><span class="line">vgremove vg_name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建lv</span></span><br><span class="line">lvcreate lv_name vg_name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 扩容lv</span></span><br><span class="line">lvextend -L 250G /dev/mapper/centos-root       # 调整到250G</span><br><span class="line">lvextend -L +250G /dev/mapper/centos-root      # 扩容250G</span><br><span class="line">lvextend -l +100%free /dev/mapper/centos-root  # 将vg剩余空间全部扩容进去</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除lv</span></span><br><span class="line">lvremove lv_name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新文件系统</span></span><br><span class="line">resize2fs /dev/mapper/centos-root      # ext4文件系统</span><br><span class="line">xfs_growfs /dev/mapper/centos-root     # xfs文件系统</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/gentsir/p/10300655.html">Centos 7 安装GNOME桌面环境</a></p>
-<p><a href="https://blog.csdn.net/wqh0830/article/details/86701379">CentOS-7安装GNOME桌面</a></p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p><strong>问题1：</strong>resize2fs报错如下：</p>
+<p>resize2fs: Bad magic number in super-block while trying to open /dev/mapper/centos-home<br>Couldn’t find valid filesystem superblock.</p>
+<p><strong>原因：</strong>文件系统是xfs（fdisk -l查看），不再支持resize2fs</p>
+<p><strong>解决：</strong>使用XFS相应命令，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">xfs_growfs /dev/mapper/centos-root</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/gaojun/archive/2012/08/22/2650229.html">Linux LVM硬盘管理及LVM扩容</a></p>
+<p><a href="https://www.cnblogs.com/-abm/p/11349240.html">CentOS7上lvm分区调整（resize2fs: Bad magic number in super-block while trying to open …）</a></p>
 ]]></content>
       <categories>
         <category>Linux</category>
       </categories>
       <tags>
         <tag>Linux</tag>
-        <tag>GNOME</tag>
+        <tag>LVM</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Linux配置：LVM</title>
-    <url>/2021/01/19/Linux%E9%85%8D%E7%BD%AE%EF%BC%9ALVM/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Linux配置：VNC Server</title>
@@ -479,64 +527,6 @@
       <tags>
         <tag>Linux</tag>
         <tag>VNC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux配置：修改网卡名称</title>
-    <url>/2021/01/12/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0/</url>
-    <content><![CDATA[<blockquote>
-<p>网上资料都是要修改 <code>/etc/default/grub</code> 文件，增加 <code>net.ifnames=0, biosdevname=0</code> 参数。该方法重启后，网卡名称统一变为eth开头，无法达到任意修改的目的。整理如下方法，亲测 Centos 7.8 可行。</p>
-</blockquote>
-<p>环境信息：CentOS Linux release 7.8.2003 (Core)</p>
-<p>网卡信息：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: rules.d # ip a</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    link/ether 00:0c:29:63:bf:af brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.1.110/24 brd 192.168.1.255 scope global noprefixroute dynamic mynet1</span><br><span class="line">       valid_lft 6511sec preferred_lft 6511sec</span><br><span class="line">    inet6 fe80::a788:f7ed:8c55:1b9f/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">4: virbr0-nic: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line"></span><br><span class="line">root@renyb: rules.d # nmcli connection show</span><br><span class="line">NAME    UUID                                  TYPE      DEVICE</span><br><span class="line">ens33   b40bd401-b463-4d44-ab63-247307f2a2d6  ethernet  ens33</span><br><span class="line">virbr0  7f07fa4e-e769-4fd1-ab39-1b70c27a0952  bridge    virbr0</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="临时配置"><a href="#临时配置" class="headerlink" title="临时配置"></a>临时配置</h2><p>通过 <code>ip</code> 命令进行配置，重启失效</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看网络设备信息</span></span><br><span class="line">nmcli connection show</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> down网卡</span></span><br><span class="line">ip link set dev ens33 down</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE名称</span></span><br><span class="line">ip link set dev ens33 name mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">nmcli connection modify ens33 connection.id mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动网卡</span></span><br><span class="line">ip link set mynet1 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载网络设备信息</span></span><br><span class="line">nmcli connection reload</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="永久配置"><a href="#永久配置" class="headerlink" title="永久配置"></a>永久配置</h2><p>通过 <code>udev</code> 实现。Centos系统中，规则目录如下：</p>
-<ul>
-<li>系统规则：<code>/usr/lib/udev/rules.d/</code></li>
-<li>自定义规则：<code>/etc/udev/rules.d</code></li>
-</ul>
-<h3 id="udev解析"><a href="#udev解析" class="headerlink" title="udev解析"></a>udev解析</h3><p>网卡相关udev的rule执行流程：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用户自定义为优先级最高</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡</span></span><br><span class="line">/usr/lib/udev/rules.d/60-net.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span></span><br><span class="line">/usr/lib/udev/rules.d/71-biosdevname.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称哦</span></span><br><span class="line">/lib/udev/rules.d/75-net-description.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名</span></span><br><span class="line">/usr/lib/udev/rules.d/80-net-name-slot.rules</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="重命名流程"><a href="#重命名流程" class="headerlink" title="重命名流程"></a>重命名流程</h3><ol>
-<li>新建文件：<code>/etc/udev/rules.d/70-persistent-net.rules</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a sample udev rules file that demonstrates how to get udev to</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> the name of IPoIB interfaces to whatever you wish.  There is a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 16 character <span class="built_in">limit</span> on network device names.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Important items to note: ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span> is IPoIB interfaces, and the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125; match must start with ?* and only reference the last 8</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bytes of the address or <span class="keyword">else</span> the address might not match the variable QPN</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> portion.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modern udev is <span class="keyword">case</span> sensitive and all addresses need to be <span class="keyword">in</span> lower <span class="keyword">case</span>.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ACTION==<span class="string">&quot;add&quot;</span>, SUBSYSTEM==<span class="string">&quot;net&quot;</span>, DRIVERS==<span class="string">&quot;?*&quot;</span>, ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span>, ATTR&#123;address&#125;==<span class="string">&quot;?*00:02:c9:03:00:31:78:f2&quot;</span>, NAME=<span class="string">&quot;mlx4_ib3&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125;: mac address</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME: device name</span></span><br><span class="line">ACTION==&quot;add&quot;, SUBSYSTEM==&quot;net&quot;, DRIVERS==&quot;?*&quot;, ATTR&#123;type&#125;==&quot;1&quot;, ATTR&#123;address&#125;==&quot;00:0c:29:63:bf:af&quot;, NAME=&quot;mynet1&quot;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>修改网卡配置文件：<code>/etc/sysconfig/network-scripts/ifcfg-ens33</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: network-scripts # pwd</span><br><span class="line">/etc/sysconfig/network-scripts</span><br><span class="line">root@renyb: network-scripts # cat ifcfg-ens33</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">NAME=mynet1</span><br><span class="line">UUID=b40bd401-b463-4d44-ab63-247307f2a2d6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE NAME</span></span><br><span class="line">DEVICE=mynet1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPV6_PRIVACY=no</span><br><span class="line">root@renyb: network-scripts # # 修改网卡配置文件名称</span><br><span class="line">root@renyb: network-scripts # mv ifcfg-ens33 ifcfg-mynet1</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/boltkiller/p/12696501.html">任意修改CentOS下网卡的显示名称和设备名称</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/33932734">在 Linux 中如何编写基本的 udev 规则</a></p>
-<p><a href="https://blog.csdn.net/u010039418/article/details/79260553">CentOS 7.4系统修改网卡名称</a></p>
-<p><a href="https://www.cnblogs.com/yinfutao/p/9634350.html">Linux系统修改网卡名（eth0-3）</a></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>网卡</tag>
       </tags>
   </entry>
   <entry>
@@ -624,6 +614,60 @@
       </tags>
   </entry>
   <entry>
+    <title>Mosquitto</title>
+    <url>/2020/08/31/Mosquitto/</url>
+    <content><![CDATA[<h2 id="Mosquitto"><a href="#Mosquitto" class="headerlink" title="Mosquitto"></a>Mosquitto</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型设备、移动应用等方面有较广泛的应用。</p>
+<p>MQTT是一个基于客户端-服务器的消息发布/订阅传输协议。MQTT协议是轻量、简单、开放和易于实现的，这些特点使它适用范围非常广泛。在很多情况下，包括受限的环境中，如：机器与机器（M2M）通信和物联网（IoT）。其在，通过卫星链路通信传感器、偶尔拨号的医疗设备、智能家居、及一些小型化设备中已广泛使用。</p>
+<a id="more"></a>
+
+<p><img src="/2020/08/31/Mosquitto/1573118328615.png" alt="1573118328615"></p>
+<h3 id="config-解析"><a href="#config-解析" class="headerlink" title="config 解析"></a>config 解析</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim mosquitto.conf</span><br><span class="line"></span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># General configuration</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 客户端心跳的间隔时间</span><br><span class="line">#retry_interval 20</span><br><span class="line"> </span><br><span class="line"># 系统状态的刷新时间</span><br><span class="line">#sys_interval 10</span><br><span class="line"> </span><br><span class="line"># 系统资源的回收时间，0表示尽快处理</span><br><span class="line">#store_clean_interval 10</span><br><span class="line"> </span><br><span class="line"># 服务进程的PID</span><br><span class="line">#pid_file &#x2F;var&#x2F;run&#x2F;mosquitto.pid</span><br><span class="line"> </span><br><span class="line"># 服务进程的系统用户</span><br><span class="line">#user mosquitto</span><br><span class="line"> </span><br><span class="line"># 客户端心跳消息的最大并发数</span><br><span class="line">#max_inflight_messages 10</span><br><span class="line"> </span><br><span class="line"># 客户端心跳消息缓存队列</span><br><span class="line">#max_queued_messages 100</span><br><span class="line"> </span><br><span class="line"># 用于设置客户端长连接的过期时间，默认永不过期</span><br><span class="line">#persistent_client_expiration</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Default listener</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 服务绑定的IP地址</span><br><span class="line">#bind_address</span><br><span class="line"> </span><br><span class="line"># 服务绑定的端口号</span><br><span class="line">#port 1883</span><br><span class="line"> </span><br><span class="line"># 允许的最大连接数，-1表示没有限制</span><br><span class="line">#max_connections -1</span><br><span class="line"> </span><br><span class="line"># cafile：CA证书文件</span><br><span class="line"># capath：CA证书目录</span><br><span class="line"># certfile：PEM证书文件</span><br><span class="line"># keyfile：PEM密钥文件</span><br><span class="line">#cafile</span><br><span class="line">#capath</span><br><span class="line">#certfile</span><br><span class="line">#keyfile</span><br><span class="line"> </span><br><span class="line"># 必须提供证书以保证数据安全性</span><br><span class="line">#require_certificate false</span><br><span class="line"> </span><br><span class="line"># 若require_certificate值为true，use_identity_as_username也必须为true</span><br><span class="line">#use_identity_as_username false</span><br><span class="line"> </span><br><span class="line"># 启用PSK（Pre-shared-key）支持</span><br><span class="line">#psk_hint</span><br><span class="line"> </span><br><span class="line"># SSL&#x2F;TSL加密算法，可以使用“openssl ciphers”命令获取</span><br><span class="line"># as the output of that command.</span><br><span class="line">#ciphers</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Persistence</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 消息自动保存的间隔时间</span><br><span class="line">#autosave_interval 1800</span><br><span class="line"> </span><br><span class="line"># 消息自动保存功能的开关</span><br><span class="line">#autosave_on_changes false</span><br><span class="line"> </span><br><span class="line"># 持久化功能的开关</span><br><span class="line">persistence true</span><br><span class="line"> </span><br><span class="line"># 持久化DB文件</span><br><span class="line">#persistence_file mosquitto.db</span><br><span class="line"> </span><br><span class="line"># 持久化DB文件目录</span><br><span class="line">#persistence_location &#x2F;var&#x2F;lib&#x2F;mosquitto&#x2F;</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Logging</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 4种日志模式：stdout、stderr、syslog、topic</span><br><span class="line"># none 则表示不记日志，此配置可以提升些许性能</span><br><span class="line">log_dest none</span><br><span class="line"> </span><br><span class="line"># 选择日志的级别（可设置多项）</span><br><span class="line">#log_type error</span><br><span class="line">#log_type warning</span><br><span class="line">#log_type notice</span><br><span class="line">#log_type information</span><br><span class="line"> </span><br><span class="line"># 是否记录客户端连接信息</span><br><span class="line">#connection_messages true</span><br><span class="line"> </span><br><span class="line"># 是否记录日志时间</span><br><span class="line">#log_timestamp true</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Security</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 客户端ID的前缀限制，可用于保证安全性</span><br><span class="line">#clientid_prefixes</span><br><span class="line"> </span><br><span class="line"># 允许匿名用户</span><br><span class="line">#allow_anonymous true</span><br><span class="line"> </span><br><span class="line"># 用户&#x2F;密码文件，默认格式：username:password</span><br><span class="line">#password_file</span><br><span class="line"> </span><br><span class="line"># PSK格式密码文件，默认格式：identity:key</span><br><span class="line">#psk_file</span><br><span class="line"> </span><br><span class="line"># pattern write sensor&#x2F;%u&#x2F;data</span><br><span class="line"># ACL权限配置，常用语法如下：</span><br><span class="line"># 用户限制：user &lt;username&gt;</span><br><span class="line"># 话题限制：topic [read|write] &lt;topic&gt;</span><br><span class="line"># 正则限制：pattern write sensor&#x2F;%u&#x2F;data</span><br><span class="line">#acl_file</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Bridges</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 允许服务之间使用“桥接”模式（可用于分布式部署）</span><br><span class="line">#connection &lt;name&gt;</span><br><span class="line">#address &lt;host&gt;[:&lt;port&gt;]</span><br><span class="line">#topic &lt;topic&gt; [[[out | in | both] qos-level] local-prefix remote-prefix]</span><br><span class="line"> </span><br><span class="line"># 设置桥接的客户端ID</span><br><span class="line">#clientid</span><br><span class="line"> </span><br><span class="line"># 桥接断开时，是否清除远程服务器中的消息</span><br><span class="line">#cleansession false</span><br><span class="line"> </span><br><span class="line"># 是否发布桥接的状态信息</span><br><span class="line">#notifications true</span><br><span class="line"> </span><br><span class="line"># 设置桥接模式下，消息将会发布到的话题地址</span><br><span class="line"># $SYS&#x2F;broker&#x2F;connection&#x2F;&lt;clientid&gt;&#x2F;state</span><br><span class="line">#notification_topic</span><br><span class="line"> </span><br><span class="line"># 设置桥接的keepalive数值</span><br><span class="line">#keepalive_interval 60</span><br><span class="line"> </span><br><span class="line"># 桥接模式，目前有三种：automatic、lazy、once</span><br><span class="line">#start_type automatic</span><br><span class="line"> </span><br><span class="line"># 桥接模式automatic的超时时间</span><br><span class="line">#restart_timeout 30</span><br><span class="line"> </span><br><span class="line"># 桥接模式lazy的超时时间</span><br><span class="line">#idle_timeout 60</span><br><span class="line"> </span><br><span class="line"># 桥接客户端的用户名</span><br><span class="line">#username</span><br><span class="line"> </span><br><span class="line"># 桥接客户端的密码</span><br><span class="line">#password</span><br><span class="line"> </span><br><span class="line"># bridge_cafile：桥接客户端的CA证书文件</span><br><span class="line"># bridge_capath：桥接客户端的CA证书目录</span><br><span class="line"># bridge_certfile：桥接客户端的PEM证书文件</span><br><span class="line"># bridge_keyfile：桥接客户端的PEM密钥文件</span><br><span class="line">#bridge_cafile</span><br><span class="line">#bridge_capath</span><br><span class="line">#bridge_certfile</span><br><span class="line">#bridge_keyfile</span><br><span class="line"> </span><br><span class="line"># 自己的配置可以放到以下目录中</span><br><span class="line">#include_dir &#x2F;mqtt&#x2F;config&#x2F;conf.d</span><br></pre></td></tr></table></figure>
+
+<h3 id="Qos-解析"><a href="#Qos-解析" class="headerlink" title="Qos 解析"></a>Qos 解析</h3><h4 id="Qos-0-–-gt-最多一次"><a href="#Qos-0-–-gt-最多一次" class="headerlink" title="Qos=0 –&gt; 最多一次"></a>Qos=0 –&gt; 最多一次</h4><blockquote>
+<p>sequenceDiagram</p>
+<p>ClientA-&gt;&gt;ServerBroker: 发送消息<br>ServerBroker-&gt;&gt;ClientB: 发送消息</p>
+</blockquote>
+<h4 id="Qos-1-–-gt-至少一次"><a href="#Qos-1-–-gt-至少一次" class="headerlink" title="Qos=1 –&gt; 至少一次"></a>Qos=1 –&gt; 至少一次</h4><blockquote>
+<p>sequenceDiagram</p>
+<p>ClientA-&gt;&gt;ServerBroker: 1.发送消息PUBLISH<br>ServerBroker-&gt;&gt;ServerBroker: 1.1存储消息<br>ServerBroker-&gt;&gt;ClientA: 1.2发送消息回应PUBACK<br>ServerBroker-&gt;&gt;ClientB: 2.发送消息<br>ClientB-&gt;&gt;ServerBroker: 2.1发送消息回应PUBACK<br>ServerBroker-&gt;&gt;ServerBroker: 2.2删除消息</p>
+</blockquote>
+<h4 id="Qos-2-–-gt-有且仅有一次"><a href="#Qos-2-–-gt-有且仅有一次" class="headerlink" title="Qos=2 –&gt; 有且仅有一次"></a>Qos=2 –&gt; 有且仅有一次</h4><blockquote>
+<p>sequenceDiagram</p>
+<p>ClientA-&gt;&gt;ServerBroker: 1.发送消息PUBLISH<br>ServerBroker-&gt;&gt;ServerBroker: 1.1存储消息<br>ServerBroker-&gt;&gt;ClientA: 1.2发送消息回应Rec<br>ClientA-&gt;&gt;ServerBroker: 2.发送消息Rel<br>ServerBroker-&gt;&gt;ServerBroker: 2.1删除消息<br>ServerBroker-&gt;&gt;ServerBroker: 2.2存储消息到发送列队<br>ServerBroker-&gt;&gt;ClientB: 2.3发送消息<br>ServerBroker-&gt;&gt;ClientA: 2.4发送消息回应Comp<br>ClientB-&gt;&gt;ServerBroker: 3.发送消息回应Rec<br>ServerBroker-&gt;&gt;ServerBroker: 3.1删除2.2中存储的消息（一次确认）<br>ServerBroker-&gt;&gt;ServerBroker: 3.2存储消息<br>ServerBroker-&gt;&gt;ClientB: 3.3发送消息Rel<br>ClientB-&gt;&gt;ServerBroker: 3.4发送消息回应Comp<br>ServerBroker-&gt;&gt;ServerBroker: 3.5删除消息(二次确认)</p>
+</blockquote>
+<p><img src="/2020/08/31/Mosquitto/1573118624880.png" alt="1573118624880"></p>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><h4 id="实验1：Mosquitto-内存数据落盘机制"><a href="#实验1：Mosquitto-内存数据落盘机制" class="headerlink" title="实验1：Mosquitto 内存数据落盘机制"></a>实验1：Mosquitto 内存数据落盘机制</h4><h5 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h5><p>​    Mosquitto 内存数据落盘持久化时，是否会产生重复数据</p>
+<h5 id="实验结论"><a href="#实验结论" class="headerlink" title="实验结论"></a>实验结论</h5><p>​    Mosquitto 不会重复持久化已经持久化过的数据</p>
+<h5 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h5><p>​    mosquitto version 1.4.15</p>
+<h5 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h5><ol>
+<li>发送者保持同样的发送速率，降低订阅者消费速度，触发mqtt的持久化机制</li>
+<li>更改mqtt持久化的间隔（3s 和 30s），观测持久化的数据大小是否不同</li>
+</ol>
+<h5 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h5><blockquote>
+<p>发送者：发送1w条消息，用时 31.16837883 s</p>
+<p>订阅者：每分钟消化1条，1min内堆积9999条消息</p>
+<p>Mosquitto：持久化间隔 3s，1min内涨幅 27842 Byte</p>
+</blockquote>
+<p><img src="/2020/08/31/Mosquitto/1573112430542.png" alt="1573112430542"></p>
+<blockquote>
+<p>发送者：发送1w条消息，</p>
+<p>订阅者：每分钟消化1条，1min内堆积9999条消息</p>
+<p>Mosquitto：持久化间隔 30s，1min内涨幅 27842 Byte</p>
+</blockquote>
+<p><img src="/2020/08/31/Mosquitto/1573113441213.png" alt="1573113441213"></p>
+<h5 id="实验脚本"><a href="#实验脚本" class="headerlink" title="实验脚本"></a>实验脚本</h5><h6 id="send-py"><a href="#send-py" class="headerlink" title="send.py"></a>send.py</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">Send msg to mqtt (linux, python2)</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">__author__ &#x3D; &#39;RYB&#39;</span><br><span class="line"></span><br><span class="line">import json</span><br><span class="line">import time</span><br><span class="line">import random</span><br><span class="line">import string</span><br><span class="line">import paho.mqtt.publish as publish</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def ranstr(num):</span><br><span class="line">    salt &#x3D; &#39;&#39;.join(random.sample(string.ascii_letters + string.digits, num))</span><br><span class="line">    return salt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def publish_msg(msg_num):</span><br><span class="line">    for i in range(msg_num):</span><br><span class="line">        msg &#x3D; &#123;</span><br><span class="line">            &quot;id&quot;: i,</span><br><span class="line">            &quot;Timestamp&quot;: int(time.time() * 1000),</span><br><span class="line">            &quot;str1&quot;: ranstr(50),</span><br><span class="line">            &quot;str2&quot;: ranstr(50)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        publish.single(&quot;test&quot;, payload&#x3D;json.dumps(msg), qos&#x3D;2, hostname&#x3D;&quot;10.244.0.164&quot;, port&#x3D;1883)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; Start &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)</span><br><span class="line">start &#x3D; time.time()</span><br><span class="line">print(&quot;Running...&quot;)</span><br><span class="line">publish_msg(10000)</span><br><span class="line">end &#x3D; time.time()</span><br><span class="line">print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; End &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)</span><br><span class="line">print(&quot;Run Time: %s s&quot; % str(end - start))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6 id="rec-py"><a href="#rec-py" class="headerlink" title="rec.py"></a>rec.py</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">Receive msg from mqtt (linux, python2)</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">__author__ &#x3D; &#39;RYB&#39;</span><br><span class="line"></span><br><span class="line">import time</span><br><span class="line">import paho.mqtt.subscribe as subscribe</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def on_message_sleep(client, userdata, msg):</span><br><span class="line">    print(msg.topic + &#39; --&gt; &#39; + msg.payload)</span><br><span class="line">    time.sleep(60)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subscribe.callback(on_message_sleep, &quot;test&quot;, qos&#x3D;2, hostname&#x3D;&quot;mosquitto&quot;, port&#x3D;1883)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3>]]></content>
+      <categories>
+        <category>中间件</category>
+      </categories>
+      <tags>
+        <tag>MQTT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OpenStack使用：Windows镜像制作</title>
     <url>/2020/11/09/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9AWindows%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</url>
     <content><![CDATA[<h2 id="资源下载地址"><a href="#资源下载地址" class="headerlink" title="资源下载地址"></a>资源下载地址</h2><ul>
@@ -646,6 +690,64 @@
       <tags>
         <tag>OpenStack使用</tag>
         <tag>镜像制作</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux配置：修改网卡名称</title>
+    <url>/2021/01/12/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0/</url>
+    <content><![CDATA[<blockquote>
+<p>网上资料都是要修改 <code>/etc/default/grub</code> 文件，增加 <code>net.ifnames=0, biosdevname=0</code> 参数。该方法重启后，网卡名称统一变为eth开头，无法达到任意修改的目的。整理如下方法，亲测 Centos 7.8 可行。</p>
+</blockquote>
+<p>环境信息：CentOS Linux release 7.8.2003 (Core)</p>
+<p>网卡信息：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: rules.d # ip a</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    link/ether 00:0c:29:63:bf:af brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.1.110/24 brd 192.168.1.255 scope global noprefixroute dynamic mynet1</span><br><span class="line">       valid_lft 6511sec preferred_lft 6511sec</span><br><span class="line">    inet6 fe80::a788:f7ed:8c55:1b9f/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">4: virbr0-nic: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line"></span><br><span class="line">root@renyb: rules.d # nmcli connection show</span><br><span class="line">NAME    UUID                                  TYPE      DEVICE</span><br><span class="line">ens33   b40bd401-b463-4d44-ab63-247307f2a2d6  ethernet  ens33</span><br><span class="line">virbr0  7f07fa4e-e769-4fd1-ab39-1b70c27a0952  bridge    virbr0</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="临时配置"><a href="#临时配置" class="headerlink" title="临时配置"></a>临时配置</h2><p>通过 <code>ip</code> 命令进行配置，重启失效</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看网络设备信息</span></span><br><span class="line">nmcli connection show</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> down网卡</span></span><br><span class="line">ip link set dev ens33 down</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE名称</span></span><br><span class="line">ip link set dev ens33 name mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">nmcli connection modify ens33 connection.id mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动网卡</span></span><br><span class="line">ip link set mynet1 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载网络设备信息</span></span><br><span class="line">nmcli connection reload</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="永久配置"><a href="#永久配置" class="headerlink" title="永久配置"></a>永久配置</h2><p>通过 <code>udev</code> 实现。Centos系统中，规则目录如下：</p>
+<ul>
+<li>系统规则：<code>/usr/lib/udev/rules.d/</code></li>
+<li>自定义规则：<code>/etc/udev/rules.d</code></li>
+</ul>
+<h3 id="udev解析"><a href="#udev解析" class="headerlink" title="udev解析"></a>udev解析</h3><p>网卡相关udev的rule执行流程：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用户自定义为优先级最高</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡</span></span><br><span class="line">/usr/lib/udev/rules.d/60-net.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span></span><br><span class="line">/usr/lib/udev/rules.d/71-biosdevname.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称哦</span></span><br><span class="line">/lib/udev/rules.d/75-net-description.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名</span></span><br><span class="line">/usr/lib/udev/rules.d/80-net-name-slot.rules</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="重命名流程"><a href="#重命名流程" class="headerlink" title="重命名流程"></a>重命名流程</h3><ol>
+<li>新建文件：<code>/etc/udev/rules.d/70-persistent-net.rules</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a sample udev rules file that demonstrates how to get udev to</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> the name of IPoIB interfaces to whatever you wish.  There is a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 16 character <span class="built_in">limit</span> on network device names.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Important items to note: ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span> is IPoIB interfaces, and the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125; match must start with ?* and only reference the last 8</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bytes of the address or <span class="keyword">else</span> the address might not match the variable QPN</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> portion.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modern udev is <span class="keyword">case</span> sensitive and all addresses need to be <span class="keyword">in</span> lower <span class="keyword">case</span>.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ACTION==<span class="string">&quot;add&quot;</span>, SUBSYSTEM==<span class="string">&quot;net&quot;</span>, DRIVERS==<span class="string">&quot;?*&quot;</span>, ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span>, ATTR&#123;address&#125;==<span class="string">&quot;?*00:02:c9:03:00:31:78:f2&quot;</span>, NAME=<span class="string">&quot;mlx4_ib3&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125;: mac address</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME: device name</span></span><br><span class="line">ACTION==&quot;add&quot;, SUBSYSTEM==&quot;net&quot;, DRIVERS==&quot;?*&quot;, ATTR&#123;type&#125;==&quot;1&quot;, ATTR&#123;address&#125;==&quot;00:0c:29:63:bf:af&quot;, NAME=&quot;mynet1&quot;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改网卡配置文件：<code>/etc/sysconfig/network-scripts/ifcfg-ens33</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: network-scripts # pwd</span><br><span class="line">/etc/sysconfig/network-scripts</span><br><span class="line">root@renyb: network-scripts # cat ifcfg-ens33</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">NAME=mynet1</span><br><span class="line">UUID=b40bd401-b463-4d44-ab63-247307f2a2d6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE NAME</span></span><br><span class="line">DEVICE=mynet1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPV6_PRIVACY=no</span><br><span class="line">root@renyb: network-scripts # # 修改网卡配置文件名称</span><br><span class="line">root@renyb: network-scripts # mv ifcfg-ens33 ifcfg-mynet1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/boltkiller/p/12696501.html">任意修改CentOS下网卡的显示名称和设备名称</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/33932734">在 Linux 中如何编写基本的 udev 规则</a></p>
+<p><a href="https://blog.csdn.net/u010039418/article/details/79260553">CentOS 7.4系统修改网卡名称</a></p>
+<p><a href="https://www.cnblogs.com/yinfutao/p/9634350.html">Linux系统修改网卡名（eth0-3）</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>网卡</tag>
       </tags>
   </entry>
   <entry>
@@ -840,6 +942,39 @@
       </tags>
   </entry>
   <entry>
+    <title>OpenStack开发：Glance Image Soft Delete</title>
+    <url>/2021/01/05/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9AGlance-Image-Soft-Delete/</url>
+    <content><![CDATA[<h2 id="Configuration-options-for-the-Image-Soft-Delete"><a href="#Configuration-options-for-the-Image-Soft-Delete" class="headerlink" title="Configuration options for the Image Soft Delete"></a>Configuration options for the Image Soft Delete</h2><p>Config File：<code>glance-api.conf</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[DEFAULT]</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on/off delayed delete.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Typically when an image is deleted, the ``glance-api`` service puts the image</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> into ``deleted`` state and deletes its data at the same time. Delayed delete</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> is a feature <span class="keyword">in</span> Glance that delays the actual deletion of image data until a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> later point <span class="keyword">in</span> time (as determined by the configuration option</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ``scrub_time``).</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> When delayed delete is turned on, the ``glance-api`` service puts the image</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> into ``pending_delete`` state upon deletion and leaves the image data <span class="keyword">in</span> the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> storage backend <span class="keyword">for</span> the image scrubber to delete at a later time. The image</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> scrubber will move the image into ``deleted`` state upon successful deletion</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> of image data.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NOTE: When delayed delete is turned on, image scrubber MUST be running as a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> periodic task to prevent the backend storage from filling up with undesired</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> usage.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible values:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * True</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * False</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Related options:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``scrub_time``</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``wakeup_time``</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``scrub_pool_size``</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  (boolean value)</span></span><br><span class="line">delayed_delete = True</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> The amount of time, <span class="keyword">in</span> seconds, to delay image scrubbing.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> When delayed delete is turned on, an image is put into ``pending_delete``</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> state upon deletion until the scrubber deletes its image data. Typically, soon</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> after the image is put into ``pending_delete`` state, it is available <span class="keyword">for</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> scrubbing. However, scrubbing can be delayed until a later point using this</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> configuration option. This option denotes the time period an image spends <span class="keyword">in</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ``pending_delete`` state before it is available <span class="keyword">for</span> scrubbing.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> It is important to realize that this has storage implications. The larger the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ``scrub_time``, the longer the time to reclaim backend storage from deleted</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> images.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible values:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * Any non-negative <span class="built_in">integer</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Related options:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``delayed_delete``</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  (<span class="built_in">integer</span> value)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Minimum value: 0</span></span><br><span class="line">scrub_time = 9999999999999</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://blog.csdn.net/zhongbeida_xue/article/details/89016403">openstack中glance镜像的延迟删除、软删除、删除保护</a></p>
+<p><a href="https://docs.openstack.org/train/api/index.html">OpenStack Train API Reference Documentation</a></p>
+<p><a href="https://docs.openstack.org/api-ref/compute/?expanded=#delete-server">OpenStack API Documentation: Compute API</a></p>
+<p><a href="https://docs.openstack.org/api-ref/image/v2/?expanded=">OpenStack API Documentation: Image Service API v2 (CURRENT)</a></p>
+<p><a href="https://docs.openstack.org/api-ref/image/v2/?expanded=">OpenStack API Documentation: Using Glance’s Image Public APIs</a></p>
+]]></content>
+      <categories>
+        <category>OpenStack开发</category>
+      </categories>
+      <tags>
+        <tag>Train版本</tag>
+        <tag>OpenStack开发</tag>
+        <tag>Glance</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OpenStack开发：novaclient解析</title>
     <url>/2020/12/16/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9Anovaclient%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><ul>
@@ -928,39 +1063,6 @@
         <tag>Train版本</tag>
         <tag>OpenStack开发</tag>
         <tag>novaclient</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenStack开发：Glance Image Soft Delete</title>
-    <url>/2021/01/05/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9AGlance-Image-Soft-Delete/</url>
-    <content><![CDATA[<h2 id="Configuration-options-for-the-Image-Soft-Delete"><a href="#Configuration-options-for-the-Image-Soft-Delete" class="headerlink" title="Configuration options for the Image Soft Delete"></a>Configuration options for the Image Soft Delete</h2><p>Config File：<code>glance-api.conf</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[DEFAULT]</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on/off delayed delete.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Typically when an image is deleted, the ``glance-api`` service puts the image</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> into ``deleted`` state and deletes its data at the same time. Delayed delete</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> is a feature <span class="keyword">in</span> Glance that delays the actual deletion of image data until a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> later point <span class="keyword">in</span> time (as determined by the configuration option</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ``scrub_time``).</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> When delayed delete is turned on, the ``glance-api`` service puts the image</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> into ``pending_delete`` state upon deletion and leaves the image data <span class="keyword">in</span> the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> storage backend <span class="keyword">for</span> the image scrubber to delete at a later time. The image</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> scrubber will move the image into ``deleted`` state upon successful deletion</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> of image data.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NOTE: When delayed delete is turned on, image scrubber MUST be running as a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> periodic task to prevent the backend storage from filling up with undesired</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> usage.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible values:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * True</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * False</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Related options:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``scrub_time``</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``wakeup_time``</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``scrub_pool_size``</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  (boolean value)</span></span><br><span class="line">delayed_delete = True</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> The amount of time, <span class="keyword">in</span> seconds, to delay image scrubbing.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> When delayed delete is turned on, an image is put into ``pending_delete``</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> state upon deletion until the scrubber deletes its image data. Typically, soon</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> after the image is put into ``pending_delete`` state, it is available <span class="keyword">for</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> scrubbing. However, scrubbing can be delayed until a later point using this</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> configuration option. This option denotes the time period an image spends <span class="keyword">in</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ``pending_delete`` state before it is available <span class="keyword">for</span> scrubbing.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> It is important to realize that this has storage implications. The larger the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ``scrub_time``, the longer the time to reclaim backend storage from deleted</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> images.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible values:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * Any non-negative <span class="built_in">integer</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Related options:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``delayed_delete``</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  (<span class="built_in">integer</span> value)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Minimum value: 0</span></span><br><span class="line">scrub_time = 9999999999999</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://blog.csdn.net/zhongbeida_xue/article/details/89016403">openstack中glance镜像的延迟删除、软删除、删除保护</a></p>
-<p><a href="https://docs.openstack.org/train/api/index.html">OpenStack Train API Reference Documentation</a></p>
-<p><a href="https://docs.openstack.org/api-ref/compute/?expanded=#delete-server">OpenStack API Documentation: Compute API</a></p>
-<p><a href="https://docs.openstack.org/api-ref/image/v2/?expanded=">OpenStack API Documentation: Image Service API v2 (CURRENT)</a></p>
-<p><a href="https://docs.openstack.org/api-ref/image/v2/?expanded=">OpenStack API Documentation: Using Glance’s Image Public APIs</a></p>
-]]></content>
-      <categories>
-        <category>OpenStack开发</category>
-      </categories>
-      <tags>
-        <tag>Train版本</tag>
-        <tag>OpenStack开发</tag>
-        <tag>Glance</tag>
       </tags>
   </entry>
   <entry>
@@ -1118,18 +1220,6 @@
       </tags>
   </entry>
   <entry>
-    <title>OpenStack部署：Kolla安装Octavia</title>
-    <url>/2020/11/07/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AKolla%E5%AE%89%E8%A3%85Octavia/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>OpenStack部署</category>
-      </categories>
-      <tags>
-        <tag>Train版本</tag>
-        <tag>OpenStack部署</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Oracle 11.2 安装文档</title>
     <url>/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<h2 id="win10安装"><a href="#win10安装" class="headerlink" title="win10安装"></a>win10安装</h2><h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle 11.2.0.1.0</p>
@@ -1186,6 +1276,42 @@
       </tags>
   </entry>
   <entry>
+    <title>Oracle 11.2 快速上手</title>
+    <url>/2020/09/14/Oracle-11-2-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</url>
+    <content><![CDATA[<p>Oracle Database，又名Oracle RDBMS，简称Oracle。是甲骨文公司推出的一款关系数据库管理系统。Oracle数据库系统是目前世界上流行的关系数据库管理系统，拥有可移植性好、使用方便、功能强等优点，在各类大、中、小、微机环境中都适用。Oracle是一种高效率、可靠性好的、适应高吞吐量的数据库解决方案。</p>
+<h3 id="Oracle-登录"><a href="#Oracle-登录" class="headerlink" title="Oracle 登录"></a>Oracle 登录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 格式：sqlplus &lt;username&gt;/&lt;password&gt;[@ip:port/instance name] [as sysdba]</span></span><br><span class="line">sqlplus sys/123@10.121.9.104:49161 as sysdba</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-用户管理"><a href="#Oracle-用户管理" class="headerlink" title="Oracle 用户管理"></a>Oracle 用户管理</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看当前用户</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改用户密码</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> &lt;username&gt; <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">&quot;&lt;new password&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-数据库设置"><a href="#Oracle-数据库设置" class="headerlink" title="Oracle 数据库设置"></a>Oracle 数据库设置</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 开启时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 清空共享池</span></span><br><span class="line"><span class="comment">会清空历史sql的缓存记录，清空后再次执行这些sql时会产生大量的硬解析，影响数据库性能</span></span><br><span class="line"><span class="comment">生产环境慎用，系统繁忙时执行，容易导致数据库宕机</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-表操作"><a href="#Oracle-表操作" class="headerlink" title="Oracle 表操作"></a>Oracle 表操作</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看表结构</span></span><br><span class="line">desc &lt;table name&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看表内容</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，在垃圾桶留下记录，可flashback闪回</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，不会在垃圾桶留下记录，不可恢复</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt; <span class="keyword">purge</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-存储过程语法"><a href="#Oracle-存储过程语法" class="headerlink" title="Oracle 存储过程语法"></a>Oracle 存储过程语法</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> [<span class="keyword">or</span> <span class="keyword">replace</span>] <span class="keyword">procedure</span> 存储过程名（param1 <span class="keyword">in</span> <span class="keyword">type</span>，param2 <span class="keyword">out</span> <span class="keyword">type</span>）</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line">    变量<span class="number">1</span> 类型（值范围）;</span><br><span class="line">    变量2 类型（值范围）;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">into</span> 变量<span class="number">1</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">    <span class="keyword">if</span> (判断条件) <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">select</span> 列名 <span class="keyword">into</span> 变量<span class="number">2</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">        dbms_output.Put_line(<span class="string">&#x27;打印信息&#x27;</span>);</span><br><span class="line">    elsif (判断条件) then</span><br><span class="line">        dbms_output.Put_line(&#x27;打印信息&#x27;);</span><br><span class="line">    else</span><br><span class="line">        raise 异常名（NO_DATA_FOUND）;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">exception</span><br><span class="line">    when others then</span><br><span class="line">        <span class="keyword">rollback</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://docs.oracle.com/cd/E11882_01/index.htm?xd_co_f=94201a14-f246-4e54-ba51-c48c9c02f224">Oracle 官方文档</a></p>
+<p><a href="https://www.cnblogs.com/c1024/p/11012016.html">Oracle数据库初学者入门教程</a></p>
+<p><a href="https://www.cnblogs.com/xswt/p/11394032.html">Oracle常用命令</a></p>
+<p><a href="https://www.cnblogs.com/joeyJss/p/11458653.html">Oracle存储过程的语法</a></p>
+]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>Oracle 11.2</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Oracle 性能测试</title>
     <url>/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h2 id="使用Oracle-SQL测试"><a href="#使用Oracle-SQL测试" class="headerlink" title="使用Oracle SQL测试"></a>使用Oracle SQL测试</h2><blockquote>
@@ -1224,42 +1350,6 @@
       </categories>
       <tags>
         <tag>性能测试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Oracle 11.2 快速上手</title>
-    <url>/2020/09/14/Oracle-11-2-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</url>
-    <content><![CDATA[<p>Oracle Database，又名Oracle RDBMS，简称Oracle。是甲骨文公司推出的一款关系数据库管理系统。Oracle数据库系统是目前世界上流行的关系数据库管理系统，拥有可移植性好、使用方便、功能强等优点，在各类大、中、小、微机环境中都适用。Oracle是一种高效率、可靠性好的、适应高吞吐量的数据库解决方案。</p>
-<h3 id="Oracle-登录"><a href="#Oracle-登录" class="headerlink" title="Oracle 登录"></a>Oracle 登录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 格式：sqlplus &lt;username&gt;/&lt;password&gt;[@ip:port/instance name] [as sysdba]</span></span><br><span class="line">sqlplus sys/123@10.121.9.104:49161 as sysdba</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-用户管理"><a href="#Oracle-用户管理" class="headerlink" title="Oracle 用户管理"></a>Oracle 用户管理</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看当前用户</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改用户密码</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> &lt;username&gt; <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">&quot;&lt;new password&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-数据库设置"><a href="#Oracle-数据库设置" class="headerlink" title="Oracle 数据库设置"></a>Oracle 数据库设置</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 开启时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 清空共享池</span></span><br><span class="line"><span class="comment">会清空历史sql的缓存记录，清空后再次执行这些sql时会产生大量的硬解析，影响数据库性能</span></span><br><span class="line"><span class="comment">生产环境慎用，系统繁忙时执行，容易导致数据库宕机</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-表操作"><a href="#Oracle-表操作" class="headerlink" title="Oracle 表操作"></a>Oracle 表操作</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看表结构</span></span><br><span class="line">desc &lt;table name&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看表内容</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，在垃圾桶留下记录，可flashback闪回</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，不会在垃圾桶留下记录，不可恢复</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt; <span class="keyword">purge</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-存储过程语法"><a href="#Oracle-存储过程语法" class="headerlink" title="Oracle 存储过程语法"></a>Oracle 存储过程语法</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> [<span class="keyword">or</span> <span class="keyword">replace</span>] <span class="keyword">procedure</span> 存储过程名（param1 <span class="keyword">in</span> <span class="keyword">type</span>，param2 <span class="keyword">out</span> <span class="keyword">type</span>）</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line">    变量<span class="number">1</span> 类型（值范围）;</span><br><span class="line">    变量2 类型（值范围）;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">into</span> 变量<span class="number">1</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">    <span class="keyword">if</span> (判断条件) <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">select</span> 列名 <span class="keyword">into</span> 变量<span class="number">2</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">        dbms_output.Put_line(<span class="string">&#x27;打印信息&#x27;</span>);</span><br><span class="line">    elsif (判断条件) then</span><br><span class="line">        dbms_output.Put_line(&#x27;打印信息&#x27;);</span><br><span class="line">    else</span><br><span class="line">        raise 异常名（NO_DATA_FOUND）;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">exception</span><br><span class="line">    when others then</span><br><span class="line">        <span class="keyword">rollback</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://docs.oracle.com/cd/E11882_01/index.htm?xd_co_f=94201a14-f246-4e54-ba51-c48c9c02f224">Oracle 官方文档</a></p>
-<p><a href="https://www.cnblogs.com/c1024/p/11012016.html">Oracle数据库初学者入门教程</a></p>
-<p><a href="https://www.cnblogs.com/xswt/p/11394032.html">Oracle常用命令</a></p>
-<p><a href="https://www.cnblogs.com/joeyJss/p/11458653.html">Oracle存储过程的语法</a></p>
-]]></content>
-      <categories>
-        <category>Oracle</category>
-      </categories>
-      <tags>
-        <tag>Oracle 11.2</tag>
       </tags>
   </entry>
   <entry>
@@ -1486,32 +1576,6 @@
       </categories>
       <tags>
         <tag>性能测试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/08/25/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<a id="more"></a>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -1932,60 +1996,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Mosquitto</title>
-    <url>/2020/08/31/Mosquitto/</url>
-    <content><![CDATA[<h2 id="Mosquitto"><a href="#Mosquitto" class="headerlink" title="Mosquitto"></a>Mosquitto</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型设备、移动应用等方面有较广泛的应用。</p>
-<p>MQTT是一个基于客户端-服务器的消息发布/订阅传输协议。MQTT协议是轻量、简单、开放和易于实现的，这些特点使它适用范围非常广泛。在很多情况下，包括受限的环境中，如：机器与机器（M2M）通信和物联网（IoT）。其在，通过卫星链路通信传感器、偶尔拨号的医疗设备、智能家居、及一些小型化设备中已广泛使用。</p>
-<a id="more"></a>
-
-<p><img src="/2020/08/31/Mosquitto/1573118328615.png" alt="1573118328615"></p>
-<h3 id="config-解析"><a href="#config-解析" class="headerlink" title="config 解析"></a>config 解析</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim mosquitto.conf</span><br><span class="line"></span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># General configuration</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 客户端心跳的间隔时间</span><br><span class="line">#retry_interval 20</span><br><span class="line"> </span><br><span class="line"># 系统状态的刷新时间</span><br><span class="line">#sys_interval 10</span><br><span class="line"> </span><br><span class="line"># 系统资源的回收时间，0表示尽快处理</span><br><span class="line">#store_clean_interval 10</span><br><span class="line"> </span><br><span class="line"># 服务进程的PID</span><br><span class="line">#pid_file &#x2F;var&#x2F;run&#x2F;mosquitto.pid</span><br><span class="line"> </span><br><span class="line"># 服务进程的系统用户</span><br><span class="line">#user mosquitto</span><br><span class="line"> </span><br><span class="line"># 客户端心跳消息的最大并发数</span><br><span class="line">#max_inflight_messages 10</span><br><span class="line"> </span><br><span class="line"># 客户端心跳消息缓存队列</span><br><span class="line">#max_queued_messages 100</span><br><span class="line"> </span><br><span class="line"># 用于设置客户端长连接的过期时间，默认永不过期</span><br><span class="line">#persistent_client_expiration</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Default listener</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 服务绑定的IP地址</span><br><span class="line">#bind_address</span><br><span class="line"> </span><br><span class="line"># 服务绑定的端口号</span><br><span class="line">#port 1883</span><br><span class="line"> </span><br><span class="line"># 允许的最大连接数，-1表示没有限制</span><br><span class="line">#max_connections -1</span><br><span class="line"> </span><br><span class="line"># cafile：CA证书文件</span><br><span class="line"># capath：CA证书目录</span><br><span class="line"># certfile：PEM证书文件</span><br><span class="line"># keyfile：PEM密钥文件</span><br><span class="line">#cafile</span><br><span class="line">#capath</span><br><span class="line">#certfile</span><br><span class="line">#keyfile</span><br><span class="line"> </span><br><span class="line"># 必须提供证书以保证数据安全性</span><br><span class="line">#require_certificate false</span><br><span class="line"> </span><br><span class="line"># 若require_certificate值为true，use_identity_as_username也必须为true</span><br><span class="line">#use_identity_as_username false</span><br><span class="line"> </span><br><span class="line"># 启用PSK（Pre-shared-key）支持</span><br><span class="line">#psk_hint</span><br><span class="line"> </span><br><span class="line"># SSL&#x2F;TSL加密算法，可以使用“openssl ciphers”命令获取</span><br><span class="line"># as the output of that command.</span><br><span class="line">#ciphers</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Persistence</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 消息自动保存的间隔时间</span><br><span class="line">#autosave_interval 1800</span><br><span class="line"> </span><br><span class="line"># 消息自动保存功能的开关</span><br><span class="line">#autosave_on_changes false</span><br><span class="line"> </span><br><span class="line"># 持久化功能的开关</span><br><span class="line">persistence true</span><br><span class="line"> </span><br><span class="line"># 持久化DB文件</span><br><span class="line">#persistence_file mosquitto.db</span><br><span class="line"> </span><br><span class="line"># 持久化DB文件目录</span><br><span class="line">#persistence_location &#x2F;var&#x2F;lib&#x2F;mosquitto&#x2F;</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Logging</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 4种日志模式：stdout、stderr、syslog、topic</span><br><span class="line"># none 则表示不记日志，此配置可以提升些许性能</span><br><span class="line">log_dest none</span><br><span class="line"> </span><br><span class="line"># 选择日志的级别（可设置多项）</span><br><span class="line">#log_type error</span><br><span class="line">#log_type warning</span><br><span class="line">#log_type notice</span><br><span class="line">#log_type information</span><br><span class="line"> </span><br><span class="line"># 是否记录客户端连接信息</span><br><span class="line">#connection_messages true</span><br><span class="line"> </span><br><span class="line"># 是否记录日志时间</span><br><span class="line">#log_timestamp true</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Security</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 客户端ID的前缀限制，可用于保证安全性</span><br><span class="line">#clientid_prefixes</span><br><span class="line"> </span><br><span class="line"># 允许匿名用户</span><br><span class="line">#allow_anonymous true</span><br><span class="line"> </span><br><span class="line"># 用户&#x2F;密码文件，默认格式：username:password</span><br><span class="line">#password_file</span><br><span class="line"> </span><br><span class="line"># PSK格式密码文件，默认格式：identity:key</span><br><span class="line">#psk_file</span><br><span class="line"> </span><br><span class="line"># pattern write sensor&#x2F;%u&#x2F;data</span><br><span class="line"># ACL权限配置，常用语法如下：</span><br><span class="line"># 用户限制：user &lt;username&gt;</span><br><span class="line"># 话题限制：topic [read|write] &lt;topic&gt;</span><br><span class="line"># 正则限制：pattern write sensor&#x2F;%u&#x2F;data</span><br><span class="line">#acl_file</span><br><span class="line"> </span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"># Bridges</span><br><span class="line"># &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> </span><br><span class="line"># 允许服务之间使用“桥接”模式（可用于分布式部署）</span><br><span class="line">#connection &lt;name&gt;</span><br><span class="line">#address &lt;host&gt;[:&lt;port&gt;]</span><br><span class="line">#topic &lt;topic&gt; [[[out | in | both] qos-level] local-prefix remote-prefix]</span><br><span class="line"> </span><br><span class="line"># 设置桥接的客户端ID</span><br><span class="line">#clientid</span><br><span class="line"> </span><br><span class="line"># 桥接断开时，是否清除远程服务器中的消息</span><br><span class="line">#cleansession false</span><br><span class="line"> </span><br><span class="line"># 是否发布桥接的状态信息</span><br><span class="line">#notifications true</span><br><span class="line"> </span><br><span class="line"># 设置桥接模式下，消息将会发布到的话题地址</span><br><span class="line"># $SYS&#x2F;broker&#x2F;connection&#x2F;&lt;clientid&gt;&#x2F;state</span><br><span class="line">#notification_topic</span><br><span class="line"> </span><br><span class="line"># 设置桥接的keepalive数值</span><br><span class="line">#keepalive_interval 60</span><br><span class="line"> </span><br><span class="line"># 桥接模式，目前有三种：automatic、lazy、once</span><br><span class="line">#start_type automatic</span><br><span class="line"> </span><br><span class="line"># 桥接模式automatic的超时时间</span><br><span class="line">#restart_timeout 30</span><br><span class="line"> </span><br><span class="line"># 桥接模式lazy的超时时间</span><br><span class="line">#idle_timeout 60</span><br><span class="line"> </span><br><span class="line"># 桥接客户端的用户名</span><br><span class="line">#username</span><br><span class="line"> </span><br><span class="line"># 桥接客户端的密码</span><br><span class="line">#password</span><br><span class="line"> </span><br><span class="line"># bridge_cafile：桥接客户端的CA证书文件</span><br><span class="line"># bridge_capath：桥接客户端的CA证书目录</span><br><span class="line"># bridge_certfile：桥接客户端的PEM证书文件</span><br><span class="line"># bridge_keyfile：桥接客户端的PEM密钥文件</span><br><span class="line">#bridge_cafile</span><br><span class="line">#bridge_capath</span><br><span class="line">#bridge_certfile</span><br><span class="line">#bridge_keyfile</span><br><span class="line"> </span><br><span class="line"># 自己的配置可以放到以下目录中</span><br><span class="line">#include_dir &#x2F;mqtt&#x2F;config&#x2F;conf.d</span><br></pre></td></tr></table></figure>
-
-<h3 id="Qos-解析"><a href="#Qos-解析" class="headerlink" title="Qos 解析"></a>Qos 解析</h3><h4 id="Qos-0-–-gt-最多一次"><a href="#Qos-0-–-gt-最多一次" class="headerlink" title="Qos=0 –&gt; 最多一次"></a>Qos=0 –&gt; 最多一次</h4><blockquote>
-<p>sequenceDiagram</p>
-<p>ClientA-&gt;&gt;ServerBroker: 发送消息<br>ServerBroker-&gt;&gt;ClientB: 发送消息</p>
-</blockquote>
-<h4 id="Qos-1-–-gt-至少一次"><a href="#Qos-1-–-gt-至少一次" class="headerlink" title="Qos=1 –&gt; 至少一次"></a>Qos=1 –&gt; 至少一次</h4><blockquote>
-<p>sequenceDiagram</p>
-<p>ClientA-&gt;&gt;ServerBroker: 1.发送消息PUBLISH<br>ServerBroker-&gt;&gt;ServerBroker: 1.1存储消息<br>ServerBroker-&gt;&gt;ClientA: 1.2发送消息回应PUBACK<br>ServerBroker-&gt;&gt;ClientB: 2.发送消息<br>ClientB-&gt;&gt;ServerBroker: 2.1发送消息回应PUBACK<br>ServerBroker-&gt;&gt;ServerBroker: 2.2删除消息</p>
-</blockquote>
-<h4 id="Qos-2-–-gt-有且仅有一次"><a href="#Qos-2-–-gt-有且仅有一次" class="headerlink" title="Qos=2 –&gt; 有且仅有一次"></a>Qos=2 –&gt; 有且仅有一次</h4><blockquote>
-<p>sequenceDiagram</p>
-<p>ClientA-&gt;&gt;ServerBroker: 1.发送消息PUBLISH<br>ServerBroker-&gt;&gt;ServerBroker: 1.1存储消息<br>ServerBroker-&gt;&gt;ClientA: 1.2发送消息回应Rec<br>ClientA-&gt;&gt;ServerBroker: 2.发送消息Rel<br>ServerBroker-&gt;&gt;ServerBroker: 2.1删除消息<br>ServerBroker-&gt;&gt;ServerBroker: 2.2存储消息到发送列队<br>ServerBroker-&gt;&gt;ClientB: 2.3发送消息<br>ServerBroker-&gt;&gt;ClientA: 2.4发送消息回应Comp<br>ClientB-&gt;&gt;ServerBroker: 3.发送消息回应Rec<br>ServerBroker-&gt;&gt;ServerBroker: 3.1删除2.2中存储的消息（一次确认）<br>ServerBroker-&gt;&gt;ServerBroker: 3.2存储消息<br>ServerBroker-&gt;&gt;ClientB: 3.3发送消息Rel<br>ClientB-&gt;&gt;ServerBroker: 3.4发送消息回应Comp<br>ServerBroker-&gt;&gt;ServerBroker: 3.5删除消息(二次确认)</p>
-</blockquote>
-<p><img src="/2020/08/31/Mosquitto/1573118624880.png" alt="1573118624880"></p>
-<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><h4 id="实验1：Mosquitto-内存数据落盘机制"><a href="#实验1：Mosquitto-内存数据落盘机制" class="headerlink" title="实验1：Mosquitto 内存数据落盘机制"></a>实验1：Mosquitto 内存数据落盘机制</h4><h5 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h5><p>​    Mosquitto 内存数据落盘持久化时，是否会产生重复数据</p>
-<h5 id="实验结论"><a href="#实验结论" class="headerlink" title="实验结论"></a>实验结论</h5><p>​    Mosquitto 不会重复持久化已经持久化过的数据</p>
-<h5 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h5><p>​    mosquitto version 1.4.15</p>
-<h5 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h5><ol>
-<li>发送者保持同样的发送速率，降低订阅者消费速度，触发mqtt的持久化机制</li>
-<li>更改mqtt持久化的间隔（3s 和 30s），观测持久化的数据大小是否不同</li>
-</ol>
-<h5 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h5><blockquote>
-<p>发送者：发送1w条消息，用时 31.16837883 s</p>
-<p>订阅者：每分钟消化1条，1min内堆积9999条消息</p>
-<p>Mosquitto：持久化间隔 3s，1min内涨幅 27842 Byte</p>
-</blockquote>
-<p><img src="/2020/08/31/Mosquitto/1573112430542.png" alt="1573112430542"></p>
-<blockquote>
-<p>发送者：发送1w条消息，</p>
-<p>订阅者：每分钟消化1条，1min内堆积9999条消息</p>
-<p>Mosquitto：持久化间隔 30s，1min内涨幅 27842 Byte</p>
-</blockquote>
-<p><img src="/2020/08/31/Mosquitto/1573113441213.png" alt="1573113441213"></p>
-<h5 id="实验脚本"><a href="#实验脚本" class="headerlink" title="实验脚本"></a>实验脚本</h5><h6 id="send-py"><a href="#send-py" class="headerlink" title="send.py"></a>send.py</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">Send msg to mqtt (linux, python2)</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">__author__ &#x3D; &#39;RYB&#39;</span><br><span class="line"></span><br><span class="line">import json</span><br><span class="line">import time</span><br><span class="line">import random</span><br><span class="line">import string</span><br><span class="line">import paho.mqtt.publish as publish</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def ranstr(num):</span><br><span class="line">    salt &#x3D; &#39;&#39;.join(random.sample(string.ascii_letters + string.digits, num))</span><br><span class="line">    return salt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def publish_msg(msg_num):</span><br><span class="line">    for i in range(msg_num):</span><br><span class="line">        msg &#x3D; &#123;</span><br><span class="line">            &quot;id&quot;: i,</span><br><span class="line">            &quot;Timestamp&quot;: int(time.time() * 1000),</span><br><span class="line">            &quot;str1&quot;: ranstr(50),</span><br><span class="line">            &quot;str2&quot;: ranstr(50)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        publish.single(&quot;test&quot;, payload&#x3D;json.dumps(msg), qos&#x3D;2, hostname&#x3D;&quot;10.244.0.164&quot;, port&#x3D;1883)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; Start &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)</span><br><span class="line">start &#x3D; time.time()</span><br><span class="line">print(&quot;Running...&quot;)</span><br><span class="line">publish_msg(10000)</span><br><span class="line">end &#x3D; time.time()</span><br><span class="line">print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; End &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)</span><br><span class="line">print(&quot;Run Time: %s s&quot; % str(end - start))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h6 id="rec-py"><a href="#rec-py" class="headerlink" title="rec.py"></a>rec.py</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">Receive msg from mqtt (linux, python2)</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line">__author__ &#x3D; &#39;RYB&#39;</span><br><span class="line"></span><br><span class="line">import time</span><br><span class="line">import paho.mqtt.subscribe as subscribe</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def on_message_sleep(client, userdata, msg):</span><br><span class="line">    print(msg.topic + &#39; --&gt; &#39; + msg.payload)</span><br><span class="line">    time.sleep(60)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subscribe.callback(on_message_sleep, &quot;test&quot;, qos&#x3D;2, hostname&#x3D;&quot;mosquitto&quot;, port&#x3D;1883)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3>]]></content>
-      <categories>
-        <category>中间件</category>
-      </categories>
-      <tags>
-        <tag>MQTT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>开发小工具：Chrome翻墙</title>
     <url>/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/</url>
     <content><![CDATA[<h2 id="谷歌上网助手GHelper-–-Chrome插件"><a href="#谷歌上网助手GHelper-–-Chrome插件" class="headerlink" title="谷歌上网助手GHelper – Chrome插件"></a>谷歌上网助手GHelper – Chrome插件</h2><blockquote>
@@ -2030,6 +2040,44 @@
         <tag>开发小工具</tag>
         <tag>翻墙</tag>
         <tag>Google</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenStack部署：Kolla安装Octavia</title>
+    <url>/2020/11/07/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AKolla%E5%AE%89%E8%A3%85Octavia/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>OpenStack部署</category>
+      </categories>
+      <tags>
+        <tag>Train版本</tag>
+        <tag>OpenStack部署</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/08/25/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<a id="more"></a>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
