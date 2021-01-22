@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Docker 入门</title>
+    <url>/2020/11/05/Docker-%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 调整docker <span class="built_in">exec</span>终端高度和宽度</span></span><br><span class="line">docker exec -it --env COLUMNS=`tput cols` --env LINES=`tput lines` mariadb bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重命名镜像repository和tag</span></span><br><span class="line">docker tag &lt;image id&gt; &lt;new repository&gt;:&lt;new tag&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/moby/moby/issues/35407">Docker Exec does not resize terminal</a></p>
+]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Dijkstra</title>
     <url>/2020/08/27/Dijkstra/</url>
     <content><![CDATA[<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><h3 id="问题1：最短路径"><a href="#问题1：最短路径" class="headerlink" title="问题1：最短路径"></a>问题1：最短路径</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src="/2020/08/27/Dijkstra/Dijkstra-%E9%97%AE%E9%A2%981.png" alt="image-20200731221210621"></p>
@@ -15,22 +31,6 @@
       </categories>
       <tags>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker 入门</title>
-    <url>/2020/11/05/Docker-%E5%85%A5%E9%97%A8/</url>
-    <content><![CDATA[<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 调整docker <span class="built_in">exec</span>终端高度和宽度</span></span><br><span class="line">docker exec -it --env COLUMNS=`tput cols` --env LINES=`tput lines` mariadb bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重命名镜像repository和tag</span></span><br><span class="line">docker tag &lt;image id&gt; &lt;new repository&gt;:&lt;new tag&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/moby/moby/issues/35407">Docker Exec does not resize terminal</a></p>
-]]></content>
-      <categories>
-        <category>Docker</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -114,6 +114,77 @@
       </categories>
       <tags>
         <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jmeter</title>
+    <url>/2020/09/23/Jmeter/</url>
+    <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址：<a href="http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip">http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip</a></p>
+<h3 id="Windows部署"><a href="#Windows部署" class="headerlink" title="Windows部署"></a>Windows部署</h3><h4 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h4><p>版本：jdk-8u131-windows-i586（链接：<a href="https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg">https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg</a> 提取码：4ztk）</p>
+<p>系统环境变量：</p>
+<ul>
+<li>JAVA_HOME：C:\Program Files (x86)\Java\jdk1.8.0_131</li>
+<li>CLASSPATH：.;%JAVA_HOME%\bin;%JAVA_HOME%\lib\dt.jar%JAVA_HOME%\lib\tools.jar;</li>
+<li>PATH：新增两行，%JAVA_HOME%\bin，%JAVA_HOME%\jre\lib</li>
+</ul>
+<h4 id="Jmeter"><a href="#Jmeter" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>开箱即用。可执行文件：<code>.\bin\jmeter.bat</code></p>
+<h3 id="Linux部署"><a href="#Linux部署" class="headerlink" title="Linux部署"></a>Linux部署</h3><h4 id="Java环境-1"><a href="#Java环境-1" class="headerlink" title="Java环境"></a>Java环境</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br></pre></td></tr></table></figure>
+
+<h4 id="Jmeter-1"><a href="#Jmeter-1" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>环境变量<code>/etc/profile</code>增加如下内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export JMETER_HOME=/root/jmeter</span><br><span class="line">export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH</span><br><span class="line">export PATH=$JMETER_HOME/bin:$PATH:$HOME/bin</span><br></pre></td></tr></table></figure>
+
+<p>环境变量配置生效：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>验证：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter --version</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>思路：</strong>通过Windows图形界面生成配置文件，上传至服务器进行压测</p>
+<h3 id="http-https-性能测试"><a href="#http-https-性能测试" class="headerlink" title="http/https 性能测试"></a>http/https 性能测试</h3><h4 id="1-添加线程组"><a href="#1-添加线程组" class="headerlink" title="1. 添加线程组"></a>1. 添加线程组</h4><p>Test Plan中添加<code>Thread Group</code></p>
+<p>总请求量 = 并发用户数 * 循环轮次</p>
+<ul>
+<li><p><code>Number of Threads (users)</code>：设置并发用户数</p>
+</li>
+<li><p><code>Loop Count</code>：设置循环轮次</p>
+</li>
+<li><p><code>Ramp-up period (seconds)</code>：设置压力启动时间（从开始到最大压力之间的时间）</p>
+</li>
+</ul>
+<p><img src="/2020/09/23/Jmeter/jmeter-1.png" alt="jmeter-1"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-2.png" alt="jmeter-2"></p>
+<h4 id="2-设置http-https请求"><a href="#2-设置http-https请求" class="headerlink" title="2. 设置http/https请求"></a>2. 设置http/https请求</h4><p>Thread Group中添加<code>HTTP Request</code>，填写http/https请求的配置</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-3.png" alt="jmeter-3"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-4.png" alt="jmeter-4"></p>
+<h4 id="3-添加统计分析功能"><a href="#3-添加统计分析功能" class="headerlink" title="3. 添加统计分析功能"></a>3. 添加统计分析功能</h4><p>通常，添加如下两个统计分析功能：</p>
+<ul>
+<li>Summary Report</li>
+<li>jp@gc - Transactions Per Second（需要单独安装，安装流程见插件 - QPS统计）</li>
+</ul>
+<p><img src="/2020/09/23/Jmeter/jmeter-5.png" alt="jmeter-5"></p>
+<h4 id="4-导出配置"><a href="#4-导出配置" class="headerlink" title="4. 导出配置"></a>4. 导出配置</h4><p>保存jmx文件，上传至压力服务器。</p>
+<h4 id="5-压力执行"><a href="#5-压力执行" class="headerlink" title="5. 压力执行"></a>5. 压力执行</h4><p>linux运行，生成结果文件至<code>test.jtl</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter -n -t vm.jmx -l test.jtl</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-查看性能测试结果"><a href="#6-查看性能测试结果" class="headerlink" title="6. 查看性能测试结果"></a>6. 查看性能测试结果</h4><p>下载<code>test.jtl</code>，在Windows Jmeter的统计分析功能中打开查看。</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-6.png" alt="jmeter-6"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-7.png" alt="jmeter-7"></p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p><strong>Jmeter插件官网：</strong><a href="https://jmeter-plugins.org/wiki/Start/">https://jmeter-plugins.org/wiki/Start/</a></p>
+<h3 id="QPS统计"><a href="#QPS统计" class="headerlink" title="QPS统计"></a>QPS统计</h3><p>下载地址：<a href="https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip">https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip</a></p>
+<p>解压后，移动压缩包内lib目录下的文件至Jmeter\lib目录下同位置即可，重启Jmeter。</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-8.png" alt="jmeter-8"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://jmeter.apache.org/">Jmeter官方网站</a></p>
+<p><a href="https://jmeter-plugins.org/wiki/Start/">Jmeter官方插件</a></p>
+]]></content>
+      <categories>
+        <category>性能测试工具</category>
+      </categories>
+      <tags>
+        <tag>Jmeter</tag>
       </tags>
   </entry>
   <entry>
@@ -239,100 +310,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Jmeter</title>
-    <url>/2020/09/23/Jmeter/</url>
-    <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址：<a href="http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip">http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip</a></p>
-<h3 id="Windows部署"><a href="#Windows部署" class="headerlink" title="Windows部署"></a>Windows部署</h3><h4 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h4><p>版本：jdk-8u131-windows-i586（链接：<a href="https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg">https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg</a> 提取码：4ztk）</p>
-<p>系统环境变量：</p>
-<ul>
-<li>JAVA_HOME：C:\Program Files (x86)\Java\jdk1.8.0_131</li>
-<li>CLASSPATH：.;%JAVA_HOME%\bin;%JAVA_HOME%\lib\dt.jar%JAVA_HOME%\lib\tools.jar;</li>
-<li>PATH：新增两行，%JAVA_HOME%\bin，%JAVA_HOME%\jre\lib</li>
-</ul>
-<h4 id="Jmeter"><a href="#Jmeter" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>开箱即用。可执行文件：<code>.\bin\jmeter.bat</code></p>
-<h3 id="Linux部署"><a href="#Linux部署" class="headerlink" title="Linux部署"></a>Linux部署</h3><h4 id="Java环境-1"><a href="#Java环境-1" class="headerlink" title="Java环境"></a>Java环境</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br></pre></td></tr></table></figure>
-
-<h4 id="Jmeter-1"><a href="#Jmeter-1" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>环境变量<code>/etc/profile</code>增加如下内容：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export JMETER_HOME=/root/jmeter</span><br><span class="line">export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH</span><br><span class="line">export PATH=$JMETER_HOME/bin:$PATH:$HOME/bin</span><br></pre></td></tr></table></figure>
-
-<p>环境变量配置生效：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-
-<p>验证：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter --version</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>思路：</strong>通过Windows图形界面生成配置文件，上传至服务器进行压测</p>
-<h3 id="http-https-性能测试"><a href="#http-https-性能测试" class="headerlink" title="http/https 性能测试"></a>http/https 性能测试</h3><h4 id="1-添加线程组"><a href="#1-添加线程组" class="headerlink" title="1. 添加线程组"></a>1. 添加线程组</h4><p>Test Plan中添加<code>Thread Group</code></p>
-<p>总请求量 = 并发用户数 * 循环轮次</p>
-<ul>
-<li><p><code>Number of Threads (users)</code>：设置并发用户数</p>
-</li>
-<li><p><code>Loop Count</code>：设置循环轮次</p>
-</li>
-<li><p><code>Ramp-up period (seconds)</code>：设置压力启动时间（从开始到最大压力之间的时间）</p>
-</li>
-</ul>
-<p><img src="/2020/09/23/Jmeter/jmeter-1.png" alt="jmeter-1"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-2.png" alt="jmeter-2"></p>
-<h4 id="2-设置http-https请求"><a href="#2-设置http-https请求" class="headerlink" title="2. 设置http/https请求"></a>2. 设置http/https请求</h4><p>Thread Group中添加<code>HTTP Request</code>，填写http/https请求的配置</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-3.png" alt="jmeter-3"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-4.png" alt="jmeter-4"></p>
-<h4 id="3-添加统计分析功能"><a href="#3-添加统计分析功能" class="headerlink" title="3. 添加统计分析功能"></a>3. 添加统计分析功能</h4><p>通常，添加如下两个统计分析功能：</p>
-<ul>
-<li>Summary Report</li>
-<li>jp@gc - Transactions Per Second（需要单独安装，安装流程见插件 - QPS统计）</li>
-</ul>
-<p><img src="/2020/09/23/Jmeter/jmeter-5.png" alt="jmeter-5"></p>
-<h4 id="4-导出配置"><a href="#4-导出配置" class="headerlink" title="4. 导出配置"></a>4. 导出配置</h4><p>保存jmx文件，上传至压力服务器。</p>
-<h4 id="5-压力执行"><a href="#5-压力执行" class="headerlink" title="5. 压力执行"></a>5. 压力执行</h4><p>linux运行，生成结果文件至<code>test.jtl</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter -n -t vm.jmx -l test.jtl</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="6-查看性能测试结果"><a href="#6-查看性能测试结果" class="headerlink" title="6. 查看性能测试结果"></a>6. 查看性能测试结果</h4><p>下载<code>test.jtl</code>，在Windows Jmeter的统计分析功能中打开查看。</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-6.png" alt="jmeter-6"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-7.png" alt="jmeter-7"></p>
-<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p><strong>Jmeter插件官网：</strong><a href="https://jmeter-plugins.org/wiki/Start/">https://jmeter-plugins.org/wiki/Start/</a></p>
-<h3 id="QPS统计"><a href="#QPS统计" class="headerlink" title="QPS统计"></a>QPS统计</h3><p>下载地址：<a href="https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip">https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip</a></p>
-<p>解压后，移动压缩包内lib目录下的文件至Jmeter\lib目录下同位置即可，重启Jmeter。</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-8.png" alt="jmeter-8"></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://jmeter.apache.org/">Jmeter官方网站</a></p>
-<p><a href="https://jmeter-plugins.org/wiki/Start/">Jmeter官方插件</a></p>
-]]></content>
-      <categories>
-        <category>性能测试工具</category>
-      </categories>
-      <tags>
-        <tag>Jmeter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux配置：GNOME桌面</title>
-    <url>/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AGNOME%E6%A1%8C%E9%9D%A2/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>GNOME是一种<a href="https://baike.baidu.com/item/GNU">GNU</a>网络对象模型环境 ，GNU计划的一部分，开放源码运动的一个重要组成部分，是一种让使用者容易操作和设定电脑环境的工具，目标是基于<a href="https://baike.baidu.com/item/%E8%87%AA%E7%94%B1%E8%BD%AF%E4%BB%B6">自由软件</a>，为<a href="https://baike.baidu.com/item/Unix">Unix</a>或者<a href="https://baike.baidu.com/item/%E7%B1%BBUnix">类Unix</a>操作系统构造一个功能完善、操作简单以及界面友好的<a href="https://baike.baidu.com/item/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83">桌面环境</a>，是GNU计划的正式桌面。</p>
-<p>GNOME可以运行在包括GNU/Linux(通常叫做<a href="https://baike.baidu.com/item/Linux">Linux</a>)，<a href="https://baike.baidu.com/item/Solaris">Solaris</a>，<a href="https://baike.baidu.com/item/HP-UX">HP-UX</a>，<a href="https://baike.baidu.com/item/BSD">BSD</a>和Apple’s Darwin系统上. GNOME 拥有很多强大的特性，如：高质量的平滑文本渲染， 首个国际化和可用性支持， 并且包括对反向文本的支持(注: 有些国家的文字是从右到左的排版的）。</p>
-<p>GNOME运行在大多数类Unix系统，并被Sun Microsystems公司采纳为Solaris平台的标准桌面，取代了过时的<a href="https://baike.baidu.com/item/CDE">CDE</a>。Sun Microsystems公司也以Java Desktop System名义发布一个商业版的桌面：一个被SUSELinux系统使用的基于GNOME的桌面。GNOME也移植到Cygwin使其能运行于Microsoft Windows。GNOME 还被众多LiveCDLinux发行版使用，如<a href="https://baike.baidu.com/item/Gnoppix">Gnoppix</a>和Morphix。</p>
-</blockquote>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 列出可安装的桌面环境</span></span><br><span class="line">yum grouplist</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看安装的包有哪些内容</span></span><br><span class="line">yum group info  &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装GNOME及相应桌面管理工具</span></span><br><span class="line">yum -y groups install &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看当前默认启动模式</span></span><br><span class="line">systemctl get-default</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动图形化界面</span></span><br><span class="line">systemctl set-default graphical.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动命令行界面</span></span><br><span class="line">systemctl set-default multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令行界面热切换到图形界面</span></span><br><span class="line">init 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 图形界面热切换到命令行界面</span></span><br><span class="line">init 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载GNOME</span></span><br><span class="line">yum -y groupremove &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/gentsir/p/10300655.html">Centos 7 安装GNOME桌面环境</a></p>
-<p><a href="https://blog.csdn.net/wqh0830/article/details/86701379">CentOS-7安装GNOME桌面</a></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>GNOME</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kubernetes部署：kubeadm部署高可用集群</title>
     <url>/2020/12/16/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9Akubeadm%E9%83%A8%E7%BD%B2%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/</url>
     <content><![CDATA[<h2 id="高可用集群部署"><a href="#高可用集群部署" class="headerlink" title="高可用集群部署"></a>高可用集群部署</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><h4 id="1-检查centos版本-hostname"><a href="#1-检查centos版本-hostname" class="headerlink" title="1. 检查centos版本 / hostname"></a>1. 检查centos版本 / hostname</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看centos版本</span></span><br><span class="line">cat /etc/centos-release</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; CentOS Linux release 7.7.1908 (Core)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此处 hostname 的输出将会是该机器在 Kubernetes 集群中的节点名字</span></span><br><span class="line">hostname</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改hostname</span></span><br><span class="line">hostnamectl set-hostname NAME</span><br></pre></td></tr></table></figure>
@@ -410,6 +387,29 @@
       <tags>
         <tag>Kubernetes部署</tag>
         <tag>kubeadm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux配置：GNOME桌面</title>
+    <url>/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AGNOME%E6%A1%8C%E9%9D%A2/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>GNOME是一种<a href="https://baike.baidu.com/item/GNU">GNU</a>网络对象模型环境 ，GNU计划的一部分，开放源码运动的一个重要组成部分，是一种让使用者容易操作和设定电脑环境的工具，目标是基于<a href="https://baike.baidu.com/item/%E8%87%AA%E7%94%B1%E8%BD%AF%E4%BB%B6">自由软件</a>，为<a href="https://baike.baidu.com/item/Unix">Unix</a>或者<a href="https://baike.baidu.com/item/%E7%B1%BBUnix">类Unix</a>操作系统构造一个功能完善、操作简单以及界面友好的<a href="https://baike.baidu.com/item/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83">桌面环境</a>，是GNU计划的正式桌面。</p>
+<p>GNOME可以运行在包括GNU/Linux(通常叫做<a href="https://baike.baidu.com/item/Linux">Linux</a>)，<a href="https://baike.baidu.com/item/Solaris">Solaris</a>，<a href="https://baike.baidu.com/item/HP-UX">HP-UX</a>，<a href="https://baike.baidu.com/item/BSD">BSD</a>和Apple’s Darwin系统上. GNOME 拥有很多强大的特性，如：高质量的平滑文本渲染， 首个国际化和可用性支持， 并且包括对反向文本的支持(注: 有些国家的文字是从右到左的排版的）。</p>
+<p>GNOME运行在大多数类Unix系统，并被Sun Microsystems公司采纳为Solaris平台的标准桌面，取代了过时的<a href="https://baike.baidu.com/item/CDE">CDE</a>。Sun Microsystems公司也以Java Desktop System名义发布一个商业版的桌面：一个被SUSELinux系统使用的基于GNOME的桌面。GNOME也移植到Cygwin使其能运行于Microsoft Windows。GNOME 还被众多LiveCDLinux发行版使用，如<a href="https://baike.baidu.com/item/Gnoppix">Gnoppix</a>和Morphix。</p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 列出可安装的桌面环境</span></span><br><span class="line">yum grouplist</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看安装的包有哪些内容</span></span><br><span class="line">yum group info  &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装GNOME及相应桌面管理工具</span></span><br><span class="line">yum -y groups install &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看当前默认启动模式</span></span><br><span class="line">systemctl get-default</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动图形化界面</span></span><br><span class="line">systemctl set-default graphical.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动命令行界面</span></span><br><span class="line">systemctl set-default multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令行界面热切换到图形界面</span></span><br><span class="line">init 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 图形界面热切换到命令行界面</span></span><br><span class="line">init 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载GNOME</span></span><br><span class="line">yum -y groupremove &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/gentsir/p/10300655.html">Centos 7 安装GNOME桌面环境</a></p>
+<p><a href="https://blog.csdn.net/wqh0830/article/details/86701379">CentOS-7安装GNOME桌面</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>GNOME</tag>
       </tags>
   </entry>
   <entry>
@@ -527,6 +527,64 @@
       <tags>
         <tag>Linux</tag>
         <tag>VNC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux配置：修改网卡名称</title>
+    <url>/2021/01/12/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0/</url>
+    <content><![CDATA[<blockquote>
+<p>网上资料都是要修改 <code>/etc/default/grub</code> 文件，增加 <code>net.ifnames=0, biosdevname=0</code> 参数。该方法重启后，网卡名称统一变为eth开头，无法达到任意修改的目的。整理如下方法，亲测 Centos 7.8 可行。</p>
+</blockquote>
+<p>环境信息：CentOS Linux release 7.8.2003 (Core)</p>
+<p>网卡信息：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: rules.d # ip a</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    link/ether 00:0c:29:63:bf:af brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.1.110/24 brd 192.168.1.255 scope global noprefixroute dynamic mynet1</span><br><span class="line">       valid_lft 6511sec preferred_lft 6511sec</span><br><span class="line">    inet6 fe80::a788:f7ed:8c55:1b9f/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">4: virbr0-nic: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line"></span><br><span class="line">root@renyb: rules.d # nmcli connection show</span><br><span class="line">NAME    UUID                                  TYPE      DEVICE</span><br><span class="line">ens33   b40bd401-b463-4d44-ab63-247307f2a2d6  ethernet  ens33</span><br><span class="line">virbr0  7f07fa4e-e769-4fd1-ab39-1b70c27a0952  bridge    virbr0</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="临时配置"><a href="#临时配置" class="headerlink" title="临时配置"></a>临时配置</h2><p>通过 <code>ip</code> 命令进行配置，重启失效</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看网络设备信息</span></span><br><span class="line">nmcli connection show</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> down网卡</span></span><br><span class="line">ip link set dev ens33 down</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE名称</span></span><br><span class="line">ip link set dev ens33 name mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">nmcli connection modify ens33 connection.id mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动网卡</span></span><br><span class="line">ip link set mynet1 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载网络设备信息</span></span><br><span class="line">nmcli connection reload</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="永久配置"><a href="#永久配置" class="headerlink" title="永久配置"></a>永久配置</h2><p>通过 <code>udev</code> 实现。Centos系统中，规则目录如下：</p>
+<ul>
+<li>系统规则：<code>/usr/lib/udev/rules.d/</code></li>
+<li>自定义规则：<code>/etc/udev/rules.d</code></li>
+</ul>
+<h3 id="udev解析"><a href="#udev解析" class="headerlink" title="udev解析"></a>udev解析</h3><p>网卡相关udev的rule执行流程：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用户自定义为优先级最高</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡</span></span><br><span class="line">/usr/lib/udev/rules.d/60-net.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span></span><br><span class="line">/usr/lib/udev/rules.d/71-biosdevname.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称哦</span></span><br><span class="line">/lib/udev/rules.d/75-net-description.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名</span></span><br><span class="line">/usr/lib/udev/rules.d/80-net-name-slot.rules</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="重命名流程"><a href="#重命名流程" class="headerlink" title="重命名流程"></a>重命名流程</h3><ol>
+<li>新建文件：<code>/etc/udev/rules.d/70-persistent-net.rules</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a sample udev rules file that demonstrates how to get udev to</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> the name of IPoIB interfaces to whatever you wish.  There is a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 16 character <span class="built_in">limit</span> on network device names.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Important items to note: ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span> is IPoIB interfaces, and the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125; match must start with ?* and only reference the last 8</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bytes of the address or <span class="keyword">else</span> the address might not match the variable QPN</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> portion.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modern udev is <span class="keyword">case</span> sensitive and all addresses need to be <span class="keyword">in</span> lower <span class="keyword">case</span>.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ACTION==<span class="string">&quot;add&quot;</span>, SUBSYSTEM==<span class="string">&quot;net&quot;</span>, DRIVERS==<span class="string">&quot;?*&quot;</span>, ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span>, ATTR&#123;address&#125;==<span class="string">&quot;?*00:02:c9:03:00:31:78:f2&quot;</span>, NAME=<span class="string">&quot;mlx4_ib3&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125;: mac address</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME: device name</span></span><br><span class="line">ACTION==&quot;add&quot;, SUBSYSTEM==&quot;net&quot;, DRIVERS==&quot;?*&quot;, ATTR&#123;type&#125;==&quot;1&quot;, ATTR&#123;address&#125;==&quot;00:0c:29:63:bf:af&quot;, NAME=&quot;mynet1&quot;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改网卡配置文件：<code>/etc/sysconfig/network-scripts/ifcfg-ens33</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: network-scripts # pwd</span><br><span class="line">/etc/sysconfig/network-scripts</span><br><span class="line">root@renyb: network-scripts # cat ifcfg-ens33</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">NAME=mynet1</span><br><span class="line">UUID=b40bd401-b463-4d44-ab63-247307f2a2d6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE NAME</span></span><br><span class="line">DEVICE=mynet1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPV6_PRIVACY=no</span><br><span class="line">root@renyb: network-scripts # # 修改网卡配置文件名称</span><br><span class="line">root@renyb: network-scripts # mv ifcfg-ens33 ifcfg-mynet1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/boltkiller/p/12696501.html">任意修改CentOS下网卡的显示名称和设备名称</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/33932734">在 Linux 中如何编写基本的 udev 规则</a></p>
+<p><a href="https://blog.csdn.net/u010039418/article/details/79260553">CentOS 7.4系统修改网卡名称</a></p>
+<p><a href="https://www.cnblogs.com/yinfutao/p/9634350.html">Linux系统修改网卡名（eth0-3）</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>网卡</tag>
       </tags>
   </entry>
   <entry>
@@ -690,64 +748,6 @@
       <tags>
         <tag>OpenStack使用</tag>
         <tag>镜像制作</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux配置：修改网卡名称</title>
-    <url>/2021/01/12/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0/</url>
-    <content><![CDATA[<blockquote>
-<p>网上资料都是要修改 <code>/etc/default/grub</code> 文件，增加 <code>net.ifnames=0, biosdevname=0</code> 参数。该方法重启后，网卡名称统一变为eth开头，无法达到任意修改的目的。整理如下方法，亲测 Centos 7.8 可行。</p>
-</blockquote>
-<p>环境信息：CentOS Linux release 7.8.2003 (Core)</p>
-<p>网卡信息：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: rules.d # ip a</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    link/ether 00:0c:29:63:bf:af brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.1.110/24 brd 192.168.1.255 scope global noprefixroute dynamic mynet1</span><br><span class="line">       valid_lft 6511sec preferred_lft 6511sec</span><br><span class="line">    inet6 fe80::a788:f7ed:8c55:1b9f/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">4: virbr0-nic: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line"></span><br><span class="line">root@renyb: rules.d # nmcli connection show</span><br><span class="line">NAME    UUID                                  TYPE      DEVICE</span><br><span class="line">ens33   b40bd401-b463-4d44-ab63-247307f2a2d6  ethernet  ens33</span><br><span class="line">virbr0  7f07fa4e-e769-4fd1-ab39-1b70c27a0952  bridge    virbr0</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="临时配置"><a href="#临时配置" class="headerlink" title="临时配置"></a>临时配置</h2><p>通过 <code>ip</code> 命令进行配置，重启失效</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看网络设备信息</span></span><br><span class="line">nmcli connection show</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> down网卡</span></span><br><span class="line">ip link set dev ens33 down</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE名称</span></span><br><span class="line">ip link set dev ens33 name mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">nmcli connection modify ens33 connection.id mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动网卡</span></span><br><span class="line">ip link set mynet1 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载网络设备信息</span></span><br><span class="line">nmcli connection reload</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="永久配置"><a href="#永久配置" class="headerlink" title="永久配置"></a>永久配置</h2><p>通过 <code>udev</code> 实现。Centos系统中，规则目录如下：</p>
-<ul>
-<li>系统规则：<code>/usr/lib/udev/rules.d/</code></li>
-<li>自定义规则：<code>/etc/udev/rules.d</code></li>
-</ul>
-<h3 id="udev解析"><a href="#udev解析" class="headerlink" title="udev解析"></a>udev解析</h3><p>网卡相关udev的rule执行流程：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用户自定义为优先级最高</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡</span></span><br><span class="line">/usr/lib/udev/rules.d/60-net.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span></span><br><span class="line">/usr/lib/udev/rules.d/71-biosdevname.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称哦</span></span><br><span class="line">/lib/udev/rules.d/75-net-description.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名</span></span><br><span class="line">/usr/lib/udev/rules.d/80-net-name-slot.rules</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="重命名流程"><a href="#重命名流程" class="headerlink" title="重命名流程"></a>重命名流程</h3><ol>
-<li>新建文件：<code>/etc/udev/rules.d/70-persistent-net.rules</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a sample udev rules file that demonstrates how to get udev to</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> the name of IPoIB interfaces to whatever you wish.  There is a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 16 character <span class="built_in">limit</span> on network device names.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Important items to note: ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span> is IPoIB interfaces, and the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125; match must start with ?* and only reference the last 8</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bytes of the address or <span class="keyword">else</span> the address might not match the variable QPN</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> portion.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modern udev is <span class="keyword">case</span> sensitive and all addresses need to be <span class="keyword">in</span> lower <span class="keyword">case</span>.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ACTION==<span class="string">&quot;add&quot;</span>, SUBSYSTEM==<span class="string">&quot;net&quot;</span>, DRIVERS==<span class="string">&quot;?*&quot;</span>, ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span>, ATTR&#123;address&#125;==<span class="string">&quot;?*00:02:c9:03:00:31:78:f2&quot;</span>, NAME=<span class="string">&quot;mlx4_ib3&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125;: mac address</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME: device name</span></span><br><span class="line">ACTION==&quot;add&quot;, SUBSYSTEM==&quot;net&quot;, DRIVERS==&quot;?*&quot;, ATTR&#123;type&#125;==&quot;1&quot;, ATTR&#123;address&#125;==&quot;00:0c:29:63:bf:af&quot;, NAME=&quot;mynet1&quot;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>修改网卡配置文件：<code>/etc/sysconfig/network-scripts/ifcfg-ens33</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: network-scripts # pwd</span><br><span class="line">/etc/sysconfig/network-scripts</span><br><span class="line">root@renyb: network-scripts # cat ifcfg-ens33</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">NAME=mynet1</span><br><span class="line">UUID=b40bd401-b463-4d44-ab63-247307f2a2d6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE NAME</span></span><br><span class="line">DEVICE=mynet1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPV6_PRIVACY=no</span><br><span class="line">root@renyb: network-scripts # # 修改网卡配置文件名称</span><br><span class="line">root@renyb: network-scripts # mv ifcfg-ens33 ifcfg-mynet1</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/boltkiller/p/12696501.html">任意修改CentOS下网卡的显示名称和设备名称</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/33932734">在 Linux 中如何编写基本的 udev 规则</a></p>
-<p><a href="https://blog.csdn.net/u010039418/article/details/79260553">CentOS 7.4系统修改网卡名称</a></p>
-<p><a href="https://www.cnblogs.com/yinfutao/p/9634350.html">Linux系统修改网卡名（eth0-3）</a></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>网卡</tag>
       </tags>
   </entry>
   <entry>
@@ -1066,6 +1066,18 @@
       </tags>
   </entry>
   <entry>
+    <title>OpenStack部署：Kolla安装Octavia</title>
+    <url>/2020/11/07/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AKolla%E5%AE%89%E8%A3%85Octavia/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>OpenStack部署</category>
+      </categories>
+      <tags>
+        <tag>Train版本</tag>
+        <tag>OpenStack部署</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OpenStack部署：默认端口号</title>
     <url>/2020/12/05/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9A%E9%BB%98%E8%AE%A4%E7%AB%AF%E5%8F%A3%E5%8F%B7/</url>
     <content><![CDATA[<h2 id="组件默认端口号"><a href="#组件默认端口号" class="headerlink" title="组件默认端口号"></a>组件默认端口号</h2><table>
@@ -1220,6 +1232,47 @@
       </tags>
   </entry>
   <entry>
+    <title>Oracle 性能测试</title>
+    <url>/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h2 id="使用Oracle-SQL测试"><a href="#使用Oracle-SQL测试" class="headerlink" title="使用Oracle SQL测试"></a>使用Oracle SQL测试</h2><blockquote>
+<p>实验环境</p>
+<p>机器：win10虚机</p>
+<p>配置：4c8G + 500G硬盘</p>
+</blockquote>
+<h3 id="持续写入"><a href="#持续写入" class="headerlink" title="持续写入"></a>持续写入</h3><p>每次insert操作后，进行一次commit操作，性能低。<code>实验用时：00:02:39.66</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">            <span class="keyword">commit</span>;</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%8C%81%E7%BB%AD%E5%86%99%E5%85%A5.png" alt="持续写入"></p>
+<h3 id="批量写入"><a href="#批量写入" class="headerlink" title="批量写入"></a>批量写入</h3><p>对insert操作进行批量提交，性能相较于上者有所提升。<code>实验用时：00:01:25.37</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%89%B9%E9%87%8F%E5%86%99%E5%85%A5.png" alt="批量写入"></p>
+<h3 id="connect-by方式写入"><a href="#connect-by方式写入" class="headerlink" title="connect by方式写入"></a>connect by方式写入</h3><p>Oracle提供的层次查询（Hierarchical Queries）功能中的connect by子句可以快速插入连续数字。该方法会将数据写入数据缓冲区(data buffer)中，然后刷入磁盘中。<code>实验用时：00:00:01.56</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">select</span> <span class="keyword">rownum</span> <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E9%9B%86%E5%90%88%E5%86%99%E5%85%A5.png" alt="connect by写入"></p>
+<h3 id="直接路径写入"><a href="#直接路径写入" class="headerlink" title="直接路径写入"></a>直接路径写入</h3><p>该方式跳过了数据缓冲区(data buffer)， 直接写进磁盘中，这种方式称之为直接路径读写方式。<code>实验用时：00:00:00.78</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E7%9B%B4%E6%8E%A5%E8%B7%AF%E5%BE%84%E5%86%99%E5%85%A5.png" alt="直接路径写入"></p>
+<h3 id="并行模式直接写入"><a href="#并行模式直接写入" class="headerlink" title="并行模式直接写入"></a>并行模式直接写入</h3><p>并行加直接路径，而且是不写日志。<code>实验用时：00:00:00.67</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t nologging <span class="keyword">parallel</span> <span class="number">4</span> <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%B9%B6%E8%A1%8C%E6%A8%A1%E5%BC%8F%E5%86%99%E5%85%A5.png" alt="并行模式写入"></p>
+<h3 id="大对象存储"><a href="#大对象存储" class="headerlink" title="大对象存储"></a>大对象存储</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 创建测试表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建普通序列号</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> sequ_t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 注册目录</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">directory</span> TEST_DIR <span class="keyword">as</span> <span class="string">&#x27;C:\Users\lenovo\Desktop&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 存储文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    tempimg <span class="built_in">blob</span>;  <span class="comment">-- 定义临时变量存放数据   </span></span><br><span class="line">    tempdir bfile := bfilename(&#x27;TEST_DIR&#x27;,&#x27;test.png&#x27;);  <span class="comment">-- 非常重要：DIR必须大写</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span> (sequ_t.nextval,<span class="string">&#x27;test.png&#x27;</span>,empty_blob())</span><br><span class="line">    <span class="keyword">returning</span> tcontent <span class="keyword">into</span> tempimg;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 使用内置的包，给tempimg写入数据</span></span><br><span class="line">    dbms_lob.fileopen(tempdir);  <span class="comment">-- 打开指定文件</span></span><br><span class="line">    dbms_lob.loadfromfile(tempimg,tempdir,dbms_lob.getlength(tempdir));</span><br><span class="line">    dbms_lob.fileclose(tempdir);  <span class="comment">-- 关闭文件        </span></span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span> ;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 读取文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    l_file utl_file.file_type;  <span class="comment">-- 定义写入磁盘文件的类型和格式</span></span><br><span class="line">    l_buffer raw(32767);  <span class="comment">-- 定义缓冲区大小</span></span><br><span class="line">    l_amount binary_integer := 3276;  <span class="comment">-- 每次位移个数</span></span><br><span class="line">    l_pos int :=1;  <span class="comment">-- 开始位置</span></span><br><span class="line">    l_blob blob;  <span class="comment">-- 临时数据存放</span></span><br><span class="line">    l_blob_len int;  <span class="comment">-- 总长度</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="comment">-- 将数据库中的数据，存放在blob变量中  </span></span><br><span class="line">    <span class="keyword">select</span> tcontent <span class="keyword">into</span> l_blob <span class="keyword">from</span> t <span class="keyword">where</span> tname=<span class="string">&#x27;test.png&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 获取blob文件的长度</span></span><br><span class="line">    l_blob_len := dbms_lob.getlength(l_blob);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 准备写入磁盘文件</span></span><br><span class="line">    l_file := utl_file.fopen(&#x27;TEST_DIR&#x27;,&#x27;t.png&#x27;,&#x27;wb&#x27;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 写入数据</span></span><br><span class="line">    while l_pos&lt;l_blob_len</span><br><span class="line">    loop</span><br><span class="line">        dbms_lob.read(l_blob,l_amount,l_pos,l_buffer);</span><br><span class="line">        utl_file.put_raw(l_file,l_buffer,true);</span><br><span class="line">        l_pos := l_pos + l_amount;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    utl_file.fclose(l_file); </span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%AD%98%E5%82%A8image.png" alt="存储image"></p>
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E8%AF%BB%E5%8F%96image.png" alt="读取image"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://docs.oracle.com/database/121/ARPLS/d_lob.htm#ARPLS600">Oracle 官方文档：DBMS_LOB</a></p>
+]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>性能测试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Oracle 11.2 安装文档</title>
     <url>/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<h2 id="win10安装"><a href="#win10安装" class="headerlink" title="win10安装"></a>win10安装</h2><h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle 11.2.0.1.0</p>
@@ -1309,47 +1362,6 @@
       </categories>
       <tags>
         <tag>Oracle 11.2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Oracle 性能测试</title>
-    <url>/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h2 id="使用Oracle-SQL测试"><a href="#使用Oracle-SQL测试" class="headerlink" title="使用Oracle SQL测试"></a>使用Oracle SQL测试</h2><blockquote>
-<p>实验环境</p>
-<p>机器：win10虚机</p>
-<p>配置：4c8G + 500G硬盘</p>
-</blockquote>
-<h3 id="持续写入"><a href="#持续写入" class="headerlink" title="持续写入"></a>持续写入</h3><p>每次insert操作后，进行一次commit操作，性能低。<code>实验用时：00:02:39.66</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">            <span class="keyword">commit</span>;</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%8C%81%E7%BB%AD%E5%86%99%E5%85%A5.png" alt="持续写入"></p>
-<h3 id="批量写入"><a href="#批量写入" class="headerlink" title="批量写入"></a>批量写入</h3><p>对insert操作进行批量提交，性能相较于上者有所提升。<code>实验用时：00:01:25.37</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%89%B9%E9%87%8F%E5%86%99%E5%85%A5.png" alt="批量写入"></p>
-<h3 id="connect-by方式写入"><a href="#connect-by方式写入" class="headerlink" title="connect by方式写入"></a>connect by方式写入</h3><p>Oracle提供的层次查询（Hierarchical Queries）功能中的connect by子句可以快速插入连续数字。该方法会将数据写入数据缓冲区(data buffer)中，然后刷入磁盘中。<code>实验用时：00:00:01.56</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">select</span> <span class="keyword">rownum</span> <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E9%9B%86%E5%90%88%E5%86%99%E5%85%A5.png" alt="connect by写入"></p>
-<h3 id="直接路径写入"><a href="#直接路径写入" class="headerlink" title="直接路径写入"></a>直接路径写入</h3><p>该方式跳过了数据缓冲区(data buffer)， 直接写进磁盘中，这种方式称之为直接路径读写方式。<code>实验用时：00:00:00.78</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E7%9B%B4%E6%8E%A5%E8%B7%AF%E5%BE%84%E5%86%99%E5%85%A5.png" alt="直接路径写入"></p>
-<h3 id="并行模式直接写入"><a href="#并行模式直接写入" class="headerlink" title="并行模式直接写入"></a>并行模式直接写入</h3><p>并行加直接路径，而且是不写日志。<code>实验用时：00:00:00.67</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t nologging <span class="keyword">parallel</span> <span class="number">4</span> <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%B9%B6%E8%A1%8C%E6%A8%A1%E5%BC%8F%E5%86%99%E5%85%A5.png" alt="并行模式写入"></p>
-<h3 id="大对象存储"><a href="#大对象存储" class="headerlink" title="大对象存储"></a>大对象存储</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 创建测试表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建普通序列号</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> sequ_t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 注册目录</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">directory</span> TEST_DIR <span class="keyword">as</span> <span class="string">&#x27;C:\Users\lenovo\Desktop&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 存储文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    tempimg <span class="built_in">blob</span>;  <span class="comment">-- 定义临时变量存放数据   </span></span><br><span class="line">    tempdir bfile := bfilename(&#x27;TEST_DIR&#x27;,&#x27;test.png&#x27;);  <span class="comment">-- 非常重要：DIR必须大写</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span> (sequ_t.nextval,<span class="string">&#x27;test.png&#x27;</span>,empty_blob())</span><br><span class="line">    <span class="keyword">returning</span> tcontent <span class="keyword">into</span> tempimg;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 使用内置的包，给tempimg写入数据</span></span><br><span class="line">    dbms_lob.fileopen(tempdir);  <span class="comment">-- 打开指定文件</span></span><br><span class="line">    dbms_lob.loadfromfile(tempimg,tempdir,dbms_lob.getlength(tempdir));</span><br><span class="line">    dbms_lob.fileclose(tempdir);  <span class="comment">-- 关闭文件        </span></span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span> ;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 读取文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    l_file utl_file.file_type;  <span class="comment">-- 定义写入磁盘文件的类型和格式</span></span><br><span class="line">    l_buffer raw(32767);  <span class="comment">-- 定义缓冲区大小</span></span><br><span class="line">    l_amount binary_integer := 3276;  <span class="comment">-- 每次位移个数</span></span><br><span class="line">    l_pos int :=1;  <span class="comment">-- 开始位置</span></span><br><span class="line">    l_blob blob;  <span class="comment">-- 临时数据存放</span></span><br><span class="line">    l_blob_len int;  <span class="comment">-- 总长度</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="comment">-- 将数据库中的数据，存放在blob变量中  </span></span><br><span class="line">    <span class="keyword">select</span> tcontent <span class="keyword">into</span> l_blob <span class="keyword">from</span> t <span class="keyword">where</span> tname=<span class="string">&#x27;test.png&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 获取blob文件的长度</span></span><br><span class="line">    l_blob_len := dbms_lob.getlength(l_blob);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 准备写入磁盘文件</span></span><br><span class="line">    l_file := utl_file.fopen(&#x27;TEST_DIR&#x27;,&#x27;t.png&#x27;,&#x27;wb&#x27;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 写入数据</span></span><br><span class="line">    while l_pos&lt;l_blob_len</span><br><span class="line">    loop</span><br><span class="line">        dbms_lob.read(l_blob,l_amount,l_pos,l_buffer);</span><br><span class="line">        utl_file.put_raw(l_file,l_buffer,true);</span><br><span class="line">        l_pos := l_pos + l_amount;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    utl_file.fclose(l_file); </span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%AD%98%E5%82%A8image.png" alt="存储image"></p>
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E8%AF%BB%E5%8F%96image.png" alt="读取image"></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://docs.oracle.com/database/121/ARPLS/d_lob.htm#ARPLS600">Oracle 官方文档：DBMS_LOB</a></p>
-]]></content>
-      <categories>
-        <category>Oracle</category>
-      </categories>
-      <tags>
-        <tag>性能测试</tag>
       </tags>
   </entry>
   <entry>
@@ -1719,6 +1731,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2020/08/25/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<a id="more"></a>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vim</title>
     <url>/2020/08/31/Vim/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
@@ -2043,44 +2081,6 @@
       </tags>
   </entry>
   <entry>
-    <title>OpenStack部署：Kolla安装Octavia</title>
-    <url>/2020/11/07/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AKolla%E5%AE%89%E8%A3%85Octavia/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>OpenStack部署</category>
-      </categories>
-      <tags>
-        <tag>Train版本</tag>
-        <tag>OpenStack部署</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/08/25/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<a id="more"></a>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>OpenStack开发：Curl接口调试</title>
     <url>/2020/12/14/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9ACurl%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95/</url>
     <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote>
@@ -2170,13 +2170,20 @@
     <url>/2021/01/19/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AHTTPS/</url>
     <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p><strong>需求：</strong>需要为openstack所有服务更新为https方式访问</p>
 <p><strong>方案：</strong>使用HAProxy进行负载均衡和https证书卸载，通过HAProxy frontend进行https证书验证，验证通过后，转发至backend的后端http server。openstack各服务之间，通过https进行访问，需要配置各个服务的CA证书，同时更新keystone的endpoint</p>
+<p><img src="/2021/01/19/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AHTTPS/%E8%AF%81%E4%B9%A6%E5%8D%B8%E8%BD%BD.png" alt="证书卸载"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
 <li>系统：CentOS Linux release 7.7.1908 (Core)</li>
 <li>OpenStack部署方式：kolla-ansible部署，control节点1台，compute节点3台</li>
 <li>kolla-ansible版本：9.2.0</li>
 <li>OpenStack版本：Train</li>
 </ul>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用kolla生成证书</span></span><br><span class="line">kolla-ansible certificates</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> haproxy</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy.pem /etc/kolla/haproxy/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> glance</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/glance-api/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> cinder</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/cinder-api/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/cinder-backup/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/cinder-scheduler/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/cinder-volume/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node02:/etc/kolla/cinder-backup/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node03:/etc/kolla/cinder-backup/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node02:/etc/kolla/cinder-volume/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node03:/etc/kolla/cinder-volume/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> neutron</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/neutron-server/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/neutron-openvswitch-agent/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/neutron-metadata-agent/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/neutron-l3-agent/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/neutron-dhcp-agent/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node02:/etc/kolla/neutron-openvswitch-agent/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node03:/etc/kolla/neutron-openvswitch-agent/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> placement</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/placement-api/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> nova</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-api/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-api-bootstrap/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-cell-bootstrap/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-compute/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-conductor/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-novncproxy/</span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/nova-scheduler/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node02:/etc/kolla/nova-compute/</span><br><span class="line">scp /etc/kolla/certificates/haproxy-ca.crt node03:/etc/kolla/nova-compute/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> horizon</span></span><br><span class="line">cp /etc/kolla/certificates/haproxy-ca.crt /etc/kolla/horizon/</span><br></pre></td></tr></table></figure>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="SSL证书"><a href="#SSL证书" class="headerlink" title="SSL证书"></a>SSL证书</h3><p><strong>生成证书</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用kolla生成证书</span></span><br><span class="line">kolla-ansible certificates</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> openssl-kolla.cnf</span></span><br><span class="line">[req]</span><br><span class="line">distinguished_name = req_distinguished_name</span><br><span class="line">req_extensions = v3_req</span><br><span class="line"></span><br><span class="line">[req_distinguished_name]</span><br><span class="line">countryName = US</span><br><span class="line">stateOrProvinceName = NC</span><br><span class="line">localityName = RTP</span><br><span class="line">organizationalUnitName = kolla</span><br><span class="line">commonName = 111.111.111.80</span><br><span class="line"></span><br><span class="line">[v3_req]</span><br><span class="line">subjectAltName = @alt_names</span><br><span class="line"></span><br><span class="line">[alt_names]</span><br><span class="line">IP.1 = 111.111.111.80</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>分发证书</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># haproxy</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy.pem &#x2F;etc&#x2F;kolla&#x2F;haproxy&#x2F;</span><br><span class="line"></span><br><span class="line"># glance</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;glance-api&#x2F;</span><br><span class="line"></span><br><span class="line"># cinder</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;cinder-api&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;cinder-backup&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;cinder-scheduler&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;cinder-volume&#x2F;</span><br><span class="line">scp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt node02:&#x2F;etc&#x2F;kolla&#x2F;cinder-backup&#x2F;</span><br><span class="line">scp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt node03:&#x2F;etc&#x2F;kolla&#x2F;cinder-backup&#x2F;</span><br><span class="line">scp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt node02:&#x2F;etc&#x2F;kolla&#x2F;cinder-volume&#x2F;</span><br><span class="line">scp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt node03:&#x2F;etc&#x2F;kolla&#x2F;cinder-volume&#x2F;</span><br><span class="line"></span><br><span class="line"># neutron</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;neutron-server&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;neutron-openvswitch-agent&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;neutron-metadata-agent&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;neutron-l3-agent&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;neutron-dhcp-agent&#x2F;</span><br><span class="line">scp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt node02:&#x2F;etc&#x2F;kolla&#x2F;neutron-openvswitch-agent&#x2F;</span><br><span class="line">scp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt node03:&#x2F;etc&#x2F;kolla&#x2F;neutron-openvswitch-agent&#x2F;</span><br><span class="line"></span><br><span class="line"># placement</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;placement-api&#x2F;</span><br><span class="line"></span><br><span class="line"># nova</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;nova-api&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;nova-api-bootstrap&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;nova-cell-bootstrap&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;nova-compute&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;nova-conductor&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;nova-novncproxy&#x2F;</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;nova-scheduler&#x2F;</span><br><span class="line">scp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt node02:&#x2F;etc&#x2F;kolla&#x2F;nova-compute&#x2F;</span><br><span class="line">scp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt node03:&#x2F;etc&#x2F;kolla&#x2F;nova-compute&#x2F;</span><br><span class="line"></span><br><span class="line"># horizon</span><br><span class="line">cp &#x2F;etc&#x2F;kolla&#x2F;certificates&#x2F;haproxy-ca.crt &#x2F;etc&#x2F;kolla&#x2F;horizon&#x2F;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -2193,7 +2200,7 @@
 <ol start="2">
 <li>删除http endpoint</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 如果环境变量interface使用的是internal，则删除掉internal http的endpoint之后，删除其他endpoint会报错，属于正常现象。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 原因：https尚未在haproxy上配置，请求https端口会报错</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解决：需要执行第3步，更新haproxy。配置https证书验证后，可正常执行其余操作</span></span><br><span class="line">root@node01: kolla # openstack endpoint delete 9200b3fcad1e42e8a8d8277e8c7ba71c</span><br><span class="line">Failed to contact the endpoint at https://111.111.111.80:5000 for discovery. Fallback to using that endpoint as the base url.</span><br><span class="line">Failed to contact the endpoint at https://111.111.111.80:5000 for discovery. Fallback to using that endpoint as the base url.</span><br><span class="line">Failed to contact the endpoint at https://111.111.111.80:5000 for discovery. Fallback to using that endpoint as the base url.</span><br><span class="line">Failed to delete endpoint with ID &#x27;9200b3fcad1e42e8a8d8277e8c7ba71c&#x27;: SSL exception connecting to https://111.111.111.80:5000/endpoints?: HTTPSConnectionPool(host=&#x27;111.111.111.80&#x27;, port=5000): Max retries exceeded with url: /endpoints (Caused by SSLError(SSLError(1, u&#x27;[SSL: UNKNOWN_PROTOCOL] unknown protocol (_ssl.c:618)&#x27;),))</span><br><span class="line">1 of 1 endpoints failed to delete.</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 如果环境变量OS_INTERFACE使用的是internal，则删除掉internal http的endpoint之后，删除其他endpoint会报错，属于正常现象。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 原因：https尚未在haproxy上配置，请求https端口会报错</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解决：需要执行第3步，更新haproxy。配置https证书验证后，可正常执行其余操作</span></span><br><span class="line">root@node01: kolla # openstack endpoint delete 9200b3fcad1e42e8a8d8277e8c7ba71c</span><br><span class="line">Failed to contact the endpoint at https://111.111.111.80:5000 for discovery. Fallback to using that endpoint as the base url.</span><br><span class="line">Failed to contact the endpoint at https://111.111.111.80:5000 for discovery. Fallback to using that endpoint as the base url.</span><br><span class="line">Failed to contact the endpoint at https://111.111.111.80:5000 for discovery. Fallback to using that endpoint as the base url.</span><br><span class="line">Failed to delete endpoint with ID &#x27;9200b3fcad1e42e8a8d8277e8c7ba71c&#x27;: SSL exception connecting to https://111.111.111.80:5000/endpoints?: HTTPSConnectionPool(host=&#x27;111.111.111.80&#x27;, port=5000): Max retries exceeded with url: /endpoints (Caused by SSLError(SSLError(1, u&#x27;[SSL: UNKNOWN_PROTOCOL] unknown protocol (_ssl.c:618)&#x27;),))</span><br><span class="line">1 of 1 endpoints failed to delete.</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>更新haproxy中 <code>keystone.cfg</code> 配置，重启haproxy。此时keystone的https端口正常响应</li>
