@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Docker 入门</title>
-    <url>/2020/11/05/Docker-%E5%85%A5%E9%97%A8/</url>
-    <content><![CDATA[<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 调整docker <span class="built_in">exec</span>终端高度和宽度</span></span><br><span class="line">docker exec -it --env COLUMNS=`tput cols` --env LINES=`tput lines` mariadb bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重命名镜像repository和tag</span></span><br><span class="line">docker tag &lt;image id&gt; &lt;new repository&gt;:&lt;new tag&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/moby/moby/issues/35407">Docker Exec does not resize terminal</a></p>
-]]></content>
-      <categories>
-        <category>Docker</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Dijkstra</title>
     <url>/2020/08/27/Dijkstra/</url>
     <content><![CDATA[<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><h3 id="问题1：最短路径"><a href="#问题1：最短路径" class="headerlink" title="问题1：最短路径"></a>问题1：最短路径</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src="/2020/08/27/Dijkstra/Dijkstra-%E9%97%AE%E9%A2%981.png" alt="image-20200731221210621"></p>
@@ -31,6 +15,22 @@
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker 入门</title>
+    <url>/2020/11/05/Docker-%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 调整docker <span class="built_in">exec</span>终端高度和宽度</span></span><br><span class="line">docker exec -it --env COLUMNS=`tput cols` --env LINES=`tput lines` mariadb bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重命名镜像repository和tag</span></span><br><span class="line">docker tag &lt;image id&gt; &lt;new repository&gt;:&lt;new tag&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/moby/moby/issues/35407">Docker Exec does not resize terminal</a></p>
+]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -114,77 +114,6 @@
       </categories>
       <tags>
         <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jmeter</title>
-    <url>/2020/09/23/Jmeter/</url>
-    <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址：<a href="http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip">http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip</a></p>
-<h3 id="Windows部署"><a href="#Windows部署" class="headerlink" title="Windows部署"></a>Windows部署</h3><h4 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h4><p>版本：jdk-8u131-windows-i586（链接：<a href="https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg">https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg</a> 提取码：4ztk）</p>
-<p>系统环境变量：</p>
-<ul>
-<li>JAVA_HOME：C:\Program Files (x86)\Java\jdk1.8.0_131</li>
-<li>CLASSPATH：.;%JAVA_HOME%\bin;%JAVA_HOME%\lib\dt.jar%JAVA_HOME%\lib\tools.jar;</li>
-<li>PATH：新增两行，%JAVA_HOME%\bin，%JAVA_HOME%\jre\lib</li>
-</ul>
-<h4 id="Jmeter"><a href="#Jmeter" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>开箱即用。可执行文件：<code>.\bin\jmeter.bat</code></p>
-<h3 id="Linux部署"><a href="#Linux部署" class="headerlink" title="Linux部署"></a>Linux部署</h3><h4 id="Java环境-1"><a href="#Java环境-1" class="headerlink" title="Java环境"></a>Java环境</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br></pre></td></tr></table></figure>
-
-<h4 id="Jmeter-1"><a href="#Jmeter-1" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>环境变量<code>/etc/profile</code>增加如下内容：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export JMETER_HOME=/root/jmeter</span><br><span class="line">export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH</span><br><span class="line">export PATH=$JMETER_HOME/bin:$PATH:$HOME/bin</span><br></pre></td></tr></table></figure>
-
-<p>环境变量配置生效：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-
-<p>验证：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter --version</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>思路：</strong>通过Windows图形界面生成配置文件，上传至服务器进行压测</p>
-<h3 id="http-https-性能测试"><a href="#http-https-性能测试" class="headerlink" title="http/https 性能测试"></a>http/https 性能测试</h3><h4 id="1-添加线程组"><a href="#1-添加线程组" class="headerlink" title="1. 添加线程组"></a>1. 添加线程组</h4><p>Test Plan中添加<code>Thread Group</code></p>
-<p>总请求量 = 并发用户数 * 循环轮次</p>
-<ul>
-<li><p><code>Number of Threads (users)</code>：设置并发用户数</p>
-</li>
-<li><p><code>Loop Count</code>：设置循环轮次</p>
-</li>
-<li><p><code>Ramp-up period (seconds)</code>：设置压力启动时间（从开始到最大压力之间的时间）</p>
-</li>
-</ul>
-<p><img src="/2020/09/23/Jmeter/jmeter-1.png" alt="jmeter-1"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-2.png" alt="jmeter-2"></p>
-<h4 id="2-设置http-https请求"><a href="#2-设置http-https请求" class="headerlink" title="2. 设置http/https请求"></a>2. 设置http/https请求</h4><p>Thread Group中添加<code>HTTP Request</code>，填写http/https请求的配置</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-3.png" alt="jmeter-3"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-4.png" alt="jmeter-4"></p>
-<h4 id="3-添加统计分析功能"><a href="#3-添加统计分析功能" class="headerlink" title="3. 添加统计分析功能"></a>3. 添加统计分析功能</h4><p>通常，添加如下两个统计分析功能：</p>
-<ul>
-<li>Summary Report</li>
-<li>jp@gc - Transactions Per Second（需要单独安装，安装流程见插件 - QPS统计）</li>
-</ul>
-<p><img src="/2020/09/23/Jmeter/jmeter-5.png" alt="jmeter-5"></p>
-<h4 id="4-导出配置"><a href="#4-导出配置" class="headerlink" title="4. 导出配置"></a>4. 导出配置</h4><p>保存jmx文件，上传至压力服务器。</p>
-<h4 id="5-压力执行"><a href="#5-压力执行" class="headerlink" title="5. 压力执行"></a>5. 压力执行</h4><p>linux运行，生成结果文件至<code>test.jtl</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter -n -t vm.jmx -l test.jtl</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="6-查看性能测试结果"><a href="#6-查看性能测试结果" class="headerlink" title="6. 查看性能测试结果"></a>6. 查看性能测试结果</h4><p>下载<code>test.jtl</code>，在Windows Jmeter的统计分析功能中打开查看。</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-6.png" alt="jmeter-6"></p>
-<p><img src="/2020/09/23/Jmeter/jmeter-7.png" alt="jmeter-7"></p>
-<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p><strong>Jmeter插件官网：</strong><a href="https://jmeter-plugins.org/wiki/Start/">https://jmeter-plugins.org/wiki/Start/</a></p>
-<h3 id="QPS统计"><a href="#QPS统计" class="headerlink" title="QPS统计"></a>QPS统计</h3><p>下载地址：<a href="https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip">https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip</a></p>
-<p>解压后，移动压缩包内lib目录下的文件至Jmeter\lib目录下同位置即可，重启Jmeter。</p>
-<p><img src="/2020/09/23/Jmeter/jmeter-8.png" alt="jmeter-8"></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://jmeter.apache.org/">Jmeter官方网站</a></p>
-<p><a href="https://jmeter-plugins.org/wiki/Start/">Jmeter官方插件</a></p>
-]]></content>
-      <categories>
-        <category>性能测试工具</category>
-      </categories>
-      <tags>
-        <tag>Jmeter</tag>
       </tags>
   </entry>
   <entry>
@@ -307,6 +236,205 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jmeter</title>
+    <url>/2020/09/23/Jmeter/</url>
+    <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址：<a href="http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip">http://apache.mirrors.pair.com//jmeter/binaries/apache-jmeter-5.3.zip</a></p>
+<h3 id="Windows部署"><a href="#Windows部署" class="headerlink" title="Windows部署"></a>Windows部署</h3><h4 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h4><p>版本：jdk-8u131-windows-i586（链接：<a href="https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg">https://pan.baidu.com/s/1bBvyYNtrrzJTpFN9z0fnpg</a> 提取码：4ztk）</p>
+<p>系统环境变量：</p>
+<ul>
+<li>JAVA_HOME：C:\Program Files (x86)\Java\jdk1.8.0_131</li>
+<li>CLASSPATH：.;%JAVA_HOME%\bin;%JAVA_HOME%\lib\dt.jar%JAVA_HOME%\lib\tools.jar;</li>
+<li>PATH：新增两行，%JAVA_HOME%\bin，%JAVA_HOME%\jre\lib</li>
+</ul>
+<h4 id="Jmeter"><a href="#Jmeter" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>开箱即用。可执行文件：<code>.\bin\jmeter.bat</code></p>
+<h3 id="Linux部署"><a href="#Linux部署" class="headerlink" title="Linux部署"></a>Linux部署</h3><h4 id="Java环境-1"><a href="#Java环境-1" class="headerlink" title="Java环境"></a>Java环境</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y java-1.8.0-openjdk</span><br></pre></td></tr></table></figure>
+
+<h4 id="Jmeter-1"><a href="#Jmeter-1" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>环境变量<code>/etc/profile</code>增加如下内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export JMETER_HOME=/root/jmeter</span><br><span class="line">export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH</span><br><span class="line">export PATH=$JMETER_HOME/bin:$PATH:$HOME/bin</span><br></pre></td></tr></table></figure>
+
+<p>环境变量配置生效：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>验证：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter --version</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>思路：</strong>通过Windows图形界面生成配置文件，上传至服务器进行压测</p>
+<h3 id="http-https-性能测试"><a href="#http-https-性能测试" class="headerlink" title="http/https 性能测试"></a>http/https 性能测试</h3><h4 id="1-添加线程组"><a href="#1-添加线程组" class="headerlink" title="1. 添加线程组"></a>1. 添加线程组</h4><p>Test Plan中添加<code>Thread Group</code></p>
+<p>总请求量 = 并发用户数 * 循环轮次</p>
+<ul>
+<li><p><code>Number of Threads (users)</code>：设置并发用户数</p>
+</li>
+<li><p><code>Loop Count</code>：设置循环轮次</p>
+</li>
+<li><p><code>Ramp-up period (seconds)</code>：设置压力启动时间（从开始到最大压力之间的时间）</p>
+</li>
+</ul>
+<p><img src="/2020/09/23/Jmeter/jmeter-1.png" alt="jmeter-1"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-2.png" alt="jmeter-2"></p>
+<h4 id="2-设置http-https请求"><a href="#2-设置http-https请求" class="headerlink" title="2. 设置http/https请求"></a>2. 设置http/https请求</h4><p>Thread Group中添加<code>HTTP Request</code>，填写http/https请求的配置</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-3.png" alt="jmeter-3"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-4.png" alt="jmeter-4"></p>
+<h4 id="3-添加统计分析功能"><a href="#3-添加统计分析功能" class="headerlink" title="3. 添加统计分析功能"></a>3. 添加统计分析功能</h4><p>通常，添加如下两个统计分析功能：</p>
+<ul>
+<li>Summary Report</li>
+<li>jp@gc - Transactions Per Second（需要单独安装，安装流程见插件 - QPS统计）</li>
+</ul>
+<p><img src="/2020/09/23/Jmeter/jmeter-5.png" alt="jmeter-5"></p>
+<h4 id="4-导出配置"><a href="#4-导出配置" class="headerlink" title="4. 导出配置"></a>4. 导出配置</h4><p>保存jmx文件，上传至压力服务器。</p>
+<h4 id="5-压力执行"><a href="#5-压力执行" class="headerlink" title="5. 压力执行"></a>5. 压力执行</h4><p>linux运行，生成结果文件至<code>test.jtl</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jmeter -n -t vm.jmx -l test.jtl</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-查看性能测试结果"><a href="#6-查看性能测试结果" class="headerlink" title="6. 查看性能测试结果"></a>6. 查看性能测试结果</h4><p>下载<code>test.jtl</code>，在Windows Jmeter的统计分析功能中打开查看。</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-6.png" alt="jmeter-6"></p>
+<p><img src="/2020/09/23/Jmeter/jmeter-7.png" alt="jmeter-7"></p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p><strong>Jmeter插件官网：</strong><a href="https://jmeter-plugins.org/wiki/Start/">https://jmeter-plugins.org/wiki/Start/</a></p>
+<h3 id="QPS统计"><a href="#QPS统计" class="headerlink" title="QPS统计"></a>QPS统计</h3><p>下载地址：<a href="https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip">https://jmeter-plugins.org/files/packages/jpgc-graphs-basic-2.0.zip</a></p>
+<p>解压后，移动压缩包内lib目录下的文件至Jmeter\lib目录下同位置即可，重启Jmeter。</p>
+<p><img src="/2020/09/23/Jmeter/jmeter-8.png" alt="jmeter-8"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://jmeter.apache.org/">Jmeter官方网站</a></p>
+<p><a href="https://jmeter-plugins.org/wiki/Start/">Jmeter官方插件</a></p>
+]]></content>
+      <categories>
+        <category>性能测试工具</category>
+      </categories>
+      <tags>
+        <tag>Jmeter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Kubernetes部署：OpenStack服务配置HTTPS</title>
+    <url>/2021/01/22/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9AOpenStack%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEHTTPS/</url>
+    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>需求：OpenStack endpoint 统一格式为 https + ip</p>
+<h2 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h2><ul>
+<li><p>系统：CentOS Linux release 7.7.1908 (Core)</p>
+</li>
+<li><p>Kubernetes版本：v1.19.0</p>
+</li>
+<li><p>OpenStack版本：Train</p>
+</li>
+<li><p>部署方式：StarlingX Armada部署</p>
+</li>
+</ul>
+<h2 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h2><p>Kubernetes上部署的OpenStack，通过以下3中方式提供服务：</p>
+<ul>
+<li><strong>nodePort</strong>：OpenStack Horizon服务使用该方式。将端口映射至宿主机的端口，可通过宿主机ip + 端口方式访问。</li>
+<li><strong>ingress</strong>：OpenStack admin和public类型的endpoint使用该方式。</li>
+<li><strong>service</strong>：OpenStack internal类型的endpoint使用该方式。</li>
+</ul>
+<p>以上3种方式的网络，升级为HTTPS方案分别如下：</p>
+<ul>
+<li><p><strong>nodePort</strong>：通过HAProxy进行HTTPS的证书验证和卸载，转发至后端nodePort端口</p>
+</li>
+<li><p><strong>ingress</strong>：ingress运行在7层，支持配置HTTPS，在ingress增加tls模块即可</p>
+</li>
+<li><p><strong>service</strong>：service运行在4层，不支持配置HTTPS，需要上层增加ingress</p>
+</li>
+</ul>
+<p>这里根据需求，所有服务改为nodePort方式，通过HAProxy进行HTTPS证书验证和卸载</p>
+<p><img src="/2021/01/22/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9AOpenStack%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEHTTPS/%E8%AF%81%E4%B9%A6%E5%8D%B8%E8%BD%BD.png" alt="证书卸载"></p>
+<blockquote>
+<p><strong>ingress方式配置HTTPS</strong></p>
+<p>ingress对应的yaml，增加tls模块内容，即可开启HTTPS。</p>
+<p>Kubernetes官方提供的ingress TLS的配置参考如下：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">tls-example-ingress</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">tls:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hosts:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">https-example.foo.com</span></span><br><span class="line">    <span class="attr">secretName:</span> <span class="string">testsecret-tls</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">host:</span> <span class="string">https-example.foo.com</span></span><br><span class="line">    <span class="attr">http:</span></span><br><span class="line">      <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">path:</span> <span class="string">/</span></span><br><span class="line">        <span class="attr">pathType:</span> <span class="string">Prefix</span></span><br><span class="line">        <span class="attr">backend:</span></span><br><span class="line">          <span class="attr">service:</span></span><br><span class="line">            <span class="attr">name:</span> <span class="string">service1</span></span><br><span class="line">            <span class="attr">port:</span></span><br><span class="line">              <span class="attr">number:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="TLS证书"><a href="#TLS证书" class="headerlink" title="TLS证书"></a>TLS证书</h3><p><strong>1. 制作证书</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">certificates_dir=/tmp/certificates</span><br><span class="line">service_name=inspur</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建目录</span></span><br><span class="line">mkdir -p $&#123;certificates_dir&#125;/private</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置证书参数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 认证多域名，增加alt_names即可</span></span><br><span class="line">cat &gt; $&#123;certificates_dir&#125;/$&#123;service_name&#125;-openssl.cnf &lt;&lt; EOF</span><br><span class="line">[req]</span><br><span class="line">distinguished_name = req_distinguished_name</span><br><span class="line">req_extensions = v3_req</span><br><span class="line"></span><br><span class="line">[req_distinguished_name]</span><br><span class="line">countryName = CN</span><br><span class="line">stateOrProvinceName = Xian</span><br><span class="line">localityName = Xian</span><br><span class="line">organizationalUnitName = Inspur</span><br><span class="line">commonName = $&#123;service_name&#125;</span><br><span class="line"></span><br><span class="line">[v3_req]</span><br><span class="line">subjectAltName = @alt_names</span><br><span class="line"></span><br><span class="line">[alt_names]</span><br><span class="line">DNS.1 = *.openstack.svc.cluster.local</span><br><span class="line">DNS.2 = *.openstack</span><br><span class="line">IP.1 = 111.111.111.88</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Creating Key</span></span><br><span class="line">openssl genrsa -out $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.key</span><br><span class="line">chmod 0600 $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Creating Server Certificate</span></span><br><span class="line">openssl req -new -nodes -sha256 -x509 \</span><br><span class="line">    -subj &quot;/C=CN/ST=Xian/L=Xian/O=Inspur/CN=$&#123;service_name&#125;&quot; \</span><br><span class="line">    -config $&#123;certificates_dir&#125;/$&#123;service_name&#125;-openssl.cnf \</span><br><span class="line">    -days 3650 \</span><br><span class="line">    -extensions v3_req \</span><br><span class="line">    -key $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.key \</span><br><span class="line">    -out $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.crt</span><br><span class="line">    </span><br><span class="line"><span class="meta">#</span><span class="bash"> Creating CA Certificate File</span></span><br><span class="line">cp $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.crt $&#123;certificates_dir&#125;/$&#123;service_name&#125;-ca.crt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Creating Server PEM File</span></span><br><span class="line">cat $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.crt $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.key \</span><br><span class="line">    | tee $&#123;certificates_dir&#125;/$&#123;service_name&#125;.pem</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>openrc.sh</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Clear any old environment that may conflict.</span></span><br><span class="line">for key in $( set | awk &#x27;&#123;FS=&quot;=&quot;&#125;  /^OS_/ &#123;print $1&#125;&#x27; ); do unset $key ; done</span><br><span class="line">export OS_PROJECT_DOMAIN_NAME=Default</span><br><span class="line">export OS_USER_DOMAIN_NAME=Default</span><br><span class="line">export OS_PROJECT_NAME=admin</span><br><span class="line">export OS_TENANT_NAME=admin</span><br><span class="line">export OS_USERNAME=admin</span><br><span class="line">export OS_PASSWORD=admin</span><br><span class="line">export OS_AUTH_URL=https://111.111.111.80:35357/v3</span><br><span class="line">export OS_CACERT=/etc/kolla/certificates/haproxy-ca.crt    # CA Certificate File</span><br><span class="line">export OS_INTERFACE=internal</span><br><span class="line">export OS_ENDPOINT_TYPE=internalURL</span><br><span class="line">export OS_IDENTITY_API_VERSION=3</span><br><span class="line">export OS_REGION_NAME=RegionOne</span><br><span class="line">export OS_AUTH_PLUGIN=password</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Kubernetes管理证书"><a href="#Kubernetes管理证书" class="headerlink" title="Kubernetes管理证书"></a>Kubernetes管理证书</h3><p><strong>1. 创建Secret资源</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用Secret方式上传证书至Kubernetes，挂载给pod即可使用该证书文件</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Creating Secret方式</span></span><br><span class="line">kubectl create secret tls -n openstack tls-secret \</span><br><span class="line">    --cert=/tmp/certificates/private/inspur.crt \</span><br><span class="line">    --key=/tmp/certificates/private/inspur.key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Secret yaml方式</span></span><br><span class="line">cat &gt; tls-secret.yaml &lt;&lt; EOF</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Secret</span><br><span class="line">metadata:</span><br><span class="line">  name: tls-secret</span><br><span class="line">  namespace: openstack</span><br><span class="line">data:</span><br><span class="line">  tls.crt: &lt; base64 encoded cert &gt;</span><br><span class="line">  tls.key: &lt; base64 encoded key &gt;</span><br><span class="line">type: kubernetes.io/tls</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">kubectl create -f tls-secret.yaml</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>2. Pod使用证书</strong></p>
+<p>更新 <code>Deployment</code> 中，<code>volumes</code> 和 <code>volumeMounts</code>，设置secret和挂载目录。</p>
+<p>Kubernetes官方提供的Pod的配置参考如下：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">secret-test-pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">test-container</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">      <span class="attr">volumeMounts:</span></span><br><span class="line">        <span class="comment"># name must match the volume name below</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">secret-volume</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/etc/secret-volume</span></span><br><span class="line">  <span class="comment"># The secret data is exposed to Containers in the Pod through a Volume.</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">secret-volume</span></span><br><span class="line">      <span class="attr">secret:</span></span><br><span class="line">        <span class="attr">secretName:</span> <span class="string">test-secret</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="HAProxy基础配置"><a href="#HAProxy基础配置" class="headerlink" title="HAProxy基础配置"></a>HAProxy基础配置</h3><p><code>haproxy.cfg</code> 中，增加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">global</span><br><span class="line">    ssl-default-bind-ciphers DEFAULT:!MEDIUM:!3DES</span><br><span class="line">    ssl-default-bind-options no-sslv3 no-tlsv10 no-tlsv11</span><br><span class="line">    tune.ssl.default-dh-param 4096</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Keystone配置证书"><a href="#Keystone配置证书" class="headerlink" title="Keystone配置证书"></a>Keystone配置证书</h3><ol>
+<li>使用http协议，先创建 <code>https endpoint</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">openstack endpoint create --region RegionOne identity public https://111.111.111.88:32500/v3</span><br><span class="line">openstack endpoint create --region RegionOne identity internal https://111.111.111.88:32500/v3</span><br><span class="line">openstack endpoint create --region RegionOne identity admin https://111.111.111.88:32500/v3</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>删除http endpoint。</p>
+<blockquote>
+<p>openrc.sh中 <code>OS_INTERFACE</code> 字段和 <code>OS_ENDPOINT_TYPE</code> 替换为admin类型可以避免出错。</p>
+</blockquote>
+</li>
+<li><p>更新haproxy配置，增加keystone https认证，重启haproxy。此时keystone的https端口正常响应</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">---------------------------------------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Keystone</span></span><br><span class="line"><span class="meta">#</span><span class="bash">---------------------------------------------------------------------</span></span><br><span class="line">frontend keystone_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.88:32500 ssl crt /tmp/certificates/inspur.pem</span><br><span class="line">    default_backend keystone_back</span><br><span class="line"></span><br><span class="line">backend keystone_back</span><br><span class="line">    mode http</span><br><span class="line">    server node01 111.111.111.89:30500 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>验证</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">openstack endpoint list</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Glance配置证书"><a href="#Glance配置证书" class="headerlink" title="Glance配置证书"></a>Glance配置证书</h3><ol>
+<li>更新haproxy配置，增加glance https认证，重启haproxy</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">---------------------------------------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Glance</span></span><br><span class="line"><span class="meta">#</span><span class="bash">---------------------------------------------------------------------</span></span><br><span class="line">frontend glance_api_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    timeout client 6h</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.88:32092 ssl crt /tmp/certificates/inspur.pem</span><br><span class="line">    default_backend glance_api_back</span><br><span class="line"></span><br><span class="line">backend glance_api_back</span><br><span class="line">    mode http</span><br><span class="line">    timeout server 6h</span><br><span class="line">    server node01 111.111.111.89:30092 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在Kubernetes界面中，更新glance服务配置文件：<code>Secret</code> &gt;&gt; <code>glance-etc</code> &gt;&gt; <code>glance-api.conf</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[keystone_authtoken]</span><br><span class="line">auth_uri = https://111.111.111.88:32500/v3</span><br><span class="line">auth_url = https://111.111.111.88:32500/v3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置pod中证书挂载地址</span></span><br><span class="line">cafile = /etc/tls/tls.crt</span><br><span class="line">insecure = true</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>更新Secret后，需要重建pod，以应用新的配置。参考命令：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 删除pod后会自动重建</span></span><br><span class="line">kubectl delete pod -n openstack &lt; glance-api pod name &gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>更新Glance endpoint，替换为https地址</li>
+<li>验证</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">openstack image list</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="OpenStack其他服务"><a href="#OpenStack其他服务" class="headerlink" title="OpenStack其他服务"></a>OpenStack其他服务</h3><p>按照上述Glance流程，参考文档【<a href="https://renyb2.github.io/2021/01/19/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AHTTPS/">OpenStack部署：HTTPS</a>】修改其余服务设置即可</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://kubernetes.io/zh/docs/concepts/services-networking/ingress/">Kubernetes官方文档：Ingress</a></p>
+<p><a href="https://kubernetes.io/zh/docs/tasks/inject-data-application/distribute-credentials-secure/">Kubernetes官方文档：使用 Secret 安全地分发凭证</a></p>
+<p><a href="https://blog.51cto.com/wzlinux/2332908">Kubernetes 使用 ingress 配置 https 集群</a></p>
+<p><a href="https://www.qikqiak.com/post/use-secret-in-k8s/">Kubernetes Secret 资源对象使用方法</a></p>
+<p><a href="https://www.cnblogs.com/kreo/p/13203973.html">签发SSL多域名自签证书</a></p>
+<p><a href="https://blog.csdn.net/u013066244/article/details/78725842/">OpenSSL自签发配置有多域名或ip地址的证书</a></p>
+<p><a href="https://renyb2.github.io/2021/01/19/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AHTTPS/">OpenStack部署：HTTPS</a></p>
+]]></content>
+      <categories>
+        <category>Kubernetes</category>
+      </categories>
+      <tags>
+        <tag>Kubernetes部署</tag>
+        <tag>Openstack</tag>
+        <tag>HTTPS</tag>
       </tags>
   </entry>
   <entry>
@@ -1232,47 +1360,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Oracle 性能测试</title>
-    <url>/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h2 id="使用Oracle-SQL测试"><a href="#使用Oracle-SQL测试" class="headerlink" title="使用Oracle SQL测试"></a>使用Oracle SQL测试</h2><blockquote>
-<p>实验环境</p>
-<p>机器：win10虚机</p>
-<p>配置：4c8G + 500G硬盘</p>
-</blockquote>
-<h3 id="持续写入"><a href="#持续写入" class="headerlink" title="持续写入"></a>持续写入</h3><p>每次insert操作后，进行一次commit操作，性能低。<code>实验用时：00:02:39.66</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">            <span class="keyword">commit</span>;</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%8C%81%E7%BB%AD%E5%86%99%E5%85%A5.png" alt="持续写入"></p>
-<h3 id="批量写入"><a href="#批量写入" class="headerlink" title="批量写入"></a>批量写入</h3><p>对insert操作进行批量提交，性能相较于上者有所提升。<code>实验用时：00:01:25.37</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%89%B9%E9%87%8F%E5%86%99%E5%85%A5.png" alt="批量写入"></p>
-<h3 id="connect-by方式写入"><a href="#connect-by方式写入" class="headerlink" title="connect by方式写入"></a>connect by方式写入</h3><p>Oracle提供的层次查询（Hierarchical Queries）功能中的connect by子句可以快速插入连续数字。该方法会将数据写入数据缓冲区(data buffer)中，然后刷入磁盘中。<code>实验用时：00:00:01.56</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">select</span> <span class="keyword">rownum</span> <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E9%9B%86%E5%90%88%E5%86%99%E5%85%A5.png" alt="connect by写入"></p>
-<h3 id="直接路径写入"><a href="#直接路径写入" class="headerlink" title="直接路径写入"></a>直接路径写入</h3><p>该方式跳过了数据缓冲区(data buffer)， 直接写进磁盘中，这种方式称之为直接路径读写方式。<code>实验用时：00:00:00.78</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E7%9B%B4%E6%8E%A5%E8%B7%AF%E5%BE%84%E5%86%99%E5%85%A5.png" alt="直接路径写入"></p>
-<h3 id="并行模式直接写入"><a href="#并行模式直接写入" class="headerlink" title="并行模式直接写入"></a>并行模式直接写入</h3><p>并行加直接路径，而且是不写日志。<code>实验用时：00:00:00.67</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t nologging <span class="keyword">parallel</span> <span class="number">4</span> <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%B9%B6%E8%A1%8C%E6%A8%A1%E5%BC%8F%E5%86%99%E5%85%A5.png" alt="并行模式写入"></p>
-<h3 id="大对象存储"><a href="#大对象存储" class="headerlink" title="大对象存储"></a>大对象存储</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 创建测试表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建普通序列号</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> sequ_t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 注册目录</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">directory</span> TEST_DIR <span class="keyword">as</span> <span class="string">&#x27;C:\Users\lenovo\Desktop&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 存储文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    tempimg <span class="built_in">blob</span>;  <span class="comment">-- 定义临时变量存放数据   </span></span><br><span class="line">    tempdir bfile := bfilename(&#x27;TEST_DIR&#x27;,&#x27;test.png&#x27;);  <span class="comment">-- 非常重要：DIR必须大写</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span> (sequ_t.nextval,<span class="string">&#x27;test.png&#x27;</span>,empty_blob())</span><br><span class="line">    <span class="keyword">returning</span> tcontent <span class="keyword">into</span> tempimg;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 使用内置的包，给tempimg写入数据</span></span><br><span class="line">    dbms_lob.fileopen(tempdir);  <span class="comment">-- 打开指定文件</span></span><br><span class="line">    dbms_lob.loadfromfile(tempimg,tempdir,dbms_lob.getlength(tempdir));</span><br><span class="line">    dbms_lob.fileclose(tempdir);  <span class="comment">-- 关闭文件        </span></span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span> ;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 读取文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    l_file utl_file.file_type;  <span class="comment">-- 定义写入磁盘文件的类型和格式</span></span><br><span class="line">    l_buffer raw(32767);  <span class="comment">-- 定义缓冲区大小</span></span><br><span class="line">    l_amount binary_integer := 3276;  <span class="comment">-- 每次位移个数</span></span><br><span class="line">    l_pos int :=1;  <span class="comment">-- 开始位置</span></span><br><span class="line">    l_blob blob;  <span class="comment">-- 临时数据存放</span></span><br><span class="line">    l_blob_len int;  <span class="comment">-- 总长度</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="comment">-- 将数据库中的数据，存放在blob变量中  </span></span><br><span class="line">    <span class="keyword">select</span> tcontent <span class="keyword">into</span> l_blob <span class="keyword">from</span> t <span class="keyword">where</span> tname=<span class="string">&#x27;test.png&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 获取blob文件的长度</span></span><br><span class="line">    l_blob_len := dbms_lob.getlength(l_blob);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 准备写入磁盘文件</span></span><br><span class="line">    l_file := utl_file.fopen(&#x27;TEST_DIR&#x27;,&#x27;t.png&#x27;,&#x27;wb&#x27;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 写入数据</span></span><br><span class="line">    while l_pos&lt;l_blob_len</span><br><span class="line">    loop</span><br><span class="line">        dbms_lob.read(l_blob,l_amount,l_pos,l_buffer);</span><br><span class="line">        utl_file.put_raw(l_file,l_buffer,true);</span><br><span class="line">        l_pos := l_pos + l_amount;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    utl_file.fclose(l_file); </span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%AD%98%E5%82%A8image.png" alt="存储image"></p>
-<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E8%AF%BB%E5%8F%96image.png" alt="读取image"></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://docs.oracle.com/database/121/ARPLS/d_lob.htm#ARPLS600">Oracle 官方文档：DBMS_LOB</a></p>
-]]></content>
-      <categories>
-        <category>Oracle</category>
-      </categories>
-      <tags>
-        <tag>性能测试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Oracle 11.2 安装文档</title>
     <url>/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<h2 id="win10安装"><a href="#win10安装" class="headerlink" title="win10安装"></a>win10安装</h2><h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle 11.2.0.1.0</p>
@@ -1362,6 +1449,47 @@
       </categories>
       <tags>
         <tag>Oracle 11.2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle 性能测试</title>
+    <url>/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h2 id="使用Oracle-SQL测试"><a href="#使用Oracle-SQL测试" class="headerlink" title="使用Oracle SQL测试"></a>使用Oracle SQL测试</h2><blockquote>
+<p>实验环境</p>
+<p>机器：win10虚机</p>
+<p>配置：4c8G + 500G硬盘</p>
+</blockquote>
+<h3 id="持续写入"><a href="#持续写入" class="headerlink" title="持续写入"></a>持续写入</h3><p>每次insert操作后，进行一次commit操作，性能低。<code>实验用时：00:02:39.66</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">            <span class="keyword">commit</span>;</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%8C%81%E7%BB%AD%E5%86%99%E5%85%A5.png" alt="持续写入"></p>
+<h3 id="批量写入"><a href="#批量写入" class="headerlink" title="批量写入"></a>批量写入</h3><p>对insert操作进行批量提交，性能相较于上者有所提升。<code>实验用时：00:01:25.37</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数proc</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> proc</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> .. <span class="number">1000000</span></span><br><span class="line">        <span class="keyword">loop</span></span><br><span class="line">            <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(i);</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 运行函数proc</span></span><br><span class="line">exec proc;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E6%89%B9%E9%87%8F%E5%86%99%E5%85%A5.png" alt="批量写入"></p>
+<h3 id="connect-by方式写入"><a href="#connect-by方式写入" class="headerlink" title="connect by方式写入"></a>connect by方式写入</h3><p>Oracle提供的层次查询（Hierarchical Queries）功能中的connect by子句可以快速插入连续数字。该方法会将数据写入数据缓冲区(data buffer)中，然后刷入磁盘中。<code>实验用时：00:00:01.56</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(x <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">select</span> <span class="keyword">rownum</span> <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E9%9B%86%E5%90%88%E5%86%99%E5%85%A5.png" alt="connect by写入"></p>
+<h3 id="直接路径写入"><a href="#直接路径写入" class="headerlink" title="直接路径写入"></a>直接路径写入</h3><p>该方式跳过了数据缓冲区(data buffer)， 直接写进磁盘中，这种方式称之为直接路径读写方式。<code>实验用时：00:00:00.78</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E7%9B%B4%E6%8E%A5%E8%B7%AF%E5%BE%84%E5%86%99%E5%85%A5.png" alt="直接路径写入"></p>
+<h3 id="并行模式直接写入"><a href="#并行模式直接写入" class="headerlink" title="并行模式直接写入"></a>并行模式直接写入</h3><p>并行加直接路径，而且是不写日志。<code>实验用时：00:00:00.67</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t <span class="keyword">purge</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空共享池，注意在生产环境中千万不能做这步操作</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启sql时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用connect by level，插入连续数字</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t nologging <span class="keyword">parallel</span> <span class="number">4</span> <span class="keyword">as</span> <span class="keyword">select</span> <span class="keyword">rownum</span> x <span class="keyword">from</span> dual <span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">level</span>&lt;=<span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%B9%B6%E8%A1%8C%E6%A8%A1%E5%BC%8F%E5%86%99%E5%85%A5.png" alt="并行模式写入"></p>
+<h3 id="大对象存储"><a href="#大对象存储" class="headerlink" title="大对象存储"></a>大对象存储</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 创建测试表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建普通序列号</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> sequ_t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 注册目录</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">directory</span> TEST_DIR <span class="keyword">as</span> <span class="string">&#x27;C:\Users\lenovo\Desktop&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 存储文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    tempimg <span class="built_in">blob</span>;  <span class="comment">-- 定义临时变量存放数据   </span></span><br><span class="line">    tempdir bfile := bfilename(&#x27;TEST_DIR&#x27;,&#x27;test.png&#x27;);  <span class="comment">-- 非常重要：DIR必须大写</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span> (sequ_t.nextval,<span class="string">&#x27;test.png&#x27;</span>,empty_blob())</span><br><span class="line">    <span class="keyword">returning</span> tcontent <span class="keyword">into</span> tempimg;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 使用内置的包，给tempimg写入数据</span></span><br><span class="line">    dbms_lob.fileopen(tempdir);  <span class="comment">-- 打开指定文件</span></span><br><span class="line">    dbms_lob.loadfromfile(tempimg,tempdir,dbms_lob.getlength(tempdir));</span><br><span class="line">    dbms_lob.fileclose(tempdir);  <span class="comment">-- 关闭文件        </span></span><br><span class="line">    <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span> ;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 读取文件对象</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    l_file utl_file.file_type;  <span class="comment">-- 定义写入磁盘文件的类型和格式</span></span><br><span class="line">    l_buffer raw(32767);  <span class="comment">-- 定义缓冲区大小</span></span><br><span class="line">    l_amount binary_integer := 3276;  <span class="comment">-- 每次位移个数</span></span><br><span class="line">    l_pos int :=1;  <span class="comment">-- 开始位置</span></span><br><span class="line">    l_blob blob;  <span class="comment">-- 临时数据存放</span></span><br><span class="line">    l_blob_len int;  <span class="comment">-- 总长度</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="comment">-- 将数据库中的数据，存放在blob变量中  </span></span><br><span class="line">    <span class="keyword">select</span> tcontent <span class="keyword">into</span> l_blob <span class="keyword">from</span> t <span class="keyword">where</span> tname=<span class="string">&#x27;test.png&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 获取blob文件的长度</span></span><br><span class="line">    l_blob_len := dbms_lob.getlength(l_blob);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 准备写入磁盘文件</span></span><br><span class="line">    l_file := utl_file.fopen(&#x27;TEST_DIR&#x27;,&#x27;t.png&#x27;,&#x27;wb&#x27;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 写入数据</span></span><br><span class="line">    while l_pos&lt;l_blob_len</span><br><span class="line">    loop</span><br><span class="line">        dbms_lob.read(l_blob,l_amount,l_pos,l_buffer);</span><br><span class="line">        utl_file.put_raw(l_file,l_buffer,true);</span><br><span class="line">        l_pos := l_pos + l_amount;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">    utl_file.fclose(l_file); </span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">/</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E5%AD%98%E5%82%A8image.png" alt="存储image"></p>
+<p><img src="/2020/09/15/Oracle-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/%E8%AF%BB%E5%8F%96image.png" alt="读取image"></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://docs.oracle.com/database/121/ARPLS/d_lob.htm#ARPLS600">Oracle 官方文档：DBMS_LOB</a></p>
+]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>性能测试</tag>
       </tags>
   </entry>
   <entry>
@@ -1731,32 +1859,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/08/25/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<a id="more"></a>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vim</title>
     <url>/2020/08/31/Vim/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
@@ -2034,6 +2136,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2020/08/25/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<a id="more"></a>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>开发小工具：Chrome翻墙</title>
     <url>/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/</url>
     <content><![CDATA[<h2 id="谷歌上网助手GHelper-–-Chrome插件"><a href="#谷歌上网助手GHelper-–-Chrome插件" class="headerlink" title="谷歌上网助手GHelper – Chrome插件"></a>谷歌上网助手GHelper – Chrome插件</h2><blockquote>
@@ -2173,11 +2301,13 @@
 <p><img src="/2021/01/19/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AHTTPS/%E8%AF%81%E4%B9%A6%E5%8D%B8%E8%BD%BD.png" alt="证书卸载"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
 <li>系统：CentOS Linux release 7.7.1908 (Core)</li>
-<li>OpenStack部署方式：kolla-ansible部署，control节点1台，compute节点3台</li>
-<li>kolla-ansible版本：9.2.0</li>
 <li>OpenStack版本：Train</li>
+<li>kolla-ansible版本：9.2.0</li>
+<li>Docker版本：docker-ce-18.09.6-3.el7.x86_64</li>
+<li>OpenStack部署方式：kolla-ansible部署（OpenStack服务运行在Docker上）</li>
+<li>OpenStack部署规模：control节点1台，compute节点3台</li>
 </ul>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="SSL证书"><a href="#SSL证书" class="headerlink" title="SSL证书"></a>SSL证书</h3><p><strong>生成证书</strong></p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="TLS证书"><a href="#TLS证书" class="headerlink" title="TLS证书"></a>TLS证书</h3><p><strong>生成证书</strong></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用kolla生成证书</span></span><br><span class="line">kolla-ansible certificates</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> openssl-kolla.cnf</span></span><br><span class="line">[req]</span><br><span class="line">distinguished_name = req_distinguished_name</span><br><span class="line">req_extensions = v3_req</span><br><span class="line"></span><br><span class="line">[req_distinguished_name]</span><br><span class="line">countryName = US</span><br><span class="line">stateOrProvinceName = NC</span><br><span class="line">localityName = RTP</span><br><span class="line">organizationalUnitName = kolla</span><br><span class="line">commonName = 111.111.111.80</span><br><span class="line"></span><br><span class="line">[v3_req]</span><br><span class="line">subjectAltName = @alt_names</span><br><span class="line"></span><br><span class="line">[alt_names]</span><br><span class="line">IP.1 = 111.111.111.80</span><br></pre></td></tr></table></figure>
 
 
@@ -2366,8 +2496,8 @@
         <category>OpenStack部署</category>
       </categories>
       <tags>
-        <tag>OpenStack部署</tag>
         <tag>HTTPS</tag>
+        <tag>OpenStack部署</tag>
       </tags>
   </entry>
 </search>

@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kubernetes部署：OpenStack服务配置HTTPS | 任翌博的个人博客</title><meta name="description" content="简述需求：OpenStack endpoint 统一格式为 https + ip 环境信息 系统：CentOS Linux release 7.7.1908 (Core)  Kubernetes版本：v1.19.0  OpenStack版本：Train  部署方式：StarlingX Armada部署   网络架构Kubernetes上部署的OpenStack，通过以下3中方式提供服务：  nod"><meta name="keywords" content="Kubernetes部署,Openstack,HTTPS"><meta name="author" content="任翌博"><meta name="copyright" content="任翌博"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/icon.png"><link rel="canonical" href="https://renyb2.github.io/2021/01/22/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9AOpenStack%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEHTTPS/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="Kubernetes部署：OpenStack服务配置HTTPS"><meta property="og:url" content="https://renyb2.github.io/2021/01/22/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9AOpenStack%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEHTTPS/"><meta property="og:site_name" content="任翌博的个人博客"><meta property="og:description" content="简述需求：OpenStack endpoint 统一格式为 https + ip 环境信息 系统：CentOS Linux release 7.7.1908 (Core)  Kubernetes版本：v1.19.0  OpenStack版本：Train  部署方式：StarlingX Armada部署   网络架构Kubernetes上部署的OpenStack，通过以下3中方式提供服务：  nod"><meta property="og:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic3.zhimg.com%2Fv2-6e8551679401587b165b37c62fbd1f13_1200x500.jpg&amp;refer=http%3A%2F%2Fpic3.zhimg.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1613900311&amp;t=7a3bd4ec7ab64487adec8b48c98d6ed0"><meta property="article:published_time" content="2021-01-22T09:31:24.000Z"><meta property="article:modified_time" content="2021-01-22T10:09:01.446Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.1.1',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-01-22 18:09:01'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="任翌博的个人博客" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">32</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">31</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">14</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E4%BF%A1%E6%81%AF"><span class="toc-number">2.</span> <span class="toc-text">环境信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">网络架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TLS%E8%AF%81%E4%B9%A6"><span class="toc-number">4.1.</span> <span class="toc-text">TLS证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kubernetes%E7%AE%A1%E7%90%86%E8%AF%81%E4%B9%A6"><span class="toc-number">4.2.</span> <span class="toc-text">Kubernetes管理证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HAProxy%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-number">4.3.</span> <span class="toc-text">HAProxy基础配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keystone%E9%85%8D%E7%BD%AE%E8%AF%81%E4%B9%A6"><span class="toc-number">4.4.</span> <span class="toc-text">Keystone配置证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Glance%E9%85%8D%E7%BD%AE%E8%AF%81%E4%B9%A6"><span class="toc-number">4.5.</span> <span class="toc-text">Glance配置证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenStack%E5%85%B6%E4%BB%96%E6%9C%8D%E5%8A%A1"><span class="toc-number">4.6.</span> <span class="toc-text">OpenStack其他服务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-number">5.</span> <span class="toc-text">参考文档</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic3.zhimg.com%2Fv2-6e8551679401587b165b37c62fbd1f13_1200x500.jpg&amp;refer=http%3A%2F%2Fpic3.zhimg.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1613900311&amp;t=7a3bd4ec7ab64487adec8b48c98d6ed0)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">任翌博的个人博客</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Kubernetes部署：OpenStack服务配置HTTPS</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-22T09:31:24.000Z" title="发表于 2021-01-22 17:31:24">2021-01-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-22T10:09:01.446Z" title="更新于 2021-01-22 18:09:01">2021-01-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Kubernetes/">Kubernetes</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>需求：OpenStack endpoint 统一格式为 https + ip</p>
+<h2 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h2><ul>
+<li><p>系统：CentOS Linux release 7.7.1908 (Core)</p>
+</li>
+<li><p>Kubernetes版本：v1.19.0</p>
+</li>
+<li><p>OpenStack版本：Train</p>
+</li>
+<li><p>部署方式：StarlingX Armada部署</p>
+</li>
+</ul>
+<h2 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h2><p>Kubernetes上部署的OpenStack，通过以下3中方式提供服务：</p>
+<ul>
+<li><strong>nodePort</strong>：OpenStack Horizon服务使用该方式。将端口映射至宿主机的端口，可通过宿主机ip + 端口方式访问。</li>
+<li><strong>ingress</strong>：OpenStack admin和public类型的endpoint使用该方式。</li>
+<li><strong>service</strong>：OpenStack internal类型的endpoint使用该方式。</li>
+</ul>
+<p>以上3种方式的网络，升级为HTTPS方案分别如下：</p>
+<ul>
+<li><p><strong>nodePort</strong>：通过HAProxy进行HTTPS的证书验证和卸载，转发至后端nodePort端口</p>
+</li>
+<li><p><strong>ingress</strong>：ingress运行在7层，支持配置HTTPS，在ingress增加tls模块即可</p>
+</li>
+<li><p><strong>service</strong>：service运行在4层，不支持配置HTTPS，需要上层增加ingress</p>
+</li>
+</ul>
+<p>这里根据需求，所有服务改为nodePort方式，通过HAProxy进行HTTPS证书验证和卸载</p>
+<p><img src="/2021/01/22/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9AOpenStack%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEHTTPS/%E8%AF%81%E4%B9%A6%E5%8D%B8%E8%BD%BD.png" alt="证书卸载"></p>
+<blockquote>
+<p><strong>ingress方式配置HTTPS</strong></p>
+<p>ingress对应的yaml，增加tls模块内容，即可开启HTTPS。</p>
+<p>Kubernetes官方提供的ingress TLS的配置参考如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">tls-example-ingress</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">tls:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hosts:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">https-example.foo.com</span></span><br><span class="line">    <span class="attr">secretName:</span> <span class="string">testsecret-tls</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">host:</span> <span class="string">https-example.foo.com</span></span><br><span class="line">    <span class="attr">http:</span></span><br><span class="line">      <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">path:</span> <span class="string">/</span></span><br><span class="line">        <span class="attr">pathType:</span> <span class="string">Prefix</span></span><br><span class="line">        <span class="attr">backend:</span></span><br><span class="line">          <span class="attr">service:</span></span><br><span class="line">            <span class="attr">name:</span> <span class="string">service1</span></span><br><span class="line">            <span class="attr">port:</span></span><br><span class="line">              <span class="attr">number:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="TLS证书"><a href="#TLS证书" class="headerlink" title="TLS证书"></a>TLS证书</h3><p><strong>1. 制作证书</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">certificates_dir=/tmp/certificates</span><br><span class="line">service_name=inspur</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建目录</span></span><br><span class="line">mkdir -p $&#123;certificates_dir&#125;/private</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置证书参数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 认证多域名，增加alt_names即可</span></span><br><span class="line">cat &gt; $&#123;certificates_dir&#125;/$&#123;service_name&#125;-openssl.cnf &lt;&lt; EOF</span><br><span class="line">[req]</span><br><span class="line">distinguished_name = req_distinguished_name</span><br><span class="line">req_extensions = v3_req</span><br><span class="line"></span><br><span class="line">[req_distinguished_name]</span><br><span class="line">countryName = CN</span><br><span class="line">stateOrProvinceName = Xian</span><br><span class="line">localityName = Xian</span><br><span class="line">organizationalUnitName = Inspur</span><br><span class="line">commonName = $&#123;service_name&#125;</span><br><span class="line"></span><br><span class="line">[v3_req]</span><br><span class="line">subjectAltName = @alt_names</span><br><span class="line"></span><br><span class="line">[alt_names]</span><br><span class="line">DNS.1 = *.openstack.svc.cluster.local</span><br><span class="line">DNS.2 = *.openstack</span><br><span class="line">IP.1 = 111.111.111.88</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Creating Key</span></span><br><span class="line">openssl genrsa -out $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.key</span><br><span class="line">chmod 0600 $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Creating Server Certificate</span></span><br><span class="line">openssl req -new -nodes -sha256 -x509 \</span><br><span class="line">    -subj &quot;/C=CN/ST=Xian/L=Xian/O=Inspur/CN=$&#123;service_name&#125;&quot; \</span><br><span class="line">    -config $&#123;certificates_dir&#125;/$&#123;service_name&#125;-openssl.cnf \</span><br><span class="line">    -days 3650 \</span><br><span class="line">    -extensions v3_req \</span><br><span class="line">    -key $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.key \</span><br><span class="line">    -out $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.crt</span><br><span class="line">    </span><br><span class="line"><span class="meta">#</span><span class="bash"> Creating CA Certificate File</span></span><br><span class="line">cp $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.crt $&#123;certificates_dir&#125;/$&#123;service_name&#125;-ca.crt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Creating Server PEM File</span></span><br><span class="line">cat $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.crt $&#123;certificates_dir&#125;/private/$&#123;service_name&#125;.key \</span><br><span class="line">    | tee $&#123;certificates_dir&#125;/$&#123;service_name&#125;.pem</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>openrc.sh</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Clear any old environment that may conflict.</span></span><br><span class="line">for key in $( set | awk &#x27;&#123;FS=&quot;=&quot;&#125;  /^OS_/ &#123;print $1&#125;&#x27; ); do unset $key ; done</span><br><span class="line">export OS_PROJECT_DOMAIN_NAME=Default</span><br><span class="line">export OS_USER_DOMAIN_NAME=Default</span><br><span class="line">export OS_PROJECT_NAME=admin</span><br><span class="line">export OS_TENANT_NAME=admin</span><br><span class="line">export OS_USERNAME=admin</span><br><span class="line">export OS_PASSWORD=admin</span><br><span class="line">export OS_AUTH_URL=https://111.111.111.80:35357/v3</span><br><span class="line">export OS_CACERT=/etc/kolla/certificates/haproxy-ca.crt    # CA Certificate File</span><br><span class="line">export OS_INTERFACE=internal</span><br><span class="line">export OS_ENDPOINT_TYPE=internalURL</span><br><span class="line">export OS_IDENTITY_API_VERSION=3</span><br><span class="line">export OS_REGION_NAME=RegionOne</span><br><span class="line">export OS_AUTH_PLUGIN=password</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Kubernetes管理证书"><a href="#Kubernetes管理证书" class="headerlink" title="Kubernetes管理证书"></a>Kubernetes管理证书</h3><p><strong>1. 创建Secret资源</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用Secret方式上传证书至Kubernetes，挂载给pod即可使用该证书文件</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Creating Secret方式</span></span><br><span class="line">kubectl create secret tls -n openstack tls-secret \</span><br><span class="line">    --cert=/tmp/certificates/private/inspur.crt \</span><br><span class="line">    --key=/tmp/certificates/private/inspur.key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Secret yaml方式</span></span><br><span class="line">cat &gt; tls-secret.yaml &lt;&lt; EOF</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Secret</span><br><span class="line">metadata:</span><br><span class="line">  name: tls-secret</span><br><span class="line">  namespace: openstack</span><br><span class="line">data:</span><br><span class="line">  tls.crt: &lt; base64 encoded cert &gt;</span><br><span class="line">  tls.key: &lt; base64 encoded key &gt;</span><br><span class="line">type: kubernetes.io/tls</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">kubectl create -f tls-secret.yaml</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>2. Pod使用证书</strong></p>
+<p>更新 <code>Deployment</code> 中，<code>volumes</code> 和 <code>volumeMounts</code>，设置secret和挂载目录。</p>
+<p>Kubernetes官方提供的Pod的配置参考如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">secret-test-pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">test-container</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">      <span class="attr">volumeMounts:</span></span><br><span class="line">        <span class="comment"># name must match the volume name below</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">secret-volume</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/etc/secret-volume</span></span><br><span class="line">  <span class="comment"># The secret data is exposed to Containers in the Pod through a Volume.</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">secret-volume</span></span><br><span class="line">      <span class="attr">secret:</span></span><br><span class="line">        <span class="attr">secretName:</span> <span class="string">test-secret</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="HAProxy基础配置"><a href="#HAProxy基础配置" class="headerlink" title="HAProxy基础配置"></a>HAProxy基础配置</h3><p><code>haproxy.cfg</code> 中，增加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">global</span><br><span class="line">    ssl-default-bind-ciphers DEFAULT:!MEDIUM:!3DES</span><br><span class="line">    ssl-default-bind-options no-sslv3 no-tlsv10 no-tlsv11</span><br><span class="line">    tune.ssl.default-dh-param 4096</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Keystone配置证书"><a href="#Keystone配置证书" class="headerlink" title="Keystone配置证书"></a>Keystone配置证书</h3><ol>
+<li>使用http协议，先创建 <code>https endpoint</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openstack endpoint create --region RegionOne identity public https://111.111.111.88:32500/v3</span><br><span class="line">openstack endpoint create --region RegionOne identity internal https://111.111.111.88:32500/v3</span><br><span class="line">openstack endpoint create --region RegionOne identity admin https://111.111.111.88:32500/v3</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>删除http endpoint。</p>
+<blockquote>
+<p>openrc.sh中 <code>OS_INTERFACE</code> 字段和 <code>OS_ENDPOINT_TYPE</code> 替换为admin类型可以避免出错。</p>
+</blockquote>
+</li>
+<li><p>更新haproxy配置，增加keystone https认证，重启haproxy。此时keystone的https端口正常响应</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">---------------------------------------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Keystone</span></span><br><span class="line"><span class="meta">#</span><span class="bash">---------------------------------------------------------------------</span></span><br><span class="line">frontend keystone_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.88:32500 ssl crt /tmp/certificates/inspur.pem</span><br><span class="line">    default_backend keystone_back</span><br><span class="line"></span><br><span class="line">backend keystone_back</span><br><span class="line">    mode http</span><br><span class="line">    server node01 111.111.111.89:30500 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>验证</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openstack endpoint list</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Glance配置证书"><a href="#Glance配置证书" class="headerlink" title="Glance配置证书"></a>Glance配置证书</h3><ol>
+<li>更新haproxy配置，增加glance https认证，重启haproxy</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">---------------------------------------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Glance</span></span><br><span class="line"><span class="meta">#</span><span class="bash">---------------------------------------------------------------------</span></span><br><span class="line">frontend glance_api_front</span><br><span class="line">    mode http</span><br><span class="line">    http-request del-header X-Forwarded-Proto</span><br><span class="line">    timeout client 6h</span><br><span class="line">    option httplog</span><br><span class="line">    option forwardfor</span><br><span class="line">    http-request set-header X-Forwarded-Proto https if &#123; ssl_fc &#125;</span><br><span class="line">    bind 111.111.111.88:32092 ssl crt /tmp/certificates/inspur.pem</span><br><span class="line">    default_backend glance_api_back</span><br><span class="line"></span><br><span class="line">backend glance_api_back</span><br><span class="line">    mode http</span><br><span class="line">    timeout server 6h</span><br><span class="line">    server node01 111.111.111.89:30092 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在Kubernetes界面中，更新glance服务配置文件：<code>Secret</code> &gt;&gt; <code>glance-etc</code> &gt;&gt; <code>glance-api.conf</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[keystone_authtoken]</span><br><span class="line">auth_uri = https://111.111.111.88:32500/v3</span><br><span class="line">auth_url = https://111.111.111.88:32500/v3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置pod中证书挂载地址</span></span><br><span class="line">cafile = /etc/tls/tls.crt</span><br><span class="line">insecure = true</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>更新Secret后，需要重建pod，以应用新的配置。参考命令：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 删除pod后会自动重建</span></span><br><span class="line">kubectl delete pod -n openstack &lt; glance-api pod name &gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>更新Glance endpoint，替换为https地址</li>
+<li>验证</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openstack image list</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="OpenStack其他服务"><a href="#OpenStack其他服务" class="headerlink" title="OpenStack其他服务"></a>OpenStack其他服务</h3><p>按照上述Glance流程，参考文档【<a href="https://renyb2.github.io/2021/01/19/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AHTTPS/">OpenStack部署：HTTPS</a>】修改其余服务设置即可</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/concepts/services-networking/ingress/">Kubernetes官方文档：Ingress</a></p>
+<p><a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/tasks/inject-data-application/distribute-credentials-secure/">Kubernetes官方文档：使用 Secret 安全地分发凭证</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.51cto.com/wzlinux/2332908">Kubernetes 使用 ingress 配置 https 集群</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.qikqiak.com/post/use-secret-in-k8s/">Kubernetes Secret 资源对象使用方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kreo/p/13203973.html">签发SSL多域名自签证书</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013066244/article/details/78725842/">OpenSSL自签发配置有多域名或ip地址的证书</a></p>
+<p><a href="https://renyb2.github.io/2021/01/19/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AHTTPS/">OpenStack部署：HTTPS</a></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">任翌博</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://renyb2.github.io/2021/01/22/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9AOpenStack%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEHTTPS/">https://renyb2.github.io/2021/01/22/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9AOpenStack%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEHTTPS/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://renyb2.github.io" target="_blank">任翌博的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Kubernetes%E9%83%A8%E7%BD%B2/">Kubernetes部署</a><a class="post-meta__tags" href="/tags/Openstack/">Openstack</a><a class="post-meta__tags" href="/tags/HTTPS/">HTTPS</a></div><div class="post_share"><div class="social-share" data-image="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic3.zhimg.com%2Fv2-6e8551679401587b165b37c62fbd1f13_1200x500.jpg&amp;refer=http%3A%2F%2Fpic3.zhimg.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1613900311&amp;t=7a3bd4ec7ab64487adec8b48c98d6ed0" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/01/19/Linux%E9%85%8D%E7%BD%AE%EF%BC%9ALVM/"><img class="next-cover" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2734045988,4035371764&amp;fm=26&amp;gp=0.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Linux配置：LVM</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/12/16/Kubernetes部署：kubeadm部署高可用集群/" title="Kubernetes部署：kubeadm部署高可用集群"><img class="relatedPosts_cover" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic3.zhimg.com%2Fv2-6e8551679401587b165b37c62fbd1f13_1200x500.jpg&refer=http%3A%2F%2Fpic3.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1613900311&t=7a3bd4ec7ab64487adec8b48c98d6ed0"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-16</div><div class="relatedPosts_title">Kubernetes部署：kubeadm部署高可用集群</div></div></a></div><div class="relatedPosts_item"><a href="/2021/01/19/OpenStack部署：HTTPS/" title="OpenStack部署：HTTPS"><img class="relatedPosts_cover" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604668762480&di=d5583e78d6c7b0388d33ae09d0271f92&imgtype=0&src=http%3A%2F%2Fpic.baike.soso.com%2Fp%2F20140514%2F20140514115311-1438774487.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-19</div><div class="relatedPosts_title">OpenStack部署：HTTPS</div></div></a></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 任翌博</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script defer="defer" id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script></div></body></html>
