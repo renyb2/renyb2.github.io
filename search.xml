@@ -34,43 +34,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Dynamic Programming</title>
-    <url>/2020/08/27/Dynamic-Programming/</url>
-    <content><![CDATA[<h2 id="Dynamic-Programming（动态规划）"><a href="#Dynamic-Programming（动态规划）" class="headerlink" title="Dynamic Programming（动态规划）"></a>Dynamic Programming（动态规划）</h2><p>解决重复子问题</p>
-<h3 id="问题1：0-1背包问题"><a href="#问题1：0-1背包问题" class="headerlink" title="问题1：0/1背包问题"></a>问题1：0/1背包问题</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>有N件物品和一个容量为V的背包。第i件物品的重量是w[i]，价值是v[i]。求解将哪些物品装入背包可使这些物品的重量总和不超过背包容量，且价值总和最大</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">N &#x3D; 5</span><br><span class="line">V &#x3D; 10</span><br><span class="line">w &#x3D; [2, 2, 6, 5, 4]</span><br><span class="line">v &#x3D; [6, 3, 5, 4, 6]</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h3 id="问题2：斐波那契数列"><a href="#问题2：斐波那契数列" class="headerlink" title="问题2：斐波那契数列"></a>问题2：斐波那契数列</h3><h4 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h4><p>求第n个斐波那契数</p>
-<h4 id="python"><a href="#python" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_opt</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> <span class="keyword">if</span> n &lt;= <span class="number">2</span> <span class="keyword">else</span> rec_opt(n<span class="number">-1</span>) + rec_opt(n<span class="number">-2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 非递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_opt</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        opt = np.zeros(n, dtype=int)</span><br><span class="line">        opt[<span class="number">0</span>], opt[<span class="number">1</span>] = <span class="number">1</span>, <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, n):</span><br><span class="line">            opt[i] = opt[i<span class="number">-1</span>] + opt[i<span class="number">-2</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> opt[n<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">        print(<span class="string">&#x27;=====第%s个数=====&#x27;</span> % (i))</span><br><span class="line">        print(<span class="string">&#x27;递归结果： %s&#x27;</span> % (rec_opt(i)))</span><br><span class="line">        print(<span class="string">&#x27;非递归结果： %s&#x27;</span> % (dp_opt(i)))</span><br><span class="line">        print(<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="问题3：求最大和"><a href="#问题3：求最大和" class="headerlink" title="问题3：求最大和"></a>问题3：求最大和</h3><h4 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h4><p>Array内，隔一个选一个，求最大和</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">arr &#x3D; [1, 4, 6, 1, 9, 2, 2, 3]</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="python-1"><a href="#python-1" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_opt</span>(<span class="params">arr, i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> max(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">        A = rec_opt(arr, i<span class="number">-1</span>)</span><br><span class="line">        B = rec_opt(arr, i<span class="number">-2</span>) + arr[i]</span><br><span class="line">        <span class="keyword">return</span> max(A, B)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 非递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_opt</span>(<span class="params">arr, i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> max(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">        opt = np.zeros(i+<span class="number">1</span>, dtype=int)</span><br><span class="line">        opt[<span class="number">0</span>] = arr[<span class="number">0</span>]</span><br><span class="line">        opt[<span class="number">1</span>] = max(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">2</span>, i+<span class="number">1</span>):</span><br><span class="line">            A = opt[n<span class="number">-1</span>]</span><br><span class="line">            B = opt[n<span class="number">-2</span>] + arr[n]</span><br><span class="line">            opt[n] = max(A, B)</span><br><span class="line">        <span class="keyword">return</span> opt[i]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">    print(rec_opt(arr, <span class="number">7</span>))</span><br><span class="line">    print(dp_opt(arr, <span class="number">7</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="问题4：是否可组成指定和"><a href="#问题4：是否可组成指定和" class="headerlink" title="问题4：是否可组成指定和"></a>问题4：是否可组成指定和</h3><h4 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a>题目</h4><p>数组Array（全是正整数），是否可以组成指定和S</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">arr &#x3D; [3, 34, 4, 12, 5, 2]</span><br><span class="line">S &#x3D; 9</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="python-2"><a href="#python-2" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_subset</span>(<span class="params">arr, i, S</span>):</span></span><br><span class="line">    <span class="keyword">if</span> S == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>] == S</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 剪枝</span></span><br><span class="line">    <span class="keyword">elif</span> arr[i] &gt; S:</span><br><span class="line">        <span class="keyword">return</span> rec_subset(arr, i<span class="number">-1</span>, S)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        A = rec_subset(arr, i<span class="number">-1</span>, S-arr[i])</span><br><span class="line">        B = rec_subset(arr, i<span class="number">-1</span>, S)</span><br><span class="line">        <span class="keyword">return</span> A <span class="keyword">or</span> B</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 非递归</span></span><br><span class="line"><span class="comment">## 动态规划表：构造一个len(arr)行，S+1列的二维数组</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_subset</span>(<span class="params">arr, S</span>):</span></span><br><span class="line">    subset = np.zeros((len(arr), S + <span class="number">1</span>), dtype=bool)</span><br><span class="line">    subset[:, <span class="number">0</span>] = <span class="literal">True</span></span><br><span class="line">    subset[<span class="number">0</span>, :] = <span class="literal">False</span></span><br><span class="line">    subset[<span class="number">0</span>, arr[<span class="number">0</span>]] = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(arr)):</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> range(<span class="number">1</span>, S + <span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 剪枝</span></span><br><span class="line">            <span class="keyword">if</span> arr[i] &gt; s:</span><br><span class="line">                subset[i, s] = subset[i<span class="number">-1</span>, s]</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                A = subset[i<span class="number">-1</span>, s-arr[i]]</span><br><span class="line">                B = subset[i<span class="number">-1</span>, s]</span><br><span class="line">                subset[i, s] = A <span class="keyword">or</span> B</span><br><span class="line">    <span class="keyword">return</span> subset[<span class="number">-1</span>, <span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">3</span>, <span class="number">34</span>, <span class="number">4</span>, <span class="number">12</span>, <span class="number">5</span>, <span class="number">2</span>]</span><br><span class="line">    print(dp_subset(arr, <span class="number">9</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">10</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">11</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">12</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">13</span>))</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Git</title>
     <url>/2020/10/28/Git/</url>
     <content><![CDATA[<h2 id="Git基本操作"><a href="#Git基本操作" class="headerlink" title="Git基本操作"></a>Git基本操作</h2><p>Git 常用的是以下 6 个命令：<strong>git clone</strong>、<strong>git push</strong>、<strong>git add</strong> 、<strong>git commit</strong>、<strong>git checkout</strong>、<strong>git pull</strong></p>
@@ -114,6 +77,43 @@
       </categories>
       <tags>
         <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Dynamic Programming</title>
+    <url>/2020/08/27/Dynamic-Programming/</url>
+    <content><![CDATA[<h2 id="Dynamic-Programming（动态规划）"><a href="#Dynamic-Programming（动态规划）" class="headerlink" title="Dynamic Programming（动态规划）"></a>Dynamic Programming（动态规划）</h2><p>解决重复子问题</p>
+<h3 id="问题1：0-1背包问题"><a href="#问题1：0-1背包问题" class="headerlink" title="问题1：0/1背包问题"></a>问题1：0/1背包问题</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>有N件物品和一个容量为V的背包。第i件物品的重量是w[i]，价值是v[i]。求解将哪些物品装入背包可使这些物品的重量总和不超过背包容量，且价值总和最大</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">N &#x3D; 5</span><br><span class="line">V &#x3D; 10</span><br><span class="line">w &#x3D; [2, 2, 6, 5, 4]</span><br><span class="line">v &#x3D; [6, 3, 5, 4, 6]</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="问题2：斐波那契数列"><a href="#问题2：斐波那契数列" class="headerlink" title="问题2：斐波那契数列"></a>问题2：斐波那契数列</h3><h4 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h4><p>求第n个斐波那契数</p>
+<h4 id="python"><a href="#python" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_opt</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> <span class="keyword">if</span> n &lt;= <span class="number">2</span> <span class="keyword">else</span> rec_opt(n<span class="number">-1</span>) + rec_opt(n<span class="number">-2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 非递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_opt</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        opt = np.zeros(n, dtype=int)</span><br><span class="line">        opt[<span class="number">0</span>], opt[<span class="number">1</span>] = <span class="number">1</span>, <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, n):</span><br><span class="line">            opt[i] = opt[i<span class="number">-1</span>] + opt[i<span class="number">-2</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> opt[n<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">        print(<span class="string">&#x27;=====第%s个数=====&#x27;</span> % (i))</span><br><span class="line">        print(<span class="string">&#x27;递归结果： %s&#x27;</span> % (rec_opt(i)))</span><br><span class="line">        print(<span class="string">&#x27;非递归结果： %s&#x27;</span> % (dp_opt(i)))</span><br><span class="line">        print(<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="问题3：求最大和"><a href="#问题3：求最大和" class="headerlink" title="问题3：求最大和"></a>问题3：求最大和</h3><h4 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h4><p>Array内，隔一个选一个，求最大和</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">arr &#x3D; [1, 4, 6, 1, 9, 2, 2, 3]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="python-1"><a href="#python-1" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_opt</span>(<span class="params">arr, i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> max(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">        A = rec_opt(arr, i<span class="number">-1</span>)</span><br><span class="line">        B = rec_opt(arr, i<span class="number">-2</span>) + arr[i]</span><br><span class="line">        <span class="keyword">return</span> max(A, B)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 非递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_opt</span>(<span class="params">arr, i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> max(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">        opt = np.zeros(i+<span class="number">1</span>, dtype=int)</span><br><span class="line">        opt[<span class="number">0</span>] = arr[<span class="number">0</span>]</span><br><span class="line">        opt[<span class="number">1</span>] = max(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">2</span>, i+<span class="number">1</span>):</span><br><span class="line">            A = opt[n<span class="number">-1</span>]</span><br><span class="line">            B = opt[n<span class="number">-2</span>] + arr[n]</span><br><span class="line">            opt[n] = max(A, B)</span><br><span class="line">        <span class="keyword">return</span> opt[i]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">    print(rec_opt(arr, <span class="number">7</span>))</span><br><span class="line">    print(dp_opt(arr, <span class="number">7</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="问题4：是否可组成指定和"><a href="#问题4：是否可组成指定和" class="headerlink" title="问题4：是否可组成指定和"></a>问题4：是否可组成指定和</h3><h4 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a>题目</h4><p>数组Array（全是正整数），是否可以组成指定和S</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">arr &#x3D; [3, 34, 4, 12, 5, 2]</span><br><span class="line">S &#x3D; 9</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="python-2"><a href="#python-2" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_subset</span>(<span class="params">arr, i, S</span>):</span></span><br><span class="line">    <span class="keyword">if</span> S == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>] == S</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 剪枝</span></span><br><span class="line">    <span class="keyword">elif</span> arr[i] &gt; S:</span><br><span class="line">        <span class="keyword">return</span> rec_subset(arr, i<span class="number">-1</span>, S)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        A = rec_subset(arr, i<span class="number">-1</span>, S-arr[i])</span><br><span class="line">        B = rec_subset(arr, i<span class="number">-1</span>, S)</span><br><span class="line">        <span class="keyword">return</span> A <span class="keyword">or</span> B</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 非递归</span></span><br><span class="line"><span class="comment">## 动态规划表：构造一个len(arr)行，S+1列的二维数组</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_subset</span>(<span class="params">arr, S</span>):</span></span><br><span class="line">    subset = np.zeros((len(arr), S + <span class="number">1</span>), dtype=bool)</span><br><span class="line">    subset[:, <span class="number">0</span>] = <span class="literal">True</span></span><br><span class="line">    subset[<span class="number">0</span>, :] = <span class="literal">False</span></span><br><span class="line">    subset[<span class="number">0</span>, arr[<span class="number">0</span>]] = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(arr)):</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> range(<span class="number">1</span>, S + <span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 剪枝</span></span><br><span class="line">            <span class="keyword">if</span> arr[i] &gt; s:</span><br><span class="line">                subset[i, s] = subset[i<span class="number">-1</span>, s]</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                A = subset[i<span class="number">-1</span>, s-arr[i]]</span><br><span class="line">                B = subset[i<span class="number">-1</span>, s]</span><br><span class="line">                subset[i, s] = A <span class="keyword">or</span> B</span><br><span class="line">    <span class="keyword">return</span> subset[<span class="number">-1</span>, <span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">3</span>, <span class="number">34</span>, <span class="number">4</span>, <span class="number">12</span>, <span class="number">5</span>, <span class="number">2</span>]</span><br><span class="line">    print(dp_subset(arr, <span class="number">9</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">10</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">11</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">12</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">13</span>))</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -445,6 +445,9 @@
 <p><a href="https://v1-19.docs.kubernetes.io/zh/docs/concepts/services-networking/dual-stack/">Kubernetes v1.19 官方文档：验证 IPv4/IPv6 双协议栈</a></p>
 <p><a href="https://docs.projectcalico.org/networking/ipv6">Calico 官方文档：Configure dual stack or IPv6 only</a></p>
 <p><a href="https://github.com/kubernetes/website/issues/16801">Kubernetes Issues：Issue with k8s.io/docs/concepts/services-networking/dual-stack/ #16801</a></p>
+<p><a href="https://github.com/kubernetes/kubeadm/issues/1612">Kubernetes Issues：Dual-Stack support for Kubeadm #1612</a></p>
+<p><a href="https://github.com/kubernetes/kubeadm/issues/1828">Kubernetes Issues：Failed to parse subnet when creating IPv4/IPv6 dual stack #1828</a></p>
+<p><a href="https://github.com/kubernetes/kubernetes/issues/83006">Kubernetes Issues：fialed to test IPv6DualStack feature of release version 1.16.0 #83006</a></p>
 <p><a href="https://github.com/kubernetes/kubernetes/blob/v1.17.2/cmd/kube-apiserver/app/options/validation.go">Kubernetes IPv6 init报错 “specified –service-cluster-ip-range is too large”</a></p>
 <p><a href="https://www.kubernetes.org.cn/5173.html">kubernetes calico IPV6支持</a></p>
 <p><a href="https://jishuin.proginn.com/p/763bfbd3761a">简单示例说明 kube-proxy 如何与 iptables 配合使用</a></p>
@@ -457,6 +460,86 @@
       <tags>
         <tag>Kubernetes部署</tag>
         <tag>IPv6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Kubernetes部署：kubeadm部署高可用集群</title>
+    <url>/2020/12/16/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9Akubeadm%E9%83%A8%E7%BD%B2%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/</url>
+    <content><![CDATA[<h2 id="高可用集群部署"><a href="#高可用集群部署" class="headerlink" title="高可用集群部署"></a>高可用集群部署</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><h4 id="1-检查centos版本-hostname"><a href="#1-检查centos版本-hostname" class="headerlink" title="1. 检查centos版本 / hostname"></a>1. 检查centos版本 / hostname</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看centos版本</span></span><br><span class="line">cat /etc/centos-release</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; CentOS Linux release 7.7.1908 (Core)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此处 hostname 的输出将会是该机器在 Kubernetes 集群中的节点名字</span></span><br><span class="line">hostname</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改hostname</span></span><br><span class="line">hostnamectl set-hostname NAME</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-检查网络"><a href="#2-检查网络" class="headerlink" title="2. 检查网络"></a>2. 检查网络</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ip route show</span></span><br><span class="line">default via 111.111.111.1 dev ens192 proto static metric 100</span><br><span class="line">111.111.111.0/24 dev ens192 proto kernel scope link src 111.111.111.81 metric 100</span><br><span class="line">172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ip a</span></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens192: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000</span><br><span class="line">    link/ether 00:50:56:8c:5b:38 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 111.111.111.81/24 brd 111.111.111.255 scope global noprefixroute ens192</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::250:56ff:fe8c:5b38/64 scope link</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: ens224: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000</span><br><span class="line">    link/ether 00:50:56:8c:1e:41 brd ff:ff:ff:ff:ff:ff</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>kubelet使用的IP地址</p>
+<ul>
+<li><code>ip route show</code> 命令中，可以知道机器的默认网卡，通常是 <code>第一块网卡</code>，如 <strong><em>default via 111.111.111.1 dev ens192</em></strong></li>
+<li><code>ip a</code> 命令中，可显示默认网卡的 IP 地址，Kubernetes 将使用此 IP 地址与集群内的其他节点通信，如 <code>111.111.111.81</code></li>
+<li>所有节点上 Kubernetes 所使用的 IP 地址必须可以互通（无需 NAT 映射、无安全组或防火墙隔离）</li>
+</ul>
+</blockquote>
+<h4 id="3-环境基本配置"><a href="#3-环境基本配置" class="headerlink" title="3. 环境基本配置"></a>3. 环境基本配置</h4><blockquote>
+<ul>
+<li>任意节点 centos 版本为 7.6 / 7.7 或 7.8</li>
+<li>任意节点 CPU 内核数量大于等于 2，且内存大于等于 4G</li>
+<li>任意节点 hostname 不是 localhost，且不包含下划线、小数点、大写字母</li>
+<li>任意节点都有固定的内网 IP 地址</li>
+<li>任意节点都只有一个网卡，如果有特殊目的，我可以在完成 K8S 安装后再增加新的网卡</li>
+<li>任意节点上 <a href="https://kuboard.cn/install/install-kubernetes.html#%E6%A3%80%E6%9F%A5%E7%BD%91%E7%BB%9C">Kubelet使用的 IP 地址</a> 可互通（无需 NAT 映射即可相互访问），且没有防火墙、安全组隔离</li>
+<li>任意节点不会直接使用 docker run 或 docker-compose 运行容器</li>
+</ul>
+</blockquote>
+<h3 id="安装-docker-kubelet"><a href="#安装-docker-kubelet" class="headerlink" title="安装 docker / kubelet"></a>安装 docker / kubelet</h3><blockquote>
+<p>使用 root 身份在所有节点执行如下代码，安装软件：</p>
+<ul>
+<li>docker</li>
+<li>nfs-utils</li>
+<li>kubectl / kubeadm / kubelet</li>
+</ul>
+</blockquote>
+<h4 id="1-快速安装"><a href="#1-快速安装" class="headerlink" title="1. 快速安装"></a>1. 快速安装</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在 master 节点和 worker 节点都要执行</span></span><br><span class="line">curl -sSL https://kuboard.cn/install-script/v1.16.2/install_kubelet.sh | sh</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-手动安装"><a href="#2-手动安装" class="headerlink" title="2. 手动安装"></a>2. 手动安装</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在 master 节点和 worker 节点都要执行</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装 docker</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 参考文档如下</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> https://docs.docker.com/install/linux/docker-ce/centos/ </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> https://docs.docker.com/install/linux/linux-postinstall/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载旧版本</span></span><br><span class="line">yum remove -y docker \</span><br><span class="line">docker-client \</span><br><span class="line">docker-client-latest \</span><br><span class="line">docker-common \</span><br><span class="line">docker-latest \</span><br><span class="line">docker-latest-logrotate \</span><br><span class="line">docker-logrotate \</span><br><span class="line">docker-selinux \</span><br><span class="line">docker-engine-selinux \</span><br><span class="line">docker-engine</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置 yum repository</span></span><br><span class="line">yum install -y yum-utils \</span><br><span class="line">device-mapper-persistent-data \</span><br><span class="line">lvm2</span><br><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装并启动 docker</span></span><br><span class="line">yum install -y docker-ce-18.09.7 docker-ce-cli-18.09.7 containerd.io</span><br><span class="line">systemctl enable docker</span><br><span class="line">systemctl start docker</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装 nfs-utils</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 必须先安装 nfs-utils 才能挂载 nfs 网络存储</span></span><br><span class="line">yum install -y nfs-utils</span><br><span class="line">yum install -y wget</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭 防火墙</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭 SeLinux</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i &quot;s/SELINUX=enforcing/SELINUX=disabled/g&quot; /etc/selinux/config</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭 swap</span></span><br><span class="line">swapoff -a</span><br><span class="line">yes | cp /etc/fstab /etc/fstab_bak</span><br><span class="line">cat /etc/fstab_bak |grep -v swap &gt; /etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改 /etc/sysctl.conf</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果有配置，则修改</span></span><br><span class="line">sed -i &quot;s#^net.ipv4.ip_forward.*#net.ipv4.ip_forward=1#g&quot;  /etc/sysctl.conf</span><br><span class="line">sed -i &quot;s#^net.bridge.bridge-nf-call-ip6tables.*#net.bridge.bridge-nf-call-ip6tables=1#g&quot;  /etc/sysctl.conf</span><br><span class="line">sed -i &quot;s#^net.bridge.bridge-nf-call-iptables.*#net.bridge.bridge-nf-call-iptables=1#g&quot;  /etc/sysctl.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可能没有，追加</span></span><br><span class="line">echo &quot;net.ipv4.ip_forward = 1&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line">echo &quot;net.bridge.bridge-nf-call-ip6tables = 1&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line">echo &quot;net.bridge.bridge-nf-call-iptables = 1&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行命令以应用</span></span><br><span class="line">sysctl -p</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置K8S的yum源</span></span><br><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">repo_gpgcheck=0</span><br><span class="line">gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg</span><br><span class="line">       http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载旧版本</span></span><br><span class="line">yum remove -y kubelet kubeadm kubectl</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装kubelet、kubeadm、kubectl</span></span><br><span class="line">yum install -y kubelet-1.16.2 kubeadm-1.16.2 kubectl-1.16.2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改docker Cgroup Driver为systemd</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="comment"># 将/usr/lib/systemd/system/docker.service文件中的这一行 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="comment"># 修改为 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果不修改，在添加 worker 节点时可能会碰到如下错误</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> [WARNING IsDockerSystemdCheck]: detected <span class="string">&quot;cgroupfs&quot;</span> as the Docker cgroup driver. The recommended driver is <span class="string">&quot;systemd&quot;</span>. </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Please follow the guide at https://kubernetes.io/docs/setup/cri/</span></span><br><span class="line">sed -i &quot;s#^ExecStart=/usr/bin/dockerd.*#ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd#g&quot; /usr/lib/systemd/system/docker.service</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置 docker 镜像，提高 docker 镜像下载速度和稳定性</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果您访问 https://hub.docker.io 速度非常稳定，亦可以跳过这个步骤</span></span><br><span class="line">curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://f1361db2.m.daocloud.io</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启 docker，并启动 kubelet</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br><span class="line">systemctl enable kubelet &amp;&amp; systemctl start kubelet</span><br><span class="line"></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>WARNING</p>
+<p>如果此时执行 <code>service status kubelet</code> 命令，将得到 kubelet 启动失败的错误提示，请忽略此错误，因为必须完成后续步骤中 kubeadm init 的操作，kubelet 才能正常启动</p>
+</blockquote>
+<h3 id="安装-haproxy-keepalived"><a href="#安装-haproxy-keepalived" class="headerlink" title="安装 haproxy / keepalived"></a>安装 haproxy / keepalived</h3><h4 id="1-keepalived配置"><a href="#1-keepalived配置" class="headerlink" title="1. keepalived配置"></a>1. keepalived配置</h4><p>yum安装<code>keepalived</code>，编辑配置文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">   router_id LVS_DEVEL</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state &#123;&#123; state &#125;&#125;</span><br><span class="line">    interface &#123;&#123; interface &#125;&#125;</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority &#123;&#123; priority &#125;&#125;</span><br><span class="line">    advert_int 1</span><br><span class="line">    track_interface &#123;</span><br><span class="line">&#123;% for item in track_interface %&#125;</span><br><span class="line">        &#123;&#123; item &#125;&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        &#123;&#123; vip &#125;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>$&#123;STATE&#125;</code> is <code>MASTER</code> for one and <code>BACKUP</code> for all other hosts, hence the virtual IP will initially be assigned to the <code>MASTER</code>.</li>
+<li><code>$&#123;INTERFACE&#125;</code> is the network interface taking part in the negotiation of the virtual IP, e.g. <code>eth0</code>.</li>
+<li><code>$&#123;ROUTER_ID&#125;</code> should be the same for all <code>keepalived</code> cluster hosts while unique amongst all clusters in the same subnet. Many distros pre-configure its value to <code>51</code>.</li>
+<li><code>$&#123;PRIORITY&#125;</code> should be higher on the master than on the backups. Hence <code>101</code> and <code>100</code> respectively will suffice.</li>
+<li><code>$&#123;TRACK_INTERFACE&#125;</code> is a list of listening ports.</li>
+<li><code>$&#123;AUTH_PASS&#125;</code> should be the same for all <code>keepalived</code> cluster hosts, e.g. <code>42</code></li>
+<li><code>$&#123;APISERVER_VIP&#125;</code> is the virtual IP address negotiated between the <code>keepalived</code> cluster hosts.</li>
+</ul>
+<h4 id="2-haproxy配置"><a href="#2-haproxy配置" class="headerlink" title="2. haproxy配置"></a>2. haproxy配置</h4><p>yum安装<code>haproxy</code>，编辑配置文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">global</span><br><span class="line">  log 127.0.0.1 local2 info</span><br><span class="line">  pidfile /var/run/haproxy.pid</span><br><span class="line">  maxconn 10240</span><br><span class="line">  daemon</span><br><span class="line"></span><br><span class="line">defaults</span><br><span class="line">  log global</span><br><span class="line">  mode http</span><br><span class="line">  timeout connect 5000</span><br><span class="line">  timeout client 5000</span><br><span class="line">  timeout server 5000</span><br><span class="line">  timeout check 2000</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">######### K8s-APIServer LB #####################</span></span></span><br><span class="line">listen k8s-apiserver-lb</span><br><span class="line">  bind 0.0.0.0:8443</span><br><span class="line">  mode tcp</span><br><span class="line">  balance roundrobin</span><br><span class="line">&#123;% for item in groups.master %&#125;</span><br><span class="line">  server &#123;&#123; item &#125;&#125; &#123;&#123; hostvars[item].ansible_ssh_host &#125;&#125;:6443 check port 6443 inter 5000 fall 5</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">######### K8s-Web #####################</span></span></span><br><span class="line">listen k8s-web</span><br><span class="line">  bind 0.0.0.0:32000</span><br><span class="line">  mode tcp</span><br><span class="line">  balance roundrobin</span><br><span class="line">&#123;% for item in groups.master %&#125;</span><br><span class="line">  server &#123;&#123; item &#125;&#125; &#123;&#123; hostvars[item].ansible_ssh_host &#125;&#125;:30000 check port 30000 inter 5000 fall 5</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">####### stats ############################</span></span></span><br><span class="line">listen admin_stats</span><br><span class="line">  bind 0.0.0.0:8080</span><br><span class="line">  mode http</span><br><span class="line">  option httplog</span><br><span class="line">  maxconn 10</span><br><span class="line">  stats refresh 30s</span><br><span class="line">  stats uri /stats</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>maxconn </code> 最大并发连接数</li>
+</ul>
+<h3 id="后续流程参考后续文档"><a href="#后续流程参考后续文档" class="headerlink" title="后续流程参考后续文档"></a>后续流程参考后续文档</h3><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/high-availability/">Kubernetes官方文档：利用 kubeadm 创建高可用集群</a></p>
+<p><a href="https://kuboard.cn/install/install-kubernetes.html#%E4%BB%8B%E7%BB%8D">安装Kubernetes高可用</a></p>
+<p><a href="https://www.jianshu.com/p/8eb81d1674dc">kubeadm 搭建K8s高可用集群</a></p>
+<p><a href="https://github.com/kubernetes/kubeadm/blob/master/docs/ha-considerations.md#options-for-software-load-balancing">High Availability Considerations</a></p>
+<p><a href="https://blog.51cto.com/billy98/2350660">kubeadm安装kubernetes 1.13.2多master高可用集群</a></p>
+<p><a href="https://jimmysong.io/kubernetes-handbook/practice/master-ha.html">Master节点高可用</a></p>
+<p><a href="https://blog.csdn.net/qq_41772936/article/details/80718014">haproxy+keepalived高可用负载均衡构建</a></p>
+<p><a href="https://github.com/mendickxiao/kubeasz/tree/master/docs">集群规划和基础参数设定</a></p>
+<p><a href="https://blog.csdn.net/codemaster_2071/article/details/82634278">kubeadm安装kubernetes 多master高可用</a></p>
+<p><a href="https://www.cnblogs.com/rexcheny/p/10778567.html">Keepalive详解</a></p>
+<p><a href="https://blog.51cto.com/12244079/2125384">HAProxy介绍及配置文件详解</a></p>
+]]></content>
+      <categories>
+        <category>Kubernetes</category>
+      </categories>
+      <tags>
+        <tag>Kubernetes部署</tag>
+        <tag>kubeadm</tag>
       </tags>
   </entry>
   <entry>
@@ -588,86 +671,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Kubernetes部署：kubeadm部署高可用集群</title>
-    <url>/2020/12/16/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9Akubeadm%E9%83%A8%E7%BD%B2%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/</url>
-    <content><![CDATA[<h2 id="高可用集群部署"><a href="#高可用集群部署" class="headerlink" title="高可用集群部署"></a>高可用集群部署</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><h4 id="1-检查centos版本-hostname"><a href="#1-检查centos版本-hostname" class="headerlink" title="1. 检查centos版本 / hostname"></a>1. 检查centos版本 / hostname</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看centos版本</span></span><br><span class="line">cat /etc/centos-release</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; CentOS Linux release 7.7.1908 (Core)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此处 hostname 的输出将会是该机器在 Kubernetes 集群中的节点名字</span></span><br><span class="line">hostname</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改hostname</span></span><br><span class="line">hostnamectl set-hostname NAME</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-检查网络"><a href="#2-检查网络" class="headerlink" title="2. 检查网络"></a>2. 检查网络</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ip route show</span></span><br><span class="line">default via 111.111.111.1 dev ens192 proto static metric 100</span><br><span class="line">111.111.111.0/24 dev ens192 proto kernel scope link src 111.111.111.81 metric 100</span><br><span class="line">172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ip a</span></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens192: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000</span><br><span class="line">    link/ether 00:50:56:8c:5b:38 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 111.111.111.81/24 brd 111.111.111.255 scope global noprefixroute ens192</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::250:56ff:fe8c:5b38/64 scope link</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: ens224: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000</span><br><span class="line">    link/ether 00:50:56:8c:1e:41 brd ff:ff:ff:ff:ff:ff</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>kubelet使用的IP地址</p>
-<ul>
-<li><code>ip route show</code> 命令中，可以知道机器的默认网卡，通常是 <code>第一块网卡</code>，如 <strong><em>default via 111.111.111.1 dev ens192</em></strong></li>
-<li><code>ip a</code> 命令中，可显示默认网卡的 IP 地址，Kubernetes 将使用此 IP 地址与集群内的其他节点通信，如 <code>111.111.111.81</code></li>
-<li>所有节点上 Kubernetes 所使用的 IP 地址必须可以互通（无需 NAT 映射、无安全组或防火墙隔离）</li>
-</ul>
-</blockquote>
-<h4 id="3-环境基本配置"><a href="#3-环境基本配置" class="headerlink" title="3. 环境基本配置"></a>3. 环境基本配置</h4><blockquote>
-<ul>
-<li>任意节点 centos 版本为 7.6 / 7.7 或 7.8</li>
-<li>任意节点 CPU 内核数量大于等于 2，且内存大于等于 4G</li>
-<li>任意节点 hostname 不是 localhost，且不包含下划线、小数点、大写字母</li>
-<li>任意节点都有固定的内网 IP 地址</li>
-<li>任意节点都只有一个网卡，如果有特殊目的，我可以在完成 K8S 安装后再增加新的网卡</li>
-<li>任意节点上 <a href="https://kuboard.cn/install/install-kubernetes.html#%E6%A3%80%E6%9F%A5%E7%BD%91%E7%BB%9C">Kubelet使用的 IP 地址</a> 可互通（无需 NAT 映射即可相互访问），且没有防火墙、安全组隔离</li>
-<li>任意节点不会直接使用 docker run 或 docker-compose 运行容器</li>
-</ul>
-</blockquote>
-<h3 id="安装-docker-kubelet"><a href="#安装-docker-kubelet" class="headerlink" title="安装 docker / kubelet"></a>安装 docker / kubelet</h3><blockquote>
-<p>使用 root 身份在所有节点执行如下代码，安装软件：</p>
-<ul>
-<li>docker</li>
-<li>nfs-utils</li>
-<li>kubectl / kubeadm / kubelet</li>
-</ul>
-</blockquote>
-<h4 id="1-快速安装"><a href="#1-快速安装" class="headerlink" title="1. 快速安装"></a>1. 快速安装</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在 master 节点和 worker 节点都要执行</span></span><br><span class="line">curl -sSL https://kuboard.cn/install-script/v1.16.2/install_kubelet.sh | sh</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-手动安装"><a href="#2-手动安装" class="headerlink" title="2. 手动安装"></a>2. 手动安装</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在 master 节点和 worker 节点都要执行</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装 docker</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 参考文档如下</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> https://docs.docker.com/install/linux/docker-ce/centos/ </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> https://docs.docker.com/install/linux/linux-postinstall/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载旧版本</span></span><br><span class="line">yum remove -y docker \</span><br><span class="line">docker-client \</span><br><span class="line">docker-client-latest \</span><br><span class="line">docker-common \</span><br><span class="line">docker-latest \</span><br><span class="line">docker-latest-logrotate \</span><br><span class="line">docker-logrotate \</span><br><span class="line">docker-selinux \</span><br><span class="line">docker-engine-selinux \</span><br><span class="line">docker-engine</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置 yum repository</span></span><br><span class="line">yum install -y yum-utils \</span><br><span class="line">device-mapper-persistent-data \</span><br><span class="line">lvm2</span><br><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装并启动 docker</span></span><br><span class="line">yum install -y docker-ce-18.09.7 docker-ce-cli-18.09.7 containerd.io</span><br><span class="line">systemctl enable docker</span><br><span class="line">systemctl start docker</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装 nfs-utils</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 必须先安装 nfs-utils 才能挂载 nfs 网络存储</span></span><br><span class="line">yum install -y nfs-utils</span><br><span class="line">yum install -y wget</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭 防火墙</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭 SeLinux</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i &quot;s/SELINUX=enforcing/SELINUX=disabled/g&quot; /etc/selinux/config</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭 swap</span></span><br><span class="line">swapoff -a</span><br><span class="line">yes | cp /etc/fstab /etc/fstab_bak</span><br><span class="line">cat /etc/fstab_bak |grep -v swap &gt; /etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改 /etc/sysctl.conf</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果有配置，则修改</span></span><br><span class="line">sed -i &quot;s#^net.ipv4.ip_forward.*#net.ipv4.ip_forward=1#g&quot;  /etc/sysctl.conf</span><br><span class="line">sed -i &quot;s#^net.bridge.bridge-nf-call-ip6tables.*#net.bridge.bridge-nf-call-ip6tables=1#g&quot;  /etc/sysctl.conf</span><br><span class="line">sed -i &quot;s#^net.bridge.bridge-nf-call-iptables.*#net.bridge.bridge-nf-call-iptables=1#g&quot;  /etc/sysctl.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可能没有，追加</span></span><br><span class="line">echo &quot;net.ipv4.ip_forward = 1&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line">echo &quot;net.bridge.bridge-nf-call-ip6tables = 1&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line">echo &quot;net.bridge.bridge-nf-call-iptables = 1&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行命令以应用</span></span><br><span class="line">sysctl -p</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置K8S的yum源</span></span><br><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">repo_gpgcheck=0</span><br><span class="line">gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg</span><br><span class="line">       http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载旧版本</span></span><br><span class="line">yum remove -y kubelet kubeadm kubectl</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装kubelet、kubeadm、kubectl</span></span><br><span class="line">yum install -y kubelet-1.16.2 kubeadm-1.16.2 kubectl-1.16.2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改docker Cgroup Driver为systemd</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="comment"># 将/usr/lib/systemd/system/docker.service文件中的这一行 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="comment"># 修改为 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果不修改，在添加 worker 节点时可能会碰到如下错误</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> [WARNING IsDockerSystemdCheck]: detected <span class="string">&quot;cgroupfs&quot;</span> as the Docker cgroup driver. The recommended driver is <span class="string">&quot;systemd&quot;</span>. </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Please follow the guide at https://kubernetes.io/docs/setup/cri/</span></span><br><span class="line">sed -i &quot;s#^ExecStart=/usr/bin/dockerd.*#ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd#g&quot; /usr/lib/systemd/system/docker.service</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置 docker 镜像，提高 docker 镜像下载速度和稳定性</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果您访问 https://hub.docker.io 速度非常稳定，亦可以跳过这个步骤</span></span><br><span class="line">curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://f1361db2.m.daocloud.io</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启 docker，并启动 kubelet</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br><span class="line">systemctl enable kubelet &amp;&amp; systemctl start kubelet</span><br><span class="line"></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>WARNING</p>
-<p>如果此时执行 <code>service status kubelet</code> 命令，将得到 kubelet 启动失败的错误提示，请忽略此错误，因为必须完成后续步骤中 kubeadm init 的操作，kubelet 才能正常启动</p>
-</blockquote>
-<h3 id="安装-haproxy-keepalived"><a href="#安装-haproxy-keepalived" class="headerlink" title="安装 haproxy / keepalived"></a>安装 haproxy / keepalived</h3><h4 id="1-keepalived配置"><a href="#1-keepalived配置" class="headerlink" title="1. keepalived配置"></a>1. keepalived配置</h4><p>yum安装<code>keepalived</code>，编辑配置文件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">   router_id LVS_DEVEL</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state &#123;&#123; state &#125;&#125;</span><br><span class="line">    interface &#123;&#123; interface &#125;&#125;</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority &#123;&#123; priority &#125;&#125;</span><br><span class="line">    advert_int 1</span><br><span class="line">    track_interface &#123;</span><br><span class="line">&#123;% for item in track_interface %&#125;</span><br><span class="line">        &#123;&#123; item &#125;&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        &#123;&#123; vip &#125;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>$&#123;STATE&#125;</code> is <code>MASTER</code> for one and <code>BACKUP</code> for all other hosts, hence the virtual IP will initially be assigned to the <code>MASTER</code>.</li>
-<li><code>$&#123;INTERFACE&#125;</code> is the network interface taking part in the negotiation of the virtual IP, e.g. <code>eth0</code>.</li>
-<li><code>$&#123;ROUTER_ID&#125;</code> should be the same for all <code>keepalived</code> cluster hosts while unique amongst all clusters in the same subnet. Many distros pre-configure its value to <code>51</code>.</li>
-<li><code>$&#123;PRIORITY&#125;</code> should be higher on the master than on the backups. Hence <code>101</code> and <code>100</code> respectively will suffice.</li>
-<li><code>$&#123;TRACK_INTERFACE&#125;</code> is a list of listening ports.</li>
-<li><code>$&#123;AUTH_PASS&#125;</code> should be the same for all <code>keepalived</code> cluster hosts, e.g. <code>42</code></li>
-<li><code>$&#123;APISERVER_VIP&#125;</code> is the virtual IP address negotiated between the <code>keepalived</code> cluster hosts.</li>
-</ul>
-<h4 id="2-haproxy配置"><a href="#2-haproxy配置" class="headerlink" title="2. haproxy配置"></a>2. haproxy配置</h4><p>yum安装<code>haproxy</code>，编辑配置文件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">global</span><br><span class="line">  log 127.0.0.1 local2 info</span><br><span class="line">  pidfile /var/run/haproxy.pid</span><br><span class="line">  maxconn 10240</span><br><span class="line">  daemon</span><br><span class="line"></span><br><span class="line">defaults</span><br><span class="line">  log global</span><br><span class="line">  mode http</span><br><span class="line">  timeout connect 5000</span><br><span class="line">  timeout client 5000</span><br><span class="line">  timeout server 5000</span><br><span class="line">  timeout check 2000</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">######### K8s-APIServer LB #####################</span></span></span><br><span class="line">listen k8s-apiserver-lb</span><br><span class="line">  bind 0.0.0.0:8443</span><br><span class="line">  mode tcp</span><br><span class="line">  balance roundrobin</span><br><span class="line">&#123;% for item in groups.master %&#125;</span><br><span class="line">  server &#123;&#123; item &#125;&#125; &#123;&#123; hostvars[item].ansible_ssh_host &#125;&#125;:6443 check port 6443 inter 5000 fall 5</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">######### K8s-Web #####################</span></span></span><br><span class="line">listen k8s-web</span><br><span class="line">  bind 0.0.0.0:32000</span><br><span class="line">  mode tcp</span><br><span class="line">  balance roundrobin</span><br><span class="line">&#123;% for item in groups.master %&#125;</span><br><span class="line">  server &#123;&#123; item &#125;&#125; &#123;&#123; hostvars[item].ansible_ssh_host &#125;&#125;:30000 check port 30000 inter 5000 fall 5</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">####### stats ############################</span></span></span><br><span class="line">listen admin_stats</span><br><span class="line">  bind 0.0.0.0:8080</span><br><span class="line">  mode http</span><br><span class="line">  option httplog</span><br><span class="line">  maxconn 10</span><br><span class="line">  stats refresh 30s</span><br><span class="line">  stats uri /stats</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>maxconn </code> 最大并发连接数</li>
-</ul>
-<h3 id="后续流程参考后续文档"><a href="#后续流程参考后续文档" class="headerlink" title="后续流程参考后续文档"></a>后续流程参考后续文档</h3><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/high-availability/">Kubernetes官方文档：利用 kubeadm 创建高可用集群</a></p>
-<p><a href="https://kuboard.cn/install/install-kubernetes.html#%E4%BB%8B%E7%BB%8D">安装Kubernetes高可用</a></p>
-<p><a href="https://www.jianshu.com/p/8eb81d1674dc">kubeadm 搭建K8s高可用集群</a></p>
-<p><a href="https://github.com/kubernetes/kubeadm/blob/master/docs/ha-considerations.md#options-for-software-load-balancing">High Availability Considerations</a></p>
-<p><a href="https://blog.51cto.com/billy98/2350660">kubeadm安装kubernetes 1.13.2多master高可用集群</a></p>
-<p><a href="https://jimmysong.io/kubernetes-handbook/practice/master-ha.html">Master节点高可用</a></p>
-<p><a href="https://blog.csdn.net/qq_41772936/article/details/80718014">haproxy+keepalived高可用负载均衡构建</a></p>
-<p><a href="https://github.com/mendickxiao/kubeasz/tree/master/docs">集群规划和基础参数设定</a></p>
-<p><a href="https://blog.csdn.net/codemaster_2071/article/details/82634278">kubeadm安装kubernetes 多master高可用</a></p>
-<p><a href="https://www.cnblogs.com/rexcheny/p/10778567.html">Keepalive详解</a></p>
-<p><a href="https://blog.51cto.com/12244079/2125384">HAProxy介绍及配置文件详解</a></p>
-]]></content>
-      <categories>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes部署</tag>
-        <tag>kubeadm</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux配置：GNOME桌面</title>
     <url>/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AGNOME%E6%A1%8C%E9%9D%A2/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
@@ -688,6 +691,59 @@
       <tags>
         <tag>Linux</tag>
         <tag>GNOME</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux配置：LVM</title>
+    <url>/2021/01/19/Linux%E9%85%8D%E7%BD%AE%EF%BC%9ALVM/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>​        LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM将一个或多个硬盘的分区在逻辑上集合，相当于一个大硬盘来使用，当硬盘的空间不够使用的时候，可以继续将其它的硬盘的分区加入其中，这样可以实现磁盘空间的动态管理，相对于普通的磁盘分区有很大的灵活性。</p>
+<p>​        与传统的磁盘与分区相比，LVM为计算机提供了更高层次的磁盘存储。它使系统管理员可以更方便的为应用与用户分配存储空间。在LVM管理下的存储卷可以按需要随时改变大小与移除(可能需对文件系统工具进行升级)。LVM也允许按用户组对存储卷进行管理，允许管理员用更直观的名称(如”sales’、 ‘development’)代替物理磁盘名(如’sda’、’sdb’)来标识存储卷。</p>
+</blockquote>
+<h2 id="LVM基本术语"><a href="#LVM基本术语" class="headerlink" title="LVM基本术语"></a>LVM基本术语</h2><p>前面谈到，LVM是在磁盘分区和文件系统之间添加的一个逻辑层，来为文件系统屏蔽下层磁盘分区布局，提供一个抽象的盘卷，在盘卷上建立文件系统。首先我们讨论以下几个LVM术语：</p>
+<ul>
+<li><p>物理存储介质（The physical media）：这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。</p>
+</li>
+<li><p>物理卷（physical volume）：物理卷就是指硬盘分区或从逻辑上与磁盘分区具有同样功能的设备(如RAID)，是LVM的基本存储逻辑块，但和基本的物理存储介质（如分区、磁盘等）比较，却包含有与LVM相关的管理参数。</p>
+</li>
+<li><p>卷组（Volume Group）：LVM卷组类似于非LVM系统中的物理硬盘，其由物理卷组成。可以在卷组上创建一个或多个“LVM分区”（逻辑卷），LVM卷组由一个或多个物理卷组成。</p>
+</li>
+<li><p>逻辑卷（logical volume）：LVM的逻辑卷类似于非LVM系统中的硬盘分区，在逻辑卷之上可以建立文件系统(比如/home或者/usr等)。</p>
+</li>
+<li><p>PE（physical extent）：每一个物理卷被划分为称为PE(Physical Extents)的基本单元，具有唯一编号的PE是可以被LVM寻址的最小单元。PE的大小是可配置的，默认为4MB。</p>
+</li>
+<li><p>LE（logical extent）：逻辑卷也被划分为被称为LE(Logical Extents) 的可被寻址的基本单位。在同一个卷组中，LE的大小和PE是相同的，并且一一对应。</p>
+</li>
+</ul>
+<p>简单来说就是：</p>
+<ul>
+<li>PV:是物理的磁盘分区</li>
+<li>VG:LVM中的物理的磁盘分区，也就是PV，必须加入VG，可以将VG理解为一个仓库或者是几个大的硬盘。</li>
+<li>LV：也就是从VG中划分的逻辑分区</li>
+</ul>
+<p>如下图所示PV、VG、LV三者关系：</p>
+<p><img src="/2021/01/19/Linux%E9%85%8D%E7%BD%AE%EF%BC%9ALVM/LVM-1.jpg" alt="LVM关系"></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 新磁盘分区</span></span><br><span class="line">fdisk /dev/sdb</span><br><span class="line">n         # 新建分区</span><br><span class="line">l         # 选择逻辑分区，如果没有，则首先创建扩展分区，然后再添加逻辑分区（硬盘：最多四个分区P-P-P-P或P-P-P-E）</span><br><span class="line">6         # 分区号（从5开始），/dev/hda6</span><br><span class="line">t    8e   # 分区类型8e表示LVM分区</span><br><span class="line">w         # 写入分区表</span><br><span class="line"></span><br><span class="line">partprobe # 重读分区表</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看pv/vg/lv概要信息</span></span><br><span class="line">pvs</span><br><span class="line">vgs</span><br><span class="line">lvs</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看pv/vg/lv详情</span></span><br><span class="line">pvdisplay</span><br><span class="line">vgdisplay</span><br><span class="line">lvdisplay</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建pv</span></span><br><span class="line">pvcreate /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除pv</span></span><br><span class="line">pvremove /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建vg</span></span><br><span class="line">vgcreate vg_name /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 扩容</span></span><br><span class="line">vgextend vg_name /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除vg</span></span><br><span class="line">vgremove vg_name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建lv</span></span><br><span class="line">lvcreate lv_name vg_name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 扩容lv</span></span><br><span class="line">lvextend -L 250G /dev/mapper/centos-root       # 调整到250G</span><br><span class="line">lvextend -L +250G /dev/mapper/centos-root      # 扩容250G</span><br><span class="line">lvextend -l +100%free /dev/mapper/centos-root  # 将vg剩余空间全部扩容进去</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除lv</span></span><br><span class="line">lvremove lv_name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新文件系统</span></span><br><span class="line">resize2fs /dev/mapper/centos-root      # ext4文件系统</span><br><span class="line">xfs_growfs /dev/mapper/centos-root     # xfs文件系统</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p><strong>问题1：</strong>resize2fs报错如下：</p>
+<p>resize2fs: Bad magic number in super-block while trying to open /dev/mapper/centos-home<br>Couldn’t find valid filesystem superblock.</p>
+<p><strong>原因：</strong>文件系统是xfs（fdisk -l查看），不再支持resize2fs</p>
+<p><strong>解决：</strong>使用XFS相应命令，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">xfs_growfs /dev/mapper/centos-root</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/gaojun/archive/2012/08/22/2650229.html">Linux LVM硬盘管理及LVM扩容</a></p>
+<p><a href="https://www.cnblogs.com/-abm/p/11349240.html">CentOS7上lvm分区调整（resize2fs: Bad magic number in super-block while trying to open …）</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>LVM</tag>
       </tags>
   </entry>
   <entry>
@@ -752,117 +808,6 @@
       <tags>
         <tag>Linux</tag>
         <tag>VNC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux配置：LVM</title>
-    <url>/2021/01/19/Linux%E9%85%8D%E7%BD%AE%EF%BC%9ALVM/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>​        LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM将一个或多个硬盘的分区在逻辑上集合，相当于一个大硬盘来使用，当硬盘的空间不够使用的时候，可以继续将其它的硬盘的分区加入其中，这样可以实现磁盘空间的动态管理，相对于普通的磁盘分区有很大的灵活性。</p>
-<p>​        与传统的磁盘与分区相比，LVM为计算机提供了更高层次的磁盘存储。它使系统管理员可以更方便的为应用与用户分配存储空间。在LVM管理下的存储卷可以按需要随时改变大小与移除(可能需对文件系统工具进行升级)。LVM也允许按用户组对存储卷进行管理，允许管理员用更直观的名称(如”sales’、 ‘development’)代替物理磁盘名(如’sda’、’sdb’)来标识存储卷。</p>
-</blockquote>
-<h2 id="LVM基本术语"><a href="#LVM基本术语" class="headerlink" title="LVM基本术语"></a>LVM基本术语</h2><p>前面谈到，LVM是在磁盘分区和文件系统之间添加的一个逻辑层，来为文件系统屏蔽下层磁盘分区布局，提供一个抽象的盘卷，在盘卷上建立文件系统。首先我们讨论以下几个LVM术语：</p>
-<ul>
-<li><p>物理存储介质（The physical media）：这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。</p>
-</li>
-<li><p>物理卷（physical volume）：物理卷就是指硬盘分区或从逻辑上与磁盘分区具有同样功能的设备(如RAID)，是LVM的基本存储逻辑块，但和基本的物理存储介质（如分区、磁盘等）比较，却包含有与LVM相关的管理参数。</p>
-</li>
-<li><p>卷组（Volume Group）：LVM卷组类似于非LVM系统中的物理硬盘，其由物理卷组成。可以在卷组上创建一个或多个“LVM分区”（逻辑卷），LVM卷组由一个或多个物理卷组成。</p>
-</li>
-<li><p>逻辑卷（logical volume）：LVM的逻辑卷类似于非LVM系统中的硬盘分区，在逻辑卷之上可以建立文件系统(比如/home或者/usr等)。</p>
-</li>
-<li><p>PE（physical extent）：每一个物理卷被划分为称为PE(Physical Extents)的基本单元，具有唯一编号的PE是可以被LVM寻址的最小单元。PE的大小是可配置的，默认为4MB。</p>
-</li>
-<li><p>LE（logical extent）：逻辑卷也被划分为被称为LE(Logical Extents) 的可被寻址的基本单位。在同一个卷组中，LE的大小和PE是相同的，并且一一对应。</p>
-</li>
-</ul>
-<p>简单来说就是：</p>
-<ul>
-<li>PV:是物理的磁盘分区</li>
-<li>VG:LVM中的物理的磁盘分区，也就是PV，必须加入VG，可以将VG理解为一个仓库或者是几个大的硬盘。</li>
-<li>LV：也就是从VG中划分的逻辑分区</li>
-</ul>
-<p>如下图所示PV、VG、LV三者关系：</p>
-<p><img src="/2021/01/19/Linux%E9%85%8D%E7%BD%AE%EF%BC%9ALVM/LVM-1.jpg" alt="LVM关系"></p>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 新磁盘分区</span></span><br><span class="line">fdisk /dev/sdb</span><br><span class="line">n         # 新建分区</span><br><span class="line">l         # 选择逻辑分区，如果没有，则首先创建扩展分区，然后再添加逻辑分区（硬盘：最多四个分区P-P-P-P或P-P-P-E）</span><br><span class="line">6         # 分区号（从5开始），/dev/hda6</span><br><span class="line">t    8e   # 分区类型8e表示LVM分区</span><br><span class="line">w         # 写入分区表</span><br><span class="line"></span><br><span class="line">partprobe # 重读分区表</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看pv/vg/lv概要信息</span></span><br><span class="line">pvs</span><br><span class="line">vgs</span><br><span class="line">lvs</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看pv/vg/lv详情</span></span><br><span class="line">pvdisplay</span><br><span class="line">vgdisplay</span><br><span class="line">lvdisplay</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建pv</span></span><br><span class="line">pvcreate /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除pv</span></span><br><span class="line">pvremove /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建vg</span></span><br><span class="line">vgcreate vg_name /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 扩容</span></span><br><span class="line">vgextend vg_name /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除vg</span></span><br><span class="line">vgremove vg_name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建lv</span></span><br><span class="line">lvcreate lv_name vg_name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 扩容lv</span></span><br><span class="line">lvextend -L 250G /dev/mapper/centos-root       # 调整到250G</span><br><span class="line">lvextend -L +250G /dev/mapper/centos-root      # 扩容250G</span><br><span class="line">lvextend -l +100%free /dev/mapper/centos-root  # 将vg剩余空间全部扩容进去</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除lv</span></span><br><span class="line">lvremove lv_name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新文件系统</span></span><br><span class="line">resize2fs /dev/mapper/centos-root      # ext4文件系统</span><br><span class="line">xfs_growfs /dev/mapper/centos-root     # xfs文件系统</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p><strong>问题1：</strong>resize2fs报错如下：</p>
-<p>resize2fs: Bad magic number in super-block while trying to open /dev/mapper/centos-home<br>Couldn’t find valid filesystem superblock.</p>
-<p><strong>原因：</strong>文件系统是xfs（fdisk -l查看），不再支持resize2fs</p>
-<p><strong>解决：</strong>使用XFS相应命令，如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">xfs_growfs /dev/mapper/centos-root</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/gaojun/archive/2012/08/22/2650229.html">Linux LVM硬盘管理及LVM扩容</a></p>
-<p><a href="https://www.cnblogs.com/-abm/p/11349240.html">CentOS7上lvm分区调整（resize2fs: Bad magic number in super-block while trying to open …）</a></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>LVM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux配置：修改网卡名称</title>
-    <url>/2021/01/12/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0/</url>
-    <content><![CDATA[<blockquote>
-<p>网上资料都是要修改 <code>/etc/default/grub</code> 文件，增加 <code>net.ifnames=0, biosdevname=0</code> 参数。该方法重启后，网卡名称统一变为eth开头，无法达到任意修改的目的。整理如下方法，亲测 Centos 7.8 可行。</p>
-</blockquote>
-<p>环境信息：CentOS Linux release 7.8.2003 (Core)</p>
-<p>网卡信息：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: rules.d # ip a</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    link/ether 00:0c:29:63:bf:af brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.1.110/24 brd 192.168.1.255 scope global noprefixroute dynamic mynet1</span><br><span class="line">       valid_lft 6511sec preferred_lft 6511sec</span><br><span class="line">    inet6 fe80::a788:f7ed:8c55:1b9f/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">4: virbr0-nic: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line"></span><br><span class="line">root@renyb: rules.d # nmcli connection show</span><br><span class="line">NAME    UUID                                  TYPE      DEVICE</span><br><span class="line">ens33   b40bd401-b463-4d44-ab63-247307f2a2d6  ethernet  ens33</span><br><span class="line">virbr0  7f07fa4e-e769-4fd1-ab39-1b70c27a0952  bridge    virbr0</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="临时配置"><a href="#临时配置" class="headerlink" title="临时配置"></a>临时配置</h2><p>通过 <code>ip</code> 命令进行配置，重启失效</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看网络设备信息</span></span><br><span class="line">nmcli connection show</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> down网卡</span></span><br><span class="line">ip link set dev ens33 down</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE名称</span></span><br><span class="line">ip link set dev ens33 name mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">nmcli connection modify ens33 connection.id mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动网卡</span></span><br><span class="line">ip link set mynet1 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载网络设备信息</span></span><br><span class="line">nmcli connection reload</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="永久配置"><a href="#永久配置" class="headerlink" title="永久配置"></a>永久配置</h2><p>通过 <code>udev</code> 实现。Centos系统中，规则目录如下：</p>
-<ul>
-<li>系统规则：<code>/usr/lib/udev/rules.d/</code></li>
-<li>自定义规则：<code>/etc/udev/rules.d</code></li>
-</ul>
-<h3 id="udev解析"><a href="#udev解析" class="headerlink" title="udev解析"></a>udev解析</h3><p>网卡相关udev的rule执行流程：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用户自定义为优先级最高</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡</span></span><br><span class="line">/usr/lib/udev/rules.d/60-net.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span></span><br><span class="line">/usr/lib/udev/rules.d/71-biosdevname.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称哦</span></span><br><span class="line">/lib/udev/rules.d/75-net-description.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名</span></span><br><span class="line">/usr/lib/udev/rules.d/80-net-name-slot.rules</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="重命名流程"><a href="#重命名流程" class="headerlink" title="重命名流程"></a>重命名流程</h3><ol>
-<li>新建文件：<code>/etc/udev/rules.d/70-persistent-net.rules</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a sample udev rules file that demonstrates how to get udev to</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> the name of IPoIB interfaces to whatever you wish.  There is a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 16 character <span class="built_in">limit</span> on network device names.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Important items to note: ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span> is IPoIB interfaces, and the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125; match must start with ?* and only reference the last 8</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bytes of the address or <span class="keyword">else</span> the address might not match the variable QPN</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> portion.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modern udev is <span class="keyword">case</span> sensitive and all addresses need to be <span class="keyword">in</span> lower <span class="keyword">case</span>.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ACTION==<span class="string">&quot;add&quot;</span>, SUBSYSTEM==<span class="string">&quot;net&quot;</span>, DRIVERS==<span class="string">&quot;?*&quot;</span>, ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span>, ATTR&#123;address&#125;==<span class="string">&quot;?*00:02:c9:03:00:31:78:f2&quot;</span>, NAME=<span class="string">&quot;mlx4_ib3&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125;: mac address</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME: device name</span></span><br><span class="line">ACTION==&quot;add&quot;, SUBSYSTEM==&quot;net&quot;, DRIVERS==&quot;?*&quot;, ATTR&#123;type&#125;==&quot;1&quot;, ATTR&#123;address&#125;==&quot;00:0c:29:63:bf:af&quot;, NAME=&quot;mynet1&quot;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>修改网卡配置文件：<code>/etc/sysconfig/network-scripts/ifcfg-ens33</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: network-scripts # pwd</span><br><span class="line">/etc/sysconfig/network-scripts</span><br><span class="line">root@renyb: network-scripts # cat ifcfg-ens33</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">NAME=mynet1</span><br><span class="line">UUID=b40bd401-b463-4d44-ab63-247307f2a2d6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE NAME</span></span><br><span class="line">DEVICE=mynet1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPV6_PRIVACY=no</span><br><span class="line">root@renyb: network-scripts # # 修改网卡配置文件名称</span><br><span class="line">root@renyb: network-scripts # mv ifcfg-ens33 ifcfg-mynet1</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/boltkiller/p/12696501.html">任意修改CentOS下网卡的显示名称和设备名称</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/33932734">在 Linux 中如何编写基本的 udev 规则</a></p>
-<p><a href="https://blog.csdn.net/u010039418/article/details/79260553">CentOS 7.4系统修改网卡名称</a></p>
-<p><a href="https://www.cnblogs.com/yinfutao/p/9634350.html">Linux系统修改网卡名（eth0-3）</a></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>网卡</tag>
       </tags>
   </entry>
   <entry>
@@ -950,6 +895,89 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux配置：修改网卡名称</title>
+    <url>/2021/01/12/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0/</url>
+    <content><![CDATA[<blockquote>
+<p>网上资料都是要修改 <code>/etc/default/grub</code> 文件，增加 <code>net.ifnames=0, biosdevname=0</code> 参数。该方法重启后，网卡名称统一变为eth开头，无法达到任意修改的目的。整理如下方法，亲测 Centos 7.8 可行。</p>
+</blockquote>
+<p>环境信息：CentOS Linux release 7.8.2003 (Core)</p>
+<p>网卡信息：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: rules.d # ip a</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    link/ether 00:0c:29:63:bf:af brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.1.110/24 brd 192.168.1.255 scope global noprefixroute dynamic mynet1</span><br><span class="line">       valid_lft 6511sec preferred_lft 6511sec</span><br><span class="line">    inet6 fe80::a788:f7ed:8c55:1b9f/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">4: virbr0-nic: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line"></span><br><span class="line">root@renyb: rules.d # nmcli connection show</span><br><span class="line">NAME    UUID                                  TYPE      DEVICE</span><br><span class="line">ens33   b40bd401-b463-4d44-ab63-247307f2a2d6  ethernet  ens33</span><br><span class="line">virbr0  7f07fa4e-e769-4fd1-ab39-1b70c27a0952  bridge    virbr0</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="临时配置"><a href="#临时配置" class="headerlink" title="临时配置"></a>临时配置</h2><p>通过 <code>ip</code> 命令进行配置，重启失效</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看网络设备信息</span></span><br><span class="line">nmcli connection show</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> down网卡</span></span><br><span class="line">ip link set dev ens33 down</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE名称</span></span><br><span class="line">ip link set dev ens33 name mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">nmcli connection modify ens33 connection.id mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动网卡</span></span><br><span class="line">ip link set mynet1 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载网络设备信息</span></span><br><span class="line">nmcli connection reload</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="永久配置"><a href="#永久配置" class="headerlink" title="永久配置"></a>永久配置</h2><p>通过 <code>udev</code> 实现。Centos系统中，规则目录如下：</p>
+<ul>
+<li>系统规则：<code>/usr/lib/udev/rules.d/</code></li>
+<li>自定义规则：<code>/etc/udev/rules.d</code></li>
+</ul>
+<h3 id="udev解析"><a href="#udev解析" class="headerlink" title="udev解析"></a>udev解析</h3><p>网卡相关udev的rule执行流程：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用户自定义为优先级最高</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡</span></span><br><span class="line">/usr/lib/udev/rules.d/60-net.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span></span><br><span class="line">/usr/lib/udev/rules.d/71-biosdevname.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称哦</span></span><br><span class="line">/lib/udev/rules.d/75-net-description.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名</span></span><br><span class="line">/usr/lib/udev/rules.d/80-net-name-slot.rules</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="重命名流程"><a href="#重命名流程" class="headerlink" title="重命名流程"></a>重命名流程</h3><ol>
+<li>新建文件：<code>/etc/udev/rules.d/70-persistent-net.rules</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a sample udev rules file that demonstrates how to get udev to</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> the name of IPoIB interfaces to whatever you wish.  There is a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 16 character <span class="built_in">limit</span> on network device names.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Important items to note: ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span> is IPoIB interfaces, and the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125; match must start with ?* and only reference the last 8</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bytes of the address or <span class="keyword">else</span> the address might not match the variable QPN</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> portion.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modern udev is <span class="keyword">case</span> sensitive and all addresses need to be <span class="keyword">in</span> lower <span class="keyword">case</span>.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ACTION==<span class="string">&quot;add&quot;</span>, SUBSYSTEM==<span class="string">&quot;net&quot;</span>, DRIVERS==<span class="string">&quot;?*&quot;</span>, ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span>, ATTR&#123;address&#125;==<span class="string">&quot;?*00:02:c9:03:00:31:78:f2&quot;</span>, NAME=<span class="string">&quot;mlx4_ib3&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125;: mac address</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME: device name</span></span><br><span class="line">ACTION==&quot;add&quot;, SUBSYSTEM==&quot;net&quot;, DRIVERS==&quot;?*&quot;, ATTR&#123;type&#125;==&quot;1&quot;, ATTR&#123;address&#125;==&quot;00:0c:29:63:bf:af&quot;, NAME=&quot;mynet1&quot;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改网卡配置文件：<code>/etc/sysconfig/network-scripts/ifcfg-ens33</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: network-scripts # pwd</span><br><span class="line">/etc/sysconfig/network-scripts</span><br><span class="line">root@renyb: network-scripts # cat ifcfg-ens33</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">NAME=mynet1</span><br><span class="line">UUID=b40bd401-b463-4d44-ab63-247307f2a2d6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE NAME</span></span><br><span class="line">DEVICE=mynet1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPV6_PRIVACY=no</span><br><span class="line">root@renyb: network-scripts # # 修改网卡配置文件名称</span><br><span class="line">root@renyb: network-scripts # mv ifcfg-ens33 ifcfg-mynet1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/boltkiller/p/12696501.html">任意修改CentOS下网卡的显示名称和设备名称</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/33932734">在 Linux 中如何编写基本的 udev 规则</a></p>
+<p><a href="https://blog.csdn.net/u010039418/article/details/79260553">CentOS 7.4系统修改网卡名称</a></p>
+<p><a href="https://www.cnblogs.com/yinfutao/p/9634350.html">Linux系统修改网卡名（eth0-3）</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>网卡</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenStack使用：Windows镜像制作</title>
+    <url>/2020/11/09/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9AWindows%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</url>
+    <content><![CDATA[<h2 id="资源下载地址"><a href="#资源下载地址" class="headerlink" title="资源下载地址"></a>资源下载地址</h2><ul>
+<li>系统镜像：<a href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></li>
+<li>virtio：<a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/</a></li>
+</ul>
+<p>PS：新版本的virtio需要下载iso文件，内部驱动全面</p>
+<h2 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h2><h3 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装包</span></span><br><span class="line">yum install qemu-kvm qemu-img –y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建链接</span></span><br><span class="line">ln -sv /usr/libexec/qemu-kvm /usr/bin/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建磁盘</span></span><br><span class="line">qemu-img create -f qcow2 cn_windows_server_2016_vl_x64_cloud_11636695.qcow2 15G</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建虚机</span></span><br><span class="line">qemu-kvm -m 1024 -cdrom cn_windows_server_2016_vl_x64_dvd_11636695.iso -drive file=cn_windows_server_2016_vl_x64_dvd_11636695.qcow2,if=virtio,boot=on -fda virtio-win_amd64.vfd -boot d -nographic -vnc :3</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="VNC连接虚机"><a href="#VNC连接虚机" class="headerlink" title="VNC连接虚机"></a>VNC连接虚机</h3><p>连接方式：<code>&lt;server ip&gt;:3</code></p>
+<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/tcicy/p/7790956.html">OpenStack kvm win7镜像制作</a></p>
+<p><a href="https://blog.csdn.net/qq_20154221/article/details/51586537">制作OpenStack镜像win7.qcow2（centos/ubuntu/win镜像分享）</a></p>
+<p><a href="https://blog.csdn.net/wylfengyujiancheng/article/details/50468173">制作OpenStack Windows Server 2012镜像</a></p>
+]]></content>
+      <categories>
+        <category>OpenStack使用</category>
+      </categories>
+      <tags>
+        <tag>OpenStack使用</tag>
+        <tag>镜像制作</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mosquitto</title>
     <url>/2020/08/31/Mosquitto/</url>
     <content><![CDATA[<h2 id="Mosquitto"><a href="#Mosquitto" class="headerlink" title="Mosquitto"></a>Mosquitto</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型设备、移动应用等方面有较广泛的应用。</p>
@@ -1001,31 +1029,6 @@
       </categories>
       <tags>
         <tag>MQTT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenStack使用：Windows镜像制作</title>
-    <url>/2020/11/09/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9AWindows%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</url>
-    <content><![CDATA[<h2 id="资源下载地址"><a href="#资源下载地址" class="headerlink" title="资源下载地址"></a>资源下载地址</h2><ul>
-<li>系统镜像：<a href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></li>
-<li>virtio：<a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/</a></li>
-</ul>
-<p>PS：新版本的virtio需要下载iso文件，内部驱动全面</p>
-<h2 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h2><h3 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装包</span></span><br><span class="line">yum install qemu-kvm qemu-img –y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建链接</span></span><br><span class="line">ln -sv /usr/libexec/qemu-kvm /usr/bin/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建磁盘</span></span><br><span class="line">qemu-img create -f qcow2 cn_windows_server_2016_vl_x64_cloud_11636695.qcow2 15G</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建虚机</span></span><br><span class="line">qemu-kvm -m 1024 -cdrom cn_windows_server_2016_vl_x64_dvd_11636695.iso -drive file=cn_windows_server_2016_vl_x64_dvd_11636695.qcow2,if=virtio,boot=on -fda virtio-win_amd64.vfd -boot d -nographic -vnc :3</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="VNC连接虚机"><a href="#VNC连接虚机" class="headerlink" title="VNC连接虚机"></a>VNC连接虚机</h3><p>连接方式：<code>&lt;server ip&gt;:3</code></p>
-<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/tcicy/p/7790956.html">OpenStack kvm win7镜像制作</a></p>
-<p><a href="https://blog.csdn.net/qq_20154221/article/details/51586537">制作OpenStack镜像win7.qcow2（centos/ubuntu/win镜像分享）</a></p>
-<p><a href="https://blog.csdn.net/wylfengyujiancheng/article/details/50468173">制作OpenStack Windows Server 2012镜像</a></p>
-]]></content>
-      <categories>
-        <category>OpenStack使用</category>
-      </categories>
-      <tags>
-        <tag>OpenStack使用</tag>
-        <tag>镜像制作</tag>
       </tags>
   </entry>
   <entry>
@@ -1510,6 +1513,42 @@
       </tags>
   </entry>
   <entry>
+    <title>Oracle 11.2 快速上手</title>
+    <url>/2020/09/14/Oracle-11-2-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</url>
+    <content><![CDATA[<p>Oracle Database，又名Oracle RDBMS，简称Oracle。是甲骨文公司推出的一款关系数据库管理系统。Oracle数据库系统是目前世界上流行的关系数据库管理系统，拥有可移植性好、使用方便、功能强等优点，在各类大、中、小、微机环境中都适用。Oracle是一种高效率、可靠性好的、适应高吞吐量的数据库解决方案。</p>
+<h3 id="Oracle-登录"><a href="#Oracle-登录" class="headerlink" title="Oracle 登录"></a>Oracle 登录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 格式：sqlplus &lt;username&gt;/&lt;password&gt;[@ip:port/instance name] [as sysdba]</span></span><br><span class="line">sqlplus sys/123@10.121.9.104:49161 as sysdba</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-用户管理"><a href="#Oracle-用户管理" class="headerlink" title="Oracle 用户管理"></a>Oracle 用户管理</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看当前用户</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改用户密码</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> &lt;username&gt; <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">&quot;&lt;new password&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-数据库设置"><a href="#Oracle-数据库设置" class="headerlink" title="Oracle 数据库设置"></a>Oracle 数据库设置</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 开启时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 清空共享池</span></span><br><span class="line"><span class="comment">会清空历史sql的缓存记录，清空后再次执行这些sql时会产生大量的硬解析，影响数据库性能</span></span><br><span class="line"><span class="comment">生产环境慎用，系统繁忙时执行，容易导致数据库宕机</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-表操作"><a href="#Oracle-表操作" class="headerlink" title="Oracle 表操作"></a>Oracle 表操作</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看表结构</span></span><br><span class="line">desc &lt;table name&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看表内容</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，在垃圾桶留下记录，可flashback闪回</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，不会在垃圾桶留下记录，不可恢复</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt; <span class="keyword">purge</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Oracle-存储过程语法"><a href="#Oracle-存储过程语法" class="headerlink" title="Oracle 存储过程语法"></a>Oracle 存储过程语法</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> [<span class="keyword">or</span> <span class="keyword">replace</span>] <span class="keyword">procedure</span> 存储过程名（param1 <span class="keyword">in</span> <span class="keyword">type</span>，param2 <span class="keyword">out</span> <span class="keyword">type</span>）</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line">    变量<span class="number">1</span> 类型（值范围）;</span><br><span class="line">    变量2 类型（值范围）;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">into</span> 变量<span class="number">1</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">    <span class="keyword">if</span> (判断条件) <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">select</span> 列名 <span class="keyword">into</span> 变量<span class="number">2</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">        dbms_output.Put_line(<span class="string">&#x27;打印信息&#x27;</span>);</span><br><span class="line">    elsif (判断条件) then</span><br><span class="line">        dbms_output.Put_line(&#x27;打印信息&#x27;);</span><br><span class="line">    else</span><br><span class="line">        raise 异常名（NO_DATA_FOUND）;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">exception</span><br><span class="line">    when others then</span><br><span class="line">        <span class="keyword">rollback</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://docs.oracle.com/cd/E11882_01/index.htm?xd_co_f=94201a14-f246-4e54-ba51-c48c9c02f224">Oracle 官方文档</a></p>
+<p><a href="https://www.cnblogs.com/c1024/p/11012016.html">Oracle数据库初学者入门教程</a></p>
+<p><a href="https://www.cnblogs.com/xswt/p/11394032.html">Oracle常用命令</a></p>
+<p><a href="https://www.cnblogs.com/joeyJss/p/11458653.html">Oracle存储过程的语法</a></p>
+]]></content>
+      <categories>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>Oracle 11.2</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Oracle 11.2 安装文档</title>
     <url>/2020/09/10/Oracle-11-2-%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<h2 id="win10安装"><a href="#win10安装" class="headerlink" title="win10安装"></a>win10安装</h2><h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><p>版本：Oracle 11.2.0.1.0</p>
@@ -1558,42 +1597,6 @@
 
 <p>Password for SYS &amp; SYSTEM</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">oracle</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Oracle</category>
-      </categories>
-      <tags>
-        <tag>Oracle 11.2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Oracle 11.2 快速上手</title>
-    <url>/2020/09/14/Oracle-11-2-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</url>
-    <content><![CDATA[<p>Oracle Database，又名Oracle RDBMS，简称Oracle。是甲骨文公司推出的一款关系数据库管理系统。Oracle数据库系统是目前世界上流行的关系数据库管理系统，拥有可移植性好、使用方便、功能强等优点，在各类大、中、小、微机环境中都适用。Oracle是一种高效率、可靠性好的、适应高吞吐量的数据库解决方案。</p>
-<h3 id="Oracle-登录"><a href="#Oracle-登录" class="headerlink" title="Oracle 登录"></a>Oracle 登录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 格式：sqlplus &lt;username&gt;/&lt;password&gt;[@ip:port/instance name] [as sysdba]</span></span><br><span class="line">sqlplus sys/123@10.121.9.104:49161 as sysdba</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-用户管理"><a href="#Oracle-用户管理" class="headerlink" title="Oracle 用户管理"></a>Oracle 用户管理</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看当前用户</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改用户密码</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> &lt;username&gt; <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">&quot;&lt;new password&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-数据库设置"><a href="#Oracle-数据库设置" class="headerlink" title="Oracle 数据库设置"></a>Oracle 数据库设置</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 开启时间统计</span></span><br><span class="line"><span class="keyword">set</span> timing <span class="keyword">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 清空共享池</span></span><br><span class="line"><span class="comment">会清空历史sql的缓存记录，清空后再次执行这些sql时会产生大量的硬解析，影响数据库性能</span></span><br><span class="line"><span class="comment">生产环境慎用，系统繁忙时执行，容易导致数据库宕机</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">flush</span> <span class="keyword">shared_pool</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-表操作"><a href="#Oracle-表操作" class="headerlink" title="Oracle 表操作"></a>Oracle 表操作</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查看表结构</span></span><br><span class="line">desc &lt;table name&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    tname <span class="built_in">varchar2</span>(<span class="number">20</span>),</span><br><span class="line">    tcontent <span class="built_in">blob</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看表内容</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，在垃圾桶留下记录，可flashback闪回</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除表，不会在垃圾桶留下记录，不可恢复</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> &lt;<span class="keyword">table</span> <span class="keyword">name</span>&gt; <span class="keyword">purge</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Oracle-存储过程语法"><a href="#Oracle-存储过程语法" class="headerlink" title="Oracle 存储过程语法"></a>Oracle 存储过程语法</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> [<span class="keyword">or</span> <span class="keyword">replace</span>] <span class="keyword">procedure</span> 存储过程名（param1 <span class="keyword">in</span> <span class="keyword">type</span>，param2 <span class="keyword">out</span> <span class="keyword">type</span>）</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line">    变量<span class="number">1</span> 类型（值范围）;</span><br><span class="line">    变量2 类型（值范围）;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">into</span> 变量<span class="number">1</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">    <span class="keyword">if</span> (判断条件) <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">select</span> 列名 <span class="keyword">into</span> 变量<span class="number">2</span> <span class="keyword">from</span> 表A <span class="keyword">where</span>列名=param1；</span><br><span class="line">        dbms_output.Put_line(<span class="string">&#x27;打印信息&#x27;</span>);</span><br><span class="line">    elsif (判断条件) then</span><br><span class="line">        dbms_output.Put_line(&#x27;打印信息&#x27;);</span><br><span class="line">    else</span><br><span class="line">        raise 异常名（NO_DATA_FOUND）;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">exception</span><br><span class="line">    when others then</span><br><span class="line">        <span class="keyword">rollback</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://docs.oracle.com/cd/E11882_01/index.htm?xd_co_f=94201a14-f246-4e54-ba51-c48c9c02f224">Oracle 官方文档</a></p>
-<p><a href="https://www.cnblogs.com/c1024/p/11012016.html">Oracle数据库初学者入门教程</a></p>
-<p><a href="https://www.cnblogs.com/xswt/p/11394032.html">Oracle常用命令</a></p>
-<p><a href="https://www.cnblogs.com/joeyJss/p/11458653.html">Oracle存储过程的语法</a></p>
-]]></content>
       <categories>
         <category>Oracle</category>
       </categories>
