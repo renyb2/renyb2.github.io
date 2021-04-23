@@ -43,19 +43,6 @@
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://renyb2.github.io/2021/04/15/Untitled/"/>
-    <id>https://renyb2.github.io/2021/04/15/Untitled/</id>
-    <published>2021-04-15T10:33:55.129Z</published>
-    <updated>2021-04-15T10:33:55.129Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>Linux配置：IPTABLES</title>
     <link href="https://renyb2.github.io/2021/03/11/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AIPTABLES/"/>
     <id>https://renyb2.github.io/2021/03/11/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AIPTABLES/</id>
@@ -542,6 +529,33 @@
     <category term="OpenStack使用" scheme="https://renyb2.github.io/tags/OpenStack%E4%BD%BF%E7%94%A8/"/>
     
     <category term="镜像制作" scheme="https://renyb2.github.io/tags/%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux配置：GNOME桌面</title>
+    <link href="https://renyb2.github.io/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AGNOME%E6%A1%8C%E9%9D%A2/"/>
+    <id>https://renyb2.github.io/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AGNOME%E6%A1%8C%E9%9D%A2/</id>
+    <published>2020-11-09T07:34:24.000Z</published>
+    <updated>2020-11-09T07:48:13.410Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote><p>GNOME是一种<a href="https://baike.baidu.com/item/GNU">GNU</a>网络对象模型环境 ，GNU计划的一部分，开放源码运动的一个重要组成部分，是一种让使用者容易操作和设定电脑环境的工具，目标是基于<a href="https://baike.baidu.com/item/%E8%87%AA%E7%94%B1%E8%BD%AF%E4%BB%B6">自由软件</a>，为<a href="https://baike.baidu.com/item/Unix">Unix</a>或者<a href="https://baike.baidu.com/item/%E7%B1%BBUnix">类Unix</a>操作系统构造一个功能完善、操作简单以及界面友好的<a href="https://baike.baidu.com/item/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83">桌面环境</a>，是GNU计划的正式桌面。</p><p>GNOME可以运行在包括GNU/Linux(通常叫做<a href="https://baike.baidu.com/item/Linux">Linux</a>)，<a href="https://baike.baidu.com/item/Solaris">Solaris</a>，<a href="https://baike.baidu.com/item/HP-UX">HP-UX</a>，<a href="https://baike.baidu.com/item/BSD">BSD</a>和Apple’s Darwin系统上. GNOME 拥有很多强大的特性，如：高质量的平滑文本渲染， 首个国际化和可用性支持， 并且包括对反向文本的支持(注: 有些国家的文字是从右到左的排版的）。</p><p>GNOME运行在大多数类Unix系统，并被Sun Microsystems公司采纳为Solaris平台的标准桌面，取代了过时的<a href="https://baike.baidu.com/item/CDE">CDE</a>。Sun Microsystems公司也以Java Desktop System名义发布一个商业版的桌面：一个被SUSELinux系统使用的基于GNOME的桌面。GNOME也移植到Cygwin使其能运行于Microsoft Windows。GNOME 还被众多LiveCDLinux发行版使用，如<a href="https://baike.baidu.com/item/Gnoppix">Gnoppix</a>和Morphix。</p></blockquote><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 列出可安装的桌面环境</span></span><br><span class="line">yum grouplist</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看安装的包有哪些内容</span></span><br><span class="line">yum group info  &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装GNOME及相应桌面管理工具</span></span><br><span class="line">yum -y groups install &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看当前默认启动模式</span></span><br><span class="line">systemctl get-default</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动图形化界面</span></span><br><span class="line">systemctl set-default graphical.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认启动命令行界面</span></span><br><span class="line">systemctl set-default multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令行界面热切换到图形界面</span></span><br><span class="line">init 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 图形界面热切换到命令行界面</span></span><br><span class="line">init 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载GNOME</span></span><br><span class="line">yum -y groupremove &quot;GNOME DESKTOP&quot; &quot;Graphical Administration Tools&quot;</span><br></pre></td></tr></table></figure><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.cnblogs.com/gentsir/p/10300655.html">Centos 7 安装GNOME桌面环境</a></p><p><a href="https://blog.csdn.net/wqh0830/article/details/86701379">CentOS-7安装GNOME桌面</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;GNOME是一种&lt;a href=&quot;https://baike.baidu.com/item/GNU&quot;&gt;GNU&lt;/a</summary>
+      
+    
+    
+    
+    <category term="Linux" scheme="https://renyb2.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://renyb2.github.io/tags/Linux/"/>
+    
+    <category term="GNOME" scheme="https://renyb2.github.io/tags/GNOME/"/>
     
   </entry>
   

@@ -37,13 +37,6 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/2021/04/15/Untitled/</loc>
-    
-    <lastmod>2021-04-15</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://renyb2.github.io/2021/03/11/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AIPTABLES/</loc>
     
     <lastmod>2021-03-11</lastmod>
@@ -319,6 +312,13 @@
   </url>
   
   <url>
+    <loc>https://renyb2.github.io/tags/Hexo/</loc>
+    <lastmod>2021-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://renyb2.github.io/tags/Git/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
@@ -326,7 +326,7 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/Hexo/</loc>
+    <loc>https://renyb2.github.io/tags/Jmeter/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -354,13 +354,6 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/Jmeter/</loc>
-    <lastmod>2021-04-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://renyb2.github.io/tags/Kubernetes%E9%83%A8%E7%BD%B2/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
@@ -369,13 +362,6 @@
   
   <url>
     <loc>https://renyb2.github.io/tags/IPv6/</loc>
-    <lastmod>2021-04-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/kubeadm/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -396,7 +382,28 @@
   </url>
   
   <url>
+    <loc>https://renyb2.github.io/tags/kubeadm/</loc>
+    <lastmod>2021-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://renyb2.github.io/tags/Linux/</loc>
+    <lastmod>2021-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/GNOME/</loc>
+    <lastmod>2021-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/IPTABLES/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -417,20 +424,6 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/VNC/</loc>
-    <lastmod>2021-04-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/IPTABLES/</loc>
-    <lastmod>2021-04-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://renyb2.github.io/tags/%E7%BD%91%E5%8D%A1/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
@@ -438,14 +431,14 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/%E5%A4%A7%E9%A1%B5%E5%86%85%E5%AD%98/</loc>
+    <loc>https://renyb2.github.io/tags/VNC/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/GNOME/</loc>
+    <loc>https://renyb2.github.io/tags/%E5%A4%A7%E9%A1%B5%E5%86%85%E5%AD%98/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -587,13 +580,6 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/categories/Git/</loc>
-    <lastmod>2021-04-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://renyb2.github.io/categories/Hexo/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
@@ -601,7 +587,7 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/categories/Kubernetes/</loc>
+    <loc>https://renyb2.github.io/categories/Git/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -609,6 +595,13 @@
   
   <url>
     <loc>https://renyb2.github.io/categories/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2021-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/categories/Kubernetes/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
