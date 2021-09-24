@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://renyb2.github.io/2021/09/06/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9AGlance%E5%AF%B9%E6%8E%A5Cinder/</loc>
+    
+    <lastmod>2021-09-24</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://renyb2.github.io/2020/12/21/%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%EF%BC%9AChrome%E7%BF%BB%E5%A2%99/</loc>
     
     <lastmod>2021-09-24</lastmod>
@@ -375,6 +382,13 @@
   </url>
   
   <url>
+    <loc>https://renyb2.github.io/tags/Docker/</loc>
+    <lastmod>2021-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://renyb2.github.io/tags/Hexo/</loc>
     <lastmod>2021-09-24</lastmod>
     <changefreq>daily</changefreq>
@@ -403,14 +417,14 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/IPv6/</loc>
+    <loc>https://renyb2.github.io/tags/HA/</loc>
     <lastmod>2021-09-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/HA/</loc>
+    <loc>https://renyb2.github.io/tags/IPv6/</loc>
     <lastmod>2021-09-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -452,13 +466,6 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/HAProxy/</loc>
-    <lastmod>2021-09-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://renyb2.github.io/tags/GNOME/</loc>
     <lastmod>2021-09-24</lastmod>
     <changefreq>daily</changefreq>
@@ -466,14 +473,14 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/IPTABLES/</loc>
+    <loc>https://renyb2.github.io/tags/HAProxy/</loc>
     <lastmod>2021-09-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/Docker/</loc>
+    <loc>https://renyb2.github.io/tags/IPTABLES/</loc>
     <lastmod>2021-09-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -494,14 +501,21 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/%E5%A4%A7%E9%A1%B5%E5%86%85%E5%AD%98/</loc>
+    <loc>https://renyb2.github.io/tags/VNC/</loc>
     <lastmod>2021-09-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/VNC/</loc>
+    <loc>https://renyb2.github.io/tags/%E7%BD%91%E5%8D%A1/</loc>
+    <lastmod>2021-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/%E5%A4%A7%E9%A1%B5%E5%86%85%E5%AD%98/</loc>
     <lastmod>2021-09-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -523,13 +537,6 @@
   
   <url>
     <loc>https://renyb2.github.io/tags/MQTT/</loc>
-    <lastmod>2021-09-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/%E7%BD%91%E5%8D%A1/</loc>
     <lastmod>2021-09-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -643,6 +650,13 @@
   </url>
   
   <url>
+    <loc>https://renyb2.github.io/categories/Docker/</loc>
+    <lastmod>2021-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://renyb2.github.io/categories/Hexo/</loc>
     <lastmod>2021-09-24</lastmod>
     <changefreq>daily</changefreq>
@@ -665,13 +679,6 @@
   
   <url>
     <loc>https://renyb2.github.io/categories/Linux/</loc>
-    <lastmod>2021-09-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/categories/Docker/</loc>
     <lastmod>2021-09-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
