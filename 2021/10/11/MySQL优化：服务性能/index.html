@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MySQL优化：服务性能 | 任翌博的个人博客</title><meta name="description" content="性能优化优先顺序：  数据库结构设计和SQL语句 数据库存储引擎的选择和参数配置 系统选择和优化 硬件升级   服务器硬件CPU 64位的CPU一定要工作在64位的系统下 32位操作系统对单线程运行的MySQL有很大的限制 频率决定单个SQL处理快慢；核数决定并行处理SQL数量，即QPS 对于并发比较高的场景，CPU的数量比频率重要 对于CPU密集型场景或比较复杂的SQL，CPU频率越高越好 W"><meta name="keywords" content="MySQL"><meta name="author" content="任翌博"><meta name="copyright" content="任翌博"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/icon.png"><link rel="canonical" href="https://renyb2.github.io/2021/10/11/MySQL%E4%BC%98%E5%8C%96%EF%BC%9A%E6%9C%8D%E5%8A%A1%E6%80%A7%E8%83%BD/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="MySQL优化：服务性能"><meta property="og:url" content="https://renyb2.github.io/2021/10/11/MySQL%E4%BC%98%E5%8C%96%EF%BC%9A%E6%9C%8D%E5%8A%A1%E6%80%A7%E8%83%BD/"><meta property="og:site_name" content="任翌博的个人博客"><meta property="og:description" content="性能优化优先顺序：  数据库结构设计和SQL语句 数据库存储引擎的选择和参数配置 系统选择和优化 硬件升级   服务器硬件CPU 64位的CPU一定要工作在64位的系统下 32位操作系统对单线程运行的MySQL有很大的限制 频率决定单个SQL处理快慢；核数决定并行处理SQL数量，即QPS 对于并发比较高的场景，CPU的数量比频率重要 对于CPU密集型场景或比较复杂的SQL，CPU频率越高越好 W"><meta property="og:image" content="https://devacademy.it/wp-content/uploads/2019/12/MySQL-grande.jpg"><meta property="article:published_time" content="2021-10-11T01:55:55.000Z"><meta property="article:modified_time" content="2021-10-20T06:59:41.499Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.1.1',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-10-20 14:59:41'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="任翌博的个人博客" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">50</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">41</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A1%AC%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">服务器硬件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU"><span class="toc-number">1.1.</span> <span class="toc-text">CPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98"><span class="toc-number">1.2.</span> <span class="toc-text">内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.3.</span> <span class="toc-text">I&#x2F;O子系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.</span> <span class="toc-text">Linux系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0%EF%BC%9A-etc-sysctl-conf"><span class="toc-number">2.1.</span> <span class="toc-text">内核相关参数：&#x2F;etc&#x2F;sysctl.conf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E9%99%90%E5%88%B6%EF%BC%9A-etc-security-limits-conf"><span class="toc-number">2.2.</span> <span class="toc-text">资源限制：&#x2F;etc&#x2F;security&#x2F;limits.conf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5%EF%BC%9A-sys-block-devname-queue-scheduler"><span class="toc-number">2.3.</span> <span class="toc-text">磁盘调度策略：&#x2F;sys&#x2F;block&#x2F;devname&#x2F;queue&#x2F;scheduler</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.</span> <span class="toc-text">文件系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">MySQL体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-number">5.</span> <span class="toc-text">MySQL存储引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MyISAM"><span class="toc-number">5.1.</span> <span class="toc-text">MyISAM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Innodb"><span class="toc-number">5.2.</span> <span class="toc-text">Innodb</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">6.</span> <span class="toc-text">MySQL配置参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E8%8E%B7%E5%8F%96%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E9%80%94%E5%BE%84"><span class="toc-number">6.1.</span> <span class="toc-text">MySQL获取配置信息途径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">6.2.</span> <span class="toc-text">MySQL配置参数的作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">6.3.</span> <span class="toc-text">内存相关配置参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IO%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">6.4.</span> <span class="toc-text">IO相关配置参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Innodb-I-O%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="toc-number">6.4.1.</span> <span class="toc-text">Innodb I&#x2F;O相关配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MyISAM-I-O%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="toc-number">6.4.2.</span> <span class="toc-text">MyISAM I&#x2F;O相关配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">6.5.</span> <span class="toc-text">安全相关配置参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">6.6.</span> <span class="toc-text">其他常用配置参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-number">7.</span> <span class="toc-text">参考文档</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://devacademy.it/wp-content/uploads/2019/12/MySQL-grande.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">任翌博的个人博客</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">MySQL优化：服务性能</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-10-11T01:55:55.000Z" title="发表于 2021-10-11 09:55:55">2021-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-10-20T06:59:41.499Z" title="更新于 2021-10-20 14:59:41">2021-10-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><blockquote>
+<p>性能优化优先顺序：</p>
+<ol>
+<li>数据库结构设计和SQL语句</li>
+<li>数据库存储引擎的选择和参数配置</li>
+<li>系统选择和优化</li>
+<li>硬件升级</li>
+</ol>
+</blockquote>
+<h2 id="服务器硬件"><a href="#服务器硬件" class="headerlink" title="服务器硬件"></a>服务器硬件</h2><h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><ul>
+<li>64位的CPU一定要工作在64位的系统下</li>
+<li>32位操作系统对单线程运行的MySQL有很大的限制</li>
+<li>频率决定单个SQL处理快慢；核数决定并行处理SQL数量，即QPS</li>
+<li>对于并发比较高的场景，CPU的数量比频率重要</li>
+<li>对于CPU密集型场景或比较复杂的SQL，CPU频率越高越好</li>
+<li>Web类应用，核数优先级大于频率</li>
+</ul>
+<h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><ul>
+<li>内存选择时，应选择主板所能使用的最高频率的内存</li>
+<li>内存的大小对性能很重要，所以要尽可能的大</li>
+<li>在数据量大于内存时，内存不能缓存全部的数据，提升内存对性能有较明显的提升</li>
+</ul>
+<h3 id="I-O子系统"><a href="#I-O子系统" class="headerlink" title="I/O子系统"></a>I/O子系统</h3><p>优先级：PCIe &gt; SSD &gt; 传统磁盘 + RAID10 &gt; 磁盘 &gt; SAN</p>
+<p>传统磁盘需要注意：</p>
+<ul>
+<li>存储容量</li>
+<li>传输速度</li>
+<li>访问时间</li>
+<li>主轴转速</li>
+<li>物理尺寸</li>
+</ul>
+<p>RAID级别的选择：主库建议RAID10，从库建议RAID0、RAID5。</p>
+<table>
+<thead>
+<tr>
+<th>等级</th>
+<th>特点</th>
+<th>是否冗余</th>
+<th>盘数</th>
+<th>读</th>
+<th>写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RAID0</td>
+<td>便宜，快速，危险</td>
+<td>否</td>
+<td>N</td>
+<td>快</td>
+<td>快</td>
+</tr>
+<tr>
+<td>RAID1</td>
+<td>高速读，简单，安全</td>
+<td>是</td>
+<td>2</td>
+<td>快</td>
+<td>慢</td>
+</tr>
+<tr>
+<td>RAID5</td>
+<td>安全，成本折中</td>
+<td>是</td>
+<td>N+1</td>
+<td>快</td>
+<td>取决于最慢的盘</td>
+</tr>
+<tr>
+<td>RAID10</td>
+<td>贵，高速，安全</td>
+<td>是</td>
+<td>2N</td>
+<td>快</td>
+<td>快</td>
+</tr>
+</tbody></table>
+<p>相比于机械磁盘，固态磁盘有以下几个特点：</p>
+<ol>
+<li>更好的随机读写性能</li>
+<li>更好的支持并发</li>
+<li>更容易损坏</li>
+</ol>
+<p>使用场景：</p>
+<ul>
+<li><p>适用于存在大量随机IO的场景</p>
+</li>
+<li><p>适用于解决单线程负载的IO瓶颈</p>
+</li>
+</ul>
+<h2 id="Linux系统"><a href="#Linux系统" class="headerlink" title="Linux系统"></a>Linux系统</h2><h3 id="内核相关参数：-etc-sysctl-conf"><a href="#内核相关参数：-etc-sysctl-conf" class="headerlink" title="内核相关参数：/etc/sysctl.conf"></a>内核相关参数：/etc/sysctl.conf</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 增加连接数和队列长度</span></span><br><span class="line">net.core.somaxconn=65535</span><br><span class="line">net.core.netdev_max_backlog=65535</span><br><span class="line">net.ipv4.tcp_max_syn_backlog=65535</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 加快tcp连接回收速度</span></span><br><span class="line">net.ipv4.tcp_fin_timeout=10</span><br><span class="line">net.ipv4.tcp_tw_reuse=1</span><br><span class="line">net.ipv4.tcp_tw_recycle=1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 网络接收和发送缓冲区大小</span></span><br><span class="line">net.core.wmem_default=87380</span><br><span class="line">net.core.wmem_max=16777216</span><br><span class="line">net.core.rmem_default=87380</span><br><span class="line">net.core.rmem_max=16777216</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> tcp存活探测</span></span><br><span class="line">net.ipv4.tcp_keepalive_time=120</span><br><span class="line">net.ipv4.tcp_keepalive_intvl=30</span><br><span class="line">net.ipv4.tcp_keepalive_probes=3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 单个共享内存段的最大值</span></span><br><span class="line">kernel.shmmax=4294967296</span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. 这个参数应该设置的足够大，以便能在一个共享内存段下容纳下整个Innodb缓冲池的大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 对于64位linux系统，可取的最大值为物理内存值-1byte，建议值为大于物理内存的一半，一般取值大于Innodb缓冲池的大小即可。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 内存交换分区</span></span><br><span class="line">vm.swappiness=0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. 0代表除非虚拟内存完全满了，否则不使用交换分区</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 内存交换分区，在内存不足时会对性能产生明显的影响</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="资源限制：-etc-security-limits-conf"><a href="#资源限制：-etc-security-limits-conf" class="headerlink" title="资源限制：/etc/security/limits.conf"></a>资源限制：/etc/security/limits.conf</h3><p>需要重启操作系统才能生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 控制打开文件数限制</span></span><br><span class="line">* soft nofile 65535</span><br><span class="line">* hard nofile 65535</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> PS：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> *        表示对所有用户有效</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> soft     表示当前系统生效</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> hard     表名系统中所能设定的最大值</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> nofile   表示锁限制的资源是打开文件的最大数目</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 65535    限制的数量</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="磁盘调度策略：-sys-block-devname-queue-scheduler"><a href="#磁盘调度策略：-sys-block-devname-queue-scheduler" class="headerlink" title="磁盘调度策略：/sys/block/devname/queue/scheduler"></a>磁盘调度策略：/sys/block/devname/queue/scheduler</h3><p>Linux 内核的 4 大 IO 调度算法：</p>
+<ul>
+<li><strong>Noop IO scheduler（电梯式调度策略）</strong>：NOOP实现了一个FIFO队列，它像电梯的工作方法一样对I/O请求进行组织，当有一个新的请求到来时，它将请求合并到最近的请求之后，以此来保证请求同一介质。NOOP倾向于饿死读而利于写，因此NOOP对于<strong>闪存设备</strong>、<strong>RAM</strong>及<strong>嵌入式系统</strong>是最好的选择。</li>
+<li><strong>Deadline IO scheduler（截止时间调度策略）</strong>：Deadline确保了在一个截止时间内服务请求，这个截止时间是可调整的，而默认读期限短于写期限。这样就防止了写操作因为不能被读取而饿死的现象，Deadline对<strong>数据库类应用</strong>是最好的选择。</li>
+<li><strong>Anticipatory IO scheduler（预料I/O调度策略）</strong>：本质上与Deadline一样，但在最后一次读操作后，要等待6ms，才能继续进行对其它I/O请求进行调度。它会在每个6ms中插入新的I/O操作，而会将一些小写入流合并成一个大写入流，用写入延时换取最大的写入吞吐量。AS适合于<strong>写入较多的环境</strong>，比如文件服务器，AS对数据库环境表现很差。</li>
+<li><strong>CFQ IO scheduler（Completely Fair Queuing, 完全公平排队）</strong>：它试图为竞争块设备使用权的所有进程分配一个请求队列和一个时间片，在调度器分配给进程的时间片内，进程可以将其读写请求发送给底层块设备，当进程的时间片消耗完，进程的请求队列将被挂起，等待调度。对于通用的服务器来说，CFQ是较好的选择。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看磁盘当前调度策略（方括号里面的是当前选定的调度策略）</span></span><br><span class="line">cat /sys/block/sda/queue/scheduler</span><br><span class="line">[mq-deadline] kyber bfq none</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改磁盘调度策略</span></span><br><span class="line">echo deadline &gt; /sys/block/sda/queue/scheduler</span><br><span class="line"><span class="meta">#</span><span class="bash"> or</span></span><br><span class="line">echo deadline | sudo tee /sys/block/sda/queue/scheduler</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><p>各操作系统推荐适用如下文件系统，性能最优：</p>
+<ul>
+<li>Windows：NTFS</li>
+<li>Linux：XFS</li>
+</ul>
+<p>若Linux使用ext4文件系统，则关闭文件系统的操作时间记录可以提升读写性能，<code>/etc/fstab</code> 内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda1    /     ext4   noatime,nodiratime,data=writeback 1 1</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="MySQL体系结构"><a href="#MySQL体系结构" class="headerlink" title="MySQL体系结构"></a>MySQL体系结构</h2><p><img src="/2021/10/11/MySQL%E4%BC%98%E5%8C%96%EF%BC%9A%E6%9C%8D%E5%8A%A1%E6%80%A7%E8%83%BD/MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png" alt="image-20211012113231107"></p>
+<p>存储引擎是针对于表的，而不是针对于库的（一个库中的不同表可以使用不同的存储引擎，但不建议这样操作。）</p>
+<h2 id="MySQL存储引擎"><a href="#MySQL存储引擎" class="headerlink" title="MySQL存储引擎"></a>MySQL存储引擎</h2><h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><h3 id="Innodb"><a href="#Innodb" class="headerlink" title="Innodb"></a>Innodb</h3><h2 id="MySQL配置参数"><a href="#MySQL配置参数" class="headerlink" title="MySQL配置参数"></a>MySQL配置参数</h2><h3 id="MySQL获取配置信息途径"><a href="#MySQL获取配置信息途径" class="headerlink" title="MySQL获取配置信息途径"></a>MySQL获取配置信息途径</h3><ul>
+<li><p>命令行参数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld_safe --datadir=/data/sql_data</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看配置文件优先级</span></span><br><span class="line">mysqld --help --verbose | grep -A 1 &#x27;Default options&#x27;</span><br><span class="line"><span class="meta">#</span><span class="bash"> /etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+</li>
+</ul>
+<h3 id="MySQL配置参数的作用域"><a href="#MySQL配置参数的作用域" class="headerlink" title="MySQL配置参数的作用域"></a>MySQL配置参数的作用域</h3><ul>
+<li><p>全局参数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 动态设置全局参数</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> 参数名 = 参数值;</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="keyword">set</span> @@global.参数名 = 参数值;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看全局参数</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">GLOBAL</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">&#x27;Innodb%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>会话参数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 动态设置会话参数</span></span><br><span class="line"><span class="keyword">set</span> [<span class="keyword">session</span>] 参数名 = 参数值;</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="keyword">set</span> @@session.参数名 = 参数值;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="内存相关配置参数"><a href="#内存相关配置参数" class="headerlink" title="内存相关配置参数"></a>内存相关配置参数</h3><ul>
+<li><p>确定可使用的内存上线</p>
+</li>
+<li><p>确定MySQL的每个连接使用的内存，占用内存大小为：buffer_size * 连接数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查询排序时，立即分配指定大小内存给线程</span></span><br><span class="line">sort_buffer_size</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 连接缓冲区</span></span><br><span class="line">join_buffer_size</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> MyISAM全表扫描时，分配指定大小，需要为4K的倍数</span></span><br><span class="line">read_buffer_size</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 索引缓冲区</span></span><br><span class="line">read_rnd_buffer_size</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>确定需要为操作系统保留多少内存</p>
+</li>
+<li><p>如何为缓存池分配内存，总内存 -（每个线程所需要的内存 * 连接数）- 系统保留内存</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">innodb_buffer_pool_size</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 主要用于MyISAM存储引擎</span></span><br><span class="line">key_buffer_size</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="IO相关配置参数"><a href="#IO相关配置参数" class="headerlink" title="IO相关配置参数"></a>IO相关配置参数</h3><h4 id="Innodb-I-O相关配置"><a href="#Innodb-I-O相关配置" class="headerlink" title="Innodb I/O相关配置"></a>Innodb I/O相关配置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 单个事务日志大小</span></span><br><span class="line">innodb_log_file_size</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 事务日志文件个数</span></span><br><span class="line">innodb_log_files_in_group </span><br><span class="line"><span class="meta">#</span><span class="bash"> 事务日志总大小 = Innodb_log_files_in_group * Innodb_log_file_size</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 一个日志文件写满后才写下一个，Innodb_log_files_in_group意义不大，事务繁忙时，Innodb_log_file_size建议调大（32M ~ 128M）</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 日志缓冲区，一般不需要设置太大，基本1s就会刷新一次日志缓冲区，只需要保证可以缓冲1s的事务即可。建议32M ~ 128M即可</span></span><br><span class="line">innodb_log_buffer_size</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Innodb刷新<span class="built_in">log</span>的频率</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - 0：每隔1秒钟会将<span class="built_in">log</span> buffer中的数据写入到文件，同时通知文件系统进行文件同步的flush操作（该值会导致MySQL崩溃时至少丢失1s的事务）</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - 1：默认值，每次事务的结束都会触发Log Thread将<span class="built_in">log</span> buffer中的数据写入文件并通知文件系统同步文件（该值可以保证数据不丢失）</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - 2：建议值，每次事务提交的时候会把<span class="built_in">log</span> buffer刷到文件系统中去，但并不会立即刷写到磁盘（如果只是MySQL数据库挂掉了，由于文件系统没有问题，那么对应的事务数据并没有丢失。只有在数据库所在的主机操作系统损坏或者突然掉电的情况下，数据库的事务数据可能丢失1秒之类的事务数据）</span></span><br><span class="line">innodb_flush_log_at_trx_commit</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Innodb刷新方式</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - nosync: </span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - O_DIRECT：linux系统建议值，操作系统不缓存数据，不预读数据（完全关闭操作系统缓存）</span></span><br><span class="line">innodb_flush_method</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Innodb独立表空间，强烈建议使用该参数</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - 0：关闭</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - 1：开启</span></span><br><span class="line">innodb_file_per_table</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Innodb双写缓存，避免文件系统写入错误是文件损坏，损耗约10%写性能，保证安全性</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - 0：关闭</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - 1：开启</span></span><br><span class="line">innodb_doublewrite</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="MyISAM-I-O相关配置"><a href="#MyISAM-I-O相关配置" class="headerlink" title="MyISAM I/O相关配置"></a>MyISAM I/O相关配置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 控制缓冲刷新到磁盘的频率</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - OFF：每次写操作后刷新键缓冲区内的脏块到磁盘</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - ON：只对在建表时指定了delay_key_write选项的表使用延迟刷新</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - ALL：对所有MyISAM表都是用延迟键写入</span></span><br><span class="line">delay_key_write</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="安全相关配置参数"><a href="#安全相关配置参数" class="headerlink" title="安全相关配置参数"></a>安全相关配置参数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 自动清理binlog的天数，建议覆盖两次全备的间隔</span></span><br><span class="line">expire_logs_days</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> MySQL可以接受的包大小，建议32M。主从复制结构中，主库与从库需保持一致</span></span><br><span class="line">max_allowed_packet</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 禁用DNS查找。使用该参数后，授权需要使用ip或网段，不能使用域名</span></span><br><span class="line">skip_name_resolve</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 确保sysdate()返回确定性日期</span></span><br><span class="line">sysdate_is_now</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 禁止非super权限用户的写权限。建议主从复制结构中，从库使用</span></span><br><span class="line">read_only</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 禁用slave自动恢复</span></span><br><span class="line">skip_slave_start</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> MySQL所使用的SQL模式（对SQL语法检验严谨度，不建议在已经运行的生产环境中修改），常用值如下：</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - STRICT_TRANS_TABLES：在该模式下,如果一个值不能插入到一个事务表中,则中断当前的操作,对非事务表不做限制。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - ONLY_FULL_GROUP_BY：对于GROUP BY聚合操作,如果在SELECT中的列,没有在GROUP BY中出现,那么这个SQL是不合法的,因为列不在GROUP BY从句中。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - NO_AUTO_VALUE_ON_ZERO：该值影响自增长列的插入。默认设置下,插入0或NULL代表生成下一个自增长值。如果用户 希望插入的值为0,而该列又是自增长的,那么这个选项就有用了。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - NO_ZERO_IN_DATE：在严格模式下,不允许日期和月份为零。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - NO_ZERO_DATE：设置该值,mysql数据库不允许插入零日期,插入零日期会抛出错误而不是警告。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - ERROR_FOR_DIVISION_BY_ZERO：在INSERT或UPDATE过程中,如果数据被零除,则产生错误而非警告。如 果未给出该模式,那么数据被零除时MySQL返回NULL。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - NO_AUTO_CREATE_USER：禁止GRANT创建密码为空的用户。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - NO_ENGINE_SUBSTITUTION：如果需要的存储引擎被禁用或未编译,那么抛出错误。不设置此值时,用默认的存储引擎替代,并抛出一个异常。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - PIPES_AS_CONCAT：将<span class="string">&quot;||&quot;</span>视为字符串的连接操作符而非或运算符,这和Oracle数据库是一样的,也和字符串的拼接函数Concat相类似。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - ANSI_QUOTES：启用ANSI_QUOTES后,不能用双引号来引用字符串,因为它被解释为识别符。</span></span><br><span class="line">sql_mode</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="其他常用配置参数"><a href="#其他常用配置参数" class="headerlink" title="其他常用配置参数"></a>其他常用配置参数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> MySQL刷新binlog到磁盘的方式</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - 0：性能最好，当事务提交之后，MySQL不做fsync之类的磁盘同步指令刷新binlog_cache中的信息到磁盘，而让Filesystem自行决定什么时候来做同步。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  - n：当每进行n次事务提交之后，MySQL将进行一次fsync之类的磁盘同步指令来将binlog_cache中的数据强制写入磁盘。</span></span><br><span class="line">sync_binlog</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 内存临时表大小，组合使用，两个参数值要一致，避免过大</span></span><br><span class="line">tmp_table_size</span><br><span class="line">max_heap_table_size</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 最大连接数。默认100，建议2000+</span></span><br><span class="line">max_connections</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.percona.com/doc/percona-server/5.7/index.html#percona-server-version-documentation"><em>Percona Server for MySQL</em> 5.7 - Documentation</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1441303">MySQL参数：innodb_flush_log_at_trx_commit 和 sync_binlog</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1533798#:~:text=%E5%BD%93innodb_flush_log_at_trx_commit%E5%92%8Csync_binlog%E8%BF%99%E4%B8%A4%E4%B8%AA%E5%8F%82%E6%95%B0%E9%83%BD%E8%AE%BE%E7%BD%AE%E4%B8%BA1%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E4%BB%AC%E7%A7%B0%E4%B9%8B%E4%B8%BA%22%E5%8F%8C1%E6%A8%A1%E5%BC%8F%22%E3%80%82.%20%22%E5%8F%8C1%E8%AE%BE%E7%BD%AE%22%E9%80%82%E5%90%88%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%80%A7%E8%A6%81%E6%B1%82%E9%9D%9E%E5%B8%B8%E9%AB%98%EF%BC%8C%E8%80%8C%E4%B8%94%E7%A3%81%E7%9B%98IO%E5%86%99%E8%83%BD%E5%8A%9B%E8%B6%B3%E5%A4%9F%E6%94%AF%E6%8C%81%E4%B8%9A%E5%8A%A1%EF%BC%8C%E6%AF%94%E5%A6%82%E8%AE%A2%E5%8D%95%2C%E4%BA%A4%E6%98%93%2C%E5%85%85%E5%80%BC%2C%E6%94%AF%E4%BB%98%E6%B6%88%E8%B4%B9%E7%B3%BB%E7%BB%9F%E3%80%82.%20%E5%9C%A8mysql%20%E6%9C%8D%E5%8A%A1%E5%B4%A9%E6%BA%83%E6%88%96%E8%80%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%BB%E6%9C%BA%E6%8E%89%E7%94%B5%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8Cbinary,log%20%E5%8F%AA%E6%9C%89%E5%8F%AF%E8%83%BD%E4%B8%A2%E5%A4%B1%E6%9C%80%E5%A4%9A%E4%B8%80%E4%B8%AA%E8%AF%AD%E5%8F%A5%E6%88%96%E8%80%85%E4%B8%80%E4%B8%AA%E4%BA%8B%E5%8A%A1%EF%BC%8C%E5%AE%89%E5%85%A8%E6%80%A7%E8%83%BD%E5%A4%A7%E5%A4%A7%E5%A2%9E%E5%8A%A0%EF%BC%8C%E4%BD%86%E6%98%AF%E6%88%91%E4%BB%AC%E8%AF%B4%E8%BF%87%EF%BC%8C%E5%AE%89%E5%85%A8%E6%80%A7%E5%92%8C%E9%AB%98%E6%80%A7%E8%83%BD%E6%98%AF%E4%B8%80%E6%8A%8A%E5%8F%8C%E5%88%83%E5%89%91%EF%BC%8C%E5%8F%8C1%E6%A8%A1%E5%BC%8F%E4%BC%9A%E5%AF%BC%E8%87%B4%E9%A2%91%E7%B9%81%E7%9A%84io%E6%93%8D%E4%BD%9C%EF%BC%8C%E5%9B%A0%E6%AD%A4%E8%AF%A5%E6%A8%A1%E5%BC%8F%E4%B9%9F%E6%98%AF%E6%9C%80%E6%85%A2%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%8C%E5%BD%B1%E5%93%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%A7%E8%83%BD%E3%80%82.%20%E5%8F%8C1%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%8C%E5%BD%93%E7%A3%81%E7%9B%98IO%E6%97%A0%E6%B3%95%E6%BB%A1%E8%B6%B3%E4%B8%9A%E5%8A%A1%E9%9C%80%E6%B1%82%E6%97%B6%20%E6%AF%94%E5%A6%82%22%E5%8F%8C11%22%20%E6%B4%BB%E5%8A%A8%E7%9A%84%E5%8E%8B%E5%8A%9B%E3%80%82.">MySQL数据安全的”双1模式”简介</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/710525">MySQL的sql_mode模式说明及设置</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1615744">Linux 内核的 4 大 IO 调度算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gmpy/p/12852449.html">如何选择IO调度器</a></li>
+<li>[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/bamanzi/p/linux-disk-io-scheduler.html">Linux性能调优] 磁盘I/O队列调度策略</a></li>
+</ul>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">任翌博</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://renyb2.github.io/2021/10/11/MySQL%E4%BC%98%E5%8C%96%EF%BC%9A%E6%9C%8D%E5%8A%A1%E6%80%A7%E8%83%BD/">https://renyb2.github.io/2021/10/11/MySQL%E4%BC%98%E5%8C%96%EF%BC%9A%E6%9C%8D%E5%8A%A1%E6%80%A7%E8%83%BD/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://renyb2.github.io" target="_blank">任翌博的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="https://devacademy.it/wp-content/uploads/2019/12/MySQL-grande.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/10/13/MySQL%E6%B5%8B%E8%AF%95%EF%BC%9A%E6%80%A7%E8%83%BD%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/"><img class="prev-cover" src="https://devacademy.it/wp-content/uploads/2019/12/MySQL-grande.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">MySQL测试：性能基准测试</div></div></a></div><div class="next-post pull-right"><a href="/2021/09/28/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9Aneutronclient/"><img class="next-cover" src="https://tse1-mm.cn.bing.net/th/id/R-C.f7fb3fa204c4bca5cffe872f1647bd63?rik=qMT5LReAqlK%2b8g&amp;riu=http%3a%2f%2farticles.csdn.net%2fuploads%2fallimg%2f121012%2f145_121012152139_1.jpg&amp;ehk=lf9gNAsavUUuzA4ylpYKWJ5UC7JuypbkWW37yOFFg0Y%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">OpenStack开发：neutronclient</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2021/07/27/MySQL使用：通用手册/" title="MySQL使用：通用手册"><img class="relatedPosts_cover" src="https://devacademy.it/wp-content/uploads/2019/12/MySQL-grande.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-27</div><div class="relatedPosts_title">MySQL使用：通用手册</div></div></a></div><div class="relatedPosts_item"><a href="/2021/10/13/MySQL测试：性能基准测试/" title="MySQL测试：性能基准测试"><img class="relatedPosts_cover" src="https://devacademy.it/wp-content/uploads/2019/12/MySQL-grande.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-13</div><div class="relatedPosts_title">MySQL测试：性能基准测试</div></div></a></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 任翌博</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script defer="defer" id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script></div></body></html>
