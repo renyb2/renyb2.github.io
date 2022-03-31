@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Algorithm：Dijkstra</title>
-    <url>/2020/08/27/Algorithm%EF%BC%9ADijkstra/</url>
-    <content><![CDATA[<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><h3 id="问题1：最短路径"><a href="#问题1：最短路径" class="headerlink" title="问题1：最短路径"></a>问题1：最短路径</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src="/2020/08/27/Algorithm%EF%BC%9ADijkstra/Dijkstra-%E9%97%AE%E9%A2%981.png" alt="image-20200731221210621"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 代码构造上图</span><br><span class="line"></span><br><span class="line">graph &#x3D; &#123;</span><br><span class="line">    &quot;A&quot;: &#123;&quot;B&quot;: 5, &quot;C&quot;: 1&#125;,</span><br><span class="line">    &quot;B&quot;: &#123;&quot;A&quot;: 5, &quot;C&quot;: 2, &quot;D&quot;: 1&#125;,</span><br><span class="line">    &quot;C&quot;: &#123;&quot;A&quot;: 1, &quot;B&quot;: 2, &quot;D&quot;: 4, &quot;E&quot;: 8&#125;,</span><br><span class="line">    &quot;D&quot;: &#123;&quot;B&quot;: 1, &quot;C&quot;: 4, &quot;E&quot;: 3, &quot;F&quot;: 6&#125;,</span><br><span class="line">    &quot;E&quot;: &#123;&quot;C&quot;: 8, &quot;D&quot;: 3&#125;,</span><br><span class="line">    &quot;F&quot;: &#123;&quot;D&quot;: 6&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/27</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dijkstra.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化各点距离值，起始点距离为0，其余点距离为正无穷大</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_distance</span>(<span class="params">graph, start</span>):</span></span><br><span class="line">    distance = &#123;start: <span class="number">0</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> vertex <span class="keyword">in</span> graph:</span><br><span class="line">        <span class="keyword">if</span> vertex != start:</span><br><span class="line">            distance[vertex] = math.inf</span><br><span class="line">    <span class="keyword">return</span> distance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 最短路径</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dijkstra</span>(<span class="params">graph, start, end</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 记录未走过的点，使用优先队列维护，权重为起始点至当前节点的最短距离</span></span><br><span class="line">    pqueue = []</span><br><span class="line">    heapq.heappush(pqueue, (<span class="number">0</span>, start))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录已经被走过的点，set()用于去重</span></span><br><span class="line">    seen = set()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录当前节点的父节点，即从哪来的</span></span><br><span class="line">    parent = &#123;start: <span class="literal">None</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录从起始点到各节点的最短距离</span></span><br><span class="line">    distance = init_distance(graph, start)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 寻找起始点至所有点的最短路径</span></span><br><span class="line">    <span class="keyword">while</span> pqueue:</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># 从起始点开始走。队列非空时，拿出队列中权重最小的点</span></span><br><span class="line">        pair = heapq.heappop(pqueue)</span><br><span class="line">        dist = pair[<span class="number">0</span>]</span><br><span class="line">        vertex = pair[<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从队列中拿出的点，即认为被看见</span></span><br><span class="line">        seen.add(vertex)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 从图中查看当前父节点的所有相邻子节点</span></span><br><span class="line">        nodes = graph[vertex].keys()</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> nodes:</span><br><span class="line">            <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">                <span class="comment"># 如果父节点到子节点的距离小于记录中的距离，则把子节点加入队列中，并更新子节点的距离值和子节点的父节点信息</span></span><br><span class="line">                <span class="keyword">if</span> dist + graph[vertex][node] &lt; distance[node]:</span><br><span class="line">                    heapq.heappush(pqueue, (dist + graph[vertex][node], node))</span><br><span class="line">                    distance[node] = dist + graph[vertex][node]</span><br><span class="line">                    parent[node] = vertex</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 回溯最短路径</span></span><br><span class="line">    path = [end]</span><br><span class="line">    <span class="keyword">while</span> parent[path[<span class="number">0</span>]]:</span><br><span class="line">        path.insert(<span class="number">0</span>, parent[path[<span class="number">0</span>]])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> path, distance[end]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line"></span><br><span class="line">    graph = &#123;</span><br><span class="line">	    <span class="string">&quot;A&quot;</span>: &#123;<span class="string">&quot;B&quot;</span>: <span class="number">5</span>, <span class="string">&quot;C&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;B&quot;</span>: &#123;<span class="string">&quot;A&quot;</span>: <span class="number">5</span>, <span class="string">&quot;C&quot;</span>: <span class="number">2</span>, <span class="string">&quot;D&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;C&quot;</span>: &#123;<span class="string">&quot;A&quot;</span>: <span class="number">1</span>, <span class="string">&quot;B&quot;</span>: <span class="number">2</span>, <span class="string">&quot;D&quot;</span>: <span class="number">4</span>, <span class="string">&quot;E&quot;</span>: <span class="number">8</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;D&quot;</span>: &#123;<span class="string">&quot;B&quot;</span>: <span class="number">1</span>, <span class="string">&quot;C&quot;</span>: <span class="number">4</span>, <span class="string">&quot;E&quot;</span>: <span class="number">3</span>, <span class="string">&quot;F&quot;</span>: <span class="number">6</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;E&quot;</span>: &#123;<span class="string">&quot;C&quot;</span>: <span class="number">8</span>, <span class="string">&quot;D&quot;</span>: <span class="number">3</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;F&quot;</span>: &#123;<span class="string">&quot;D&quot;</span>: <span class="number">6</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    path, distance = dijkstra(graph, <span class="string">&quot;A&quot;</span>, <span class="string">&quot;F&quot;</span>)</span><br><span class="line">    print(path)</span><br><span class="line">    print(distance)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Algorithm</category>
-      </categories>
-      <tags>
-        <tag>Algorithm</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Algorithm：Dynamic Programming</title>
     <url>/2020/08/27/Algorithm%EF%BC%9ADynamic-Programming/</url>
     <content><![CDATA[<h2 id="Dynamic-Programming（动态规划）"><a href="#Dynamic-Programming（动态规划）" class="headerlink" title="Dynamic Programming（动态规划）"></a>Dynamic Programming（动态规划）</h2><p>解决重复子问题</p>
@@ -46,6 +29,23 @@
 
 
 <h4 id="python-2"><a href="#python-2" class="headerlink" title="python"></a>python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/31</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dp.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec_subset</span>(<span class="params">arr, i, S</span>):</span></span><br><span class="line">    <span class="keyword">if</span> S == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> arr[<span class="number">0</span>] == S</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 剪枝</span></span><br><span class="line">    <span class="keyword">elif</span> arr[i] &gt; S:</span><br><span class="line">        <span class="keyword">return</span> rec_subset(arr, i<span class="number">-1</span>, S)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        A = rec_subset(arr, i<span class="number">-1</span>, S-arr[i])</span><br><span class="line">        B = rec_subset(arr, i<span class="number">-1</span>, S)</span><br><span class="line">        <span class="keyword">return</span> A <span class="keyword">or</span> B</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 非递归</span></span><br><span class="line"><span class="comment">## 动态规划表：构造一个len(arr)行，S+1列的二维数组</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_subset</span>(<span class="params">arr, S</span>):</span></span><br><span class="line">    subset = np.zeros((len(arr), S + <span class="number">1</span>), dtype=bool)</span><br><span class="line">    subset[:, <span class="number">0</span>] = <span class="literal">True</span></span><br><span class="line">    subset[<span class="number">0</span>, :] = <span class="literal">False</span></span><br><span class="line">    subset[<span class="number">0</span>, arr[<span class="number">0</span>]] = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(arr)):</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> range(<span class="number">1</span>, S + <span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 剪枝</span></span><br><span class="line">            <span class="keyword">if</span> arr[i] &gt; s:</span><br><span class="line">                subset[i, s] = subset[i<span class="number">-1</span>, s]</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                A = subset[i<span class="number">-1</span>, s-arr[i]]</span><br><span class="line">                B = subset[i<span class="number">-1</span>, s]</span><br><span class="line">                subset[i, s] = A <span class="keyword">or</span> B</span><br><span class="line">    <span class="keyword">return</span> subset[<span class="number">-1</span>, <span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    arr = [<span class="number">3</span>, <span class="number">34</span>, <span class="number">4</span>, <span class="number">12</span>, <span class="number">5</span>, <span class="number">2</span>]</span><br><span class="line">    print(dp_subset(arr, <span class="number">9</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">10</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">11</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">12</span>))</span><br><span class="line">    print(dp_subset(arr, <span class="number">13</span>))</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Algorithm：Dijkstra</title>
+    <url>/2020/08/27/Algorithm%EF%BC%9ADijkstra/</url>
+    <content><![CDATA[<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><h3 id="问题1：最短路径"><a href="#问题1：最短路径" class="headerlink" title="问题1：最短路径"></a>问题1：最短路径</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src="/2020/08/27/Algorithm%EF%BC%9ADijkstra/Dijkstra-%E9%97%AE%E9%A2%981.png" alt="image-20200731221210621"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 代码构造上图</span><br><span class="line"></span><br><span class="line">graph &#x3D; &#123;</span><br><span class="line">    &quot;A&quot;: &#123;&quot;B&quot;: 5, &quot;C&quot;: 1&#125;,</span><br><span class="line">    &quot;B&quot;: &#123;&quot;A&quot;: 5, &quot;C&quot;: 2, &quot;D&quot;: 1&#125;,</span><br><span class="line">    &quot;C&quot;: &#123;&quot;A&quot;: 1, &quot;B&quot;: 2, &quot;D&quot;: 4, &quot;E&quot;: 8&#125;,</span><br><span class="line">    &quot;D&quot;: &#123;&quot;B&quot;: 1, &quot;C&quot;: 4, &quot;E&quot;: 3, &quot;F&quot;: 6&#125;,</span><br><span class="line">    &quot;E&quot;: &#123;&quot;C&quot;: 8, &quot;D&quot;: 3&#125;,</span><br><span class="line">    &quot;F&quot;: &#123;&quot;D&quot;: 6&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020/07/27</span></span><br><span class="line"><span class="comment"># @Author  : renyb</span></span><br><span class="line"><span class="comment"># @File    : dijkstra.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化各点距离值，起始点距离为0，其余点距离为正无穷大</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_distance</span>(<span class="params">graph, start</span>):</span></span><br><span class="line">    distance = &#123;start: <span class="number">0</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> vertex <span class="keyword">in</span> graph:</span><br><span class="line">        <span class="keyword">if</span> vertex != start:</span><br><span class="line">            distance[vertex] = math.inf</span><br><span class="line">    <span class="keyword">return</span> distance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 最短路径</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dijkstra</span>(<span class="params">graph, start, end</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 记录未走过的点，使用优先队列维护，权重为起始点至当前节点的最短距离</span></span><br><span class="line">    pqueue = []</span><br><span class="line">    heapq.heappush(pqueue, (<span class="number">0</span>, start))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录已经被走过的点，set()用于去重</span></span><br><span class="line">    seen = set()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录当前节点的父节点，即从哪来的</span></span><br><span class="line">    parent = &#123;start: <span class="literal">None</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 记录从起始点到各节点的最短距离</span></span><br><span class="line">    distance = init_distance(graph, start)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 寻找起始点至所有点的最短路径</span></span><br><span class="line">    <span class="keyword">while</span> pqueue:</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># 从起始点开始走。队列非空时，拿出队列中权重最小的点</span></span><br><span class="line">        pair = heapq.heappop(pqueue)</span><br><span class="line">        dist = pair[<span class="number">0</span>]</span><br><span class="line">        vertex = pair[<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从队列中拿出的点，即认为被看见</span></span><br><span class="line">        seen.add(vertex)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 从图中查看当前父节点的所有相邻子节点</span></span><br><span class="line">        nodes = graph[vertex].keys()</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> nodes:</span><br><span class="line">            <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">                <span class="comment"># 如果父节点到子节点的距离小于记录中的距离，则把子节点加入队列中，并更新子节点的距离值和子节点的父节点信息</span></span><br><span class="line">                <span class="keyword">if</span> dist + graph[vertex][node] &lt; distance[node]:</span><br><span class="line">                    heapq.heappush(pqueue, (dist + graph[vertex][node], node))</span><br><span class="line">                    distance[node] = dist + graph[vertex][node]</span><br><span class="line">                    parent[node] = vertex</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 回溯最短路径</span></span><br><span class="line">    path = [end]</span><br><span class="line">    <span class="keyword">while</span> parent[path[<span class="number">0</span>]]:</span><br><span class="line">        path.insert(<span class="number">0</span>, parent[path[<span class="number">0</span>]])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> path, distance[end]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line"></span><br><span class="line">    graph = &#123;</span><br><span class="line">	    <span class="string">&quot;A&quot;</span>: &#123;<span class="string">&quot;B&quot;</span>: <span class="number">5</span>, <span class="string">&quot;C&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;B&quot;</span>: &#123;<span class="string">&quot;A&quot;</span>: <span class="number">5</span>, <span class="string">&quot;C&quot;</span>: <span class="number">2</span>, <span class="string">&quot;D&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;C&quot;</span>: &#123;<span class="string">&quot;A&quot;</span>: <span class="number">1</span>, <span class="string">&quot;B&quot;</span>: <span class="number">2</span>, <span class="string">&quot;D&quot;</span>: <span class="number">4</span>, <span class="string">&quot;E&quot;</span>: <span class="number">8</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;D&quot;</span>: &#123;<span class="string">&quot;B&quot;</span>: <span class="number">1</span>, <span class="string">&quot;C&quot;</span>: <span class="number">4</span>, <span class="string">&quot;E&quot;</span>: <span class="number">3</span>, <span class="string">&quot;F&quot;</span>: <span class="number">6</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;E&quot;</span>: &#123;<span class="string">&quot;C&quot;</span>: <span class="number">8</span>, <span class="string">&quot;D&quot;</span>: <span class="number">3</span>&#125;,</span><br><span class="line">	    <span class="string">&quot;F&quot;</span>: &#123;<span class="string">&quot;D&quot;</span>: <span class="number">6</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    path, distance = dijkstra(graph, <span class="string">&quot;A&quot;</span>, <span class="string">&quot;F&quot;</span>)</span><br><span class="line">    print(path)</span><br><span class="line">    print(distance)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Algorithm</category>
@@ -482,6 +482,15 @@
 <p><a href="https://www.cnblogs.com/cocowool/p/kubernetes_affinity.html">Kubernetes中的亲和性与反亲和性</a></p>
 </blockquote>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">k8s-app:</span> <span class="string">kubernetes-dashboard</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">kubernetes-dashboard</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">kubernetes-dashboard</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">revisionHistoryLimit:</span> <span class="number">10</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">k8s-app:</span> <span class="string">kubernetes-dashboard</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">k8s-app:</span> <span class="string">kubernetes-dashboard</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="string">...</span></span><br><span class="line">      <span class="attr">tolerations:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">node-role.kubernetes.io/master</span></span><br><span class="line">          <span class="attr">effect:</span> <span class="string">NoSchedule</span></span><br><span class="line">      <span class="attr">affinity:</span></span><br><span class="line">        <span class="attr">podAntiAffinity:</span></span><br><span class="line">          <span class="attr">requiredDuringSchedulingIgnoredDuringExecution:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">labelSelector:</span></span><br><span class="line">                <span class="attr">matchExpressions:</span></span><br><span class="line">                  <span class="comment"># key values与spec.template.metadata.labels列表一致</span></span><br><span class="line">                  <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">k8s-app</span></span><br><span class="line">                    <span class="attr">operator:</span> <span class="string">In</span></span><br><span class="line">                    <span class="attr">values:</span></span><br><span class="line">                      <span class="bullet">-</span> <span class="string">kubernetes-dashboard</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="问题-1：节点状态为SchedulingDisabled"><a href="#问题-1：节点状态为SchedulingDisabled" class="headerlink" title="问题  1：节点状态为SchedulingDisabled"></a>问题  1：节点状态为SchedulingDisabled</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@k104 ~]# kubectl get node</span><br><span class="line">NAME   STATUS                     ROLES                             AGE     VERSION</span><br><span class="line">k104   Ready,SchedulingDisabled   controlplane,etcd,master,worker   3d18h   v1.21.4</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决办法</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@k104 ~]# kubectl cordon k104</span><br><span class="line">node/k104 already cordoned</span><br><span class="line">[root@k104 ~]# kubectl uncordon k104</span><br><span class="line">node/k104 uncordoned</span><br><span class="line">[root@k104 ~]#</span><br><span class="line">[root@k104 ~]# kubectl get node</span><br><span class="line">NAME   STATUS   ROLES                             AGE     VERSION</span><br><span class="line">k104   Ready    controlplane,etcd,master,worker   3d19h   v1.21.4</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1611,7 +1620,11 @@
   <entry>
     <title>Linux使用：通用手册</title>
     <url>/2021/05/07/Linux%E4%BD%BF%E7%94%A8%EF%BC%9A%E9%80%9A%E7%94%A8%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<h2 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h2><h3 id="tar-gz-压缩拆分"><a href="#tar-gz-压缩拆分" class="headerlink" title="tar.gz 压缩拆分"></a>tar.gz 压缩拆分</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 压缩拆分</span></span><br><span class="line">tar zcvf - k8s_install/ | split -b 3G - iECI_v210430.tar.gz.</span><br><span class="line"><span class="meta">#</span><span class="bash"> PS:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> split -b 指定拆分小包的大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成iECI_v210430.tar.gz.开头，aa、ab、ac...等小包</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压拆分</span></span><br><span class="line">cat iECI_v210430.tar.gz.* | tar zxv</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h2 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h2><h3 id="内核默认启动版本管理"><a href="#内核默认启动版本管理" class="headerlink" title="内核默认启动版本管理"></a>内核默认启动版本管理</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看当前默认启动内核</span></span><br><span class="line">[root@k104 ~]# grub2-editenv list</span><br><span class="line">saved_entry=CentOS Linux (3.10.0-1127.el7.x86_64) 7 (Core)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所有可用内核</span></span><br><span class="line">[root@k104 ~]# cat /boot/grub2/grub.cfg | grep ^menuentry</span><br><span class="line">menuentry &#x27;CentOS Linux (5.4.134-1.el7.elrepo.x86_64) 7 (Core)&#x27; --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &#x27;gnulinux-5.4.134-1.el7.elrepo.x86_64-advanced-f7d63930-b583-4731-976f-29c94ff7bdd6&#x27; &#123;</span><br><span class="line">menuentry &#x27;CentOS Linux (3.10.0-1127.el7.x86_64) 7 (Core)&#x27; --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &#x27;gnulinux-3.10.0-1127.el7.x86_64-advanced-f7d63930-b583-4731-976f-29c94ff7bdd6&#x27; &#123;</span><br><span class="line">menuentry &#x27;CentOS Linux (0-rescue-3144d2251e4742d79fe35eb04ed8eba2) 7 (Core)&#x27; --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &#x27;gnulinux-0-rescue-3144d2251e4742d79fe35eb04ed8eba2-advanced-f7d63930-b583-4731-976f-29c94ff7bdd6&#x27; &#123;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改默认启动内核</span></span><br><span class="line">[root@k104 ~]# grub2-set-default &#x27;CentOS Linux (3.10.0-1127.el7.x86_64) 7 (Core)&#x27;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看系统当前内核</span></span><br><span class="line">[root@k104 ~]# uname -a</span><br><span class="line">Linux k104 3.10.0-1127.el7.x86_64 #1 SMP Tue Mar 31 23:36:51 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="tar-gz-压缩拆分"><a href="#tar-gz-压缩拆分" class="headerlink" title="tar.gz 压缩拆分"></a>tar.gz 压缩拆分</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 压缩拆分</span></span><br><span class="line">tar zcvf - k8s_install/ | split -b 3G - iECI_v210430.tar.gz.</span><br><span class="line"><span class="meta">#</span><span class="bash"> PS:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> split -b 指定拆分小包的大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成iECI_v210430.tar.gz.开头，aa、ab、ac...等小包</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压拆分</span></span><br><span class="line">cat iECI_v210430.tar.gz.* | tar zxv</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1641,6 +1654,90 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux运维：CPU load average过高</title>
+    <url>/2022/03/03/Linux%E8%BF%90%E7%BB%B4%EF%BC%9ACPU-load-average%E8%BF%87%E9%AB%98/</url>
+    <content><![CDATA[<h2 id="load-average基础"><a href="#load-average基础" class="headerlink" title="load average基础"></a>load average基础</h2><p>top命令中load average显示的是最近1分钟、5分钟和15分钟的系统平均负载。</p>
+<p>系统平均负载被定义为在<strong>特定时间间隔内</strong>运行队列中(<strong>在CPU上运行或者等待运行多少进程</strong>)的平均进程数。如果一个进程满足以下条件则其就会位于运行队列中：</p>
+<ul>
+<li>它没有在等待I/O操作的结果</li>
+<li>它没有主动进入等待状态(也就是没有调用’wait’)</li>
+<li>没有被停止(例如：等待终止)</li>
+</ul>
+<p>在Linux中，进程分为三种状态，一种是阻塞的进程blocked process，一种是可运行的进程runnable process，另外就是正在运行的进程running process。</p>
+<p>进程可运行状态时，它处在一个运行队列run queue中，与其他可运行进程争夺CPU时间。 <strong>系统的load是指正在运行和准备好运行的进程的总数。</strong>比如现在系统有2个正在运行的进程，3个可运行进程，那么系统的load就是5。load average就是一定时间内的load数量。</p>
+<p>一般来说只要每个CPU的当前活动进程数不大于3那么系统的性能就是良好的，如果每个CPU的任务数大于5，那么就表示这台机器的性能有严重问题。</p>
+<p><strong>CPU使用率高并不总是意味着CPU工作繁忙，它有可能是正在等待其他子系统。</strong>在进行性能分析时，将所有子系统当做一个整体来看是非常重要的，因为在子系统中可能会出现瀑布效应。衡量CPU 系统负载的指标是load,load 就是对计算机系统能够承担的多少负载的度量,简单的说是进程队列的长度。简单的例子比如食堂有五个窗口，当有小于五个学生来打饭，五个窗口都能及时处理，但是当学生个数超过5个，必然会出现等待的学生。请求大于当前的处理能力，会出现等待，引起load升高。<br>Load Average 就是一段时间(1min,5min,15min)内平均Load。<strong>平均负载的最佳值是1</strong>，这意味着每个进程都可以在一个完整的CPU 周期内完成。</p>
+<h2 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h2><p>经反馈发现，虚机环境CentOS系统的CPU负载超过正常水平，并持续升高，经过一晚的时间，负载提升至1000+的水平。</p>
+<p><img src="/2022/03/03/Linux%E8%BF%90%E7%BB%B4%EF%BC%9ACPU-load-average%E8%BF%87%E9%AB%98/CPU%E8%B4%9F%E8%BD%BD%E8%BF%87%E9%AB%98.png" alt="CPU负载过高"></p>
+<h2 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h2><ul>
+<li>12c32G vCenter 虚机 * 3台</li>
+<li>部署Kubernetes + OpenStack</li>
+</ul>
+<h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><ol>
+<li>通过top查看各CPU使用率，发现CPU各核使用率并不高，说明CPU性能并不是导致拥塞的瓶颈。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看CPU各核使用率</span></span><br><span class="line">top后按1</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/03/Linux%E8%BF%90%E7%BB%B4%EF%BC%9ACPU-load-average%E8%BF%87%E9%AB%98/CPU%E4%BD%BF%E7%94%A8%E7%8E%87.png" alt="CPU使用率"></p>
+<ol start="2">
+<li>计算通常不会存在瓶颈，一般性能瓶颈出在IO处。接下来需要确认是否由于IO问题，导致拥塞，引起负载升高。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> IO监控命令</span></span><br><span class="line">[root@k104 ~]# iostat</span><br><span class="line">[root@k104 ~]# dstat</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 简单磁盘写测速</span></span><br><span class="line">[root@k104 ~]# dd if=/dev/zero of=test.img bs=1M count=1024</span><br><span class="line">1024+0 records in</span><br><span class="line">1024+0 records out</span><br><span class="line">1073741824 bytes (1.1 GB) copied, 0.603499 s, 1.8 GB/s</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>检测发现IO不存在瓶颈，推测可能程序有问题，未正常退出导致cpu load average异常升高。这里先寻找哪个进程有问题，命令如下：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看所有线程</span></span><br><span class="line">[root@k104 ~]# ps -eLl</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>检查发现cephcsi线程数过多，且都处于S（休眠）状态，统计数量与load average一致，故load average升高由cephcsi线程未正常退出导致。</li>
+</ol>
+<p><img src="/2022/03/03/Linux%E8%BF%90%E7%BB%B4%EF%BC%9ACPU-load-average%E8%BF%87%E9%AB%98/%E4%BC%91%E7%9C%A0%E7%BA%BF%E7%A8%8B%E8%BF%87%E5%A4%9A.png" alt="休眠线程过多"></p>
+<ol start="5">
+<li>追踪定位cephcsi线程未正常退出原因，该线程为rook-ceph创建，提供cephfs服务，检查ceph状态。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看ceph状态概况</span></span><br><span class="line">[root@k104 ~]# ceph -s</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看ceph健康详情</span></span><br><span class="line">[root@k104 ~]# ceph health detail</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/03/Linux%E8%BF%90%E7%BB%B4%EF%BC%9ACPU-load-average%E8%BF%87%E9%AB%98/ceph%E5%BC%82%E5%B8%B8.png" alt="ceph异常"></p>
+<p><img src="/2022/03/03/Linux%E8%BF%90%E7%BB%B4%EF%BC%9ACPU-load-average%E8%BF%87%E9%AB%98/ceph%E5%81%A5%E5%BA%B7%E5%BC%82%E5%B8%B8.png" alt="ceph健康异常"></p>
+<ol start="6">
+<li>发现cephfs异常，根据报错信息<code>1 mds daemon damaged</code>从网上寻找到如下解决办法：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ceph mds repaired 0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Ceph部分组件用途</strong></p>
+<ul>
+<li><strong>MDS：</strong>Ceph元数据服务器，跟踪文件层次结构并存储只供CephFS使用的元数据。Ceph块设备和RADOS网关不需要元数据。MDS不直接给client提供数据服务。</li>
+<li><strong>CephFS：</strong>提供了一个任意大小且兼容POSlX的分布式文件系统。CephFS 依赖Ceph MDS 来跟踪文件层次结构，即元数据。</li>
+<li><strong>CSI CephFS plugin：</strong>用来提供CephFS存储卷和挂载存储卷。</li>
+</ul>
+</blockquote>
+<ol start="7">
+<li>cephfs问题修复后，重启相关pod，cpu load average问题未出现。</li>
+</ol>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://blog.csdn.net/xiaoqiaoq0/article/details/106932338">CPU负载均衡之loadavg计算</a></li>
+<li><a href="https://blog.csdn.net/xingjing1226/article/details/81977129">线程的5种状态详解</a></li>
+<li><a href="https://www.cnblogs.com/lddbupt/p/5779655.html">cpu load过高问题排查</a></li>
+<li><a href="https://blog.csdn.net/canot/article/details/78079085">CPU load过高产生的原因及排查</a></li>
+<li><a href="https://www.cnblogs.com/weifeng1463/p/9007369.html">cpu使用率低负载高，原因分析</a></li>
+<li><a href="https://juejin.cn/post/6844904173843005447">记一次CPU使用率低负载高的排查过程</a></li>
+<li><a href="https://blog.csdn.net/whatday/article/details/108933578">linux 查看线程数的方法</a></li>
+<li><a href="https://blog.csdn.net/mayue_web/article/details/106942440">查看Linux的所有线程</a></li>
+<li><a href="https://www.cnblogs.com/xrq730/p/11041741.html">对cpu与load的理解及线上问题处理思路解读</a></li>
+<li><a href="https://www.jianshu.com/p/94d130b457ce">Linux CPU负载过高问题排查</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>CPU</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux配置：GNOME桌面</title>
     <url>/2020/11/09/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AGNOME%E6%A1%8C%E9%9D%A2/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
@@ -1663,6 +1760,64 @@
       <tags>
         <tag>Linux</tag>
         <tag>GNOME</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux配置：HAProxy</title>
+    <url>/2021/06/03/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AHAProxy/</url>
+    <content><![CDATA[<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="Backend-配置域名"><a href="#Backend-配置域名" class="headerlink" title="Backend 配置域名"></a>Backend 配置域名</h3><p>HAProxy 版本1.6开始支持域名解析功能</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">resolvers</span> <span class="string">mynameservers</span></span><br><span class="line">    <span class="string">nameserver</span> <span class="string">ns1</span> <span class="number">10.96</span><span class="number">.0</span><span class="number">.10</span><span class="string">:53</span>                                <span class="comment"># 配置DNS服务器地址，ns1为服务器代号，可自定义</span></span><br><span class="line">    <span class="string">parse-resolv-conf</span>                                           <span class="comment"># 加载主机/etc/resolve.conf文件内的DNS配置信息</span></span><br><span class="line">    <span class="string">resolve_retries</span>       <span class="number">3</span></span><br><span class="line">    <span class="string">timeout</span> <span class="string">resolve</span>       <span class="string">1s</span></span><br><span class="line">    <span class="string">timeout</span> <span class="string">retry</span>         <span class="string">1s</span></span><br><span class="line">    <span class="string">hold</span> <span class="string">other</span>           <span class="string">10s</span></span><br><span class="line">    <span class="string">hold</span> <span class="string">refused</span>         <span class="string">10s</span></span><br><span class="line">    <span class="string">hold</span> <span class="string">nx</span>              <span class="string">10s</span></span><br><span class="line">    <span class="string">hold</span> <span class="string">timeout</span>         <span class="string">10s</span></span><br><span class="line">    <span class="string">hold</span> <span class="string">valid</span>           <span class="string">5s</span></span><br><span class="line">    <span class="string">hold</span> <span class="string">obsolete</span>        <span class="string">10s</span></span><br><span class="line"></span><br><span class="line"><span class="string">frontend</span> <span class="string">keystone-admin_front</span></span><br><span class="line">    <span class="string">mode</span> <span class="string">http</span></span><br><span class="line">    <span class="string">http-request</span> <span class="string">del-header</span> <span class="string">X-Forwarded-Proto</span></span><br><span class="line">    <span class="string">option</span> <span class="string">httplog</span></span><br><span class="line">    <span class="string">option</span> <span class="string">forwardfor</span></span><br><span class="line">    <span class="string">http-request</span> <span class="string">set-header</span> <span class="string">X-Forwarded-Proto</span> <span class="string">https</span> <span class="string">if</span> &#123; <span class="string">ssl_fc</span> &#125;</span><br><span class="line">    <span class="string">bind</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:5000</span></span><br><span class="line">    <span class="string">default_backend</span> <span class="string">keystone-admin_back</span></span><br><span class="line"></span><br><span class="line"><span class="string">backend</span> <span class="string">keystone-admin_back</span></span><br><span class="line">    <span class="string">mode</span> <span class="string">http</span></span><br><span class="line">    <span class="string">default-server</span> <span class="string">init-addr</span> <span class="string">none</span> <span class="string">resolvers</span> <span class="string">mynameservers</span>        <span class="comment"># 初始域名后端解析地址为空，启动后从DNS服务器获取后端ip后更新解析地址</span></span><br><span class="line">    <span class="string">server</span> <span class="string">keystone-admin</span> <span class="string">keystone-api.openstack.svc.cluster.local:5000</span> <span class="string">check</span> <span class="string">inter</span> <span class="number">2000 </span><span class="string">rise</span> <span class="number">2</span> <span class="string">fall</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="请求重定向"><a href="#请求重定向" class="headerlink" title="请求重定向"></a>请求重定向</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将所有访问9999端口的请求重定向至指定地址</span></span><br><span class="line"><span class="string">frontend</span> <span class="string">demo</span></span><br><span class="line">    <span class="string">mode</span> <span class="string">http</span></span><br><span class="line">    <span class="string">bind</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:9999</span></span><br><span class="line">    <span class="string">redirect</span> <span class="string">location</span> <span class="string">http://keystone.openstack.svc.cluster.local</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h3><p>HAProxy将对应级别的log发送至指定日志服务器，默认为rsyslog日志服务</p>
+<ul>
+<li>HAProxy配置文件</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">global</span></span><br><span class="line">    <span class="string">log</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="string">local2</span> <span class="string">info</span>                        <span class="comment"># 使用本机local2进行日志记录（可选范围local1 ~ 7），生产环境不推荐开启日志，增加IO负担</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>rsyslog配置文件：<code>/etc/rsyslog.conf</code> ，修改后重启 <code>rsyslog</code> 服务</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Provides UDP syslog reception</span></span><br><span class="line"><span class="string">$ModLoad</span> <span class="string">imudp</span>                                       <span class="comment"># HAProxy基于udp方式发送日志消息，需要加载支持udp协议的模块</span></span><br><span class="line"><span class="string">$UDPServerRun</span> <span class="number">514</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Provides TCP syslog reception</span></span><br><span class="line"><span class="string">$ModLoad</span> <span class="string">imtcp</span></span><br><span class="line"><span class="string">$InputTCPServerRun</span> <span class="number">514</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Everybody gets emergency messages</span></span><br><span class="line"><span class="comment"># *.emerg                 :omusrmsg:*</span></span><br><span class="line"><span class="string">*.emerg</span>                  <span class="string">/var/log/messages</span>           <span class="comment"># rsyslog默认将严重消息发送至终端，HAProxy后端不可用为严重消息。这里将消息记录至文件内</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Haproxy log</span></span><br><span class="line"><span class="string">local2.*</span>                 <span class="string">/var/log/haproxy.log</span>        <span class="comment"># 将local2的日志记录入文件</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><p><a href="https://www.haproxy.org/">HAProxy 官网</a></p>
+</li>
+<li><p><a href="http://cbonte.github.io/haproxy-dconv/2.4/configuration.html#1">HAProxy 官方文档（version 2.4.0）</a></p>
+</li>
+<li><p><a href="https://www.haproxy.com/documentation/hapee/latest/configuration/config-sections/resolvers/">HAProxy Resolvers</a></p>
+</li>
+<li><p><a href="https://phpor.net/blog/post/3812">haproxy 健康检查与域名解析</a></p>
+</li>
+<li><p><a href="http://www.ttlsa.com/linux/haproxy-study-tutorial/">HAProxy用法详解</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/kevingrace/p/10182538.html">Haproxy 重定向跳转设置 - 运维小结</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/yinzhengjie/p/12114081.html">HAProxy基础配置-haproxy的配置文件说明</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/yinzhengjie/p/12122239.html">HAProxy基础配置-配置haproxy的日志</a></p>
+</li>
+<li><p><a href="http://www.szl724.com/sysmaint/linux-os/3258.html">HAProxy日志重复记录messages和错误输出到终端的优化</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>HAProxy</tag>
       </tags>
   </entry>
   <entry>
@@ -1735,64 +1890,6 @@
       <tags>
         <tag>Linux</tag>
         <tag>IPTABLES</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux配置：HAProxy</title>
-    <url>/2021/06/03/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AHAProxy/</url>
-    <content><![CDATA[<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="Backend-配置域名"><a href="#Backend-配置域名" class="headerlink" title="Backend 配置域名"></a>Backend 配置域名</h3><p>HAProxy 版本1.6开始支持域名解析功能</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">resolvers</span> <span class="string">mynameservers</span></span><br><span class="line">    <span class="string">nameserver</span> <span class="string">ns1</span> <span class="number">10.96</span><span class="number">.0</span><span class="number">.10</span><span class="string">:53</span>                                <span class="comment"># 配置DNS服务器地址，ns1为服务器代号，可自定义</span></span><br><span class="line">    <span class="string">parse-resolv-conf</span>                                           <span class="comment"># 加载主机/etc/resolve.conf文件内的DNS配置信息</span></span><br><span class="line">    <span class="string">resolve_retries</span>       <span class="number">3</span></span><br><span class="line">    <span class="string">timeout</span> <span class="string">resolve</span>       <span class="string">1s</span></span><br><span class="line">    <span class="string">timeout</span> <span class="string">retry</span>         <span class="string">1s</span></span><br><span class="line">    <span class="string">hold</span> <span class="string">other</span>           <span class="string">10s</span></span><br><span class="line">    <span class="string">hold</span> <span class="string">refused</span>         <span class="string">10s</span></span><br><span class="line">    <span class="string">hold</span> <span class="string">nx</span>              <span class="string">10s</span></span><br><span class="line">    <span class="string">hold</span> <span class="string">timeout</span>         <span class="string">10s</span></span><br><span class="line">    <span class="string">hold</span> <span class="string">valid</span>           <span class="string">5s</span></span><br><span class="line">    <span class="string">hold</span> <span class="string">obsolete</span>        <span class="string">10s</span></span><br><span class="line"></span><br><span class="line"><span class="string">frontend</span> <span class="string">keystone-admin_front</span></span><br><span class="line">    <span class="string">mode</span> <span class="string">http</span></span><br><span class="line">    <span class="string">http-request</span> <span class="string">del-header</span> <span class="string">X-Forwarded-Proto</span></span><br><span class="line">    <span class="string">option</span> <span class="string">httplog</span></span><br><span class="line">    <span class="string">option</span> <span class="string">forwardfor</span></span><br><span class="line">    <span class="string">http-request</span> <span class="string">set-header</span> <span class="string">X-Forwarded-Proto</span> <span class="string">https</span> <span class="string">if</span> &#123; <span class="string">ssl_fc</span> &#125;</span><br><span class="line">    <span class="string">bind</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:5000</span></span><br><span class="line">    <span class="string">default_backend</span> <span class="string">keystone-admin_back</span></span><br><span class="line"></span><br><span class="line"><span class="string">backend</span> <span class="string">keystone-admin_back</span></span><br><span class="line">    <span class="string">mode</span> <span class="string">http</span></span><br><span class="line">    <span class="string">default-server</span> <span class="string">init-addr</span> <span class="string">none</span> <span class="string">resolvers</span> <span class="string">mynameservers</span>        <span class="comment"># 初始域名后端解析地址为空，启动后从DNS服务器获取后端ip后更新解析地址</span></span><br><span class="line">    <span class="string">server</span> <span class="string">keystone-admin</span> <span class="string">keystone-api.openstack.svc.cluster.local:5000</span> <span class="string">check</span> <span class="string">inter</span> <span class="number">2000 </span><span class="string">rise</span> <span class="number">2</span> <span class="string">fall</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="请求重定向"><a href="#请求重定向" class="headerlink" title="请求重定向"></a>请求重定向</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将所有访问9999端口的请求重定向至指定地址</span></span><br><span class="line"><span class="string">frontend</span> <span class="string">demo</span></span><br><span class="line">    <span class="string">mode</span> <span class="string">http</span></span><br><span class="line">    <span class="string">bind</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:9999</span></span><br><span class="line">    <span class="string">redirect</span> <span class="string">location</span> <span class="string">http://keystone.openstack.svc.cluster.local</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h3><p>HAProxy将对应级别的log发送至指定日志服务器，默认为rsyslog日志服务</p>
-<ul>
-<li>HAProxy配置文件</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">global</span></span><br><span class="line">    <span class="string">log</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="string">local2</span> <span class="string">info</span>                        <span class="comment"># 使用本机local2进行日志记录（可选范围local1 ~ 7），生产环境不推荐开启日志，增加IO负担</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>rsyslog配置文件：<code>/etc/rsyslog.conf</code> ，修改后重启 <code>rsyslog</code> 服务</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Provides UDP syslog reception</span></span><br><span class="line"><span class="string">$ModLoad</span> <span class="string">imudp</span>                                       <span class="comment"># HAProxy基于udp方式发送日志消息，需要加载支持udp协议的模块</span></span><br><span class="line"><span class="string">$UDPServerRun</span> <span class="number">514</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Provides TCP syslog reception</span></span><br><span class="line"><span class="string">$ModLoad</span> <span class="string">imtcp</span></span><br><span class="line"><span class="string">$InputTCPServerRun</span> <span class="number">514</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Everybody gets emergency messages</span></span><br><span class="line"><span class="comment"># *.emerg                 :omusrmsg:*</span></span><br><span class="line"><span class="string">*.emerg</span>                  <span class="string">/var/log/messages</span>           <span class="comment"># rsyslog默认将严重消息发送至终端，HAProxy后端不可用为严重消息。这里将消息记录至文件内</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Haproxy log</span></span><br><span class="line"><span class="string">local2.*</span>                 <span class="string">/var/log/haproxy.log</span>        <span class="comment"># 将local2的日志记录入文件</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><p><a href="https://www.haproxy.org/">HAProxy 官网</a></p>
-</li>
-<li><p><a href="http://cbonte.github.io/haproxy-dconv/2.4/configuration.html#1">HAProxy 官方文档（version 2.4.0）</a></p>
-</li>
-<li><p><a href="https://www.haproxy.com/documentation/hapee/latest/configuration/config-sections/resolvers/">HAProxy Resolvers</a></p>
-</li>
-<li><p><a href="https://phpor.net/blog/post/3812">haproxy 健康检查与域名解析</a></p>
-</li>
-<li><p><a href="http://www.ttlsa.com/linux/haproxy-study-tutorial/">HAProxy用法详解</a></p>
-</li>
-<li><p><a href="https://www.cnblogs.com/kevingrace/p/10182538.html">Haproxy 重定向跳转设置 - 运维小结</a></p>
-</li>
-<li><p><a href="https://www.cnblogs.com/yinzhengjie/p/12114081.html">HAProxy基础配置-haproxy的配置文件说明</a></p>
-</li>
-<li><p><a href="https://www.cnblogs.com/yinzhengjie/p/12122239.html">HAProxy基础配置-配置haproxy的日志</a></p>
-</li>
-<li><p><a href="http://www.szl724.com/sysmaint/linux-os/3258.html">HAProxy日志重复记录messages和错误输出到终端的优化</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>HAProxy</tag>
       </tags>
   </entry>
   <entry>
@@ -1940,6 +2037,70 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux配置：修改网卡名称</title>
+    <url>/2021/01/12/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0/</url>
+    <content><![CDATA[<blockquote>
+<p>网上资料都是要修改 <code>/etc/default/grub</code> 文件，增加 <code>net.ifnames=0, biosdevname=0</code> 参数。该方法重启后，网卡名称统一变为eth开头，无法达到任意修改的目的。整理如下方法，亲测 Centos 7.8 可行。</p>
+</blockquote>
+<p>环境信息：CentOS Linux release 7.8.2003 (Core)</p>
+<p>网卡信息：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: rules.d # ip a</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    link/ether 00:0c:29:63:bf:af brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.1.110/24 brd 192.168.1.255 scope global noprefixroute dynamic mynet1</span><br><span class="line">       valid_lft 6511sec preferred_lft 6511sec</span><br><span class="line">    inet6 fe80::a788:f7ed:8c55:1b9f/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">4: virbr0-nic: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line"></span><br><span class="line">root@renyb: rules.d # nmcli connection show</span><br><span class="line">NAME    UUID                                  TYPE      DEVICE</span><br><span class="line">ens33   b40bd401-b463-4d44-ab63-247307f2a2d6  ethernet  ens33</span><br><span class="line">virbr0  7f07fa4e-e769-4fd1-ab39-1b70c27a0952  bridge    virbr0</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="临时配置"><a href="#临时配置" class="headerlink" title="临时配置"></a>临时配置</h2><p>通过 <code>ip</code> 命令进行配置，重启失效</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看网络设备信息</span></span><br><span class="line">nmcli connection show</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> down网卡</span></span><br><span class="line">ip link set dev ens33 down</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE名称（ens33为设备名称）</span></span><br><span class="line">ip link set dev ens33 name mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME（ens33为网卡名称）</span></span><br><span class="line">nmcli connection modify ens33 connection.id mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动网卡</span></span><br><span class="line">ip link set mynet1 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载网络设备信息</span></span><br><span class="line">nmcli connection reload</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="永久配置"><a href="#永久配置" class="headerlink" title="永久配置"></a>永久配置</h2><p>通过 <code>udev</code> 实现。Centos系统中，规则目录如下：</p>
+<ul>
+<li>系统规则：<code>/usr/lib/udev/rules.d/</code></li>
+<li>自定义规则：<code>/etc/udev/rules.d</code></li>
+</ul>
+<h3 id="udev解析"><a href="#udev解析" class="headerlink" title="udev解析"></a>udev解析</h3><p>网卡相关udev的rule执行流程：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用户自定义为优先级最高</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡</span></span><br><span class="line">/usr/lib/udev/rules.d/60-net.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span></span><br><span class="line">/usr/lib/udev/rules.d/71-biosdevname.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称哦</span></span><br><span class="line">/lib/udev/rules.d/75-net-description.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名</span></span><br><span class="line">/usr/lib/udev/rules.d/80-net-name-slot.rules</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="重命名流程"><a href="#重命名流程" class="headerlink" title="重命名流程"></a>重命名流程</h3><ol>
+<li>新建文件：<code>/etc/udev/rules.d/70-persistent-net.rules</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a sample udev rules file that demonstrates how to get udev to</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> the name of IPoIB interfaces to whatever you wish.  There is a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 16 character <span class="built_in">limit</span> on network device names.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Important items to note: ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span> is IPoIB interfaces, and the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125; match must start with ?* and only reference the last 8</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bytes of the address or <span class="keyword">else</span> the address might not match the variable QPN</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> portion.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modern udev is <span class="keyword">case</span> sensitive and all addresses need to be <span class="keyword">in</span> lower <span class="keyword">case</span>.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ACTION==<span class="string">&quot;add&quot;</span>, SUBSYSTEM==<span class="string">&quot;net&quot;</span>, DRIVERS==<span class="string">&quot;?*&quot;</span>, ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span>, ATTR&#123;address&#125;==<span class="string">&quot;?*00:02:c9:03:00:31:78:f2&quot;</span>, NAME=<span class="string">&quot;mlx4_ib3&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125;: mac address</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME: device name</span></span><br><span class="line">ACTION==&quot;add&quot;, SUBSYSTEM==&quot;net&quot;, DRIVERS==&quot;?*&quot;, ATTR&#123;type&#125;==&quot;1&quot;, ATTR&#123;address&#125;==&quot;00:0c:29:63:bf:af&quot;, NAME=&quot;mynet1&quot;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改网卡配置文件：<code>/etc/sysconfig/network-scripts/ifcfg-ens33</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: network-scripts # pwd</span><br><span class="line">/etc/sysconfig/network-scripts</span><br><span class="line">root@renyb: network-scripts # cat ifcfg-ens33</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">NAME=mynet1</span><br><span class="line">UUID=b40bd401-b463-4d44-ab63-247307f2a2d6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE NAME</span></span><br><span class="line">DEVICE=mynet1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPV6_PRIVACY=no</span><br><span class="line">root@renyb: network-scripts # # 修改网卡配置文件名称</span><br><span class="line">root@renyb: network-scripts # mv ifcfg-ens33 ifcfg-mynet1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><p><a href="https://www.cnblogs.com/boltkiller/p/12696501.html">任意修改CentOS下网卡的显示名称和设备名称</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/33932734">在 Linux 中如何编写基本的 udev 规则</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/u010039418/article/details/79260553">CentOS 7.4系统修改网卡名称</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/yinfutao/p/9634350.html">Linux系统修改网卡名（eth0-3）</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>网卡</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux配置：开启大页内存</title>
     <url>/2021/02/18/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E5%BC%80%E5%90%AF%E5%A4%A7%E9%A1%B5%E5%86%85%E5%AD%98/</url>
     <content><![CDATA[<h2 id="大页内存"><a href="#大页内存" class="headerlink" title="大页内存"></a>大页内存</h2><h3 id="Centos-开启大页内存"><a href="#Centos-开启大页内存" class="headerlink" title="Centos 开启大页内存"></a>Centos 开启大页内存</h3><blockquote>
@@ -1987,6 +2148,32 @@
       <tags>
         <tag>Linux</tag>
         <tag>大页内存</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongoDB使用：通用手册</title>
+    <url>/2021/07/27/MongoDB%E4%BD%BF%E7%94%A8%EF%BC%9A%E9%80%9A%E7%94%A8%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>参考：<a href="https://www.runoob.com/mongodb/mongodb-linux-install.html">https://www.runoob.com/mongodb/mongodb-linux-install.html</a></p>
+<p>下载：<a href="https://www.mongodb.com/try/download/community">https://www.mongodb.com/try/download/community</a></p>
+<h2 id="管理命令"><a href="#管理命令" class="headerlink" title="管理命令"></a>管理命令</h2><h3 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mongo 192.168.122.12:27017/admin -u admin -p inspur@123</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建admin用户</span></span><br><span class="line">&gt; db.createUser(&#123;user:&quot;admin&quot;,pwd:&quot;inspur@123&quot;,roles:[&#123;&quot;role&quot;:&quot;userAdminAnyDatabase&quot;,&quot;db&quot;:&quot;admin&quot;&#125;]&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有用户</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>通用手册</tag>
+        <tag>MongoDB</tag>
       </tags>
   </entry>
   <entry>
@@ -2073,96 +2260,6 @@
       <tags>
         <tag>Linux</tag>
         <tag>代理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux配置：修改网卡名称</title>
-    <url>/2021/01/12/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0/</url>
-    <content><![CDATA[<blockquote>
-<p>网上资料都是要修改 <code>/etc/default/grub</code> 文件，增加 <code>net.ifnames=0, biosdevname=0</code> 参数。该方法重启后，网卡名称统一变为eth开头，无法达到任意修改的目的。整理如下方法，亲测 Centos 7.8 可行。</p>
-</blockquote>
-<p>环境信息：CentOS Linux release 7.8.2003 (Core)</p>
-<p>网卡信息：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: rules.d # ip a</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    link/ether 00:0c:29:63:bf:af brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.1.110/24 brd 192.168.1.255 scope global noprefixroute dynamic mynet1</span><br><span class="line">       valid_lft 6511sec preferred_lft 6511sec</span><br><span class="line">    inet6 fe80::a788:f7ed:8c55:1b9f/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">4: virbr0-nic: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line"></span><br><span class="line">root@renyb: rules.d # nmcli connection show</span><br><span class="line">NAME    UUID                                  TYPE      DEVICE</span><br><span class="line">ens33   b40bd401-b463-4d44-ab63-247307f2a2d6  ethernet  ens33</span><br><span class="line">virbr0  7f07fa4e-e769-4fd1-ab39-1b70c27a0952  bridge    virbr0</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="临时配置"><a href="#临时配置" class="headerlink" title="临时配置"></a>临时配置</h2><p>通过 <code>ip</code> 命令进行配置，重启失效</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看网络设备信息</span></span><br><span class="line">nmcli connection show</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> down网卡</span></span><br><span class="line">ip link set dev ens33 down</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE名称（ens33为设备名称）</span></span><br><span class="line">ip link set dev ens33 name mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME（ens33为网卡名称）</span></span><br><span class="line">nmcli connection modify ens33 connection.id mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动网卡</span></span><br><span class="line">ip link set mynet1 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载网络设备信息</span></span><br><span class="line">nmcli connection reload</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="永久配置"><a href="#永久配置" class="headerlink" title="永久配置"></a>永久配置</h2><p>通过 <code>udev</code> 实现。Centos系统中，规则目录如下：</p>
-<ul>
-<li>系统规则：<code>/usr/lib/udev/rules.d/</code></li>
-<li>自定义规则：<code>/etc/udev/rules.d</code></li>
-</ul>
-<h3 id="udev解析"><a href="#udev解析" class="headerlink" title="udev解析"></a>udev解析</h3><p>网卡相关udev的rule执行流程：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用户自定义为优先级最高</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡</span></span><br><span class="line">/usr/lib/udev/rules.d/60-net.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span></span><br><span class="line">/usr/lib/udev/rules.d/71-biosdevname.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称哦</span></span><br><span class="line">/lib/udev/rules.d/75-net-description.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名</span></span><br><span class="line">/usr/lib/udev/rules.d/80-net-name-slot.rules</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="重命名流程"><a href="#重命名流程" class="headerlink" title="重命名流程"></a>重命名流程</h3><ol>
-<li>新建文件：<code>/etc/udev/rules.d/70-persistent-net.rules</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a sample udev rules file that demonstrates how to get udev to</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> the name of IPoIB interfaces to whatever you wish.  There is a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 16 character <span class="built_in">limit</span> on network device names.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Important items to note: ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span> is IPoIB interfaces, and the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125; match must start with ?* and only reference the last 8</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bytes of the address or <span class="keyword">else</span> the address might not match the variable QPN</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> portion.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modern udev is <span class="keyword">case</span> sensitive and all addresses need to be <span class="keyword">in</span> lower <span class="keyword">case</span>.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ACTION==<span class="string">&quot;add&quot;</span>, SUBSYSTEM==<span class="string">&quot;net&quot;</span>, DRIVERS==<span class="string">&quot;?*&quot;</span>, ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span>, ATTR&#123;address&#125;==<span class="string">&quot;?*00:02:c9:03:00:31:78:f2&quot;</span>, NAME=<span class="string">&quot;mlx4_ib3&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125;: mac address</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME: device name</span></span><br><span class="line">ACTION==&quot;add&quot;, SUBSYSTEM==&quot;net&quot;, DRIVERS==&quot;?*&quot;, ATTR&#123;type&#125;==&quot;1&quot;, ATTR&#123;address&#125;==&quot;00:0c:29:63:bf:af&quot;, NAME=&quot;mynet1&quot;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>修改网卡配置文件：<code>/etc/sysconfig/network-scripts/ifcfg-ens33</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: network-scripts # pwd</span><br><span class="line">/etc/sysconfig/network-scripts</span><br><span class="line">root@renyb: network-scripts # cat ifcfg-ens33</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">NAME=mynet1</span><br><span class="line">UUID=b40bd401-b463-4d44-ab63-247307f2a2d6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE NAME</span></span><br><span class="line">DEVICE=mynet1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPV6_PRIVACY=no</span><br><span class="line">root@renyb: network-scripts # # 修改网卡配置文件名称</span><br><span class="line">root@renyb: network-scripts # mv ifcfg-ens33 ifcfg-mynet1</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><p><a href="https://www.cnblogs.com/boltkiller/p/12696501.html">任意修改CentOS下网卡的显示名称和设备名称</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/33932734">在 Linux 中如何编写基本的 udev 规则</a></p>
-</li>
-<li><p><a href="https://blog.csdn.net/u010039418/article/details/79260553">CentOS 7.4系统修改网卡名称</a></p>
-</li>
-<li><p><a href="https://www.cnblogs.com/yinfutao/p/9634350.html">Linux系统修改网卡名（eth0-3）</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>网卡</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MongoDB使用：通用手册</title>
-    <url>/2021/07/27/MongoDB%E4%BD%BF%E7%94%A8%EF%BC%9A%E9%80%9A%E7%94%A8%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>参考：<a href="https://www.runoob.com/mongodb/mongodb-linux-install.html">https://www.runoob.com/mongodb/mongodb-linux-install.html</a></p>
-<p>下载：<a href="https://www.mongodb.com/try/download/community">https://www.mongodb.com/try/download/community</a></p>
-<h2 id="管理命令"><a href="#管理命令" class="headerlink" title="管理命令"></a>管理命令</h2><h3 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mongo 192.168.122.12:27017/admin -u admin -p inspur@123</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建admin用户</span></span><br><span class="line">&gt; db.createUser(&#123;user:&quot;admin&quot;,pwd:&quot;inspur@123&quot;,roles:[&#123;&quot;role&quot;:&quot;userAdminAnyDatabase&quot;,&quot;db&quot;:&quot;admin&quot;&#125;]&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有用户</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>通用手册</tag>
-        <tag>MongoDB</tag>
       </tags>
   </entry>
   <entry>
@@ -2351,12 +2448,12 @@
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Percona Server由领先的MySQL咨询公司Percona发布。Percona Server是一款独立的数据库产品，其可以完全与MySQL兼容，可以在不更改代码的情况了下将存储引擎更换成XtraDB 。</p>
 <p>Percona团队的最终声明是“Percona Server是由Oracle发布的最接近官方MySQL Enterprise发行版的版本”，因此与其他更改了大量基本核心MySQL代码的分支有所区别。Percona Server的一个缺点是他们自己管理代码，不接受外部开发人员的贡献，以这种方式确保他们对产品中所包含功能的控制。</p>
 <p>官网地址：<a href="http://www.percona.com/">http://www.percona.com/</a></p>
-<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><ul>
+<h2 id="基于CentOS安装Percona-Server"><a href="#基于CentOS安装Percona-Server" class="headerlink" title="基于CentOS安装Percona Server"></a>基于CentOS安装Percona Server</h2><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><ul>
 <li><strong>规格：</strong>4C8G，100G数据盘</li>
 <li><strong>系统：</strong>CentOS Linux release 7.9.2009 (Core)</li>
 <li><strong>MySQL版本：</strong>Percona Server 5.7.35-38</li>
 </ul>
-<h2 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h2><ol>
+<h3 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h3><ol>
 <li><p>下载地址：</p>
 <ul>
 <li>Percona Server 5.7.35-38：<a href="https://pan.baidu.com/s/11N7a3WeZ-Qa-7in_X0fdMA">https://pan.baidu.com/s/11N7a3WeZ-Qa-7in_X0fdMA</a>   提取码：8p8f</li>
@@ -2394,14 +2491,52 @@
 
 
 
-<h2 id="登录数据库"><a href="#登录数据库" class="headerlink" title="登录数据库"></a>登录数据库</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@mysql-5 ~]# mysql -uroot -pInspur@123</span><br><span class="line">mysql: [Warning] Using a password on the command line interface can be insecure.</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 205</span><br><span class="line">Server version: 5.7.35-38 Percona Server (GPL), Release 38, Revision 3692a61</span><br><span class="line"></span><br><span class="line">Copyright (c) 2009-2021 Percona LLC and/or its affiliates</span><br><span class="line">Copyright (c) 2000, 2021, Oracle and/or its affiliates.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="登录数据库"><a href="#登录数据库" class="headerlink" title="登录数据库"></a>登录数据库</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@mysql-5 ~]# mysql -uroot -pInspur@123</span><br><span class="line">mysql: [Warning] Using a password on the command line interface can be insecure.</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 205</span><br><span class="line">Server version: 5.7.35-38 Percona Server (GPL), Release 38, Revision 3692a61</span><br><span class="line"></span><br><span class="line">Copyright (c) 2009-2021 Percona LLC and/or its affiliates</span><br><span class="line">Copyright (c) 2000, 2021, Oracle and/or its affiliates.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 
+<h2 id="基于Ubuntu安装Percona-Server"><a href="#基于Ubuntu安装Percona-Server" class="headerlink" title="基于Ubuntu安装Percona Server"></a>基于Ubuntu安装Percona Server</h2><h3 id="环境配置-1"><a href="#环境配置-1" class="headerlink" title="环境配置"></a>环境配置</h3><ul>
+<li><strong>规格：</strong>4C8G，100G数据盘</li>
+<li><strong>系统：</strong>CentOS Linux release 7.9.2009 (Core)</li>
+<li><strong>MySQL版本：</strong>Percona Server 5.7.35-38</li>
+</ul>
+<h3 id="安装流程-1"><a href="#安装流程-1" class="headerlink" title="安装流程"></a>安装流程</h3><ol>
+<li><p>Install <code>GnuPG</code>, the GNU Privacy Guard:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo apt install gnupg2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Fetch the repository packages from Percona web:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ wget https:&#x2F;&#x2F;repo.percona.com&#x2F;apt&#x2F;percona-release_latest.$(lsb_release -sc)_all.deb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Install the downloaded package with <strong>dpkg</strong>. To do that, run the following commands as root or with <strong>sudo</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo dpkg -i percona-release_latest.$(lsb_release -sc)_all.deb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Remember to update the local cache:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo apt update</span><br></pre></td></tr></table></figure>
 
+<p>Once you install this package the Percona repositories should be added. You can check the repository setup in the <code>/etc/apt/sources.list.d/percona-release.list</code> file.</p>
+</li>
+<li><p>After that you can install the server package:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo apt install percona-server-server-5.7</span><br></pre></td></tr></table></figure>
 
+</li>
+</ol>
+<blockquote>
+<p>Note</p>
+<p><em>Percona Server for MySQL</em> 5.7 comes with the <a href="https://www.percona.com/doc/percona-server/5.7/tokudb/tokudb_intro.html#tokudb-intro">TokuDB storage engine</a> and <a href="https://www.percona.com/doc/percona-server/5.7/myrocks/index.html#myrocks-intro">MyRocks storage engine</a>. These storage engines are installed as plugin.</p>
+<p>For information on how to install and configure TokuDB, refer to the <a href="https://www.percona.com/doc/percona-server/5.7/tokudb/tokudb_installation.html#tokudb-installation">TokuDB Installation</a> guide.</p>
+<p>For information on how to install and configure MyRocks, refer to the <a href="https://www.percona.com/doc/percona-server/5.7/myrocks/install.html#myrocks-install">Percona MyRocks Installation Guide</a> guide.</p>
+</blockquote>
+<p>The <em>Percona Server for MySQL</em> distribution contains several useful User Defined Functions (UDF) from Percona Toolkit. After the installation completes, run the following commands to create these functions:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql -e &quot;CREATE FUNCTION fnvla_64 RETURNS INTEGER SONAME &#39;libfnvla_udf.so&#39;&quot;</span><br><span class="line">mysql -e &quot;CREATE FUNCTION fnv_64 RETURNS INTEGER SONAME &#39;libfnv_udf.so&#39;&quot;</span><br><span class="line">mysql -e &quot;CREATE FUNCTION murmur_hash RETURNS INTEGER SONAME &#39;libmurmur_udf.so&#39;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>For more details on the UDFs, see <a href="https://www.percona.com/doc/percona-server/5.7/management/udf_percona_toolkit.html">Percona Toolkit UDFS</a>.</p>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://www.percona.com/software/documentation">Percona官方文档</a></li>
+<li><a href="https://www.percona.com/doc/percona-server/5.7/index.html">Percona官方文档：<em>Percona Server for MySQL</em> 5.7 - Documentation</a></li>
+<li><a href="https://www.percona.com/doc/percona-server/8.0/index.html">Percona官方文档：<em>Percona Server for MySQL</em> 8.0 - Documentation</a></li>
 <li><a href="https://www.percona.com/doc/percona-server/5.7/installation/yum_repo.html">Percona官方文档：Installing <em>Percona Server for MySQL</em> on Red Hat Enterprise Linux and CentOS</a></li>
+<li><a href="https://repo.percona.com/apt/">Percona官方资源：Ubuntu系统</a></li>
+<li><a href="https://www.cnblogs.com/keme/p/10239838.html">Percona 数据库</a></li>
 <li><a href="https://dev.mysql.com/doc/refman/5.7/en/preface.html">MySQL官方文档</a></li>
 <li><a href="https://www.biaodianfu.com/mysql-percona-or-mariadb.html">MySQL分支的选择：Percona还是MariaDB</a></li>
 <li><a href="https://www.cnblogs.com/dingkailinux/p/8881327.html">Mysql-Percona mysql5.7简单安装</a></li>
@@ -2413,6 +2548,52 @@
       <tags>
         <tag>MySQL</tag>
         <tag>Percona</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NVIDIA使用：vGPU</title>
+    <url>/2022/03/30/NVIDIA%E4%BD%BF%E7%94%A8%EF%BC%9AvGPU/</url>
+    <content><![CDATA[<h2 id="vGPU选择"><a href="#vGPU选择" class="headerlink" title="vGPU选择"></a>vGPU选择</h2><p>NVIDIA 虚拟 GPU 软件产品包括 GRID 虚拟 PC (GRID vPC)、GRID 虚拟应用程序 (GRID vApp)，以及 Quadro 虚拟数据中心工作站 (Quadro vDWS)。</p>
+<ul>
+<li>vGPU推荐对比：<a href="https://link.zhihu.com/?target=https://www.nvidia.cn/data-center/graphics-cards-for-virtualization/">https://www.nvidia.cn/data-center/graphics-cards-for-virtualization/</a></li>
+<li>vGPU支持型号：<a href="https://link.zhihu.com/?target=https://docs.nvidia.com/grid/gpus-supported-by-vgpu.html">https://docs.nvidia.com/grid/gpus-supported-by-vgpu.html</a></li>
+<li>vGPU支持服务器：<a href="https://www.nvidia.com/en-us/data-center/resources/vgpu-certified-servers/">https://www.nvidia.com/en-us/data-center/resources/vgpu-certified-servers/</a></li>
+</ul>
+<p><img src="/2022/03/30/NVIDIA%E4%BD%BF%E7%94%A8%EF%BC%9AvGPU/vGPU%E6%94%AF%E6%8C%81%E6%83%85%E5%86%B5.png" alt="vGPU支持情况"></p>
+<h2 id="vGPU驱动安装"><a href="#vGPU驱动安装" class="headerlink" title="vGPU驱动安装"></a>vGPU驱动安装</h2><blockquote>
+<p>vGPU驱动说明：</p>
+<p>A physical GPU that is passed through to a VM is bound to the vfio-pci kernel module. A physical GPU that is bound to the vfio-pci kernel module can be used only for pass-through. To enable the GPU to be used for vGPU, the GPU must be unbound from vfio-pci kernel module and bound to the nvidia kernel module.</p>
+</blockquote>
+<h3 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h3><ul>
+<li>系统：CentOS Linux release 7.8.2003 (Core)</li>
+<li>内核：3.10.0-1127.el7.x86_64</li>
+</ul>
+<h3 id="驱动安装"><a href="#驱动安装" class="headerlink" title="驱动安装"></a>驱动安装</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看GPU信息</span></span><br><span class="line">[root@k205 ~]# lspci -nnn -D | grep NVIDIA</span><br><span class="line">0000:86:00.0 3D controller [0302]: NVIDIA Corporation TU104GL [Tesla T4] [10de:1eb8] (rev a1)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 基础依赖包</span></span><br><span class="line">[root@k205 ~]# yum install -y gcc</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装NVIDIA驱动</span></span><br><span class="line">[root@k205 ~]# ./NVIDIA-Linux-x86_64-460.32.04-vgpu-kvm.run</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题汇总"><a href="#问题汇总" class="headerlink" title="问题汇总"></a>问题汇总</h3><p><strong>问题1：</strong>安装报<code>X library path &#39;/usr/lib64&#39; ... were not queryable from the system</code>，问题截图如下：</p>
+<p><img src="/2022/03/30/NVIDIA%E4%BD%BF%E7%94%A8%EF%BC%9AvGPU/%E9%97%AE%E9%A2%981.png" alt="X library not queryable"></p>
+<p><strong>解决办法：</strong>关闭<code>vnc server</code></p>
+<h2 id="vGPU使用"><a href="#vGPU使用" class="headerlink" title="vGPU使用"></a>vGPU使用</h2><h3 id="宿主机使用"><a href="#宿主机使用" class="headerlink" title="宿主机使用"></a>宿主机使用</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看GPU PCI信息</span></span><br><span class="line">[root@k205 ~]# lspci -nnn -D | grep NVIDIA</span><br><span class="line">0000:86:00.0 3D controller [0302]: NVIDIA Corporation TU104GL [Tesla T4] [10de:1eb8] (rev a1)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看GPU PCI详情</span></span><br><span class="line">[root@k205 ~]# lspci -d 10de: -k</span><br><span class="line">86:00.0 3D controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1)</span><br><span class="line">        Subsystem: NVIDIA Corporation Device 12a2</span><br><span class="line">        Kernel driver in use: nvidia</span><br><span class="line">        Kernel modules: nouveau, nvidia_vgpu_vfio, nvidia</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看支持的vGPU类型</span></span><br><span class="line">[root@k205 mdev_supported_types]# cd /sys/class/mdev_bus/0000:86:00.0/mdev_supported_types &amp;&amp; ls</span><br><span class="line">nvidia-222  nvidia-224  nvidia-226  nvidia-228  nvidia-230  nvidia-232  nvidia-234  nvidia-319  nvidia-321</span><br><span class="line">nvidia-223  nvidia-225  nvidia-227  nvidia-229  nvidia-231  nvidia-233  nvidia-252  nvidia-320</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看指定类型vGPU信息</span></span><br><span class="line">[root@k205 mdev_supported_types]# cat nvidia-222/name</span><br><span class="line">GRID T4-1B</span><br><span class="line">[root@k205 mdev_supported_types]# cat nvidia-222/available_instances</span><br><span class="line">16</span><br><span class="line">[root@k205 mdev_supported_types]# cat nvidia-222/description</span><br><span class="line">num_heads=4, frl_config=45, framebuffer=1024M, max_resolution=5120x2880, max_instance=16</span><br><span class="line"><span class="meta">#</span><span class="bash"> PS:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> num_heads: The maximum number of virtual display heads that the vGPU <span class="built_in">type</span> supports</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> frl_config: The frame rate limiter (FRL) configuration <span class="keyword">in</span> frames per second</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> framebuffer: The frame buffer size <span class="keyword">in</span> Mbytes</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> max_resolution: The maximum resolution per display head</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> max_instance: The maximum number of vGPU instances per physical GPU</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建vGPU</span></span><br><span class="line">[root@k205 mdev_supported_types]# uuidgen</span><br><span class="line">8da209ce-7865-48f0-9b04-fd6ef55dca63</span><br><span class="line">[root@k205 mdev_supported_types]# echo 8da209ce-7865-48f0-9b04-fd6ef55dca63 &gt; nvidia-222/create</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看现有vGPU设备</span></span><br><span class="line">[root@k205 mdev_supported_types]# ls /sys/bus/mdev/devices/</span><br><span class="line">8da209ce-7865-48f0-9b04-fd6ef55dca63</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除指定vGPU设备</span></span><br><span class="line">[root@k205 mdev_supported_types]# echo 1 &gt; nvidia-222/devices/8da209ce-7865-48f0-9b04-fd6ef55dca63/remove</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 脚本</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所有vGPU类型信息</span></span><br><span class="line">vGPU_DIR=&#x27;/sys/class/mdev_bus/0000:86:00.0/mdev_supported_types&#x27;</span><br><span class="line">for type in $(ls $vGPU_DIR)</span><br><span class="line">do</span><br><span class="line">	echo &quot;-----&quot;</span><br><span class="line">	echo &quot;$type&quot;</span><br><span class="line">	echo &quot;name: $(cat $vGPU_DIR/$type/name)&quot;</span><br><span class="line">	echo &quot;description: $(cat $vGPU_DIR/$type/description)&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="虚机使用"><a href="#虚机使用" class="headerlink" title="虚机使用"></a>虚机使用</h3><p>创建虚机增加如下配置：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-device vfio-pci,sysfsdev=/sys/bus/mdev/devices/8da209ce-7865-48f0-9b04-fd6ef55dca63 -uuid xxxxxxxxxxxxxxxxxxxxx</span><br></pre></td></tr></table></figure>
+
+<p>虚机xml内相关配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hostdev</span> <span class="attr">mode</span>=<span class="string">&#x27;subsystem&#x27;</span> <span class="attr">type</span>=<span class="string">&#x27;mdev&#x27;</span> <span class="attr">managed</span>=<span class="string">&#x27;no&#x27;</span> <span class="attr">model</span>=<span class="string">&#x27;vfio-pci&#x27;</span> <span class="attr">display</span>=<span class="string">&#x27;off&#x27;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">address</span> <span class="attr">uuid</span>=<span class="string">&#x27;8da209ce-7865-48f0-9b04-fd6ef55dca63&#x27;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">alias</span> <span class="attr">name</span>=<span class="string">&#x27;hostdev0&#x27;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">address</span> <span class="attr">type</span>=<span class="string">&#x27;pci&#x27;</span> <span class="attr">domain</span>=<span class="string">&#x27;0x0000&#x27;</span> <span class="attr">bus</span>=<span class="string">&#x27;0x00&#x27;</span> <span class="attr">slot</span>=<span class="string">&#x27;0x07&#x27;</span> <span class="attr">function</span>=<span class="string">&#x27;0x0&#x27;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hostdev</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>后面就是虚拟机内部安装对应的驱动程序了，一般名称为：<em>xxxx_grid_win10_server2016_server2019_64bit_international.exe</em></p>
+<h2 id="vGPU授权"><a href="#vGPU授权" class="headerlink" title="vGPU授权"></a>vGPU授权</h2><p>NVIDIA的vGPU在虚拟机内部使用是需要购买license的，具体的部署方式是需要搭建一台授权服务器，虚拟机内部安装显卡驱动后需要配置授权服务器的地址和端口，前提是虚拟机和授权服务器网络是通的，虚拟机每次开机后都要连接到授权服务器进行授权。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://docs.nvidia.com/grid/9.0/grid-vgpu-user-guide/index.html#abstract">NVIDIA官方文档：Virtual GPU Software User Guide</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/424967206">英伟达显卡虚拟化vGPU实践指南</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Accelerator</category>
+      </categories>
+      <tags>
+        <tag>NVIDIA</tag>
+        <tag>Accelerator</tag>
       </tags>
   </entry>
   <entry>
@@ -2624,6 +2805,37 @@
       </tags>
   </entry>
   <entry>
+    <title>OpenStack开发：Glance Image Soft Delete</title>
+    <url>/2021/01/05/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9AGlance-Image-Soft-Delete/</url>
+    <content><![CDATA[<h2 id="Configuration-options-for-the-Image-Soft-Delete"><a href="#Configuration-options-for-the-Image-Soft-Delete" class="headerlink" title="Configuration options for the Image Soft Delete"></a>Configuration options for the Image Soft Delete</h2><p>Config File：<code>glance-api.conf</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[DEFAULT]</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on/off delayed delete.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Typically when an image is deleted, the ``glance-api`` service puts the image</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> into ``deleted`` state and deletes its data at the same time. Delayed delete</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> is a feature <span class="keyword">in</span> Glance that delays the actual deletion of image data until a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> later point <span class="keyword">in</span> time (as determined by the configuration option</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ``scrub_time``).</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> When delayed delete is turned on, the ``glance-api`` service puts the image</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> into ``pending_delete`` state upon deletion and leaves the image data <span class="keyword">in</span> the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> storage backend <span class="keyword">for</span> the image scrubber to delete at a later time. The image</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> scrubber will move the image into ``deleted`` state upon successful deletion</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> of image data.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NOTE: When delayed delete is turned on, image scrubber MUST be running as a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> periodic task to prevent the backend storage from filling up with undesired</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> usage.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible values:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * True</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * False</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Related options:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``scrub_time``</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``wakeup_time``</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``scrub_pool_size``</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  (boolean value)</span></span><br><span class="line">delayed_delete = True</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> The amount of time, <span class="keyword">in</span> seconds, to delay image scrubbing.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> When delayed delete is turned on, an image is put into ``pending_delete``</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> state upon deletion until the scrubber deletes its image data. Typically, soon</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> after the image is put into ``pending_delete`` state, it is available <span class="keyword">for</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> scrubbing. However, scrubbing can be delayed until a later point using this</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> configuration option. This option denotes the time period an image spends <span class="keyword">in</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ``pending_delete`` state before it is available <span class="keyword">for</span> scrubbing.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> It is important to realize that this has storage implications. The larger the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ``scrub_time``, the longer the time to reclaim backend storage from deleted</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> images.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible values:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * Any non-negative <span class="built_in">integer</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Related options:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``delayed_delete``</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  (<span class="built_in">integer</span> value)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Minimum value: 0</span></span><br><span class="line">scrub_time = 9999999999999</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><p><a href="https://blog.csdn.net/zhongbeida_xue/article/details/89016403">openstack中glance镜像的延迟删除、软删除、删除保护</a></p>
+</li>
+<li><p><a href="https://docs.openstack.org/train/api/index.html">OpenStack Train API Reference Documentation</a></p>
+</li>
+<li><p><a href="https://docs.openstack.org/api-ref/compute/?expanded=#delete-server">OpenStack API Documentation: Compute API</a></p>
+</li>
+<li><p><a href="https://docs.openstack.org/api-ref/image/v2/?expanded=">OpenStack API Documentation: Image Service API v2 (CURRENT)</a></p>
+</li>
+<li><p><a href="https://docs.openstack.org/api-ref/image/v2/?expanded=">OpenStack API Documentation: Using Glance’s Image Public APIs</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>OpenStack</category>
+      </categories>
+      <tags>
+        <tag>OpenStack</tag>
+        <tag>Glance</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OpenStack开发：Glance Image Cache</title>
     <url>/2020/12/22/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9AGlance-Image-Cache/</url>
     <content><![CDATA[<h2 id="The-Glance-Image-Cache"><a href="#The-Glance-Image-Cache" class="headerlink" title="The Glance Image Cache"></a>The Glance Image Cache</h2><blockquote>
@@ -2734,37 +2946,6 @@
 <li><p><a href="https://docs.openstack.org/glance/train/admin/">OpenStack Documentation：Glance Administration Guide</a></p>
 </li>
 <li><p><a href="https://docs.openstack.org/glance/train/configuration/configuring.html">OpenStack Documentation：Basic Configuration</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>OpenStack</category>
-      </categories>
-      <tags>
-        <tag>OpenStack</tag>
-        <tag>Glance</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenStack开发：Glance Image Soft Delete</title>
-    <url>/2021/01/05/OpenStack%E5%BC%80%E5%8F%91%EF%BC%9AGlance-Image-Soft-Delete/</url>
-    <content><![CDATA[<h2 id="Configuration-options-for-the-Image-Soft-Delete"><a href="#Configuration-options-for-the-Image-Soft-Delete" class="headerlink" title="Configuration options for the Image Soft Delete"></a>Configuration options for the Image Soft Delete</h2><p>Config File：<code>glance-api.conf</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[DEFAULT]</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on/off delayed delete.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Typically when an image is deleted, the ``glance-api`` service puts the image</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> into ``deleted`` state and deletes its data at the same time. Delayed delete</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> is a feature <span class="keyword">in</span> Glance that delays the actual deletion of image data until a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> later point <span class="keyword">in</span> time (as determined by the configuration option</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ``scrub_time``).</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> When delayed delete is turned on, the ``glance-api`` service puts the image</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> into ``pending_delete`` state upon deletion and leaves the image data <span class="keyword">in</span> the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> storage backend <span class="keyword">for</span> the image scrubber to delete at a later time. The image</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> scrubber will move the image into ``deleted`` state upon successful deletion</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> of image data.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NOTE: When delayed delete is turned on, image scrubber MUST be running as a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> periodic task to prevent the backend storage from filling up with undesired</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> usage.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible values:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * True</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * False</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Related options:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``scrub_time``</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``wakeup_time``</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``scrub_pool_size``</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  (boolean value)</span></span><br><span class="line">delayed_delete = True</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> The amount of time, <span class="keyword">in</span> seconds, to delay image scrubbing.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> When delayed delete is turned on, an image is put into ``pending_delete``</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> state upon deletion until the scrubber deletes its image data. Typically, soon</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> after the image is put into ``pending_delete`` state, it is available <span class="keyword">for</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> scrubbing. However, scrubbing can be delayed until a later point using this</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> configuration option. This option denotes the time period an image spends <span class="keyword">in</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ``pending_delete`` state before it is available <span class="keyword">for</span> scrubbing.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> It is important to realize that this has storage implications. The larger the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ``scrub_time``, the longer the time to reclaim backend storage from deleted</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> images.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible values:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * Any non-negative <span class="built_in">integer</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Related options:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     * ``delayed_delete``</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  (<span class="built_in">integer</span> value)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Minimum value: 0</span></span><br><span class="line">scrub_time = 9999999999999</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><p><a href="https://blog.csdn.net/zhongbeida_xue/article/details/89016403">openstack中glance镜像的延迟删除、软删除、删除保护</a></p>
-</li>
-<li><p><a href="https://docs.openstack.org/train/api/index.html">OpenStack Train API Reference Documentation</a></p>
-</li>
-<li><p><a href="https://docs.openstack.org/api-ref/compute/?expanded=#delete-server">OpenStack API Documentation: Compute API</a></p>
-</li>
-<li><p><a href="https://docs.openstack.org/api-ref/image/v2/?expanded=">OpenStack API Documentation: Image Service API v2 (CURRENT)</a></p>
-</li>
-<li><p><a href="https://docs.openstack.org/api-ref/image/v2/?expanded=">OpenStack API Documentation: Using Glance’s Image Public APIs</a></p>
 </li>
 </ul>
 ]]></content>
@@ -2956,6 +3137,52 @@
       <tags>
         <tag>OpenStack</tag>
         <tag>Glance</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenStack部署：Trove</title>
+    <url>/2021/08/05/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9ATrove/</url>
+    <content><![CDATA[<h2 id="Building-guest-image"><a href="#Building-guest-image" class="headerlink" title="Building guest image"></a>Building guest image</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 构建镜像踩的坑（基于Wallaby版源码做的修改）：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. apt、pip源为国外源，下载慢，大概率失败，需要替换为国内源</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 编译ubuntu镜像时，宿主机为centos，导致pkg_map解析包名错误。需增加如下环境变量：<span class="built_in">export</span> DISTRO_NAME=<span class="variable">$&#123;guest_os&#125;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3. root密码没有，无法登陆。需下functions_qemu文件中，增加<span class="built_in">local</span> root_password=<span class="string">&quot;inspur_trove@123&quot;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4. elements guest-agent中<span class="built_in">source</span>-repository-guest-agent获取位置需要修改，调整为本地代码库及本地文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 5. v版之后，guest-agent镜像切换为docker，docker image从docker源上下载。如果本地为http源，则需要打包镜像时将该域名添加为insecure-registries</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 6. ubuntu系统自带的systemd-resolved服务，会导致域名解析文件不生效。解决办法如下：ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 基础参数</span></span><br><span class="line">guest_os=ubuntu</span><br><span class="line">guest_os_release=bionic</span><br><span class="line">dev_mode=false</span><br><span class="line">guest_username=ubuntu</span><br><span class="line">output_image_path=$HOME/images/trove-guest-$&#123;guest_os&#125;-$&#123;guest_os_release&#125;.qcow2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入trove/integration/scripts目录，执行如下构建镜像命令，前期准备注意以下两点：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. 需要切换为普通用户执行</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 普通用户最好可以免密sudo</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./trovestack build-image \</span></span><br><span class="line">    $&#123;guest_os&#125; \</span><br><span class="line">    $&#123;guest_os_release&#125; \</span><br><span class="line">    $&#123;dev_mode&#125; \</span><br><span class="line">    $&#123;guest_username&#125; \</span><br><span class="line">    $&#123;output_image_path&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 上传镜像至glance</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack image create trove-guest-ubuntu-bionic<span class="_">-a</span> \</span></span><br><span class="line">  --private \</span><br><span class="line">  --disk-format qcow2 \</span><br><span class="line">  --container-format bare \</span><br><span class="line">  --tag trove --tag mysql \</span><br><span class="line">  --file ~/trove-guest-ubuntu-bionic.qcow2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 镜像与trove关联</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack datastore version create 8.0 mysql mysql <span class="string">&quot;&quot;</span> \</span></span><br><span class="line">  --image-tags trove,mysql \</span><br><span class="line">  --active --default</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 同步数据库配置</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> trove-manage db_load_datastore_config_parameters mysql 8.0 \</span></span><br><span class="line">  /var/lib/kolla/venv/lib/python3.6/site-packages/trove/templates/mysql/validation-rules.json</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看datastore version</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack datastore version list mysql</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除datastore version</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack datastore version delete &lt; datastore version id &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新datastore version关联镜像</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack datastore version <span class="built_in">set</span> --image &lt; image id &gt; &lt; datastore version id &gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="Create-database-instance"><a href="#Create-database-instance" class="headerlink" title="Create database instance"></a>Create database instance</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 基础环境准备：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. 数据库实例所使用的网络必须内网，且存在一个路由与外部网络连接</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 数据库实例所在网络必须与rabbitmq可以通信</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3. 数据库实例所在的网络必须可以解析到registry.local域名</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建数据库实例</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack database instance create mysql_instance_1 \</span></span><br><span class="line">    --flavor mysql \</span><br><span class="line">    --size 5 \</span><br><span class="line">    --nic net-id=a899ca4e-95ed-4e91-8877-562e24200ce4 \</span><br><span class="line">    --databases test --users demo:password \</span><br><span class="line">    --datastore mysql --datastore-version 8.0 \</span><br><span class="line">    --is-public \</span><br><span class="line">    --allowed-cidr 0.0.0.0/0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看数据库实例</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack database instance list</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看数据库实例虚机</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack server list --all</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="DEV"><a href="#DEV" class="headerlink" title="DEV"></a>DEV</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 放通实例安全组ssh端口</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack security group rule create --ingress --ethertype IPv4 --dst-port 22 --protocol tcp --remote-ip 0.0.0.0/0 &lt; security group id &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 放通实例安全组icmp</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack security group rule create --ingress --ethertype IPv4 --protocol icmp --remote-ip 0.0.0.0/0 &lt; security group id &gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><p><a href="https://wiki.openstack.org/wiki/Trove">WIKI：Trove</a></p>
+</li>
+<li><p><a href="https://docs.openstack.org/trove/wallaby/install/install-redhat.html">OpenStack Documentation：Install and configure for Red Hat Enterprise Linux and CentOS</a></p>
+</li>
+<li><p><a href="https://docs.openstack.org/trove/wallaby/user/create-db.html">OpenStack Documentation：Create and access a database instance</a></p>
+</li>
+<li><p><a href="https://docs.openstack.org/trove/latest/user/set-up-clustering.html">OpenStack Documentation：Set up database clustering</a></p>
+</li>
+<li><p><a href="https://docs.openstack.org/trove/wallaby/admin/upgrade.html">OpenStack Documentation：Trove upgrade</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/jackyzzy/p/7384347.html">OpenStack trove原理及配置实践</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/mh20131118/p/12970338.html">OpenStack的Trove组件详解</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>OpenStack</category>
+      </categories>
+      <tags>
+        <tag>OpenStack</tag>
+        <tag>Trove</tag>
       </tags>
   </entry>
   <entry>
@@ -3154,52 +3381,6 @@
       <tags>
         <tag>通用手册</tag>
         <tag>Oracle</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenStack部署：Trove</title>
-    <url>/2021/08/05/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9ATrove/</url>
-    <content><![CDATA[<h2 id="Building-guest-image"><a href="#Building-guest-image" class="headerlink" title="Building guest image"></a>Building guest image</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 构建镜像踩的坑（基于Wallaby版源码做的修改）：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. apt、pip源为国外源，下载慢，大概率失败，需要替换为国内源</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 编译ubuntu镜像时，宿主机为centos，导致pkg_map解析包名错误。需增加如下环境变量：<span class="built_in">export</span> DISTRO_NAME=<span class="variable">$&#123;guest_os&#125;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3. root密码没有，无法登陆。需下functions_qemu文件中，增加<span class="built_in">local</span> root_password=<span class="string">&quot;inspur_trove@123&quot;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4. elements guest-agent中<span class="built_in">source</span>-repository-guest-agent获取位置需要修改，调整为本地代码库及本地文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 5. v版之后，guest-agent镜像切换为docker，docker image从docker源上下载。如果本地为http源，则需要打包镜像时将该域名添加为insecure-registries</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 6. ubuntu系统自带的systemd-resolved服务，会导致域名解析文件不生效。解决办法如下：ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 基础参数</span></span><br><span class="line">guest_os=ubuntu</span><br><span class="line">guest_os_release=bionic</span><br><span class="line">dev_mode=false</span><br><span class="line">guest_username=ubuntu</span><br><span class="line">output_image_path=$HOME/images/trove-guest-$&#123;guest_os&#125;-$&#123;guest_os_release&#125;.qcow2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入trove/integration/scripts目录，执行如下构建镜像命令，前期准备注意以下两点：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. 需要切换为普通用户执行</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 普通用户最好可以免密sudo</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./trovestack build-image \</span></span><br><span class="line">    $&#123;guest_os&#125; \</span><br><span class="line">    $&#123;guest_os_release&#125; \</span><br><span class="line">    $&#123;dev_mode&#125; \</span><br><span class="line">    $&#123;guest_username&#125; \</span><br><span class="line">    $&#123;output_image_path&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 上传镜像至glance</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack image create trove-guest-ubuntu-bionic<span class="_">-a</span> \</span></span><br><span class="line">  --private \</span><br><span class="line">  --disk-format qcow2 \</span><br><span class="line">  --container-format bare \</span><br><span class="line">  --tag trove --tag mysql \</span><br><span class="line">  --file ~/trove-guest-ubuntu-bionic.qcow2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 镜像与trove关联</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack datastore version create 8.0 mysql mysql <span class="string">&quot;&quot;</span> \</span></span><br><span class="line">  --image-tags trove,mysql \</span><br><span class="line">  --active --default</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 同步数据库配置</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> trove-manage db_load_datastore_config_parameters mysql 8.0 \</span></span><br><span class="line">  /var/lib/kolla/venv/lib/python3.6/site-packages/trove/templates/mysql/validation-rules.json</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看datastore version</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack datastore version list mysql</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除datastore version</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack datastore version delete &lt; datastore version id &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新datastore version关联镜像</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack datastore version <span class="built_in">set</span> --image &lt; image id &gt; &lt; datastore version id &gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="Create-database-instance"><a href="#Create-database-instance" class="headerlink" title="Create database instance"></a>Create database instance</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 基础环境准备：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. 数据库实例所使用的网络必须内网，且存在一个路由与外部网络连接</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 数据库实例所在网络必须与rabbitmq可以通信</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3. 数据库实例所在的网络必须可以解析到registry.local域名</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建数据库实例</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack database instance create mysql_instance_1 \</span></span><br><span class="line">    --flavor mysql \</span><br><span class="line">    --size 5 \</span><br><span class="line">    --nic net-id=a899ca4e-95ed-4e91-8877-562e24200ce4 \</span><br><span class="line">    --databases test --users demo:password \</span><br><span class="line">    --datastore mysql --datastore-version 8.0 \</span><br><span class="line">    --is-public \</span><br><span class="line">    --allowed-cidr 0.0.0.0/0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看数据库实例</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack database instance list</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看数据库实例虚机</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack server list --all</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="DEV"><a href="#DEV" class="headerlink" title="DEV"></a>DEV</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 放通实例安全组ssh端口</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack security group rule create --ingress --ethertype IPv4 --dst-port 22 --protocol tcp --remote-ip 0.0.0.0/0 &lt; security group id &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 放通实例安全组icmp</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> openstack security group rule create --ingress --ethertype IPv4 --protocol icmp --remote-ip 0.0.0.0/0 &lt; security group id &gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><p><a href="https://wiki.openstack.org/wiki/Trove">WIKI：Trove</a></p>
-</li>
-<li><p><a href="https://docs.openstack.org/trove/wallaby/install/install-redhat.html">OpenStack Documentation：Install and configure for Red Hat Enterprise Linux and CentOS</a></p>
-</li>
-<li><p><a href="https://docs.openstack.org/trove/wallaby/user/create-db.html">OpenStack Documentation：Create and access a database instance</a></p>
-</li>
-<li><p><a href="https://docs.openstack.org/trove/latest/user/set-up-clustering.html">OpenStack Documentation：Set up database clustering</a></p>
-</li>
-<li><p><a href="https://docs.openstack.org/trove/wallaby/admin/upgrade.html">OpenStack Documentation：Trove upgrade</a></p>
-</li>
-<li><p><a href="https://www.cnblogs.com/jackyzzy/p/7384347.html">OpenStack trove原理及配置实践</a></p>
-</li>
-<li><p><a href="https://www.cnblogs.com/mh20131118/p/12970338.html">OpenStack的Trove组件详解</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>OpenStack</category>
-      </categories>
-      <tags>
-        <tag>OpenStack</tag>
-        <tag>Trove</tag>
       </tags>
   </entry>
   <entry>
@@ -3425,6 +3606,64 @@
       </tags>
   </entry>
   <entry>
+    <title>Python</title>
+    <url>/2022/03/08/Python/</url>
+    <content><![CDATA[<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>在需要调试的代码位置，加入如下代码，即可进入PDB交互式源代码调试模式。详细用法参考官方文档：<a href="https://docs.python.org/zh-cn/3/library/pdb.html">pdb — Python 的调试器</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pdb;pdb.set_trace()</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left"><strong>命令</strong></th>
+<th><strong>解释</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">break 或 b 设置断点</td>
+<td>设置断点</td>
+</tr>
+<tr>
+<td align="left">continue 或 c</td>
+<td>继续执行程序</td>
+</tr>
+<tr>
+<td align="left">list 或 l</td>
+<td>查看当前行的代码段</td>
+</tr>
+<tr>
+<td align="left">step 或 s</td>
+<td>进入函数</td>
+</tr>
+<tr>
+<td align="left">return 或 r</td>
+<td>执行代码直到从当前函数返回</td>
+</tr>
+<tr>
+<td align="left">exit 或 q</td>
+<td>中止并退出</td>
+</tr>
+<tr>
+<td align="left">next 或 n</td>
+<td>执行下一行</td>
+</tr>
+<tr>
+<td align="left">pp</td>
+<td>打印变量的值</td>
+</tr>
+<tr>
+<td align="left">help</td>
+<td>帮助</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>开发语言</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis部署：安装文档</title>
     <url>/2021/11/19/Redis%E9%83%A8%E7%BD%B2%EF%BC%9A%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker. Redis provides data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, geospatial indexes, and streams. Redis has built-in replication, Lua scripting, LRU eviction, transactions, and different levels of on-disk persistence, and provides high availability via Redis Sentinel and automatic partitioning with Redis Cluster. <a href="https://redis.io/topics/introduction">Learn more →</a></p>
@@ -3461,32 +3700,6 @@
       </categories>
       <tags>
         <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows使用：通用手册</title>
-    <url>/2021/11/29/Windows%E4%BD%BF%E7%94%A8%EF%BC%9A%E9%80%9A%E7%94%A8%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<h2 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h2><h3 id="远程登录"><a href="#远程登录" class="headerlink" title="远程登录"></a>远程登录</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mstsc</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="计算MD5"><a href="#计算MD5" class="headerlink" title="计算MD5"></a>计算MD5</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">certutil -hashfile  &lt;文件名&gt;  &lt;hash类型&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成MD5</span></span><br><span class="line">certutil -hashfile demo.txt MD5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成SHA1</span></span><br><span class="line">certutil -hashfile demo.txt SHA1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成SHA256</span></span><br><span class="line">certutil -hashfile demo.txt SHA256</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成SHA512</span></span><br><span class="line">certutil -hashfile demo.txt SHA512</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="网卡MTU管理"><a href="#网卡MTU管理" class="headerlink" title="网卡MTU管理"></a>网卡MTU管理</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看各网卡MTU值</span></span><br><span class="line">netsh interface ipv4 show subinterfaces</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改指定网卡MTU值</span></span><br><span class="line">netsh interface ipv4 set subinterface &lt;interface_name&gt; mtu=&lt;value&gt; store=persistent </span><br></pre></td></tr></table></figure>
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>Windows</category>
-      </categories>
-      <tags>
-        <tag>通用手册</tag>
-        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -3627,6 +3840,32 @@
       </categories>
       <tags>
         <tag>TiDB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows使用：通用手册</title>
+    <url>/2021/11/29/Windows%E4%BD%BF%E7%94%A8%EF%BC%9A%E9%80%9A%E7%94%A8%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<h2 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h2><h3 id="远程登录"><a href="#远程登录" class="headerlink" title="远程登录"></a>远程登录</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mstsc</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="计算MD5"><a href="#计算MD5" class="headerlink" title="计算MD5"></a>计算MD5</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">certutil -hashfile  &lt;文件名&gt;  &lt;hash类型&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成MD5</span></span><br><span class="line">certutil -hashfile demo.txt MD5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成SHA1</span></span><br><span class="line">certutil -hashfile demo.txt SHA1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成SHA256</span></span><br><span class="line">certutil -hashfile demo.txt SHA256</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成SHA512</span></span><br><span class="line">certutil -hashfile demo.txt SHA512</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="网卡MTU管理"><a href="#网卡MTU管理" class="headerlink" title="网卡MTU管理"></a>网卡MTU管理</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看各网卡MTU值</span></span><br><span class="line">netsh interface ipv4 show subinterfaces</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改指定网卡MTU值</span></span><br><span class="line">netsh interface ipv4 set subinterface &lt;interface_name&gt; mtu=&lt;value&gt; store=persistent </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Windows</category>
+      </categories>
+      <tags>
+        <tag>通用手册</tag>
+        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -3773,6 +4012,71 @@
       </tags>
   </entry>
   <entry>
+    <title>性能测试工具：Sysbench</title>
+    <url>/2021/12/24/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%EF%BC%9ASysbench/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>源码地址：<a href="https://github.com/akopytov/sysbench">https://github.com/akopytov/sysbench</a></p>
+<blockquote>
+<p>sysbench is a scriptable multi-threaded benchmark tool based on LuaJIT. It is most frequently used for database benchmarks, but can also be used to create arbitrarily complex workloads that do not involve a database server.</p>
+<p>sysbench comes with the following bundled benchmarks:</p>
+<ul>
+<li><code>oltp_*.lua</code>: a collection of OLTP-like database benchmarks</li>
+<li><code>fileio</code>: a filesystem-level benchmark</li>
+<li><code>cpu</code>: a simple CPU benchmark</li>
+<li><code>memory</code>: a memory access benchmark</li>
+<li><code>threads</code>: a thread-based scheduler benchmark</li>
+<li><code>mutex</code>: a POSIX mutex benchmark</li>
+</ul>
+<p><strong>Features</strong></p>
+<ul>
+<li>extensive statistics about rate and latency is available, including latency percentiles and histograms;</li>
+<li>low overhead even with thousands of concurrent threads. sysbench is capable of generating and tracking hundreds of millions of events per second;</li>
+<li>new benchmarks can be easily created by implementing pre-defined hooks in user-provided Lua scripts;</li>
+<li>can be used as a general-purpose Lua interpreter as well, simply replace <code>#!/usr/bin/lua</code> with <code>#!/usr/bin/sysbench</code> in your script.</li>
+</ul>
+</blockquote>
+<p>简单的说，sysbench是一个基于Lua即时编译器（<a href="http://luajit.org/luajit.html">http://luajit.org/luajit.html</a> ）实现的多线程基准测试工具。它被频繁用于数据库基准测试，除此之外，它也可以被用于进行其他复杂的负载测试，比如fileio，cpu，memory等。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>本文以“sysbench-1.0.20”版本为例，下载源码，并编译安装。</p>
+<ol>
+<li>下载地址：<ul>
+<li>sysbench源码：<a href="https://github.com/akopytov/sysbench/releases">https://github.com/akopytov/sysbench/releases</a></li>
+</ul>
+</li>
+<li>安装sysbench的依赖包。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install gcc gcc-c++ automake make libtool mariadb-devel -y</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>下载并安装sysbench。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载sysbench源码</span></span><br><span class="line">wget https://github.com/akopytov/sysbench/archive/refs/tags/1.0.20.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压</span></span><br><span class="line">mv 1.0.20.tar.gz sysbench-1.0.20.tar.gz</span><br><span class="line">tar zxvf sysbench-1.0.20.tar.gz &amp;&amp; cd sysbench-1.0.20</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置及生成编译文件</span></span><br><span class="line">./autogen.sh &amp;&amp; ./configure</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 编译并安装</span></span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 验证sysbench</span></span><br><span class="line">sysbench --version</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="CPU性能测试"><a href="#CPU性能测试" class="headerlink" title="CPU性能测试"></a>CPU性能测试</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 10秒钟CPU素数计算次数</span></span><br><span class="line">sysbench cpu --cpu-max-prime=20000 --threads=1 run</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="内存性能测试"><a href="#内存性能测试" class="headerlink" title="内存性能测试"></a>内存性能测试</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 内存顺序：10秒钟，内存顺序访问次数与速度</span></span><br><span class="line">sysbench memory --threads=1 --memory-block-size=8K --memory-total-size=200G --memory-access-mode=seq run</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 内存随机：10秒钟，内存随机访问次数与速度</span></span><br><span class="line">sysbench memory --threads=1 --memory-block-size=8K --memory-total-size=200G --memory-access-mode=rnd run</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="存储性能测试"><a href="#存储性能测试" class="headerlink" title="存储性能测试"></a>存储性能测试</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">fileio options:</span><br><span class="line">  --file-num=N                  number of files to create [128]</span><br><span class="line">  --file-block-size=N           block size to use in all IO operations [16384]</span><br><span class="line">  --file-total-size=SIZE        total size of files to create [2G]</span><br><span class="line">  --file-test-mode=STRING       test mode &#123;seqwr, seqrewr, seqrd, rndrd, rndwr, rndrw&#125;</span><br><span class="line">  --file-io-mode=STRING         file operations mode &#123;sync,async,mmap&#125; [sync]</span><br><span class="line">  --file-extra-flags=[LIST,...] list of additional flags to use to open files &#123;sync,dsync,direct&#125; []</span><br><span class="line">  --file-fsync-freq=N           do fsync() after this number of requests (0 - don&#x27;t use fsync()) [100]</span><br><span class="line">  --file-fsync-all[=on|off]     do fsync() after each write operation [off]</span><br><span class="line">  --file-fsync-end[=on|off]     do fsync() at the end of test [on]</span><br><span class="line">  --file-fsync-mode=STRING      which method to use for synchronization &#123;fsync, fdatasync&#125; [fsync]</span><br><span class="line">  --file-merged-requests=N      merge at most this number of IO requests if possible (0 - don&#x27;t merge) [0]</span><br><span class="line">  --file-rw-ratio=N             reads/writes ratio for combined test [1.5]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 加载4k测试数据</span></span><br><span class="line">sysbench fileio --threads=1 --file-block-size=4k --file-total-size=20G --file-test-mode=rndrw prepare</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 随机读</span></span><br><span class="line">sysbench fileio --threads=1 --file-block-size=4k --file-total-size=20G --time=60 --file-test-mode=rndrd run</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 随机写</span></span><br><span class="line">sysbench fileio --threads=1 --file-block-size=4k --file-total-size=20G --time=60 --file-test-mode=rndwr run</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 加载1M测试数据</span></span><br><span class="line">sysbench fileio --threads=1 --file-block-size=1M --file-total-size=20G --file-test-mode=rndrw prepare</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 顺序读</span></span><br><span class="line">sysbench fileio --threads=1 --file-block-size=1M --file-total-size=20G --time=60 --file-test-mode=seqrd run</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 顺序写</span></span><br><span class="line">sysbench fileio --threads=1 --file-block-size=1M --file-total-size=20G --time=60 --file-test-mode=seqwr run</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="MySQL性能测试"><a href="#MySQL性能测试" class="headerlink" title="MySQL性能测试"></a>MySQL性能测试</h3><p>参考本博客文档：《MySQL测试：性能基准测试》</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://github.com/akopytov/sysbench">Github：sysbench</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>性能测试工具</category>
+      </categories>
+      <tags>
+        <tag>Sysbench</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Jmeter</title>
     <url>/2020/09/23/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%EF%BC%9AJmeter/</url>
     <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
@@ -3845,71 +4149,6 @@
       </categories>
       <tags>
         <tag>Jmeter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>性能测试工具：Sysbench</title>
-    <url>/2021/12/24/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%EF%BC%9ASysbench/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>源码地址：<a href="https://github.com/akopytov/sysbench">https://github.com/akopytov/sysbench</a></p>
-<blockquote>
-<p>sysbench is a scriptable multi-threaded benchmark tool based on LuaJIT. It is most frequently used for database benchmarks, but can also be used to create arbitrarily complex workloads that do not involve a database server.</p>
-<p>sysbench comes with the following bundled benchmarks:</p>
-<ul>
-<li><code>oltp_*.lua</code>: a collection of OLTP-like database benchmarks</li>
-<li><code>fileio</code>: a filesystem-level benchmark</li>
-<li><code>cpu</code>: a simple CPU benchmark</li>
-<li><code>memory</code>: a memory access benchmark</li>
-<li><code>threads</code>: a thread-based scheduler benchmark</li>
-<li><code>mutex</code>: a POSIX mutex benchmark</li>
-</ul>
-<p><strong>Features</strong></p>
-<ul>
-<li>extensive statistics about rate and latency is available, including latency percentiles and histograms;</li>
-<li>low overhead even with thousands of concurrent threads. sysbench is capable of generating and tracking hundreds of millions of events per second;</li>
-<li>new benchmarks can be easily created by implementing pre-defined hooks in user-provided Lua scripts;</li>
-<li>can be used as a general-purpose Lua interpreter as well, simply replace <code>#!/usr/bin/lua</code> with <code>#!/usr/bin/sysbench</code> in your script.</li>
-</ul>
-</blockquote>
-<p>简单的说，sysbench是一个基于Lua即时编译器（<a href="http://luajit.org/luajit.html">http://luajit.org/luajit.html</a> ）实现的多线程基准测试工具。它被频繁用于数据库基准测试，除此之外，它也可以被用于进行其他复杂的负载测试，比如fileio，cpu，memory等。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>本文以“sysbench-1.0.20”版本为例，下载源码，并编译安装。</p>
-<ol>
-<li>下载地址：<ul>
-<li>sysbench源码：<a href="https://github.com/akopytov/sysbench/releases">https://github.com/akopytov/sysbench/releases</a></li>
-</ul>
-</li>
-<li>安装sysbench的依赖包。</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install gcc gcc-c++ automake make libtool mariadb-devel -y</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>下载并安装sysbench。</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载sysbench源码</span></span><br><span class="line">wget https://github.com/akopytov/sysbench/archive/refs/tags/1.0.20.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压</span></span><br><span class="line">mv 1.0.20.tar.gz sysbench-1.0.20.tar.gz</span><br><span class="line">tar zxvf sysbench-1.0.20.tar.gz &amp;&amp; cd sysbench-1.0.20</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置及生成编译文件</span></span><br><span class="line">./autogen.sh &amp;&amp; ./configure</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 编译并安装</span></span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 验证sysbench</span></span><br><span class="line">sysbench --version</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="CPU性能测试"><a href="#CPU性能测试" class="headerlink" title="CPU性能测试"></a>CPU性能测试</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 10秒钟CPU素数计算次数</span></span><br><span class="line">sysbench cpu --cpu-max-prime=20000 --threads=1 run</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="内存性能测试"><a href="#内存性能测试" class="headerlink" title="内存性能测试"></a>内存性能测试</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 内存顺序：10秒钟，内存顺序访问次数与速度</span></span><br><span class="line">sysbench memory --threads=1 --memory-block-size=8K --memory-total-size=200G --memory-access-mode=seq run</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 内存随机：10秒钟，内存随机访问次数与速度</span></span><br><span class="line">sysbench memory --threads=1 --memory-block-size=8K --memory-total-size=200G --memory-access-mode=rnd run</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="存储性能测试"><a href="#存储性能测试" class="headerlink" title="存储性能测试"></a>存储性能测试</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">fileio options:</span><br><span class="line">  --file-num=N                  number of files to create [128]</span><br><span class="line">  --file-block-size=N           block size to use in all IO operations [16384]</span><br><span class="line">  --file-total-size=SIZE        total size of files to create [2G]</span><br><span class="line">  --file-test-mode=STRING       test mode &#123;seqwr, seqrewr, seqrd, rndrd, rndwr, rndrw&#125;</span><br><span class="line">  --file-io-mode=STRING         file operations mode &#123;sync,async,mmap&#125; [sync]</span><br><span class="line">  --file-extra-flags=[LIST,...] list of additional flags to use to open files &#123;sync,dsync,direct&#125; []</span><br><span class="line">  --file-fsync-freq=N           do fsync() after this number of requests (0 - don&#x27;t use fsync()) [100]</span><br><span class="line">  --file-fsync-all[=on|off]     do fsync() after each write operation [off]</span><br><span class="line">  --file-fsync-end[=on|off]     do fsync() at the end of test [on]</span><br><span class="line">  --file-fsync-mode=STRING      which method to use for synchronization &#123;fsync, fdatasync&#125; [fsync]</span><br><span class="line">  --file-merged-requests=N      merge at most this number of IO requests if possible (0 - don&#x27;t merge) [0]</span><br><span class="line">  --file-rw-ratio=N             reads/writes ratio for combined test [1.5]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 加载4k测试数据</span></span><br><span class="line">sysbench fileio --threads=1 --file-block-size=4k --file-total-size=20G --file-test-mode=rndrw prepare</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 随机读</span></span><br><span class="line">sysbench fileio --threads=1 --file-block-size=4k --file-total-size=20G --time=60 --file-test-mode=rndrd run</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 随机写</span></span><br><span class="line">sysbench fileio --threads=1 --file-block-size=4k --file-total-size=20G --time=60 --file-test-mode=rndwr run</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 加载1M测试数据</span></span><br><span class="line">sysbench fileio --threads=1 --file-block-size=1M --file-total-size=20G --file-test-mode=rndrw prepare</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 顺序读</span></span><br><span class="line">sysbench fileio --threads=1 --file-block-size=1M --file-total-size=20G --time=60 --file-test-mode=seqrd run</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 顺序写</span></span><br><span class="line">sysbench fileio --threads=1 --file-block-size=1M --file-total-size=20G --time=60 --file-test-mode=seqwr run</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="MySQL性能测试"><a href="#MySQL性能测试" class="headerlink" title="MySQL性能测试"></a>MySQL性能测试</h3><p>参考本博客文档：《MySQL测试：性能基准测试》</p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><a href="https://github.com/akopytov/sysbench">Github：sysbench</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>性能测试工具</category>
-      </categories>
-      <tags>
-        <tag>Sysbench</tag>
       </tags>
   </entry>
   <entry>
