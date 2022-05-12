@@ -1005,6 +1005,47 @@
       </tags>
   </entry>
   <entry>
+    <title>Kubernetes部署：RabbitMQ</title>
+    <url>/2021/05/15/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9ARabbitMQ/</url>
+    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>本文用来记录 <code>Kubernetes</code> 上部署的 <code>RabbitMQ</code> 集群遇到的一个问题。基础信息如下：</p>
+<ul>
+<li>宿主机系统：Centos 7.8</li>
+<li>Docker Server版本：18.09.6</li>
+<li>Kubernetes版本：v1.19.0</li>
+<li>RabbitMQ部署方式：stx-openstack 3.0</li>
+<li>RabbitMQ镜像版本：3.7.13</li>
+</ul>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>3节点集群，由于非同时节点关机（如机房掉电），概率导致集群仲裁失败。故障现象是pod 为Running 状态，但是几分钟以后依然不能readay 1/1。pod日志显示” Waiting for Mnesia tables”</p>
+<h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>rabbitmq集群pod分0、1、2，共3节点。服务器掉电，最后退出的pod认为自己具有最新的数据，所以启动时应从最后退出的pod启动。但Kubernetes Statefulset维护的pod，启动方式为0 - 1 - 2顺序启动，只有0运行起来后才会运行后面的pod。如果0不是最后退出，则会启动卡住，等待最后退出的节点运行，形成死循环</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>pod 0 启动方式调整为强制启动，删除pod后自动重建，会强制拉起。命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Ensures that the node will start next time, even <span class="keyword">if</span> it was not the last to shut down.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Force boot cluster shut down unexpectedly <span class="keyword">in</span> an unknown order.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ref: https://www.rabbitmq.com/rabbitmqctl.8.html<span class="comment">#force_boot</span></span></span><br><span class="line">rabbitmqctl force_boot</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><p><a href="https://www.rabbitmq.com/rabbitmqctl.8.html#force_boot">RabbitMQ官方文档：rabbitmqctl</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/u013256816/article/details/78348761">RabbitMQ管理（5）——集群管理</a></p>
+</li>
+<li><p><a href="https://stackoverflow.com/questions/60407082/rabbit-mq-error-while-waiting-for-mnesia-tables">Rabbit mq - Error while waiting for Mnesia tables</a></p>
+</li>
+<li><p><a href="https://www.sohu.com/a/338991483_470018">RabbitMQ原理、集群、基本操作及常见故障处理</a></p>
+</li>
+<li><p><a href="https://www.kubernetes.org.cn/1304.html">基于Kubernetes（k8s）的RabbitMQ 集群</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Kubernetes</category>
+      </categories>
+      <tags>
+        <tag>Kubernetes</tag>
+        <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Kubernetes部署：kubeadm部署高可用集群</title>
     <url>/2020/12/16/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9Akubeadm%E9%83%A8%E7%BD%B2%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/</url>
     <content><![CDATA[<h2 id="高可用集群部署"><a href="#高可用集群部署" class="headerlink" title="高可用集群部署"></a>高可用集群部署</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><h4 id="1-检查centos版本-hostname"><a href="#1-检查centos版本-hostname" class="headerlink" title="1. 检查centos版本 / hostname"></a>1. 检查centos版本 / hostname</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看centos版本</span></span><br><span class="line">cat /etc/centos-release</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; CentOS Linux release 7.7.1908 (Core)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此处 hostname 的输出将会是该机器在 Kubernetes 集群中的节点名字</span></span><br><span class="line">hostname</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改hostname</span></span><br><span class="line">hostnamectl set-hostname NAME</span><br></pre></td></tr></table></figure>
@@ -1097,47 +1138,6 @@
       <tags>
         <tag>Kubernetes</tag>
         <tag>kubeadm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kubernetes部署：RabbitMQ</title>
-    <url>/2021/05/15/Kubernetes%E9%83%A8%E7%BD%B2%EF%BC%9ARabbitMQ/</url>
-    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>本文用来记录 <code>Kubernetes</code> 上部署的 <code>RabbitMQ</code> 集群遇到的一个问题。基础信息如下：</p>
-<ul>
-<li>宿主机系统：Centos 7.8</li>
-<li>Docker Server版本：18.09.6</li>
-<li>Kubernetes版本：v1.19.0</li>
-<li>RabbitMQ部署方式：stx-openstack 3.0</li>
-<li>RabbitMQ镜像版本：3.7.13</li>
-</ul>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>3节点集群，由于非同时节点关机（如机房掉电），概率导致集群仲裁失败。故障现象是pod 为Running 状态，但是几分钟以后依然不能readay 1/1。pod日志显示” Waiting for Mnesia tables”</p>
-<h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>rabbitmq集群pod分0、1、2，共3节点。服务器掉电，最后退出的pod认为自己具有最新的数据，所以启动时应从最后退出的pod启动。但Kubernetes Statefulset维护的pod，启动方式为0 - 1 - 2顺序启动，只有0运行起来后才会运行后面的pod。如果0不是最后退出，则会启动卡住，等待最后退出的节点运行，形成死循环</p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>pod 0 启动方式调整为强制启动，删除pod后自动重建，会强制拉起。命令如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Ensures that the node will start next time, even <span class="keyword">if</span> it was not the last to shut down.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Force boot cluster shut down unexpectedly <span class="keyword">in</span> an unknown order.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ref: https://www.rabbitmq.com/rabbitmqctl.8.html<span class="comment">#force_boot</span></span></span><br><span class="line">rabbitmqctl force_boot</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><p><a href="https://www.rabbitmq.com/rabbitmqctl.8.html#force_boot">RabbitMQ官方文档：rabbitmqctl</a></p>
-</li>
-<li><p><a href="https://blog.csdn.net/u013256816/article/details/78348761">RabbitMQ管理（5）——集群管理</a></p>
-</li>
-<li><p><a href="https://stackoverflow.com/questions/60407082/rabbit-mq-error-while-waiting-for-mnesia-tables">Rabbit mq - Error while waiting for Mnesia tables</a></p>
-</li>
-<li><p><a href="https://www.sohu.com/a/338991483_470018">RabbitMQ原理、集群、基本操作及常见故障处理</a></p>
-</li>
-<li><p><a href="https://www.kubernetes.org.cn/1304.html">基于Kubernetes（k8s）的RabbitMQ 集群</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
-        <tag>RabbitMQ</tag>
       </tags>
   </entry>
   <entry>
@@ -1338,46 +1338,6 @@
       <tags>
         <tag>Linux</tag>
         <tag>性能优化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux使用：通用手册</title>
-    <url>/2021/05/07/Linux%E4%BD%BF%E7%94%A8%EF%BC%9A%E9%80%9A%E7%94%A8%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<h2 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h2><h3 id="内核默认启动版本管理"><a href="#内核默认启动版本管理" class="headerlink" title="内核默认启动版本管理"></a>内核默认启动版本管理</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看当前默认启动内核</span></span><br><span class="line">[root@k104 ~]# grub2-editenv list</span><br><span class="line">saved_entry=CentOS Linux (3.10.0-1127.el7.x86_64) 7 (Core)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所有可用内核</span></span><br><span class="line">[root@k104 ~]# cat /boot/grub2/grub.cfg | grep ^menuentry</span><br><span class="line">menuentry &#x27;CentOS Linux (5.4.134-1.el7.elrepo.x86_64) 7 (Core)&#x27; --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &#x27;gnulinux-5.4.134-1.el7.elrepo.x86_64-advanced-f7d63930-b583-4731-976f-29c94ff7bdd6&#x27; &#123;</span><br><span class="line">menuentry &#x27;CentOS Linux (3.10.0-1127.el7.x86_64) 7 (Core)&#x27; --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &#x27;gnulinux-3.10.0-1127.el7.x86_64-advanced-f7d63930-b583-4731-976f-29c94ff7bdd6&#x27; &#123;</span><br><span class="line">menuentry &#x27;CentOS Linux (0-rescue-3144d2251e4742d79fe35eb04ed8eba2) 7 (Core)&#x27; --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &#x27;gnulinux-0-rescue-3144d2251e4742d79fe35eb04ed8eba2-advanced-f7d63930-b583-4731-976f-29c94ff7bdd6&#x27; &#123;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改默认启动内核</span></span><br><span class="line">[root@k104 ~]# grub2-set-default &#x27;CentOS Linux (3.10.0-1127.el7.x86_64) 7 (Core)&#x27;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看系统当前内核</span></span><br><span class="line">[root@k104 ~]# uname -a</span><br><span class="line">Linux k104 3.10.0-1127.el7.x86_64 #1 SMP Tue Mar 31 23:36:51 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="IPv6管理"><a href="#IPv6管理" class="headerlink" title="IPv6管理"></a>IPv6管理</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 设置ipv6 ip</span></span><br><span class="line">ip -6 addr add 2018::10/64 dev eth0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置ipv6静态路由</span></span><br><span class="line">ip -6 route add 2019::/64 via 2018::1 dev eth0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认网关</span></span><br><span class="line">route add default gw 192.168.0.1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看ipv6路由表</span></span><br><span class="line">ip -6 route show</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="tar-gz-压缩拆分"><a href="#tar-gz-压缩拆分" class="headerlink" title="tar.gz 压缩拆分"></a>tar.gz 压缩拆分</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 压缩拆分</span></span><br><span class="line">tar zcvf - k8s_install/ | split -b 3G - iECI_v210430.tar.gz.</span><br><span class="line"><span class="meta">#</span><span class="bash"> PS:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> split -b 指定拆分小包的大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成iECI_v210430.tar.gz.开头，aa、ab、ac...等小包</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压拆分</span></span><br><span class="line">cat iECI_v210430.tar.gz.* | tar zxv</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="搭建本地ISO-yum源"><a href="#搭建本地ISO-yum源" class="headerlink" title="搭建本地ISO yum源"></a>搭建本地ISO yum源</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 挂载ISO文件</span></span><br><span class="line">mount -o loop /root/CentOS-7-x86_64-Everything-2009.iso /mnt/cdrom/</span><br><span class="line">cat &gt;&gt; /etc/fstab &lt;&lt; EOF</span><br><span class="line">/root/CentOS-7-x86_64-Everything-2009.iso /mnt/cdrom/ iso9660 loop,defaults 0 0</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新yum源文件</span></span><br><span class="line">cd /etc/yum.repos.d/ &amp;&amp; mkdir bak &amp;&amp; mv * bak </span><br><span class="line">cat &gt; /etc/yum.repos.d/local.repo &lt;&lt; EOF</span><br><span class="line">[local]</span><br><span class="line">name=local</span><br><span class="line">baseurl=file:///mnt/cdrom/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新yum源缓存</span></span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Selinux修改服务端口"><a href="#Selinux修改服务端口" class="headerlink" title="Selinux修改服务端口"></a>Selinux修改服务端口</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看ssh服务端口</span></span><br><span class="line">semanage port -l |grep ssh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加ssh新端口</span></span><br><span class="line">semanage port -a -t ssh_port_t -p tcp 2202</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Firewalld基础管理"><a href="#Firewalld基础管理" class="headerlink" title="Firewalld基础管理"></a>Firewalld基础管理</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看状态</span></span><br><span class="line">firewall-cmd --state</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所有打开的端口</span></span><br><span class="line">firewall-cmd --zone=public --list-ports</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加开放端口</span></span><br><span class="line">firewall-cmd --zone=public --add-port=2202/tcp --permanent</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 移除开放端口</span></span><br><span class="line">firewall-cmd --zone=public --remove-port=2202/tcp --permanent</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载规则</span></span><br><span class="line">firewall-cmd --reload</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看端口是否开放</span></span><br><span class="line">firewall-cmd --zone=public --query-port=2202/tcp</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>通用手册</tag>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -1658,6 +1618,46 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux使用：通用手册</title>
+    <url>/2021/05/07/Linux%E4%BD%BF%E7%94%A8%EF%BC%9A%E9%80%9A%E7%94%A8%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<h2 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h2><h3 id="内核默认启动版本管理"><a href="#内核默认启动版本管理" class="headerlink" title="内核默认启动版本管理"></a>内核默认启动版本管理</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看当前默认启动内核</span></span><br><span class="line">[root@k104 ~]# grub2-editenv list</span><br><span class="line">saved_entry=CentOS Linux (3.10.0-1127.el7.x86_64) 7 (Core)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所有可用内核</span></span><br><span class="line">[root@k104 ~]# cat /boot/grub2/grub.cfg | grep ^menuentry</span><br><span class="line">menuentry &#x27;CentOS Linux (5.4.134-1.el7.elrepo.x86_64) 7 (Core)&#x27; --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &#x27;gnulinux-5.4.134-1.el7.elrepo.x86_64-advanced-f7d63930-b583-4731-976f-29c94ff7bdd6&#x27; &#123;</span><br><span class="line">menuentry &#x27;CentOS Linux (3.10.0-1127.el7.x86_64) 7 (Core)&#x27; --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &#x27;gnulinux-3.10.0-1127.el7.x86_64-advanced-f7d63930-b583-4731-976f-29c94ff7bdd6&#x27; &#123;</span><br><span class="line">menuentry &#x27;CentOS Linux (0-rescue-3144d2251e4742d79fe35eb04ed8eba2) 7 (Core)&#x27; --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &#x27;gnulinux-0-rescue-3144d2251e4742d79fe35eb04ed8eba2-advanced-f7d63930-b583-4731-976f-29c94ff7bdd6&#x27; &#123;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改默认启动内核</span></span><br><span class="line">[root@k104 ~]# grub2-set-default &#x27;CentOS Linux (3.10.0-1127.el7.x86_64) 7 (Core)&#x27;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看系统当前内核</span></span><br><span class="line">[root@k104 ~]# uname -a</span><br><span class="line">Linux k104 3.10.0-1127.el7.x86_64 #1 SMP Tue Mar 31 23:36:51 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="IPv6管理"><a href="#IPv6管理" class="headerlink" title="IPv6管理"></a>IPv6管理</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 设置ipv6 ip</span></span><br><span class="line">ip -6 addr add 2018::10/64 dev eth0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置ipv6静态路由</span></span><br><span class="line">ip -6 route add 2019::/64 via 2018::1 dev eth0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认网关</span></span><br><span class="line">route add default gw 192.168.0.1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看ipv6路由表</span></span><br><span class="line">ip -6 route show</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="tar-gz-压缩拆分"><a href="#tar-gz-压缩拆分" class="headerlink" title="tar.gz 压缩拆分"></a>tar.gz 压缩拆分</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 压缩拆分</span></span><br><span class="line">tar zcvf - k8s_install/ | split -b 3G - iECI_v210430.tar.gz.</span><br><span class="line"><span class="meta">#</span><span class="bash"> PS:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> split -b 指定拆分小包的大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成iECI_v210430.tar.gz.开头，aa、ab、ac...等小包</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压拆分</span></span><br><span class="line">cat iECI_v210430.tar.gz.* | tar zxv</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="搭建本地ISO-yum源"><a href="#搭建本地ISO-yum源" class="headerlink" title="搭建本地ISO yum源"></a>搭建本地ISO yum源</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 挂载ISO文件</span></span><br><span class="line">mount -o loop /root/CentOS-7-x86_64-Everything-2009.iso /mnt/cdrom/</span><br><span class="line">cat &gt;&gt; /etc/fstab &lt;&lt; EOF</span><br><span class="line">/root/CentOS-7-x86_64-Everything-2009.iso /mnt/cdrom/ iso9660 loop,defaults 0 0</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新yum源文件</span></span><br><span class="line">cd /etc/yum.repos.d/ &amp;&amp; mkdir bak &amp;&amp; mv * bak </span><br><span class="line">cat &gt; /etc/yum.repos.d/local.repo &lt;&lt; EOF</span><br><span class="line">[local]</span><br><span class="line">name=local</span><br><span class="line">baseurl=file:///mnt/cdrom/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新yum源缓存</span></span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Selinux修改服务端口"><a href="#Selinux修改服务端口" class="headerlink" title="Selinux修改服务端口"></a>Selinux修改服务端口</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看ssh服务端口</span></span><br><span class="line">semanage port -l |grep ssh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加ssh新端口</span></span><br><span class="line">semanage port -a -t ssh_port_t -p tcp 2202</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Firewalld基础管理"><a href="#Firewalld基础管理" class="headerlink" title="Firewalld基础管理"></a>Firewalld基础管理</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看状态</span></span><br><span class="line">firewall-cmd --state</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所有打开的端口</span></span><br><span class="line">firewall-cmd --zone=public --list-ports</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加开放端口</span></span><br><span class="line">firewall-cmd --zone=public --add-port=2202/tcp --permanent</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 移除开放端口</span></span><br><span class="line">firewall-cmd --zone=public --remove-port=2202/tcp --permanent</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载规则</span></span><br><span class="line">firewall-cmd --reload</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看端口是否开放</span></span><br><span class="line">firewall-cmd --zone=public --query-port=2202/tcp</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>通用手册</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux运维：CPU load average过高</title>
     <url>/2022/03/03/Linux%E8%BF%90%E7%BB%B4%EF%BC%9ACPU-load-average%E8%BF%87%E9%AB%98/</url>
     <content><![CDATA[<h2 id="load-average基础"><a href="#load-average基础" class="headerlink" title="load average基础"></a>load average基础</h2><p>top命令中load average显示的是最近1分钟、5分钟和15分钟的系统平均负载。</p>
@@ -1897,27 +1897,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux配置：Ubuntu配置网卡</title>
-    <url>/2021/02/18/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AUbuntu%E9%85%8D%E7%BD%AE%E7%BD%91%E5%8D%A1/</url>
-    <content><![CDATA[<h2 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h2><p>系统：Ubuntu 18.04.5 LTS</p>
-<p>内核：GNU/Linux 4.15.0-112-generic x86_64</p>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>编辑 <code>/etc/netplan/00-installer-config.yaml</code> ，增加网卡配置信息。PS：不同安装方式，yaml文件名略有不同，需自行在 <code>/etc/netplan/</code> 目录下寻找</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is the network config written by <span class="string">&#x27;subiquity&#x27;</span></span></span><br><span class="line">network:</span><br><span class="line">  ethernets:</span><br><span class="line">    ens160:</span><br><span class="line">      addresses: [111.111.111.61/24]</span><br><span class="line">      gateway4: 111.111.111.1</span><br><span class="line">      nameservers:</span><br><span class="line">        addresses: [114.114.114.114]</span><br><span class="line">  version: 2</span><br></pre></td></tr></table></figure>
-
-<p>执行命令 <code>netplan apply</code> 让配置直接生效</p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><a href="https://www.cnblogs.com/opsprobe/p/9979234.html">Ubuntu18.04的网络配置（静态IP和动态IP）</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux配置：LVM</title>
     <url>/2021/01/19/Linux%E9%85%8D%E7%BD%AE%EF%BC%9ALVM/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
@@ -1972,6 +1951,91 @@
       <tags>
         <tag>Linux</tag>
         <tag>LVM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux配置：Ubuntu配置网卡</title>
+    <url>/2021/02/18/Linux%E9%85%8D%E7%BD%AE%EF%BC%9AUbuntu%E9%85%8D%E7%BD%AE%E7%BD%91%E5%8D%A1/</url>
+    <content><![CDATA[<h2 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h2><p>系统：Ubuntu 18.04.5 LTS</p>
+<p>内核：GNU/Linux 4.15.0-112-generic x86_64</p>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>编辑 <code>/etc/netplan/00-installer-config.yaml</code> ，增加网卡配置信息。PS：不同安装方式，yaml文件名略有不同，需自行在 <code>/etc/netplan/</code> 目录下寻找</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is the network config written by <span class="string">&#x27;subiquity&#x27;</span></span></span><br><span class="line">network:</span><br><span class="line">  ethernets:</span><br><span class="line">    ens160:</span><br><span class="line">      addresses: [111.111.111.61/24]</span><br><span class="line">      gateway4: 111.111.111.1</span><br><span class="line">      nameservers:</span><br><span class="line">        addresses: [114.114.114.114]</span><br><span class="line">  version: 2</span><br></pre></td></tr></table></figure>
+
+<p>执行命令 <code>netplan apply</code> 让配置直接生效</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://www.cnblogs.com/opsprobe/p/9979234.html">Ubuntu18.04的网络配置（静态IP和动态IP）</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux配置：修改网卡名称</title>
+    <url>/2021/01/12/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0/</url>
+    <content><![CDATA[<blockquote>
+<p>网上资料都是要修改 <code>/etc/default/grub</code> 文件，增加 <code>net.ifnames=0, biosdevname=0</code> 参数。该方法重启后，网卡名称统一变为eth开头，无法达到任意修改的目的。整理如下方法，亲测 Centos 7.8 可行。</p>
+</blockquote>
+<p>环境信息：CentOS Linux release 7.8.2003 (Core)</p>
+<p>网卡信息：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: rules.d # ip a</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    link/ether 00:0c:29:63:bf:af brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.1.110/24 brd 192.168.1.255 scope global noprefixroute dynamic mynet1</span><br><span class="line">       valid_lft 6511sec preferred_lft 6511sec</span><br><span class="line">    inet6 fe80::a788:f7ed:8c55:1b9f/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">4: virbr0-nic: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line"></span><br><span class="line">root@renyb: rules.d # nmcli connection show</span><br><span class="line">NAME    UUID                                  TYPE      DEVICE</span><br><span class="line">ens33   b40bd401-b463-4d44-ab63-247307f2a2d6  ethernet  ens33</span><br><span class="line">virbr0  7f07fa4e-e769-4fd1-ab39-1b70c27a0952  bridge    virbr0</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="临时配置"><a href="#临时配置" class="headerlink" title="临时配置"></a>临时配置</h2><p>通过 <code>ip</code> 命令进行配置，重启失效</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看网络设备信息</span></span><br><span class="line">nmcli connection show</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> down网卡</span></span><br><span class="line">ip link set dev ens33 down</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE名称（ens33为设备名称）</span></span><br><span class="line">ip link set dev ens33 name mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME（ens33为网卡名称）</span></span><br><span class="line">nmcli connection modify ens33 connection.id mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动网卡</span></span><br><span class="line">ip link set mynet1 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载网络设备信息</span></span><br><span class="line">nmcli connection reload</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="永久配置"><a href="#永久配置" class="headerlink" title="永久配置"></a>永久配置</h2><p>通过 <code>udev</code> 实现。Centos系统中，规则目录如下：</p>
+<ul>
+<li>系统规则：<code>/usr/lib/udev/rules.d/</code></li>
+<li>自定义规则：<code>/etc/udev/rules.d</code></li>
+</ul>
+<h3 id="udev解析"><a href="#udev解析" class="headerlink" title="udev解析"></a>udev解析</h3><p>网卡相关udev的rule执行流程：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用户自定义为优先级最高</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡</span></span><br><span class="line">/usr/lib/udev/rules.d/60-net.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span></span><br><span class="line">/usr/lib/udev/rules.d/71-biosdevname.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称哦</span></span><br><span class="line">/lib/udev/rules.d/75-net-description.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名</span></span><br><span class="line">/usr/lib/udev/rules.d/80-net-name-slot.rules</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="重命名流程"><a href="#重命名流程" class="headerlink" title="重命名流程"></a>重命名流程</h3><ol>
+<li>新建文件：<code>/etc/udev/rules.d/70-persistent-net.rules</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a sample udev rules file that demonstrates how to get udev to</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> the name of IPoIB interfaces to whatever you wish.  There is a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 16 character <span class="built_in">limit</span> on network device names.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Important items to note: ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span> is IPoIB interfaces, and the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125; match must start with ?* and only reference the last 8</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bytes of the address or <span class="keyword">else</span> the address might not match the variable QPN</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> portion.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modern udev is <span class="keyword">case</span> sensitive and all addresses need to be <span class="keyword">in</span> lower <span class="keyword">case</span>.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ACTION==<span class="string">&quot;add&quot;</span>, SUBSYSTEM==<span class="string">&quot;net&quot;</span>, DRIVERS==<span class="string">&quot;?*&quot;</span>, ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span>, ATTR&#123;address&#125;==<span class="string">&quot;?*00:02:c9:03:00:31:78:f2&quot;</span>, NAME=<span class="string">&quot;mlx4_ib3&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125;: mac address</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME: device name</span></span><br><span class="line">ACTION==&quot;add&quot;, SUBSYSTEM==&quot;net&quot;, DRIVERS==&quot;?*&quot;, ATTR&#123;type&#125;==&quot;1&quot;, ATTR&#123;address&#125;==&quot;00:0c:29:63:bf:af&quot;, NAME=&quot;mynet1&quot;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改网卡配置文件：<code>/etc/sysconfig/network-scripts/ifcfg-ens33</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: network-scripts # pwd</span><br><span class="line">/etc/sysconfig/network-scripts</span><br><span class="line">root@renyb: network-scripts # cat ifcfg-ens33</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">NAME=mynet1</span><br><span class="line">UUID=b40bd401-b463-4d44-ab63-247307f2a2d6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE NAME</span></span><br><span class="line">DEVICE=mynet1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPV6_PRIVACY=no</span><br><span class="line">root@renyb: network-scripts # # 修改网卡配置文件名称</span><br><span class="line">root@renyb: network-scripts # mv ifcfg-ens33 ifcfg-mynet1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><p><a href="https://www.cnblogs.com/boltkiller/p/12696501.html">任意修改CentOS下网卡的显示名称和设备名称</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/33932734">在 Linux 中如何编写基本的 udev 规则</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/u010039418/article/details/79260553">CentOS 7.4系统修改网卡名称</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/yinfutao/p/9634350.html">Linux系统修改网卡名（eth0-3）</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>网卡</tag>
       </tags>
   </entry>
   <entry>
@@ -2038,70 +2102,6 @@
       <tags>
         <tag>Linux</tag>
         <tag>VNC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux配置：修改网卡名称</title>
-    <url>/2021/01/12/Linux%E9%85%8D%E7%BD%AE%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0/</url>
-    <content><![CDATA[<blockquote>
-<p>网上资料都是要修改 <code>/etc/default/grub</code> 文件，增加 <code>net.ifnames=0, biosdevname=0</code> 参数。该方法重启后，网卡名称统一变为eth开头，无法达到任意修改的目的。整理如下方法，亲测 Centos 7.8 可行。</p>
-</blockquote>
-<p>环境信息：CentOS Linux release 7.8.2003 (Core)</p>
-<p>网卡信息：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: rules.d # ip a</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    link/ether 00:0c:29:63:bf:af brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.1.110/24 brd 192.168.1.255 scope global noprefixroute dynamic mynet1</span><br><span class="line">       valid_lft 6511sec preferred_lft 6511sec</span><br><span class="line">    inet6 fe80::a788:f7ed:8c55:1b9f/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">4: virbr0-nic: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000</span><br><span class="line">    link/ether 52:54:00:0f:32:90 brd ff:ff:ff:ff:ff:ff</span><br><span class="line"></span><br><span class="line">root@renyb: rules.d # nmcli connection show</span><br><span class="line">NAME    UUID                                  TYPE      DEVICE</span><br><span class="line">ens33   b40bd401-b463-4d44-ab63-247307f2a2d6  ethernet  ens33</span><br><span class="line">virbr0  7f07fa4e-e769-4fd1-ab39-1b70c27a0952  bridge    virbr0</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="临时配置"><a href="#临时配置" class="headerlink" title="临时配置"></a>临时配置</h2><p>通过 <code>ip</code> 命令进行配置，重启失效</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看网络设备信息</span></span><br><span class="line">nmcli connection show</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> down网卡</span></span><br><span class="line">ip link set dev ens33 down</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE名称（ens33为设备名称）</span></span><br><span class="line">ip link set dev ens33 name mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME（ens33为网卡名称）</span></span><br><span class="line">nmcli connection modify ens33 connection.id mynet1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动网卡</span></span><br><span class="line">ip link set mynet1 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新加载网络设备信息</span></span><br><span class="line">nmcli connection reload</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="永久配置"><a href="#永久配置" class="headerlink" title="永久配置"></a>永久配置</h2><p>通过 <code>udev</code> 实现。Centos系统中，规则目录如下：</p>
-<ul>
-<li>系统规则：<code>/usr/lib/udev/rules.d/</code></li>
-<li>自定义规则：<code>/etc/udev/rules.d</code></li>
-</ul>
-<h3 id="udev解析"><a href="#udev解析" class="headerlink" title="udev解析"></a>udev解析</h3><p>网卡相关udev的rule执行流程：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用户自定义为优先级最高</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡</span></span><br><span class="line">/usr/lib/udev/rules.d/60-net.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span></span><br><span class="line">/usr/lib/udev/rules.d/71-biosdevname.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称哦</span></span><br><span class="line">/lib/udev/rules.d/75-net-description.rules</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名</span></span><br><span class="line">/usr/lib/udev/rules.d/80-net-name-slot.rules</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="重命名流程"><a href="#重命名流程" class="headerlink" title="重命名流程"></a>重命名流程</h3><ol>
-<li>新建文件：<code>/etc/udev/rules.d/70-persistent-net.rules</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a sample udev rules file that demonstrates how to get udev to</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> the name of IPoIB interfaces to whatever you wish.  There is a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 16 character <span class="built_in">limit</span> on network device names.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Important items to note: ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span> is IPoIB interfaces, and the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125; match must start with ?* and only reference the last 8</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bytes of the address or <span class="keyword">else</span> the address might not match the variable QPN</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> portion.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modern udev is <span class="keyword">case</span> sensitive and all addresses need to be <span class="keyword">in</span> lower <span class="keyword">case</span>.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ACTION==<span class="string">&quot;add&quot;</span>, SUBSYSTEM==<span class="string">&quot;net&quot;</span>, DRIVERS==<span class="string">&quot;?*&quot;</span>, ATTR&#123;<span class="built_in">type</span>&#125;==<span class="string">&quot;32&quot;</span>, ATTR&#123;address&#125;==<span class="string">&quot;?*00:02:c9:03:00:31:78:f2&quot;</span>, NAME=<span class="string">&quot;mlx4_ib3&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ATTR&#123;address&#125;: mac address</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME: device name</span></span><br><span class="line">ACTION==&quot;add&quot;, SUBSYSTEM==&quot;net&quot;, DRIVERS==&quot;?*&quot;, ATTR&#123;type&#125;==&quot;1&quot;, ATTR&#123;address&#125;==&quot;00:0c:29:63:bf:af&quot;, NAME=&quot;mynet1&quot;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>修改网卡配置文件：<code>/etc/sysconfig/network-scripts/ifcfg-ens33</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@renyb: network-scripts # pwd</span><br><span class="line">/etc/sysconfig/network-scripts</span><br><span class="line">root@renyb: network-scripts # cat ifcfg-ens33</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡NAME</span></span><br><span class="line">NAME=mynet1</span><br><span class="line">UUID=b40bd401-b463-4d44-ab63-247307f2a2d6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改网卡DEVICE NAME</span></span><br><span class="line">DEVICE=mynet1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPV6_PRIVACY=no</span><br><span class="line">root@renyb: network-scripts # # 修改网卡配置文件名称</span><br><span class="line">root@renyb: network-scripts # mv ifcfg-ens33 ifcfg-mynet1</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><p><a href="https://www.cnblogs.com/boltkiller/p/12696501.html">任意修改CentOS下网卡的显示名称和设备名称</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/33932734">在 Linux 中如何编写基本的 udev 规则</a></p>
-</li>
-<li><p><a href="https://blog.csdn.net/u010039418/article/details/79260553">CentOS 7.4系统修改网卡名称</a></p>
-</li>
-<li><p><a href="https://www.cnblogs.com/yinfutao/p/9634350.html">Linux系统修改网卡名（eth0-3）</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>网卡</tag>
       </tags>
   </entry>
   <entry>
@@ -2844,7 +2844,20 @@
 <p>Hardware Discovery:<br>The instance is scanned for accelerators and usage levels of existing accelerators every few seconds and this information is reported in a heartbeat message to the Cyborg server to help manage scheduling and availability.</p>
 <p>Hardware Management:<br>Ansible will be used to manage configuration files and other setup for each accelerator and it’s driver. Setup and teardown playbooks will be made for each set of supported hardware. A configuration change on cyborg managed hardware will boil down to running the uninstall playbook and the install playbook with different configuration options.</p>
 <p>Instance connection:<br>Once a instance is spawned that requires connecting to a specific accelerator on the host Cyborg server will send a message to Cyborg agent to inform the agent of the new instance. Since the connection method may change dramatically between different accelerators the driver should probably provide a connect function to call out to.</p>
-<h2 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h2><h3 id="Cyborg-and-Nova-interaction-workflow"><a href="#Cyborg-and-Nova-interaction-workflow" class="headerlink" title="Cyborg and Nova interaction workflow"></a>Cyborg and Nova interaction workflow</h3><p>This flow is captured by the following sequence diagram, in which the Nova conductor and scheduler are together represented as the Nova controller.</p>
+<h2 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h2><h3 id="Cyborg-discovery-accelerates-device-workflow"><a href="#Cyborg-discovery-accelerates-device-workflow" class="headerlink" title="Cyborg discovery accelerates device workflow"></a>Cyborg discovery accelerates device workflow</h3><img src="/2022/05/10/OpenStack%E7%A0%94%E5%8F%91%EF%BC%9ACyborg/cyborg_acc_discover.drawio.png" alt="cyborg_acc_discover.drawio" style="zoom:100%;">
+
+<p>加速资源发现的工作流程如下：</p>
+<ol>
+<li>根据配置的驱动信息，调用指定驱动的<code>discover()</code>方法，后续流程以NVIDIA GPU驱动为例。</li>
+<li>调用系统<code>lspci -nnn -D</code>命令，获取所有PCI设备。</li>
+<li>根据<code>VENDOR_ID</code>及<code>GPU_TAG</code>匹配到GPU设备信息。</li>
+<li>通过正则表达式，从命令行输出中提取并格式化关键信息。</li>
+<li>根据配置文件中是否启用了vGPU，判断添加何种resource class与可用设备数量。</li>
+<li>根据<code>VENDOR_ID</code>和<code>PRODUCT_ID</code>生成特定的traits。</li>
+<li>实例化DriverDevice()。</li>
+<li>返回实例化后的DriverDevice()对象，RPC方式发送给cyborg conductor，进行资源上报。</li>
+</ol>
+<h3 id="Cyborg-and-Nova-interaction-workflow"><a href="#Cyborg-and-Nova-interaction-workflow" class="headerlink" title="Cyborg and Nova interaction workflow"></a>Cyborg and Nova interaction workflow</h3><p>This flow is captured by the following sequence diagram, in which the Nova conductor and scheduler are together represented as the Nova controller.</p>
 <img src="/2022/05/10/OpenStack%E7%A0%94%E5%8F%91%EF%BC%9ACyborg/cyborg-and-nova-interaction-workflow.png" alt="cyborg-and-nova-interaction-workflow" style="zoom:100%;">
 
 <p>A Cyborg client module is added to nova (cyborg-client-module). All Cyborg API calls are routed through that.</p>
@@ -2897,10 +2910,13 @@
 
 
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://opendev.org/openstack/cyborg">OpenDev：openstack/cyborg</a></li>
 <li><a href="https://wiki.openstack.org/wiki/Cyborg">OpenStack Wiki：Cyborg</a></li>
 <li><a href="https://docs.openstack.org/cyborg/latest/user/architecture.html">OpenStack User Guide：Cyborg architecture</a></li>
 <li><a href="https://docs.openstack.org/cyborg/latest/admin/index.html">OpenStack Admin Guide：Acceleration Service</a></li>
 <li><a href="https://blueprints.launchpad.net/openstack-cyborg">Blueprints for Cyborg (OpenStack)</a></li>
+<li><a href="https://wiki.openstack.org/wiki/Cyborg/TestReport/InspurFPGA">Cyborg/TestReport/InspurFPGA</a></li>
+<li><a href="https://blog.csdn.net/wuyongpeng0912/article/details/113752165">nova实现vGPU功能</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -4147,58 +4163,6 @@
       </tags>
   </entry>
   <entry>
-    <title>消息队列：ActiveMQ</title>
-    <url>/2022/04/24/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%EF%BC%9AActiveMQ/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Apache ActiveMQ is an open-source message broker written in Java. It supports several cross-language clients and protocols.</p>
-<p>The Apache ActiveMQ message broker is a fast, reliable, scalable, and totally integrated open source messaging platform for handling lots of messages (ingest) or lots of consumers (dispatch). It uses memory as the storage format; it can be configured to store data persistently on a disk if necessary. The initial startup time can be slow due to the fact that ActiveMQ will load all historical information into memory. However, after the first startup period, which could take up to several minutes depending on how much history you have stored in your queues and other configuration settings, performance starts to scale well up until a point when we consider other factors such as system resources.</p>
-<p>Based on its origins as an experience of just moving from an in-house messaging solution to a commercial product, ActiveMQ can be considered as one of those products that have been constantly developed and improved, offering extremely high quality and solid stability.</p>
-<p>ActiveMQ provides both a simple embedded broker and a fully deployed, highly available enterprise solution. Its most important features and strengths are high availability and failover (a setup with one broker can survive up to 99.999% of message loss), support for many ways of connecting clients (including web consoles, command-line tools, and libraries, JMS client libraries, etc.), clustering across physical boundaries, load balancing through multiple internal queues per topic, flexible configuration such as persistent or non-persistent messages according to the need, the persistence of data by file or database, security implementation based on JAAS authentication model which also supports LDAP implementation.</p>
-<p>ActiveMQ is truly the preferred messaging solution for Java developers, infrastructure architects, and system integrators. It can be used in both small deployments (in which case you will probably use the embedded broker) or big enterprise solutions (which require clustering and failover).</p>
-<p>Depending on your needs, ActiveMQ can be easily scaled out to real high availability scenarios with full load balancing across all brokers, including dynamic addition of new nodes when existing ones go down; stateful failover with automatic re-sync and potential data loss (which is always possible), fully supported by ActiveMQ itself: just another two nodes that need to be configured into a cluster for high availability.</p>
-<p>Apache ActiveMQ is cross-platform and runs in a Java Virtual Machine (JVM). You could use ActiveMQ on either Linux, Windows, or OS X.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Ubuntu系统"><a href="#Ubuntu系统" class="headerlink" title="Ubuntu系统"></a>Ubuntu系统</h3><h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><ul>
-<li><strong>规格：</strong>4C8G，100G数据盘</li>
-<li><strong>系统：</strong>20.04.3 LTS (GNU/Linux 5.4.0-107-generic x86_64)</li>
-<li><strong>PostgreSQL版本：</strong>PostgreSQL 9.5.25</li>
-</ul>
-<blockquote>
-<p><strong>Pre-Installation Requirements</strong></p>
-<p><strong>Hardware:</strong></p>
-<ul>
-<li>60 MB of free disk space for the ActiveMQ binary distribution.</li>
-<li>200 MB of free disk space for the ActiveMQ source or developer’s distributions.</li>
-</ul>
-<p><strong>Operating Systems:</strong></p>
-<ul>
-<li>Windows: Windows XP SP2, Windows 2000.</li>
-<li>Unix: Ubuntu Linux, Powerdog Linux, MacOS, AIX, HP-UX, Solaris, or any Unix platform that supports Java.</li>
-</ul>
-<p><strong>Environment:</strong></p>
-<ul>
-<li>Java Developer Kit (JDK) 1.7.x or greater for deployment and 1.7.x (Java 7) for compiling/building.</li>
-<li>The JAVA_HOME environment variable must be set to the directory where the JDK is installed, e.g., <code>c:\Program Files\jdk.1.7.0_xx_xx</code>.</li>
-<li>Maven 3.0 or greater (required when installing source or developer’s releases).</li>
-<li><a href="http://cvs.apache.org/repository/geronimo-spec/jars/">JARs</a> that will be used must be added to the classpath.</li>
-</ul>
-</blockquote>
-<h4 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装基础依赖包</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt install openjdk-8-jdk</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 下载资源包</span></span><br><span class="line">sudo wget http://www.apache.org/dist/activemq/5.16.4/apache-activemq-5.16.4-bin.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压资源包</span></span><br><span class="line">sudo tar zxvf apache-activemq-*gz -C /opt/ </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建服务用户</span></span><br><span class="line">sudo addgroup --quiet --system activemq</span><br><span class="line">sudo adduser --quiet --system --ingroup activemq --no-create-home --disabled-password activemq</span><br><span class="line">sudo chown -R activemq:activemq /opt/apache-activemq*</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建systemctl服务</span></span><br><span class="line">ACTIVEMQ_DIR=$(cd /opt/apache-activemq* &amp;&amp; pwd)</span><br><span class="line">cat &gt; /usr/lib/systemd/system/activemq.service &lt;&lt; EOF</span><br><span class="line">[Unit]</span><br><span class="line">Description=Apache ActiveMQ</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">User=activemq</span><br><span class="line">Group=activemq</span><br><span class="line">ExecStart=$&#123;ACTIVEMQ_DIR&#125;/bin/activemq start</span><br><span class="line">ExecStop=$&#123;ACTIVEMQ_DIR&#125;/bin/activemq stop</span><br><span class="line">ExecRestart=$&#123;ACTIVEMQ_DIR&#125;/bin/activemq stop : $&#123;ACTIVEMQ_DIR&#125;/bin/activemq start</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动服务</span></span><br><span class="line">sudo systemctl start activemq</span><br><span class="line">sudo systemctl status activemq</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><a href="https://activemq.apache.org/components/classic/documentation">官方文档：ActiveMQ 5 Documentation</a></li>
-<li><a href="https://activemq.apache.org/version-5-getting-started">官方文档：Version 5 Getting Started</a></li>
-<li><a href="https://vitux.com/how-to-install-apache-activemq-on-ubuntu/">How to Install Apache ActiveMQ on Ubuntu 20.04</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>消息队列</category>
-      </categories>
-      <tags>
-        <tag>ActiveMQ</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Jmeter</title>
     <url>/2020/09/23/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%EF%BC%9AJmeter/</url>
     <content><![CDATA[<p>The <strong>Apache JMeter™</strong> application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.</p>
@@ -4336,6 +4300,58 @@
       </categories>
       <tags>
         <tag>Sysbench</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>消息队列：ActiveMQ</title>
+    <url>/2022/04/24/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%EF%BC%9AActiveMQ/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Apache ActiveMQ is an open-source message broker written in Java. It supports several cross-language clients and protocols.</p>
+<p>The Apache ActiveMQ message broker is a fast, reliable, scalable, and totally integrated open source messaging platform for handling lots of messages (ingest) or lots of consumers (dispatch). It uses memory as the storage format; it can be configured to store data persistently on a disk if necessary. The initial startup time can be slow due to the fact that ActiveMQ will load all historical information into memory. However, after the first startup period, which could take up to several minutes depending on how much history you have stored in your queues and other configuration settings, performance starts to scale well up until a point when we consider other factors such as system resources.</p>
+<p>Based on its origins as an experience of just moving from an in-house messaging solution to a commercial product, ActiveMQ can be considered as one of those products that have been constantly developed and improved, offering extremely high quality and solid stability.</p>
+<p>ActiveMQ provides both a simple embedded broker and a fully deployed, highly available enterprise solution. Its most important features and strengths are high availability and failover (a setup with one broker can survive up to 99.999% of message loss), support for many ways of connecting clients (including web consoles, command-line tools, and libraries, JMS client libraries, etc.), clustering across physical boundaries, load balancing through multiple internal queues per topic, flexible configuration such as persistent or non-persistent messages according to the need, the persistence of data by file or database, security implementation based on JAAS authentication model which also supports LDAP implementation.</p>
+<p>ActiveMQ is truly the preferred messaging solution for Java developers, infrastructure architects, and system integrators. It can be used in both small deployments (in which case you will probably use the embedded broker) or big enterprise solutions (which require clustering and failover).</p>
+<p>Depending on your needs, ActiveMQ can be easily scaled out to real high availability scenarios with full load balancing across all brokers, including dynamic addition of new nodes when existing ones go down; stateful failover with automatic re-sync and potential data loss (which is always possible), fully supported by ActiveMQ itself: just another two nodes that need to be configured into a cluster for high availability.</p>
+<p>Apache ActiveMQ is cross-platform and runs in a Java Virtual Machine (JVM). You could use ActiveMQ on either Linux, Windows, or OS X.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Ubuntu系统"><a href="#Ubuntu系统" class="headerlink" title="Ubuntu系统"></a>Ubuntu系统</h3><h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><ul>
+<li><strong>规格：</strong>4C8G，100G数据盘</li>
+<li><strong>系统：</strong>20.04.3 LTS (GNU/Linux 5.4.0-107-generic x86_64)</li>
+<li><strong>PostgreSQL版本：</strong>PostgreSQL 9.5.25</li>
+</ul>
+<blockquote>
+<p><strong>Pre-Installation Requirements</strong></p>
+<p><strong>Hardware:</strong></p>
+<ul>
+<li>60 MB of free disk space for the ActiveMQ binary distribution.</li>
+<li>200 MB of free disk space for the ActiveMQ source or developer’s distributions.</li>
+</ul>
+<p><strong>Operating Systems:</strong></p>
+<ul>
+<li>Windows: Windows XP SP2, Windows 2000.</li>
+<li>Unix: Ubuntu Linux, Powerdog Linux, MacOS, AIX, HP-UX, Solaris, or any Unix platform that supports Java.</li>
+</ul>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>Java Developer Kit (JDK) 1.7.x or greater for deployment and 1.7.x (Java 7) for compiling/building.</li>
+<li>The JAVA_HOME environment variable must be set to the directory where the JDK is installed, e.g., <code>c:\Program Files\jdk.1.7.0_xx_xx</code>.</li>
+<li>Maven 3.0 or greater (required when installing source or developer’s releases).</li>
+<li><a href="http://cvs.apache.org/repository/geronimo-spec/jars/">JARs</a> that will be used must be added to the classpath.</li>
+</ul>
+</blockquote>
+<h4 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装基础依赖包</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt install openjdk-8-jdk</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 下载资源包</span></span><br><span class="line">sudo wget http://www.apache.org/dist/activemq/5.16.4/apache-activemq-5.16.4-bin.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压资源包</span></span><br><span class="line">sudo tar zxvf apache-activemq-*gz -C /opt/ </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建服务用户</span></span><br><span class="line">sudo addgroup --quiet --system activemq</span><br><span class="line">sudo adduser --quiet --system --ingroup activemq --no-create-home --disabled-password activemq</span><br><span class="line">sudo chown -R activemq:activemq /opt/apache-activemq*</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建systemctl服务</span></span><br><span class="line">ACTIVEMQ_DIR=$(cd /opt/apache-activemq* &amp;&amp; pwd)</span><br><span class="line">cat &gt; /usr/lib/systemd/system/activemq.service &lt;&lt; EOF</span><br><span class="line">[Unit]</span><br><span class="line">Description=Apache ActiveMQ</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">User=activemq</span><br><span class="line">Group=activemq</span><br><span class="line">ExecStart=$&#123;ACTIVEMQ_DIR&#125;/bin/activemq start</span><br><span class="line">ExecStop=$&#123;ACTIVEMQ_DIR&#125;/bin/activemq stop</span><br><span class="line">ExecRestart=$&#123;ACTIVEMQ_DIR&#125;/bin/activemq stop : $&#123;ACTIVEMQ_DIR&#125;/bin/activemq start</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动服务</span></span><br><span class="line">sudo systemctl start activemq</span><br><span class="line">sudo systemctl status activemq</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://activemq.apache.org/components/classic/documentation">官方文档：ActiveMQ 5 Documentation</a></li>
+<li><a href="https://activemq.apache.org/version-5-getting-started">官方文档：Version 5 Getting Started</a></li>
+<li><a href="https://vitux.com/how-to-install-apache-activemq-on-ubuntu/">How to Install Apache ActiveMQ on Ubuntu 20.04</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>消息队列</category>
+      </categories>
+      <tags>
+        <tag>ActiveMQ</tag>
       </tags>
   </entry>
   <entry>
