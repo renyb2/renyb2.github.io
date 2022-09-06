@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://renyb2.github.io/about/index.html</loc>
+    
+    <lastmod>2022-09-06</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/categories/index.html</loc>
+    
+    <lastmod>2022-09-06</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/index.html</loc>
+    
+    <lastmod>2022-09-06</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://renyb2.github.io/2022/08/22/OpenStack%E4%BD%BF%E7%94%A8%EF%BC%9AGPU%E5%8D%A1%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2022-09-01</lastmod>
@@ -526,27 +547,6 @@
     
   </url>
   
-  <url>
-    <loc>https://renyb2.github.io/tags/index.html</loc>
-    
-    <lastmod>2020-08-31</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/categories/index.html</loc>
-    
-    <lastmod>2020-08-31</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/about/index.html</loc>
-    
-    <lastmod>2020-08-26</lastmod>
-    
-  </url>
-  
 
   <url>
     <loc>https://renyb2.github.io/</loc>
@@ -558,13 +558,6 @@
   
   <url>
     <loc>https://renyb2.github.io/tags/Algorithm/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/Git/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -586,6 +579,13 @@
   
   <url>
     <loc>https://renyb2.github.io/tags/Docker/</loc>
+    <lastmod>2022-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/Git/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -760,13 +760,6 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/%E4%BB%A3%E7%90%86/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://renyb2.github.io/tags/MongoDB/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
@@ -782,6 +775,13 @@
   
   <url>
     <loc>https://renyb2.github.io/tags/%E6%80%A7%E8%83%BD%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2022-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/%E4%BB%A3%E7%90%86/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -830,14 +830,14 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/Nova/</loc>
+    <loc>https://renyb2.github.io/tags/Glance/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/Glance/</loc>
+    <loc>https://renyb2.github.io/tags/Nova/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -872,7 +872,7 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/Python/</loc>
+    <loc>https://renyb2.github.io/tags/TiDB/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -886,7 +886,7 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/TiDB/</loc>
+    <loc>https://renyb2.github.io/tags/Python/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -894,6 +894,13 @@
   
   <url>
     <loc>https://renyb2.github.io/tags/Windows/</loc>
+    <lastmod>2022-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/Jmeter/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -929,13 +936,6 @@
   
   <url>
     <loc>https://renyb2.github.io/tags/Google/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/Jmeter/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -986,13 +986,6 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/categories/Git/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://renyb2.github.io/categories/Ceph/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
@@ -1001,6 +994,13 @@
   
   <url>
     <loc>https://renyb2.github.io/categories/Docker/</loc>
+    <lastmod>2022-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/categories/Git/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
