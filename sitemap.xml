@@ -2,6 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://renyb2.github.io/2022/11/15/OpenStack%E7%A0%94%E5%8F%91%EF%BC%9Acinderclient/</loc>
+    
+    <lastmod>2022-11-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/2021/09/28/OpenStack%E7%A0%94%E5%8F%91%EF%BC%9Aneutronclient/</loc>
+    
+    <lastmod>2022-11-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/2020/12/16/OpenStack%E7%A0%94%E5%8F%91%EF%BC%9Anovaclient/</loc>
+    
+    <lastmod>2022-11-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/2022/11/15/Libvirt%E7%A0%94%E5%8F%91%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%8C%96%E7%89%B9%E6%80%A7%E6%A3%80%E6%B5%8B/</loc>
+    
+    <lastmod>2022-11-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/2022/11/10/Libvirt%E7%A0%94%E5%8F%91%EF%BC%9A%E5%B1%8F%E8%94%BD%E8%99%9A%E6%8B%9F%E5%8C%96%E7%89%B9%E6%80%A7/</loc>
+    
+    <lastmod>2022-11-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/2022/05/31/Libvirt%E4%BD%BF%E7%94%A8%EF%BC%9A%E9%80%9A%E7%94%A8%E6%89%8B%E5%86%8C/</loc>
+    
+    <lastmod>2022-11-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/2022/07/02/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9ACyborg/</loc>
+    
+    <lastmod>2022-09-21</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://renyb2.github.io/about/index.html</loc>
     
     <lastmod>2022-09-06</lastmod>
@@ -37,20 +86,6 @@
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/2022/07/02/OpenStack%E9%83%A8%E7%BD%B2%EF%BC%9ACyborg/</loc>
-    
-    <lastmod>2022-08-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/2021/09/28/OpenStack%E7%A0%94%E5%8F%91%EF%BC%9Aneutronclient/</loc>
-    
-    <lastmod>2022-08-22</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://renyb2.github.io/2022/07/11/Linux%E9%85%8D%E7%BD%AE%EF%BC%9ACPU%E7%AE%A1%E7%90%86/</loc>
     
     <lastmod>2022-08-19</lastmod>
@@ -66,13 +101,6 @@
   
   <url>
     <loc>https://renyb2.github.io/2022/07/18/NVIDIA%E4%BD%BF%E7%94%A8%EF%BC%9A%E8%99%9A%E6%9C%BA%E6%B8%B8%E6%88%8F%E6%80%A7%E8%83%BD/</loc>
-    
-    <lastmod>2022-08-11</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/2020/12/16/OpenStack%E7%A0%94%E5%8F%91%EF%BC%9Anovaclient/</loc>
     
     <lastmod>2022-08-11</lastmod>
     
@@ -166,13 +194,6 @@
     <loc>https://renyb2.github.io/2021/07/27/MongoDB%E4%BD%BF%E7%94%A8%EF%BC%9A%E9%80%9A%E7%94%A8%E6%89%8B%E5%86%8C/</loc>
     
     <lastmod>2022-06-07</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/2022/05/31/KVM%E4%BD%BF%E7%94%A8%EF%BC%9A%E9%80%9A%E7%94%A8%E6%89%8B%E5%86%8C/</loc>
-    
-    <lastmod>2022-05-31</lastmod>
     
   </url>
   
@@ -550,7 +571,7 @@
 
   <url>
     <loc>https://renyb2.github.io/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -558,420 +579,427 @@
   
   <url>
     <loc>https://renyb2.github.io/tags/Algorithm/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/Ceph/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/%E9%80%9A%E7%94%A8%E6%89%8B%E5%86%8C/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/Docker/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Git/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/Docker/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Hexo/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/KVM/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Kubernetes/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/Helm/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/IPv6/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/Ceph/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/%E9%80%9A%E7%94%A8%E6%89%8B%E5%86%8C/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/HA/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/OpenStack/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/HTTPS/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/RabbitMQ/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <loc>https://renyb2.github.io/tags/Helm/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/kubeadm/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/KVM/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/Libvirt/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/OpenStack/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/HTTPS/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Linux/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Vim/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/CPU/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/GNOME/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/HAProxy/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/IPTABLES/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/LVM/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Ubuntu/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/VNC/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/%E5%A4%A7%E9%A1%B5%E5%86%85%E5%AD%98/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/%E7%A1%AC%E4%BB%B6/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/%E7%BD%91%E5%8D%A1/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://renyb2.github.io/tags/MongoDB/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/MySQL/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/%E6%80%A7%E8%83%BD%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <loc>https://renyb2.github.io/tags/%E7%A1%AC%E4%BB%B6/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/%E4%BB%A3%E7%90%86/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/MongoDB/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/RabbitMQ/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/MySQL/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/%E6%80%A7%E8%83%BD%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Galera/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Percona/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/NVIDIA/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Accelerator/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Nginx/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/Cyborg/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Glance/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/Cyborg/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Nova/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/CLI/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Trove/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Oracle/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/PostgreSQL/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/TiDB/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/Redis/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Python/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/Redis/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/TiDB/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Windows/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/Jmeter/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Sysbench/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/MQTT/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/%E7%A0%94%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/%E7%BF%BB%E5%A2%99/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/tags/Google/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/ActiveMQ/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/Jmeter/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/MQTT/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/%E7%A0%94%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/%E7%BF%BB%E5%A2%99/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/tags/Google/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Jupyter/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/Curl/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/tags/%E5%AD%98%E5%82%A8/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -980,126 +1008,126 @@
   
   <url>
     <loc>https://renyb2.github.io/categories/Algorithm/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/categories/Ceph/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/categories/Docker/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/Git/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/categories/Docker/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/Hexo/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://renyb2.github.io/categories/KVM/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/Kubernetes/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/categories/Ceph/</loc>
+    <lastmod>2022-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://renyb2.github.io/categories/Libvirt/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/Linux/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/Accelerator/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/Nginx/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/OpenStack/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/Windows/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/%E7%A0%94%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://renyb2.github.io/categories/%E5%AD%98%E5%82%A8/</loc>
-    <lastmod>2022-09-06</lastmod>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
