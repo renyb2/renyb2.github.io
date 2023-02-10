@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Windows使用：系统激活方案调研 | 任翌博的个人博客</title><meta name="description" content="简述由于项目需求，需调研目前所有的windows 10激活方式成本及其法律风险，现将调研内容整理至本文章，本文主要介绍目前各种常见的windows 10激活方式对企业用户的风险及成本评估。微软不追究个人用户的盗版使用，所以个人用户不在本次调研范围内，个人用户可随意使用本文中的各种激活方式。 永久激活方案方案介绍官方渠道官方渠道报价：1800&#x2F;套，量大可优惠至1600 ~ 1700 官方licens"><meta name="keywords" content="Windows,调研"><meta name="author" content="任翌博"><meta name="copyright" content="任翌博"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/icon.png"><link rel="canonical" href="https://renyb2.github.io/2023/01/10/Windows%E4%BD%BF%E7%94%A8%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%BF%80%E6%B4%BB%E6%96%B9%E6%A1%88%E8%B0%83%E7%A0%94/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="M1_EXcc19ZIF_3aoBvPquWukTrAlRMubecMNC4x4ANY"/><meta property="og:type" content="article"><meta property="og:title" content="Windows使用：系统激活方案调研"><meta property="og:url" content="https://renyb2.github.io/2023/01/10/Windows%E4%BD%BF%E7%94%A8%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%BF%80%E6%B4%BB%E6%96%B9%E6%A1%88%E8%B0%83%E7%A0%94/"><meta property="og:site_name" content="任翌博的个人博客"><meta property="og:description" content="简述由于项目需求，需调研目前所有的windows 10激活方式成本及其法律风险，现将调研内容整理至本文章，本文主要介绍目前各种常见的windows 10激活方式对企业用户的风险及成本评估。微软不追究个人用户的盗版使用，所以个人用户不在本次调研范围内，个人用户可随意使用本文中的各种激活方式。 永久激活方案方案介绍官方渠道官方渠道报价：1800&#x2F;套，量大可优惠至1600 ~ 1700 官方licens"><meta property="og:image" content="https://cdn.benchmark.pl/uploads/article/65233/BIGICON/3db4d568127508f2b578f86526bdec46d9fd4d3d.jpg"><meta property="article:published_time" content="2023-01-10T02:58:40.000Z"><meta property="article:modified_time" content="2023-01-20T01:05:10.248Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.1.1',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: {"limitCount":50,"languages":{"author":"作者: 任翌博","link":"链接: ","source":"来源: 任翌博的个人博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2023-01-20 09:05:10'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="任翌博的个人博客" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">89</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">67</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">18</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B0%B8%E4%B9%85%E6%BF%80%E6%B4%BB%E6%96%B9%E6%A1%88"><span class="toc-number">2.</span> <span class="toc-text">永久激活方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.1.</span> <span class="toc-text">方案介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E6%B8%A0%E9%81%93"><span class="toc-number">2.1.1.</span> <span class="toc-text">官方渠道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%98%E5%AE%9D%E5%BA%97%E9%93%BA"><span class="toc-number">2.1.2.</span> <span class="toc-text">淘宝店铺</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%B7%A5%E5%85%B7"><span class="toc-number">2.1.3.</span> <span class="toc-text">激活工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#license%E5%85%B1%E4%BA%AB"><span class="toc-number">2.1.4.</span> <span class="toc-text">license共享</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E5%BE%8B%E9%A3%8E%E9%99%A9"><span class="toc-number">2.2.</span> <span class="toc-text">法律风险</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%91%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">云解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E6%9C%89%E4%BA%91%E5%A6%82%E4%BD%95%E6%8F%90%E4%BE%9Bwindows"><span class="toc-number">3.1.</span> <span class="toc-text">公有云如何提供windows</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-number">4.</span> <span class="toc-text">参考文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3"><span class="toc-number">4.1.</span> <span class="toc-text">官方文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BE%E5%8C%BA%E6%96%87%E6%A1%A3"><span class="toc-number">4.2.</span> <span class="toc-text">社区文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E6%9C%89%E4%BA%91%E6%96%87%E6%A1%A3"><span class="toc-number">4.3.</span> <span class="toc-text">公有云文档</span></a></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.benchmark.pl/uploads/article/65233/BIGICON/3db4d568127508f2b578f86526bdec46d9fd4d3d.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">任翌博的个人博客</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Windows使用：系统激活方案调研</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-10T02:58:40.000Z" title="发表于 2023-01-10 10:58:40">2023-01-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-20T01:05:10.248Z" title="更新于 2023-01-20 09:05:10">2023-01-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Windows/">Windows</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>由于项目需求，需调研目前所有的windows 10激活方式成本及其法律风险，现将调研内容整理至本文章，本文主要介绍目前各种常见的windows 10激活方式对企业用户的风险及成本评估。微软不追究个人用户的盗版使用，所以个人用户不在本次调研范围内，个人用户可随意使用本文中的各种激活方式。</p>
+<h2 id="永久激活方案"><a href="#永久激活方案" class="headerlink" title="永久激活方案"></a>永久激活方案</h2><h3 id="方案介绍"><a href="#方案介绍" class="headerlink" title="方案介绍"></a>方案介绍</h3><h4 id="官方渠道"><a href="#官方渠道" class="headerlink" title="官方渠道"></a>官方渠道</h4><p><strong>官方渠道报价：1800/套，量大可优惠至1600 ~ 1700</strong></p>
+<p>官方license可接受5次硬件变动，同时只能有一套该license激活的系统在运行。硬件变动范围包括但不限于插拔内存条、插拔硬盘、更换主板等操作。</p>
+<p>该激活方式不存在法律风险，唯一的不足就是太贵了。在云场景上，虚机需要不断创删，删除后的虚机会消耗license数量，无法回收，所以该方案的成本非常高。</p>
+<h4 id="淘宝店铺"><a href="#淘宝店铺" class="headerlink" title="淘宝店铺"></a>淘宝店铺</h4><p>淘宝/京东搜索windows激活，即可搜到很多可提供windows激活的店铺，<strong>激活价格在几块到几百不等</strong>。区别在于一次性过期还是可重复安装，根据调研及网络上各企业反馈，该方式激活的windows同样也会收到微软的律师函，及该方式企业使用是存在法律风险的。该方式个人认为是最不值得的一种方式，既花了钱，还不能规避法律风险。</p>
+<h4 id="激活工具"><a href="#激活工具" class="headerlink" title="激活工具"></a>激活工具</h4><p>网上的激活工具有很多，这里推荐GITHUB上的一款开源工具：<a target="_blank" rel="noopener" href="https://github.com/massgravel/Microsoft-Activation-Scripts/">GitHub - massgravel/Microsoft-Activation-Scripts</a></p>
+<p>激活流程在该工具的README内有提及，按照流程几步操作即可激活windows系统。该方式即破解版，企业使用风险较大，但胜在不花钱，如果纯内网的场景下，可考虑该方案</p>
+<h4 id="license共享"><a href="#license共享" class="headerlink" title="license共享"></a>license共享</h4><p>基于正版渠道，通过技术手段降低license成本，但是提升了硬件复杂度且适用性较低。</p>
+<ol>
+<li>windows正版降低成本，总的来看瘦终端形式没有正规技术手段降低成本方式，只能通过商务层面进行（买一些license，然后其余用盗版），胖终端可以通过提升硬件复杂度最多节约75%的license成本（1拖4最多，但是硬件选型很难，一般推荐1拖2）。</li>
+<li>通过网络连接windows（如瘦客户端场景）复用同一个license均会被判定为盗版，只能通过硬件直连的方式去解决（冰特云桌面提供的方案有一拖四，即胖客户端内虚4个虚机，每个虚机直通一个网卡，硬件直连的方式去使用，4个虚机公用一个windows license。这个方案受制于硬件，如主板很难直接插4个显卡，一般一拖二用的最多）。</li>
+<li>硬件直连的方式不能过交换机，只能点对点连接。</li>
+<li>通过加速卡实现<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/392364044">HDMI信号远距离传输</a>，可以压缩HDMI和VDI的信号，通过网线传输，延长HDMI信号距离，整机部署架构就受制于网线长度了（网线能做到100m左右，覆盖一栋楼），痛点就是要重新布线。</li>
+</ol>
+<img title src="/2023/01/10/Windows%E4%BD%BF%E7%94%A8%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%BF%80%E6%B4%BB%E6%96%B9%E6%A1%88%E8%B0%83%E7%A0%94/胖终端license共享.png" alt data-align="center">
+
+<h3 id="法律风险"><a href="#法律风险" class="headerlink" title="法律风险"></a>法律风险</h3><ol>
+<li>windows正版只有官网和渠道商提供，其余什么淘宝几十、几百的、OEM这种企业使用都有概率收到微软的律师函（跟企业大小、使用量等都有关系）</li>
+<li>微软发现盗版后会先收集证据和侵权数量，然后发律师函，先派销售上门沟通，然后要钱，这种一般商务谈判可以购买60% ~ 80%，达到微软后续不再骚扰的目的，这种一般就是所谓的保护费。</li>
+<li>一般到商务谈判这一步就基本解决了，协商不成功的话，微软会上版权局，然后政府介入收集证据，最后走法院。到法院之后，微软有极大概率会胜诉，胜诉后基本就是微软要多少是多少了，不到万不得已，不要走到这一步，败诉后的赔偿数额是很高的。</li>
+</ol>
+<h2 id="云解决方案"><a href="#云解决方案" class="headerlink" title="云解决方案"></a>云解决方案</h2><h3 id="公有云如何提供windows"><a href="#公有云如何提供windows" class="headerlink" title="公有云如何提供windows"></a>公有云如何提供windows</h3><p>共有云对windows的用法都是通过自建的KMS自动激活并按时收取激活费用，一般由微软官方渠道商提供镜像。具体计划可参考微软官网提供的内容：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/partner-center/csp-overview">云解决方案提供商计划概述 - Partner Center | Microsoft Learn</a></p>
+<p>一般根据windows的类型，由不同的供应商提供，分别如下：</p>
+<ul>
+<li><p>windows系统：云供应商较多，其中比较火的是成都春山云网络科技有限公司。</p>
+</li>
+<li><p>winserver系统：目前只看到华为云的供货商，为深圳市伊登软件有限公司。</p>
+</li>
+</ul>
+<img title src="/2023/01/10/Windows%E4%BD%BF%E7%94%A8%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%BF%80%E6%B4%BB%E6%96%B9%E6%A1%88%E8%B0%83%E7%A0%94/华为云-winserver.png" alt data-align="center">
+
+<img title src="/2023/01/10/Windows%E4%BD%BF%E7%94%A8%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%BF%80%E6%B4%BB%E6%96%B9%E6%A1%88%E8%B0%83%E7%A0%94/华为云-windows-01.png" alt data-align="center">
+
+<img title src="/2023/01/10/Windows%E4%BD%BF%E7%94%A8%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%BF%80%E6%B4%BB%E6%96%B9%E6%A1%88%E8%B0%83%E7%A0%94/华为云-windows-02.png" alt data-align="center">
+
+<p>成都春山云网络科技有限公司公开的微软授权书内容：</p>
+<img title src="/2023/01/10/Windows%E4%BD%BF%E7%94%A8%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%BF%80%E6%B4%BB%E6%96%B9%E6%A1%88%E8%B0%83%E7%A0%94/成都春山云网络科技有限公司.png" alt data-align="center">
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/deployment/volume-activation/volume-activation-windows-10">Windows 10 批量激活 - Windows Deployment | Microsoft Learn</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/partner-center/csp-overview">云解决方案提供商计划概述 - Partner Center | Microsoft Learn</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/partner-center/csp-documents-and-learning-resources?source=recommendations">云解决方案提供商协议、价目表和产品/服务 - Partner Center | Microsoft Learn</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-client-activation-keys">适用于 Windows Server 和 Windows 的密钥管理服务 (KMS) 客户端激活和产品密钥 | Microsoft Learn</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/licensing/existing-customer/activation-centers">批量许可密钥电话号码 | 微软批量许可</a></p>
+</li>
+</ul>
+<h3 id="社区文档"><a href="#社区文档" class="headerlink" title="社区文档"></a>社区文档</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/260014354?utm_source=wechat_session">win10激活的几种方式及其原理（支持win11）</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/massgravel/Microsoft-Activation-Scripts/">GitHub - massgravel/Microsoft-Activation-Scripts</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/363666124">微软律师函又来了，老板不想花钱怎么办？适用于中小企业</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/338805607">淘宝京东买的Windows/office秘钥是正版吗？</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/104640134">微软对正版及盗版的定义</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/67684166">微软对盗版用户的态度是怎么样的？</a></li>
+</ul>
+<h3 id="公有云文档"><a href="#公有云文档" class="headerlink" title="公有云文档"></a>公有云文档</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.jdcloud.com/cn/virtual-machines/windows-cloud-host-adjustment-activation-mode-is-kms">京东云 - Windows云主机调整激活方式为KMS</a></li>
+<li><a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/41056.htm">如何使用KMS域名激活VPC网络中的Windows实例_云服务器 ECS-阿里云帮助中心</a></li>
+</ul>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">任翌博</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://renyb2.github.io/2023/01/10/Windows%E4%BD%BF%E7%94%A8%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%BF%80%E6%B4%BB%E6%96%B9%E6%A1%88%E8%B0%83%E7%A0%94/">https://renyb2.github.io/2023/01/10/Windows%E4%BD%BF%E7%94%A8%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%BF%80%E6%B4%BB%E6%96%B9%E6%A1%88%E8%B0%83%E7%A0%94/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://renyb2.github.io" target="_blank">任翌博的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Windows/">Windows</a><a class="post-meta__tags" href="/tags/%E8%B0%83%E7%A0%94/">调研</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.benchmark.pl/uploads/article/65233/BIGICON/3db4d568127508f2b578f86526bdec46d9fd4d3d.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/01/10/Python%E7%A0%94%E5%8F%91%EF%BC%9Asetup%E6%89%93%E5%8C%85/"><img class="prev-cover" src="https://i2.wp.com/getcodify.com/wp-content/uploads/2016/10/Python_logo.jpg?fit=1890%2C800&amp;ssl=1" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Python研发：setup打包</div></div></a></div><div class="next-post pull-right"><a href="/2022/12/10/NVIDIA%E7%A0%94%E5%8F%91%EF%BC%9AvGPU-Unlock/"><img class="next-cover" src="https://www.numerama.com/content/uploads/2019/05/nvidia-logo.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">NVIDIA研发：vGPU Unlock</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2021/11/29/Windows使用：通用手册/" title="Windows使用：通用手册"><img class="relatedPosts_cover" src="https://cdn.benchmark.pl/uploads/article/65233/BIGICON/3db4d568127508f2b578f86526bdec46d9fd4d3d.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-29</div><div class="relatedPosts_title">Windows使用：通用手册</div></div></a></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 任翌博</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks"></canvas><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script defer="defer" id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script></div></body></html>
